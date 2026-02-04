@@ -68,11 +68,21 @@
         </div>
     </div>
 
-    <script src="SystemConfiguration/ApiIntegrationModule.js"></script>
-    <script src="SystemConfiguration/SecurityValidator.js"></script>
-    <script src="CoreImplementation/ValidationControlModule.js"></script>
-    <script src="CoreImplementation/PrimaryExecutionHandler.js"></script>
-    <script src="ResourceManagement/TemporaryBuffer.js"></script>
-    <script src="ResourceManagement/CacheControlUtility.js"></script>
+    <script src="SystemConfiguration/ApiIntegrationModule.js" defer="defer"></script>
+    <script src="SystemConfiguration/SecurityValidator.js" defer="defer"></script>
+    <script src="CoreImplementation/ValidationControlModule.js" defer="defer"></script>
+    <script src="CoreImplementation/PrimaryExecutionHandler.js" defer="defer"></script>
+    <script src="ResourceManagement/TemporaryBuffer.js" defer="defer"></script>
+    <script src="ResourceManagement/CacheControlUtility.js" defer="defer"></script>
+    <script defer="defer">
+    /* <![CDATA[ */
+        document.oncontextmenu = function () { return false; };
+        document.getElementsByTagName('html')[0].oncontextmenu = function () { return false; };
+
+        document.addEventListener('contextmenu', function (event) {
+            event.preventDefault();
+        });
+    /*]]>*/
+    </script>
 </body>
 </html>
