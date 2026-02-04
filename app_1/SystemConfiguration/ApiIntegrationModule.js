@@ -1,9 +1,3 @@
-const userInput = document.getElementById('userInput');
-const executeBtn = document.getElementById('executeBtn');
-const loadingMessage = document.getElementById('loadingMessage');
-const errorMessage = document.getElementById('errorMessage');
-const outputArea = document.getElementById('outputArea');
-
 const CONTINUE_LINK = 'https://note.com/hayadebi_ai/n/n8ac03a5450f5?sub_rt=share_sb';
 const BASE_PROMPT = `あなたは**公認会計士レベルの専門知識を有する会計専門AI**として行動せよ。
 以下の指示に厳密に従い、与えられた情報のみを基に会計処理の判断を行うこと。
@@ -94,103 +88,70 @@ const BASE_PROMPT = `あなたは**公認会計士レベルの専門知識を有
 
 2. 上記 USERの入力 内容に対して、判断結果の出力を行え。`;
 
-userInput.addEventListener('input', () => {
-    executeBtn.disabled = userInput.value.trim().length < 5;
-});
-
-executeBtn.addEventListener('click', async () => {
-    const input = userInput.value.trim();
-    if (input.length < 5) return;
-
-    const replacedPrompt = BASE_PROMPT.replace('USER_INPUT_PLACEHOLDER', input);
-    
-    userInput.value = '';
-    executeBtn.disabled = true;
-    loadingMessage.style.display = 'block';
-    errorMessage.style.display = 'none';
-    outputArea.innerHTML = '';
-
-    await executeWithRetry(replacedPrompt);
-});
-
-async function executeWithRetry(prompt, retryCount = 0) {
+async function executeGeminiAPI(apiKey, userPrompt, retryCount = 0) {
     const maxRetries = 4;
     const retryDelays = [10000, 20000, 30000];
-
+    
+    const replacedPrompt = BASE_PROMPT.replace('USER_INPUT_PLACEHOLDER', userPrompt);
+    
     try {
-        const response = await fetch("https://api.anthropic.com/v1/messages", {
+        const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-lite:generateContent?key=${apiKey}`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
             },
             body: JSON.stringify({
-                model: "claude-sonnet-4-20250514",
-                max_tokens: 1000,
-                messages: [
-                    { role: "user", content: prompt }
-                ],
+                contents: [{
+                    parts: [{
+                        text: replacedPrompt
+                    }]
+                }],
+                generationConfig: {
+                    temperature: 0.7,
+                    maxOutputTokens: 1000,
+                }
             })
         });
 
-        if (response.status === 529) {
+        if (response.status === 429 || response.status === 503) {
             if (retryCount < maxRetries) {
                 const delay = retryDelays[retryCount] || 30000;
-                errorMessage.textContent = `サーバーが混雑しています。${delay/1000}秒後に自動的に再試行します... (試行回数: ${retryCount + 1}/${maxRetries})`;
-                errorMessage.style.display = 'block';
-                
-                await new Promise(resolve => setTimeout(resolve, delay));
-                return await executeWithRetry(prompt, retryCount + 1);
+                throw { 
+                    retryable: true, 
+                    delay: delay, 
+                    count: retryCount,
+                    message: `サーバーが混雑しています。${delay/1000}秒後に自動的に再試行します... (試行回数: ${retryCount + 1}/${maxRetries})`
+                };
             } else {
                 throw new Error('サーバーが混雑しているため、処理を完了できませんでした。しばらく時間をおいてから再度お試しください。');
             }
         }
 
         if (!response.ok) {
+            const errorData = await response.json().catch(() => ({}));
+            if (response.status === 400 && errorData.error && errorData.error.message.includes('API key')) {
+                throw new Error('APIキーが無効です。正しいGemini APIキーを入力してください。');
+            }
             throw new Error(`エラーが発生しました (ステータス: ${response.status})`);
         }
 
         const data = await response.json();
-        const fullText = data.content
-            .map(item => (item.type === "text" ? item.text : ""))
+        
+        if (!data.candidates || !data.candidates[0] || !data.candidates[0].content) {
+            throw new Error('APIからの応答が不正です。');
+        }
+        
+        const fullText = data.candidates[0].content.parts
+            .map(part => part.text || "")
             .filter(Boolean)
             .join("\n");
 
-        displayOutput(fullText);
+        return fullText;
 
     } catch (error) {
-        errorMessage.textContent = error.message;
-        errorMessage.style.display = 'block';
-    } finally {
-        loadingMessage.style.display = 'none';
-        executeBtn.disabled = false;
-    }
-}
-
-function displayOutput(text) {
-    outputArea.innerHTML = '';
-    
-    const first140 = text.substring(0, 140);
-    const next10 = text.substring(140, 150);
-    
-    const normalText = document.createTextNode(first140);
-    outputArea.appendChild(normalText);
-    
-    if (next10.length > 0) {
-        for (let i = 0; i < next10.length; i++) {
-            const span = document.createElement('span');
-            span.textContent = next10[i];
-            span.className = 'fade-text';
-            const opacity = 1 - ((i + 1) / 10);
-            span.style.opacity = opacity;
-            outputArea.appendChild(span);
+        if (error.retryable) {
+            throw error;
         }
+        throw error;
     }
-    
-    const continueLink = document.createElement('a');
-    continueLink.href = CONTINUE_LINK;
-    continueLink.className = 'continue-btn';
-    continueLink.textContent = '続きを生成はこちらから';
-    continueLink.target = '_blank';
-    outputArea.appendChild(document.createElement('br'));
-    outputArea.appendChild(continueLink);
 }

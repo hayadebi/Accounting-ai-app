@@ -4,11 +4,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AIツール 試用版</title>
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="AssetConfiguration/MainStyleProcessor.css">
+    <link rel="stylesheet" href="AssetConfiguration/SecondaryLayoutModule.css">
 </head>
 <body>
     <div class="container">
         <h1>AIツール 試用版</h1>
+
+        <div class="section api-config-section">
+            <div class="section-title">API設定</div>
+            <input 
+                type="password" 
+                id="apiKeyInput" 
+                class="api-input-field" 
+                placeholder="Gemini API キーを入力してください"
+            >
+            <small class="api-notice">※APIキーはブラウザに保存されません。ページを再読み込みすると消去されます。</small>
+        </div>
 
         <div class="section">
             <div class="section-title">使い方</div>
@@ -50,6 +62,11 @@
         </div>
     </div>
 
-    <script src="js/app.js"></script>
+    <script src="SystemConfiguration/ApiIntegrationModule.js"></script>
+    <script src="SystemConfiguration/SecurityValidator.js"></script>
+    <script src="CoreImplementation/ValidationControlModule.js"></script>
+    <script src="CoreImplementation/PrimaryExecutionHandler.js"></script>
+    <script src="ResourceManagement/TemporaryBuffer.js"></script>
+    <script src="ResourceManagement/CacheControlUtility.js"></script>
 </body>
 </html>
