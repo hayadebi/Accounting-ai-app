@@ -84,7 +84,14 @@
         <div class="button-container">
             <button id="executeBtn" class="execute-btn" disabled>実行</button>
         </div>
-
+        <!--広告-->
+        <div class="random-adcontents" style="width:100%; height:auto;padding: 0;margin: 0 0 20px 0;">
+            <center><div style="position: relative; height:auto;display: inline-block;">
+                <a href="#" class="random-ads-link" alt="広告リンク" target="_blank" rel="nofollow" referrerpolicy="no-referrer-when-downgrade"><img src="#" class="random-ads-image" alt="広告画像" style="max-width:100%; height:auto;" /></a>
+                <p style="position: absolute;top: 3%;left: 3%;color: rgba(255,255,255,0.6);font-size: 14px;font-weight: bold;margin: 0;">PR</p>
+            </div>
+            </center>
+        </div>
         <div id="loadingMessage" class="loading-message">生成されるまで少しお待ちください</div>
         <div id="errorMessage" class="error-message"></div>
 
@@ -112,14 +119,14 @@
         </div>
     </footer>
 
-<div id="adOverlay" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.7); justify-content: center; align-items: center; z-index: 1000;">
+<!-- <div id="adOverlay" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.7); justify-content: center; align-items: center; z-index: 1000;">
     <div id="adContainer" style="position: relative; width: 300px; height: 250px; text-align: center;">
         <p id="countdown" style="color: white; font-size: 14px;">
             5 seconds until you can close the ad
         </p>
 
         <div id="adContent" width="100%" height="auto" style="width:100%; max-width:100%; height:auto;">
-            <!--　admax　--><br/><script　src="https://adm.shinobi.jp/s/53d3dfe193efcd19b639201e297973b4"></script><br/><!--　admax　-->
+            
         </div>
 
         <div id="closeButton" style=
@@ -127,8 +134,8 @@
             ✕
         </div>
     </div>
-</div>
-<script defer="defer">
+</div> -->
+<!-- <script defer="defer">
 /* <![CDATA[ */
     let adDisplayed = false;
     let adClosed = false;
@@ -196,7 +203,7 @@
         document.documentElement.style.height = "auto";
     }
     /*]]>*/
-</script>
+</script> -->
     <script src="../../CoreImplementation/TweetManager.js" defer="defer"></script>
         <script>
         // ハンバーガーメニューの動作
@@ -219,7 +226,7 @@
             });
         });
     </script>
-    <script src="../../CoreImplementation/ValidationControlModule.js" defer="defer"></script><script src="../../CoreImplementation/PrimaryExecutionHandler.js" defer="defer"></script><script src="../../ResourceManagement/TemporaryBuffer.js" defer="defer"></script><script src="DangerConfiguration/main/00/00/prompt.js" defer="defer"></script><script src="DangerConfiguration/main/00/00/prompt_1.js" defer="defer"></script><script src="DangerConfiguration/main/00/00/prompt_2.js" defer="defer"></script><script src="DangerConfiguration/main/00/00/prompt_3.js" defer="defer"></script><script src="SystemConfiguration/sub/02/08/ApiIntegrationModule.js" defer="defer"></script><script src="SystemConfiguration/sub/02/08/SecurityValidator.js" defer="defer"></script><script src="../../ResourceManagement/CacheControlUtility.js" defer="defer"></script><script src="DangerConfiguration/main/00/00/prompt_main.js" defer="defer"></script><script src="DangerConfiguration/main/00/00/prompt_sub.js" defer="defer"></script>
+        <script src="../../Ads/ToolAds.js" defer="defer"></script><script src="../../CoreImplementation/ValidationControlModule.js" defer="defer"></script><script src="../../CoreImplementation/PrimaryExecutionHandler.js" defer="defer"></script><script src="../../ResourceManagement/TemporaryBuffer.js" defer="defer"></script><script src="DangerConfiguration/main/00/00/prompt.js" defer="defer"></script><script src="DangerConfiguration/main/00/00/prompt_1.js" defer="defer"></script><script src="DangerConfiguration/main/00/00/prompt_2.js" defer="defer"></script><script src="DangerConfiguration/main/00/00/prompt_3.js" defer="defer"></script><script src="SystemConfiguration/sub/02/08/ApiIntegrationModule.js" defer="defer"></script><script src="SystemConfiguration/sub/02/08/SecurityValidator.js" defer="defer"></script><script src="../../ResourceManagement/CacheControlUtility.js" defer="defer"></script><script src="DangerConfiguration/main/00/00/prompt_main.js" defer="defer"></script><script src="DangerConfiguration/main/00/00/prompt_sub.js" defer="defer"></script>
     <script defer="defer">
     /* <![CDATA[ */
         document.oncontextmenu = function () { return false; };
