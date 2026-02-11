@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ブログ記事一覧 ― ハヤデビのツール工房</title>
+    <link rel="stylesheet" href="AssetConfiguration/MainStyleProcessor.css">
+    <link rel="stylesheet" href="AssetConfiguration/SubStyleProcessor.css">
+    <meta content="後から考える" name="description" />
+    <meta name="keywords" content="後から考える" />
+    <meta property="og:image" content="#" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <!-- <link rel="prev" href="#">
+    <link rel="next" href="#"> -->
+</head>
+<body>
+    <!-- ヘッダー・ナビゲーション -->
+    <header class="header">
+        <nav class="nav-container">
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html" alt="ハヤデビのツール工房ホームページ">ホーム</a></li>
+                <li><a href="tools.html" alt="ハヤデビのツール工房/ツール一覧">ツール</a></li>
+                <li><a href="coconala.html" alt="ハヤデビのツール工房/ココナラ事業一覧">事業</a></li>
+                <li><a href="blogs.html" alt="ハヤデビのツール工房/ブログ一覧">ブログ</a></li>
+                <li><a href="profile.html" alt="ハヤデビのツール工房/プロフィール詳細">プロフィール</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- メインコンテンツ -->
+    <main class="main-container" >
+        <!-- タイトル -->
+        <div class="hero">
+            <h1>公開ブログ記事一覧</h1>
+        </div>
+
+        <!-- 準備中 -->
+        <div id="scroll-fade">
+            <section class="section" id="ai-blogs">
+                <h2>AI</h2>
+                <p class="hero-subtitle">AI関連のブログ記事がまとめられています。</p>
+                <button onclick="toggleDetails(this, 'ai-details')" class="btn" alt="一覧切り替え">一覧を表示</button>
+                <div class="recommend-boxes" id="ai-details" style="display: none; content-visibility: auto;contain-intrinsic-size: 0 500px;">
+                    <!-- AI -->
+                    <!-- <div class="recommend-box">
+                        <div class="recommend-icon"><img src="#" alt="記事サムネイル" style="object-fit: cover;max-width:100%;height: auto; border-radius:2%;" /></div>
+                            <h3>記事タイトル
+                            </h3>
+                            <p >記事概要
+                            </p>
+                            <a href="#" class="minibtn" alt="ブログ記事">記事を見る</a>
+                    </div> -->
+
+                </div>
+                
+            </section>
+
+            <section class="section" id="dev-blogs">
+                <h2>開発</h2>
+                <p class="hero-subtitle">開発関連のブログ記事がまとめられています。</p>
+                <button onclick="toggleDetails(this, 'dev-details')" class="btn" alt="一覧切り替え">一覧を表示</button>
+                <div class="recommend-boxes" id="dev-details" style="display: none; content-visibility: auto;contain-intrinsic-size: 0 500px;">
+                    <!-- 開発 -->
+                    <!-- <div class="recommend-box">
+                        <div class="recommend-icon"><img src="#" alt="記事サムネイル" style="object-fit: cover;max-width:100%;height: auto; border-radius:2%;" /></div>
+                            <h3>記事タイトル
+                            </h3>
+                            <p >記事概要
+                            </p>
+                            <a href="#" class="minibtn" alt="ブログ記事">記事を見る</a>
+                    </div> -->
+
+                </div>
+                
+            </section>
+
+            <section class="section" id="other-blogs">
+                <h2>その他</h2>
+                <p class="hero-subtitle">その他のブログ記事がまとめられています。</p>
+                <button onclick="toggleDetails(this, 'other-details')" class="btn" alt="一覧切り替え">一覧を表示</button>
+                <div class="recommend-boxes" id="other-details" style="display: none; content-visibility: auto;contain-intrinsic-size: 0 500px;">
+                    <!-- その他 -->
+                    <!-- <div class="recommend-box">
+                        <div class="recommend-icon"><img src="#" alt="記事サムネイル" style="object-fit: cover;max-width:100%;height: auto; border-radius:2%;" /></div>
+                            <h3 >記事タイトル
+                            </h3>
+                            <p >記事概要
+                            </p>
+                            <a href="#" class="minibtn" alt="ブログ記事">記事を見る</a>
+                    </div> -->
+                    <div class="recommend-box">
+                        <div class="recommend-icon"><img src="https://pbs.twimg.com/media/G72nXTLb0AA_Itp?format=jpg&name=large" alt="記事サムネイル" style="object-fit: cover;max-width:100%;height: auto; border-radius:2%;" /></div>
+                            <h3 >【絵師必見】Nightshadeより簡単！AI学習から作品守れる最強AI避け加工アプリ「イラスト守るくん」の完全ガイド
+                            </h3>
+                            <p >AIによる無断学習問題に終止符を打つ、国内初の本格AI避け加工アプリ「イラスト守るくん」を徹底解説！
+                            </p>
+                            <a href="Blogs/Other/blog_other_1.html" class="minibtn" alt="ブログ記事">記事を見る</a>
+                    </div>
+
+                </div>
+                
+            </section>
+        </div>
+    </main>
+    <!-- フッター -->
+    <footer class="footer">
+        <div class="footer-content">
+            <a href="notation.html" alt="必要表記一覧">プライバシーポリシー＆利用規約＆特定商取引法に基づく表記</a>
+            <p>© ハヤデビのツール工房</p>
+        </div>
+    </footer>
+
+    <script defer="defer">
+        // ハンバーガーメニューの動作
+        const hamburger = document.getElementById('hamburger');
+        const navLinks = document.getElementById('navLinks');
+
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navLinks.classList.toggle('active');
+        });
+
+        // メニュー項目クリック時にメニューを閉じる
+        const navItems = navLinks.querySelectorAll('a');
+        navItems.forEach(item => {
+            item.addEventListener('click', () => {
+                if (window.innerWidth <= 768) {
+                    hamburger.classList.remove('active');
+                    navLinks.classList.remove('active');
+                }
+            });
+        });
+    </script>
+
+    <script src="CoreImplementation/TweetManager.js" defer="defer"></script>
+    <script defer="defer">
+        function toggleDetails(button, targetId) {
+            const targetElement = document.getElementById(targetId);
+            if (targetElement.style.display === 'none' || targetElement.style.display === '') {
+                targetElement.style.display = 'grid';
+                button.textContent = '一覧を隠す';
+            } else {
+                targetElement.style.display = 'none';
+                button.textContent = '一覧を表示';
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const el = entry.target;
+                el.style.opacity = '1';
+                el.style.transform = 'translateY(0)';
+                observer.unobserve(el);
+            }
+            });
+        }, observerOptions);
+
+        // セレクタを配列で管理し、柔軟に指定
+        const targetSelectors = [
+            'div[class*="recommend-box"]'
+        ];
+
+        document.querySelectorAll(targetSelectors.map(s => `#scroll-fade ${s}`).join(',')).forEach(card => {
+            // 実行前のスタイルセット
+            Object.assign(card.style, {
+            opacity: '0',
+            transform: 'translateY(20px)',
+            transition: 'opacity 0.6s ease-out, transform 0.6s ease-out',
+            willChange: 'opacity, transform' // ブラウザの最適化を促進
+            });
+            observer.observe(card);
+        });
+        });
+
+    </script>
+</body>
+</html>

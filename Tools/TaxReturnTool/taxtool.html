@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>確定申告補助AIツール ― ハヤデビのツール工房</title>
+    <meta content="確定申告補助AIツールは、個人事業主の会計処理を劇的に効率化します。公認会計士レベルの専門知識をプロンプトに凝縮し、日々の仕訳から複雑な税務判断の補助までを自律的に行います。最新の税法や実務慣行をリアルタイムで参照しながら、領収書や請求書の画像から最適な勘定科目を導き出すプロセスは圧巻です。最終的な判断は自己責任となりますが、保守的な実務処理を優先し、消費税区分まで慎重に扱うAIの姿勢は、多忙な個人事業主にとって心強い味方となるはずです。本ツールを通じて、AIと共に歩む新しい会計スタイルの可能性を体感してください。" name="description" />
+    <meta name="keywords" content="確定申告, AIツール, Manus AI, 個人事業主, 会計効率化, プロンプト, 公認会計士, 税務補助, 領収書整理, 自動仕訳, 2026年確定申告, 節税対策" />
+    <meta property="og:image" content="https://pbs.twimg.com/media/HAISrAmbYAE8TkV?format=jpg&name=large" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="prev" href="../../tools.html">
+    <!-- <link rel="next" href="#"> -->
+    <link rel="stylesheet" href="../../AssetConfiguration/MainStyleProcessor.css">
+    <link rel="stylesheet" href="../../AssetConfiguration/SecondaryLayoutModule.css">
+    <link rel="stylesheet" href="../../AssetConfiguration/SubStyleProcessor.css">
+    
+</head>
+<body>
+    <!-- ヘッダー・ナビゲーション -->
+    <header class="header">
+        <nav class="nav-container">
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="../../index.html" alt="ハヤデビのツール工房ホームページ">ホーム</a></li>
+                <li><a href="../../tools.html" alt="ハヤデビのツール工房/ツール一覧">ツール</a></li>
+                <li><a href="../../coconala.html" alt="ハヤデビのツール工房/ココナラ事業一覧">事業</a></li>
+                <li><a href="../../blogs.html" alt="ハヤデビのツール工房/ブログ一覧">ブログ</a></li>
+                <li><a href="../../profile.html" alt="ハヤデビのツール工房/プロフィール詳細">プロフィール</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <div class="container">
+        <!-- タイトル -->
+        <div class="hero">
+            <h1>確定申告補助AIツール 試用版</h1>
+            <p class="hero-subtitle">確定申告の仕訳で、もう迷わない</p>
+        </div>
+
+       <!-- 当サイトの概要 -->
+        <section class="section">
+            <h2>概要</h2>
+            <p>本ツールは、<strong>「公認会計士レベルの専門知識」</strong>を再現した高度なAIツールです。個人事業主の皆様が直面する複雑な仕訳判断を、AIが専門的な視点から強力にバックアップします。
+        領収書や請求書の画像を読み取り、日本の税務実務に基づいた最適な勘定科目や摘要を瞬時に提示。日々の入力作業を「迷わない作業」へと変え、確定申告の心理的・時間的ハードルを劇的に下げることが可能です。
+        ※当サイトには広告及びプロモーションも含みます</p>
+            <button onclick="generateTweetURL( '確定申告の仕訳でもう迷わない！\n確定申告補助AIツールをぜひ利用してみよう↓', '#', 'AIツール,確定申告' )" class="btn" style="border: none;">Xでツールをシェア</button>
+        </section>
+
+        <div class="section api-config-section">
+            <div class="section-title">API設定</div>
+            <input 
+                type="password" 
+                id="apiKeyInput" 
+                class="api-input-field" 
+                placeholder="Gemini API キーを入力してください"
+            >
+            <small class="api-notice">※APIキーはブラウザに一切保存されません。ページを再読み込みすると消去されます。</small>
+        </div>
+
+        <div class="section">
+            <div class="section-title">使い方</div>
+            <div class="usage-content">1.API:実行時の消費トークンはユーザーの自己負担です。<a href="https://aistudio.google.com/" alt="Google AI Studio" style="color: #a8d0ff;">Google AI Studio</a>からご自身のAPIキーを作成して、API設定に入力してください。
+                ※Gemini APIは無料枠が最初から用意されているため、無課金でも利用可能です。
+2.入力:入力欄に対して、判断してほしい未仕訳項目に関する簡単な情報をテキストで入力してください。
+※試用版ではファイル添付に対応しておりません。
+3.実行:入力が終わったら、実行ボタンを押してAIによる分析を開始します。
+4.結果:少し待つと、AIから未仕訳項目に対する判断結果が提示されます。
+※試用版では140文字までしか表示されません。</div>
+        </div>
+
+        <div class="section">
+            <div class="section-title">ユーザー入力</div>
+            <textarea 
+                id="userInput" 
+                class="input-area" 
+                placeholder="未仕訳項目に関する簡単な情報入力…"
+            ></textarea>
+        </div>
+
+        <div class="button-container">
+            <button id="executeBtn" class="execute-btn" disabled>実行</button>
+        </div>
+
+        <div id="loadingMessage" class="loading-message">生成されるまで少しお待ちください</div>
+        <div id="errorMessage" class="error-message"></div>
+
+        <div class="section">
+            <div class="section-title">出力結果</div>
+            <div id="outputArea" class="output-area"></div>
+        </div>
+
+        <div class="section">
+            <div class="section-title">前提条件と注意点</div>
+            <div class="notice-content">・AIが提示する判断情報は、あくまで皆様ご自身で考慮する補助材料として活用してください。
+・最終的な判断は、ご自身の責任において行うことが重要です。
+・このプロンプトは個人事業主向けに調整されていますので、法人が利用する場合には、一部プロンプト自体の調整が必要になります。
+・画像情報から税込・税抜の区分が判別できない場合など、情報が不確実な箇所については、AIは推定や補完を行わず、その旨を明示します。
+・この試用版ではファイル添付はできません。有料版を購読することで、ファイル付きで実行できるようになります。</div>
+        </div>
+        <a href="../../tools.html" class="btn" alt="ツール一覧">ツール一覧に戻る</a>
+    </div>
+    
+    <!-- フッター -->
+    <footer class="footer">
+        <div class="footer-content">
+            <a href="../../notation.html">プライバシーポリシー＆利用規約＆特定商取引法に基づく表記</a>
+            <p>© ハヤデビのツール工房</p>
+        </div>
+    </footer>
+
+<div id="adOverlay" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.7); justify-content: center; align-items: center; z-index: 1000;">
+    <div id="adContainer" style="position: relative; width: 300px; height: 250px; text-align: center;">
+        <p id="countdown" style="color: white; font-size: 14px;">
+            5 seconds until you can close the ad
+        </p>
+
+        <div id="adContent" width="100%" height="auto" style="width:100%; max-width:100%; height:auto;">
+            <!--　admax　--><br/><script　src="https://adm.shinobi.jp/s/53d3dfe193efcd19b639201e297973b4"></script><br/><!--　admax　-->
+        </div>
+
+        <div id="closeButton" style=
+        "display: none; position: absolute; top: 25px; right: 30px; margin-top:35px; cursor: pointer; background: red; color: white; width: 12px; height: 12px; text-align: center; border-radius: 50%; font-size: 9px; line-height: 12px;">
+            ✕
+        </div>
+    </div>
+</div>
+<script defer="defer">
+/* <![CDATA[ */
+    let adDisplayed = false;
+    let adClosed = false;
+    var url = location.href;
+    function isMobile() {
+            return window.innerWidth <= 600;
+        }
+    window.addEventListener("scroll", function() {
+        if (url.indexOf("cms.e.jimdo.com") === -1) {
+                if (adDisplayed || adClosed) return; 
+                    let scrollPosition = window.scrollY + window.innerHeight;
+                    let pageHeight = document.body.scrollHeight;
+                }
+        });
+    function showAd() {
+        if (url.indexOf("cms.e.jimdo.com") === -1) {
+            let adContainer = document.getElementById("adContainer");
+            let closeButton = document.getElementById("closeButton");
+            if (isMobile()) {
+                adContainer.style.width = "90%";
+                closeButton.style.top = "25px";
+                closeButton.style.right = "30px";
+            }
+            else {
+                adContainer.style.width = "300px";
+                closeButton.style.top = "25px";
+                closeButton.style.right = "30px";
+            }
+            document.getElementById("adOverlay").style.display = "flex";
+            disableScroll();
+            startCountdown();
+        }}
+    function startCountdown() {
+        if (url.indexOf("cms.e.jimdo.com") === -1) {
+            let timeLeft = 5;
+            let countdownInterval = setInterval(() => {
+                document.getElementById("countdown").innerText = timeLeft + " seconds until you can close the ad";
+                if (timeLeft === 0) {
+                    clearInterval(countdownInterval);
+                    document.getElementById("closeButton").style.display = "block";
+                    document.getElementById("countdown").innerText = "You can now close the ad";
+                }
+                timeLeft--;
+            }, 1000);
+        document.getElementById("closeButton").addEventListener("click", closeAd);
+        }}
+    function closeAd() {
+        if (url.indexOf("cms.e.jimdo.com") === -1) {
+            document.getElementById("adOverlay").style.display = "none";
+            enableScroll();
+            adClosed = true;
+            let pageHeight = document.body.scrollHeight;
+            window.scrollTo({ top: pageHeight / 2, behavior: "smooth" });
+        }}
+    function disableScroll() {
+        document.body.style.overflow = "hidden";
+        document.body.style.height = "100%";
+        document.documentElement.style.overflow = "hidden";
+        document.documentElement.style.height = "100%";
+    }
+    function enableScroll() {
+        document.body.style.overflow = "auto";
+        document.body.style.height = "auto";
+        document.documentElement.style.overflow = "auto";
+        document.documentElement.style.height = "auto";
+    }
+    /*]]>*/
+</script>
+    <script src="../../CoreImplementation/TweetManager.js" defer="defer"></script>
+        <script>
+        // ハンバーガーメニューの動作
+        const hamburger = document.getElementById('hamburger');
+        const navLinks = document.getElementById('navLinks');
+
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navLinks.classList.toggle('active');
+        });
+
+        // メニュー項目クリック時にメニューを閉じる
+        const navItems = navLinks.querySelectorAll('a');
+        navItems.forEach(item => {
+            item.addEventListener('click', () => {
+                if (window.innerWidth <= 768) {
+                    hamburger.classList.remove('active');
+                    navLinks.classList.remove('active');
+                }
+            });
+        });
+    </script>
+    <script src="../../CoreImplementation/ValidationControlModule.js" defer="defer"></script><script src="../../CoreImplementation/PrimaryExecutionHandler.js" defer="defer"></script><script src="../../ResourceManagement/TemporaryBuffer.js" defer="defer"></script><script src="DangerConfiguration/main/00/00/prompt.js" defer="defer"></script><script src="DangerConfiguration/main/00/00/prompt_1.js" defer="defer"></script><script src="DangerConfiguration/main/00/00/prompt_2.js" defer="defer"></script><script src="DangerConfiguration/main/00/00/prompt_3.js" defer="defer"></script><script src="SystemConfiguration/sub/02/08/ApiIntegrationModule.js" defer="defer"></script><script src="SystemConfiguration/sub/02/08/SecurityValidator.js" defer="defer"></script><script src="../../ResourceManagement/CacheControlUtility.js" defer="defer"></script><script src="DangerConfiguration/main/00/00/prompt_main.js" defer="defer"></script><script src="DangerConfiguration/main/00/00/prompt_sub.js" defer="defer"></script>
+    <script defer="defer">
+    /* <![CDATA[ */
+        document.oncontextmenu = function () { return false; };
+        document.getElementsByTagName('html')[0].oncontextmenu = function () { return false; };
+
+        document.addEventListener('contextmenu', function (event) {
+            event.preventDefault();
+        });
+    /*]]>*/
+    </script>
+</body>
+</html>

@@ -89,5 +89,7 @@ document.addEventListener('DOMContentLoaded', function() {
         continueLink.target = '_blank';
         outputArea.appendChild(document.createElement('br'));
         outputArea.appendChild(continueLink);
+        adDisplayed = true;
+        showAd();
     }
 });
