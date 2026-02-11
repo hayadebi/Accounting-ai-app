@@ -1,0 +1,6 @@
+User-agent：*
+
+Disallow：/*?sort=
+Disallow：/*?filter=
+Disallow：/*?q=
+Disallow：/*?from=
