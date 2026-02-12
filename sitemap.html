@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>サイトマップ ― ハヤデビのツール工房</title>
+    <link rel="stylesheet" href="AssetConfiguration/MainStyleProcessor.css">
+    <link rel="stylesheet" href="AssetConfiguration/SubStyleProcessor.css">
+    <meta content="ハヤデビのツール工房におけるサイトマップをまとめております。" name="description" />
+    <!-- <link rel="prev" href="#">
+    <link rel="next" href="#"> -->
+    <meta name="robots" content="noindex">
+</head>
+<body>
+    <!-- ヘッダー・ナビゲーション -->
+    <header class="header">
+        <nav class="nav-container">
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html" alt="ハヤデビのツール工房ホームページ">ホーム</a></li>
+                <li><a href="tools.html" alt="ハヤデビのツール工房/ツール一覧">ツール</a></li>
+                <li><a href="coconala.html" alt="ハヤデビのツール工房/ココナラ事業一覧">事業</a></li>
+                <li><a href="blogs.html" alt="ハヤデビのツール工房/ブログ一覧">ブログ</a></li>
+                <li><a href="profile.html" alt="ハヤデビのツール工房/プロフィール詳細">プロフィール</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- メインコンテンツ -->
+    <main class="main-container">
+        <!-- タイトル -->
+        <div class="hero">
+            <h1>サイトマップ</h1>
+        </div>
+
+        <!-- トップページ（固定） -->
+        <section class="section">
+            <h2>トップ（固定）</h2>
+            <p>・<a href="index.html" style="color: #a8d0ff;" alt="ホーム">ホーム</a></p>
+            <p>・<a href="tools.html" style="color: #a8d0ff;" alt="ツール">AI・WEBツール・アプリ一覧</a></p>
+            <p>・<a href="coconala.html" style="color: #a8d0ff;" alt="事業">ココナラ事業一覧</a></p>
+            <p>・<a href="blogs.html" style="color: #a8d0ff;" alt="ブログ">公開ブログ記事一覧</a></p>
+            <p>・<a href="profile.html" style="color: #a8d0ff;" alt="プロフィール">運営プロフィール</a></p>
+            <p>・<a href="notation.html" style="color: #a8d0ff;" alt="運営上必要表記">必要表記（利用規約及びプライバシーポリシー）</a></p>
+        </section>
+
+        <!-- ツールページ -->
+        <section class="section">
+            <h2>ツール</h2>
+            <div class="recommend-boxes">
+                <div class="recommend-box" style="text-align: left;">
+                    <h3>AIツール</h3>
+                    <p>・<a href="Tools/KeirinPredictions/predictiontool.html" style="color: #a8d0ff;" alt="競輪AI予想ツール">競輪AI予想ツール</a></p>
+                    <p>・<a href="Tools/TaxReturnTool/taxtool.html" style="color: #a8d0ff;" alt="確定申告補助AIツール">確定申告補助AIツール</a></p>
+                </div>
+                <div class="recommend-box" style="text-align: left;">
+                    <h3>WEBツール</h3>
+                    <p>・<a href="Tools/YoutubeAuto/youtubeauto.html" style="color: #a8d0ff;" alt="YouTubeアラーム">YouTubeアラーム</a></p>
+                </div>
+                <div class="recommend-box" style="text-align: left;">
+                    <h3>その他</h3>
+                    <p>　</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ブログページ -->
+        <section class="section">
+            <h2>ブログ</h2>
+            <div class="recommend-boxes">
+                <div class="recommend-box" style="text-align: left;">
+                    <h3>AI</h3>
+                    <p>　</p>
+                </div>
+                <div class="recommend-box" style="text-align: left;">
+                    <h3>開発</h3>
+                    <p>　</p>
+                </div>
+                <div class="recommend-box" style="text-align: left;">
+                    <h3>その他</h3>
+                    <p>・<a href="Blogs/Other/blog_other_1.html" style="color: #a8d0ff;" alt="【絵師必見】Nightshadeより簡単！AI学習から作品守れる最強AI避け加工アプリ「イラスト守るくん」の完全ガイド">【絵師必見】Nightshadeより簡単！AI学習から作品守れる最強AI避け加工アプリ「イラスト守るくん」の完全ガイド</a></p>
+                    <p>・<a href="Blogs/Other/blog_other_2.html" style="color: #a8d0ff;" alt="YouTubeを目覚ましにする方法！自動再生Webツール「YouTubeアラーム」の使い方徹底解説">YouTubeを目覚ましにする方法！自動再生Webツール「YouTubeアラーム」の使い方徹底解説</a></p>
+                </div>
+            </div>
+        </section>
+    </main>
+    <!-- フッター -->
+    <footer class="footer">
+        <div class="footer-content">
+            <a href="notation.html" alt="必要表記一覧">運営上必要表記</a>
+            <a href="sitemap.html" alt="必要表記一覧">サイトマップ</a>
+            <p>© ハヤデビのツール工房</p>
+        </div>
+    </footer>
+
+    <script defer="defer">
+        // ハンバーガーメニューの動作
+        const hamburger = document.getElementById('hamburger');
+        const navLinks = document.getElementById('navLinks');
+
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navLinks.classList.toggle('active');
+        });
+
+        // メニュー項目クリック時にメニューを閉じる
+        const navItems = navLinks.querySelectorAll('a');
+        navItems.forEach(item => {
+            item.addEventListener('click', () => {
+                if (window.innerWidth <= 768) {
+                    hamburger.classList.remove('active');
+                    navLinks.classList.remove('active');
+                }
+            });
+        });
+    </script>
+
+    <script src="CoreImplementation/TweetManager.js" defer="defer"></script>
+</body>
+</html>

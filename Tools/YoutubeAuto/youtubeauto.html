@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>【無料】YouTubeアラーム ― ハヤデビのツール工房</title>
+    <meta content="「YouTubeアラーム」は、好きな動画を指定時刻に自動再生できる無料Webツールです。インストール不要でブラウザからすぐ利用可能。PC・スマホ両対応で、朝の目覚ましアラームとしてはもちろん、作業タイマーやリマインダーとしても便利に使えます。シンプル操作で誰でも簡単に設定できるため、「YouTubeをアラーム代わりにしたい」「勉強や作業時間を管理したい」といった方に最適。無料で使えるYouTube自動再生アラームとして、日常の時間管理をサポートします。" name="description" />
+    <meta name="keywords" content="Webツール,ウェブツール,無料,簡単,アラーム,ランダム,オンライン,作業用,居眠り防止,Youtube,ようつべ,自動再生" />
+    <meta property="og:image" content="https://pbs.twimg.com/media/HASPSB1aMAA3jp9?format=jpg&name=large" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="prev" href="../../tools.html">
+    <!-- <link rel="next" href="#"> -->
+    <link rel="stylesheet" href="../../AssetConfiguration/MainStyleProcessor.css">
+    <link rel="stylesheet" href="../../AssetConfiguration/SecondaryLayoutModule.css">
+    <link rel="stylesheet" href="../../AssetConfiguration/SubStyleProcessor.css">
+    <link rel="icon" type="image/png" href="https://pbs.twimg.com/media/G2H3yzRaIAIIHjw?format=png&name=240x240">
+</head>
+<body>
+    <!-- ヘッダー・ナビゲーション -->
+    <header class="header">
+        <nav class="nav-container">
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="../../index.html" alt="ハヤデビのツール工房ホームページ">ホーム</a></li>
+                <li><a href="../../tools.html" alt="ハヤデビのツール工房/ツール一覧">ツール</a></li>
+                <li><a href="../../coconala.html" alt="ハヤデビのツール工房/ココナラ事業一覧">事業</a></li>
+                <li><a href="../../blogs.html" alt="ハヤデビのツール工房/ブログ一覧">ブログ</a></li>
+                <li><a href="../../profile.html" alt="ハヤデビのツール工房/プロフィール詳細">プロフィール</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <div class="container">
+        <!-- タイトル -->
+        <div class="hero">
+            <h1>YouTubeアラーム</h1>
+            <p class="hero-subtitle">―― 目覚めはYouTube動画で ――</p>
+        </div>
+
+       <!-- 当サイトの概要 -->
+        <section class="section">
+            <h2>概要</h2>
+            <p>本ツールは、好きな動画を指定時刻に自動再生できる無料Webツールです。インストール不要でブラウザからすぐ利用可能。
+        PC・スマホ両対応で、朝の目覚ましアラームとしてはもちろん、作業タイマーやリマインダーとしても便利に使えます。
+        ※当サイトには広告及びプロモーションも含みます</p>
+            <button onclick="generateTweetURL( '好きな動画をアラームにしよう！\nブラウザからシンプルに使えるウェブツールです↓', '#', 'ウェブツール,Youtube' )" class="btn" style="border: none;">Xでツールをシェア</button>
+        </section>
+
+        <div class="section">
+            <div class="section-title">使い方</div>
+            <div class="usage-content">1.サイト上部に表示されている「時 (0-23)」と「分 (0-59)」の入力欄に、それぞれアラームを鳴らしたい時刻を半角数字で入力。
+2.「YouTube動画リンク」と書かれた入力欄に、再生したいYouTube動画のURLをコピペ。
+3.時刻とYouTube動画リンクの入力が完了したら、「稼働開始」ボタンをクリック。ボタンが切り替わり、アラームが稼働状態になります。
+指定時刻に達するとアラームが起動し、動画が再生されます。もし稼働中にアラームを停止したい場合は、「稼働停止」ボタンをクリックしてください。</div>
+        </div>
+
+        <div class="section">
+            <div class="section-title">ユーザー入力</div>
+            <input id="hourInput" class="api-input-field" type="number" min="0" max="23" placeholder="時 (0-23):" style="margin-bottom: 5px;" />
+            <input id="minuteInput" class="api-input-field" type="number" min="0" max="59" placeholder="分 (0-59):" style="margin-bottom: 5px;" />
+             <input id="youtubeLink" class="api-input-field" type="url" placeholder="YouTube動画リンク(https://www.youtube.com/...)" />
+        </div>
+        <!--広告-->
+        <div class="random-adcontents" style="width:100%; height:auto;padding: 0;margin: 0 0 20px 0;">
+            <center><div style="position: relative; height:auto;display: inline-block;">
+                <a href="#" class="random-ads-link" alt="広告リンク" target="_blank" rel="nofollow" referrerpolicy="no-referrer-when-downgrade"><img src="#" class="random-ads-image" alt="広告画像" style="max-width:100%; height:auto;" /></a>
+                <p style="position: absolute;top: 3%;left: 3%;color: rgba(255,255,255,0.6);font-size: 14px;font-weight: bold;margin: 0;">PR</p>
+            </div>
+            </center>
+        </div>
+        <div class="button-container">
+            <button id="toggleBtn" class="execute-btn">稼働開始</button>
+        <small id="statusDisplay">現在の状態: OFF</small>
+        </div>
+        <div class="section" id="playerContainer" style="display:none;">
+            <iframe id="ytPlayer" width="100%" height="315" frameborder="0" allowfullscreen="allowfullscreen" name="ytPlayer"></iframe>
+        </div>
+
+        <div class="section">
+            <div class="section-title">注意点</div>
+            <div class="notice-content">・使用ブラウザごとの動作制限で、正常に作動しない可能性があります。
+・YouTube側の仕様変更で機能しなくなる可能性があります。
+・YouTube動画の再生に依存しているため、安定したインターネット接続が必須です。
+・無料サービスなため、Webサイト内に広告が表示されます。
+・シンプルな機能に特化しているため、高度なアラーム設定は提供されていません。</div>
+        </div>
+        <section class="section">
+            <h2>他のツール</h2>
+            <p>本サイトでは、他にも暮らしや作業をサポートする 様々なウェブツールを運営しております。</p>
+            <a href="../../tools.html" class="btn" alt="ツール一覧">ツール一覧</a>
+        </section>
+    </div>
+    <!-- フッター -->
+    <footer class="footer">
+        <div class="footer-content">
+            <a href="../../notation.html">運営上必要表記</a>
+            <a href="../../sitemap.html" alt="必要表記一覧">サイトマップ</a>
+            <p>© ハヤデビのツール工房</p>
+        </div>
+    </footer>
+
+    <!--忍者Admax-->
+    <div class="affiliate-banner" style=
+    "border: 1px solid #5592b7; padding: 0.2em; display: flex; flex-wrap: wrap; align-items: flex-start; width: 100%; height:auto; box-sizing: border-box; position: fixed; bottom: 0px; left: 0; right: 0; transition: bottom 0.5s ease; background: rgba(255, 255, 255, 0.9);">
+        <div style="width:100%; height:auto;" class="admax-container">
+            <center>
+                <!-- admax -->
+    <script src="https://adm.shinobi.jp/o/85bc7bbb6425e778dead4dae555af812"></script>
+    <!-- admax -->
+            </center>
+        </div>
+    </div>
+    <div id="adOverlay" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.7); justify-content: center; align-items: center; z-index: 1000;">
+        <div id="adContainer" style="position: relative; width: 300px; height: 250px; text-align: center;">
+            <p id="countdown" style="color: white; font-size: 14px;">
+                5 seconds until you can close the ad
+            </p>
+
+            <div id="adContent" width="100%" height="auto" style="width:100%; max-width:100%; height:auto;">
+                <!-- admax -->
+<script src="https://adm.shinobi.jp/s/dbf0a5b89bbe174b2b50c6fbfb663a0c"></script>
+<!-- admax -->
+            </div>
+
+            <div id="closeButton" style=
+            "display: none; position: absolute; top: 25px; right: 30px; margin-top:35px; cursor: pointer; background: red; color: white; width: 12px; height: 12px; text-align: center; border-radius: 50%; font-size: 9px; line-height: 12px;">
+                ✕
+            </div>
+        </div>
+    </div>
+
+    <!--ウェブツール機能実装-->
+    <script rel="preload">
+        document.addEventListener("DOMContentLoaded", function(){
+        const hourInput = document.getElementById("hourInput");
+        const minuteInput = document.getElementById("minuteInput");
+        const youtubeLink = document.getElementById("youtubeLink");
+        const toggleBtn = document.getElementById("toggleBtn");
+        const statusDisplay = document.getElementById("statusDisplay");
+
+        let running = false;
+        let timer = null;
+
+        function isValidYouTubeUrl(url) {
+            const pattern = /^(https?:\/\/)?(www\.)?(youtube\.com|youtu\.be)\//;
+            return pattern.test(url.trim());
+        }
+
+        function start() {
+            const hour = parseInt(hourInput.value, 10);
+            const minute = parseInt(minuteInput.value, 10);
+            const link = youtubeLink.value.trim();
+
+            if (isNaN(hour) || isNaN(minute) || !link) {
+            alert("時・分・YouTubeリンクを正しく入力してください。");
+            return;
+            }
+            if (hour < 0 || hour > 23 || minute < 0 || minute > 59) {
+            alert("時は0-23、分は0-59で指定してください。");
+            return;
+            }
+            if (!isValidYouTubeUrl(link)) {
+            alert("YouTubeの正しいリンクを入力してください。");
+            return;
+            }
+
+            running = true;
+            toggleBtn.textContent = "稼働停止";
+            statusDisplay.textContent = "現在の状態: ON (待機中)";
+            adDisplayed = true;
+            showAd();
+
+            timer = setInterval(() => {
+            if (!running) return;
+            const now = new Date();
+            if (now.getHours() === hour && now.getMinutes() === minute) {
+                window.location.href = link; // 同じタブで開く
+                stop();
+            }
+            }, 1000);
+        }
+
+            
+        function stop() {
+            running = false;
+            if (timer) {
+            clearInterval(timer);
+            timer = null;
+            }
+            toggleBtn.textContent = "稼働開始";
+            statusDisplay.textContent = "現在の状態: OFF";
+        }
+
+        toggleBtn.addEventListener("click", () => {
+            if (running) stop();
+            else start();
+        });
+        });
+    </script>
+
+    <script defer="defer">
+        let adDisplayed = false;
+        let adClosed = false;
+        var url = location.href;
+        function isMobile() {
+                return window.innerWidth <= 600;
+            }
+        window.addEventListener("scroll", function() {
+            if (url.indexOf("cms.e.jimdo.com") === -1) {
+                    if (adDisplayed || adClosed) return; 
+                        let scrollPosition = window.scrollY + window.innerHeight;
+                        let pageHeight = document.body.scrollHeight;
+                    }
+            });
+        function showAd() {
+            if (url.indexOf("cms.e.jimdo.com") === -1) {
+                let adContainer = document.getElementById("adContainer");
+                let closeButton = document.getElementById("closeButton");
+                if (isMobile()) {
+                    adContainer.style.width = "90%";
+                    closeButton.style.top = "25px";
+                    closeButton.style.right = "30px";
+                }
+                else {
+                    adContainer.style.width = "300px";
+                    closeButton.style.top = "25px";
+                    closeButton.style.right = "30px";
+                }
+                document.getElementById("adOverlay").style.display = "flex";
+                disableScroll();
+                startCountdown();
+            }}
+        function startCountdown() {
+            if (url.indexOf("cms.e.jimdo.com") === -1) {
+                let timeLeft = 5;
+                let countdownInterval = setInterval(() => {
+                    document.getElementById("countdown").innerText = timeLeft + " seconds until you can close the ad";
+                    if (timeLeft === 0) {
+                        clearInterval(countdownInterval);
+                        document.getElementById("closeButton").style.display = "block";
+                        document.getElementById("countdown").innerText = "You can now close the ad";
+                    }
+                    timeLeft--;
+                }, 1000);
+            document.getElementById("closeButton").addEventListener("click", closeAd);
+            }}
+        function closeAd() {
+            if (url.indexOf("cms.e.jimdo.com") === -1) {
+                document.getElementById("adOverlay").style.display = "none";
+                enableScroll();
+                adClosed = true;
+                let pageHeight = document.body.scrollHeight;
+                window.scrollTo({ top: pageHeight / 2, behavior: "smooth" });
+            }}
+        function disableScroll() {
+            document.body.style.overflow = "hidden";
+            document.body.style.height = "100%";
+            document.documentElement.style.overflow = "hidden";
+            document.documentElement.style.height = "100%";
+        }
+        function enableScroll() {
+            document.body.style.overflow = "auto";
+            document.body.style.height = "auto";
+            document.documentElement.style.overflow = "auto";
+            document.documentElement.style.height = "auto";
+        }
+    </script>
+    <script src="../../CoreImplementation/TweetManager.js" defer="defer"></script> <script> const hamburger = document.getElementById('hamburger'); const navLinks = document.getElementById('navLinks'); hamburger.addEventListener('click', () => { hamburger.classList.toggle('active'); navLinks.classList.toggle('active'); }); const navItems = navLinks.querySelectorAll('a'); navItems.forEach(item => {  item.addEventListener('click', () => {  if (window.innerWidth <= 768) {   hamburger.classList.remove('active');  navLinks.classList.remove('active');   }   });  }); </script>  <script src="../../Ads/ToolAds.js" defer="defer"></script><script defer="defer"> document.oncontextmenu = function () { return false; }; document.getElementsByTagName('html')[0].oncontextmenu = function () { return false; }; document.addEventListener('contextmenu', function (event) { event.preventDefault();  }); </script>
+</body>
+</html>

@@ -4,3 +4,5 @@ Disallow：/*?sort=
 Disallow：/*?filter=
 Disallow：/*?q=
 Disallow：/*?from=
+
+Sitemap: https://hayadebi-tools.netlify.app/sitemap.xml

@@ -9,8 +9,16 @@
     "siteUrl": "https://bitflyer.com/invitation?id=hhhv5jly&lang=ja-JP"
   },
   {
-    "imageUrl": "../../Ads/BlogImage/AdsImage3.jpg",
-    "siteUrl": "https://note.com/hayadebi_ai/n/n9f71a3b80529"
+    "imageUrl": "../../Ads/BlogImage/AdsImage3.gif",
+    "siteUrl": "https://dlaf.jp/home/dlaf/=/aid/hayadebitools/url/https%3A%2F%2Fwww.dlsite.com%2Fhome%2F%3Futm_medium%3Daffiliate%26utm_campaign%3Dbnlink%26utm_content%3Dtext"
+  },
+  {
+    "imageUrl": "../../Ads/BlogImage/AdsImage4.jpg",
+    "siteUrl": "https://cointiply.com/r/KrAZKx"
+  },
+  {
+    "imageUrl": "../../Ads/BlogImage/AdsImage5.jpg",
+    "siteUrl": "https://adf.shinobi.jp/r/39333f8f9196ba84d3a4893ffbd4351b"
   }
 ];
   
