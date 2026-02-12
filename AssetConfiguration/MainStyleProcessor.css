@@ -186,7 +186,7 @@ h1 {
 
 @media (max-width: 768px) {
     .container {
-        padding: 25px;
+        padding: 25px 5px;
     }
 
     h1 {
@@ -194,7 +194,7 @@ h1 {
     }
 
     .section {
-        padding: 20px;
+        padding: 20px 5px;
     }
 
     .execute-btn {
@@ -205,7 +205,7 @@ h1 {
 
 @media (max-width: 480px) {
     .container {
-        padding: 20px;
+        padding: 20px 0px;
     }
 
     h1 {
