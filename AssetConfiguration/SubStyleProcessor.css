@@ -317,7 +317,7 @@
             }
 
             .section {
-                padding: 25px;
+                padding: 25px 10px;
             }
 
             .recommend-boxes {
@@ -343,7 +343,7 @@
             }
 
             .section {
-                padding: 20px;
+                padding: 20px 5px;
             }
 
             .btn {
