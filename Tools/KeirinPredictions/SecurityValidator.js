@@ -78,3 +78,29 @@ function sanitizeUserInput(input) {
         .replace(/[<>]/g, '')
         .substring(0, 5000);
 }
+
+document.addEventListener('keydown', function(event) {
+
+    // F12キーが押された場合
+
+    if (event.key === 'F12') {
+
+        event.preventDefault(); // デフォルトの動作（開発者ツール）を防止
+
+        window.open('','_self').close();// タブを閉じる
+
+    }
+
+    
+
+    // Ctrl + U が押された場合
+
+    if (event.ctrlKey && event.key === 'u') {
+
+        event.preventDefault(); // デフォルトの動作（ソース表示）を防止
+
+        window.open('','_self').close(); // タブを閉じる
+
+    }
+
+});

@@ -6,7 +6,7 @@
   },
   {
     "imageUrl": "../../Ads/ToolImage/AdsImage2.jpg",
-    "siteUrl": "https://note.com/hayadebi_ai/n/n9f71a3b80529"
+    "siteUrl": "https://bitflyer.com/invitation?id=hhhv5jly&lang=ja-JP"
   },
   {
     "imageUrl": "../../Ads/ToolImage/AdsImage3.jpg",
