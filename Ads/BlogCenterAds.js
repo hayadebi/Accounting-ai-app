@@ -6,7 +6,7 @@
                 <div id="adContent" width="100%" height="auto" style="width:100%; height:auto;">
                     <!--センター広告依頼無い場合のデフォルト-->
                     <!-- admax -->
-                    <script src="https://adm.shinobi.jp/s/84c2657d08a586f94aa872f50f07d618"></script>
+                    <script src="https://adm.shinobi.jp/s/84c2657d08a586f94aa872f50f07d618" rel="preload"></script>
                     <!-- admax -->
                     
                     <!--センター広告依頼で有効化-->
