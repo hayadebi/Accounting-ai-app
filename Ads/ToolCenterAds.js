@@ -35,7 +35,7 @@
                 },
                 {
                     "imageUrl": "../../Ads/CenterImage/AdsImage2.jpg",
-                    "siteUrl": "https://hayadebi.github.io/Accounting-ai-app/Tools/DevilGame/devilgame.html"
+                    "siteUrl": "https://hayadebi.github.io/Accounting-ai-app/adnextcenter.html?q=hayadebi.github.io%2FAccounting-ai-app%2FTools%2FDevilGame%2Fdevilgame.html"
                 },
                 {
                     "imageUrl": "../../Ads/CenterImage/AdsImage3.jpg",
