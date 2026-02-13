@@ -1,4 +1,4 @@
-const CONTINUE_LINK = '#';
+const CONTINUE_LINK = 'https://note.com/hayadebi_ai/n/nd7234ba28c72';
 const BASE_PROMPT = `あなたは **SEO監査・競合比較・ドメイン評価を専門とする上級SEO分析AI** として行動せよ。
 以下の指示に**厳密に従い**、USERから提供される情報のみを基に分析を実行すること。
 

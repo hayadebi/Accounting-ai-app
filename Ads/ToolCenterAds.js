@@ -44,6 +44,10 @@
                 {
                     "imageUrl": "../../Ads/CenterImage/AdsImage4.gif",
                     "siteUrl": "https://dlaf.jp/home/dlaf/=/aid/githubhayadebitools/url/https%3A%2F%2Fwww.dlsite.com%2Fhome%2Franking%2Fweek%2F%3Futm_medium%3Daffiliate%26utm_campaign%3Dbnlink%26utm_content%3Dtext"
+                },
+                {
+                    "imageUrl": "../../Ads/CenterImage/AdsImage5.jpg",
+                    "siteUrl": "https://note.com/hayadebi_ai/n/nd7234ba28c72"
                 }
             ];
             // ランダムに1つ選択
