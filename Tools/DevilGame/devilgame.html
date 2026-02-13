@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>無料で遊べるブラウザゲーム市場 Devil Games｜収益還元の悪魔的体験 ― ハヤデビのツール工房</title>
-    <meta content="無料で遊べる多彩なブラウザゲームが集結する「あくまでブラウザゲーム市場【Devil Games】」は、アクション、パズル、シミュレーションなど豊富なジャンルを網羅したゲームプラットフォームです。本サイトの最大の特徴は、RentAHumanとの連携による独自の収益還元システムにあります。ゲームをプレイした応募者の中から抽選で1名に、その日の収益の50%が分配されるという、まさに「悪魔的」な還元体験を提供しています。インストール不要でPCやスマートフォンから即座にプレイ可能。暇つぶしに最適なカジュアルゲームから、じっくり楽しめるストラテジーまで、あなたの好みにぴったりのタイトルが必ず見つかります。最新のプロモーションゲームも随時更新中。遊べば遊ぶほどチャンスが広がる、新感覚のゲーム市場で今すぐ「悪魔的なゲーム体験」を始めてみませんか。" name="description" />
+    <meta content="無料で遊べる多彩なブラウザゲームが集結する「あくまでブラウザゲーム市場【Devil Games】」は、アクション、パズル、シミュレーションなど豊富なジャンルを網羅したゲームプラットフォームです。本サイトの最大の特徴は、独自の収益還元システムにあります。ゲームをプレイした応募者の中から抽選で1名に、その日の収益の50%が分配されるという、まさに「悪魔的」な還元体験を提供しています。インストール不要でPCやスマートフォンから即座にプレイ可能。暇つぶしに最適なカジュアルゲームから、じっくり楽しめるストラテジーまで、あなたの好みにぴったりのタイトルが必ず見つかります。最新のプロモーションゲームも随時更新中。遊べば遊ぶほどチャンスが広がる、新感覚のゲーム市場で今すぐ「悪魔的なゲーム体験」を始めてみませんか。" name="description" />
     <meta name="keywords" content="ブラウザゲーム,無料ゲーム,Devil Games,収益還元,懸賞,オンラインゲーム,ハヤデビ,RentAHuman,暇つぶし,スマホゲーム,PCゲーム,アクションゲーム,パズルゲーム" />
     <meta property="og:image" content="https://pbs.twimg.com/media/HA-VlwbakAAd0BW?format=jpg&name=large" />
     <meta name="twitter:card" content="summary_large_image" />
@@ -55,10 +55,46 @@
 
        <!-- 当サイトの概要 -->
         <section class="section">
+            <!-- <div style="max-width: 600px; margin: 20px auto; padding: 30px 20px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); font-family: 'Arial', sans-serif;"> -->
+                <div style="text-align: center; color: white; margin-bottom: 30px;">
+                    <div style="font-size: clamp(24px, 5vw, 36px); font-weight: bold; margin-bottom: 10px;">抽選カウントダウン</div>
+                    <p id="targetDate"></p>
+                </div>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(70px, 1fr)); gap: clamp(10px, 2vw, 20px); margin-bottom: 20px;">
+                    <div style="background: rgba(255,255,255,0.2); backdrop-filter: blur(10px); border-radius: 15px; padding: clamp(15px, 3vw, 20px); text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
+                        <div style="font-size: clamp(28px, 6vw, 48px); font-weight: bold; color: white; line-height: 1;" id="days">00</div>
+                        <div style="font-size: clamp(12px, 2.5vw, 14px); color: rgba(255,255,255,0.8); margin-top: 8px;">日</div>
+                    </div>
+                    <div style="background: rgba(255,255,255,0.2); backdrop-filter: blur(10px); border-radius: 15px; padding: clamp(15px, 3vw, 20px); text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
+                        <div style="font-size: clamp(28px, 6vw, 48px); font-weight: bold; color: white; line-height: 1;" id="hours">00</div>
+                        <div style="font-size: clamp(12px, 2.5vw, 14px); color: rgba(255,255,255,0.8); margin-top: 8px;">時間</div>
+                    </div>
+                    <div style="background: rgba(255,255,255,0.2); backdrop-filter: blur(10px); border-radius: 15px; padding: clamp(15px, 3vw, 20px); text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
+                        <div style="font-size: clamp(28px, 6vw, 48px); font-weight: bold; color: white; line-height: 1;" id="minutes">00</div>
+                        <div style="font-size: clamp(12px, 2.5vw, 14px); color: rgba(255,255,255,0.8); margin-top: 8px;">分</div>
+                    </div>
+                    <div style="background: rgba(255,255,255,0.2); backdrop-filter: blur(10px); border-radius: 15px; padding: clamp(15px, 3vw, 20px); text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
+                        <div style="font-size: clamp(28px, 6vw, 48px); font-weight: bold; color: white; line-height: 1;" id="seconds">00</div>
+                        <div style="font-size: clamp(12px, 2.5vw, 14px); color: rgba(255,255,255,0.8); margin-top: 8px;">秒</div>
+                    </div>
+                </div>
+                <div style="text-align: center; color: white; font-size: clamp(12px, 2.5vw, 14px); opacity: 0.7;" id="message"></div>
+            <!-- </div> -->
             <h2>概要</h2>
-            <p>本サイトでは様々なブラウザゲームを遊べます。<a href="https://rentahuman.ai/" alt="RentAHuman" style="color: #a8d0ff;overflow-wrap: break-word;" target="_blank" rel="nofollow" referrerpolicy="no-referrer-when-downgrade">RentAHuman</a>でほぼ毎日募集するタスクと連携しており、遊んだ総応募者の内抽選で1名に、募集期間中の本サイト収益50%分が分配されます。（審査有）</p>
-            <button onclick="generateTweetURL( 'ブラウザゲームを遊びながら収益を得よう！\nDevil GamesはRentAHumanの募集と連携したプラットフォームです↓', '#', 'ブラウザゲーム,ポイ活,副業' )" class="btn" style="border: none;">Xで本サイトをシェア</button>
+            <p>本サイトページでは、さまざまなブラウザゲームを遊べます。
+抽選期限までにGoogleフォームからご応募ください。総応募者の中から期間中全クリ等達成ゲーム数が最も多い1名に、期間中本サイトページの収益50%分を分配します。</p>
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfqT3Lt8yDBXKa2mx33QylMbQui-J09kmfSYV9xdbVnSzLhQQ/viewform?usp=header" target="_blank" referrerpolicy="no-referrer-when-downgrade" class="btn" target="_blank" alt="抽選応募" style="border:none;">詳細と応募（Googleフォーム）</a><button onclick="generateTweetURL( 'ブラウザゲームを遊びながら収益を得よう！\nDevil Gamesは収益が還元されるプラットフォームです↓', '#', 'ブラウザゲーム,ポイ活,副業' )" class="btn" style="border: none;">シェアで収益増やす</button>
         </section>
+
+        <div style="width:100%; height:auto;padding: 0;margin: 0 0 20px 0;text-align: left;">
+            <h2>抽選履歴</h2>
+            <div style="width:100%;max-height:200px;overflow-y: auto;">
+                <!-- 抽選数分div量産 -->
+                <div class="recommend-box">
+                    <p style="max-width: 100%;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">2026/02/01：名無し 様が分配報酬 $2.47 を受け取りました</span>
+                </div>
+            </div>
+        </div>
 
         <section class="section">
             <h2>ジャンル</h2>
@@ -102,14 +138,6 @@
             キッズ</a>
         </div>
         </section>
-        <!--広告-->
-        <div class="random-adcontents" style="width:100%; height:auto;padding: 0;margin: 0 0 20px 0;">
-            <center><div style="position: relative; height:auto;display: inline-block;">
-                <a href="#" class="random-ads-link" alt="広告リンク" target="_blank" rel="nofollow" referrerpolicy="no-referrer-when-downgrade"><img src="#" class="random-ads-image" alt="広告画像" style="max-width:100%; height:auto;" /></a>
-                <p style="position: absolute;top: 3%;left: 3%;color: rgba(255,255,255,0.6);font-size: 14px;font-weight: bold;margin: 0;">PR</p>
-            </div>
-            </center>
-        </div>
 
         <div class="section">
             <div class="section-title" id="genre-1">アクション</div>
@@ -164,8 +192,12 @@
         </div>
 
         <!--広告-->
-        <div style="width:100%; height:auto;padding: 0;margin: 0 0 20px 0;text-align: left;">
-            <script type="text/javascript">blogparts={"base":"https://www.dlsite.com/","type":"ranking","site":"home","query":{"period":"week","options":["-GRO","-MEN"]},"title":"ランキング","display":"horizontal","detail":"1","column":"h","image":"small","count":"3","wrapper":"0","autorotate":true,"aid":"hayadebitools"}</script><script type="text/javascript" src="https://www.dlsite.com/js/blogparts.js" charset="UTF-8"></script>
+        <div class="random-adcontents" style="width:100%; height:auto;padding: 0;margin: 0 0 20px 0;">
+            <center><div style="position: relative; height:auto;display: inline-block;">
+                <a href="#" class="random-ads-link" alt="広告リンク" target="_blank" rel="nofollow" referrerpolicy="no-referrer-when-downgrade"><img src="#" class="random-ads-image" alt="広告画像" style="max-width:100%; height:auto;" /></a>
+                <p style="position: absolute;top: 3%;left: 3%;color: rgba(255,255,255,0.6);font-size: 14px;font-weight: bold;margin: 0;">PR</p>
+            </div>
+            </center>
         </div>
 
         <div class="section">
@@ -192,12 +224,8 @@
         </div>
 
         <!--広告-->
-        <div class="random-adcontents" style="width:100%; height:auto;padding: 0;margin: 0 0 20px 0;">
-            <center><div style="position: relative; height:auto;display: inline-block;">
-                <a href="#" class="random-ads-link" alt="広告リンク" target="_blank" rel="nofollow" referrerpolicy="no-referrer-when-downgrade"><img src="#" class="random-ads-image" alt="広告画像" style="max-width:100%; height:auto;" /></a>
-                <p style="position: absolute;top: 3%;left: 3%;color: rgba(255,255,255,0.6);font-size: 14px;font-weight: bold;margin: 0;">PR</p>
-            </div>
-            </center>
+        <div style="width:100%; height:auto;padding: 0;margin: 0 0 20px 0;text-align: left;">
+            <script type="text/javascript">blogparts={"base":"https://www.dlsite.com/","type":"ranking","site":"home","query":{"period":"week","options":["-GRO","-MEN"]},"title":"ランキング","display":"horizontal","detail":"1","column":"h","image":"small","count":"3","wrapper":"0","autorotate":true,"aid":"hayadebitools"}</script><script type="text/javascript" src="https://www.dlsite.com/js/blogparts.js" charset="UTF-8"></script>
         </div>
 
         <div class="section">
@@ -366,6 +394,55 @@
         });
     </script>
   <!--playgama-->
+
+  <!--タイマー-->
+    <script>
+        function updateCountdown() {
+            // 現在の日時を取得
+            const now = new Date();
+            
+            // 来月1日0時を計算
+            const nextMonth = new Date(now.getFullYear(), now.getMonth() + 1, 1, 0, 0, 0);
+            
+            // 対象日時を表示
+            const year = nextMonth.getFullYear();
+            const month = nextMonth.getMonth() + 1;
+            document.getElementById('targetDate').textContent = `収益50%還元の抽選(${year}年${month}月1日)まで`;
+            
+            // 残り時間を計算
+            const diff = nextMonth - now;
+            
+            if (diff <= 0) {
+                document.getElementById('days').textContent = '00';
+                document.getElementById('hours').textContent = '00';
+                document.getElementById('minutes').textContent = '00';
+                document.getElementById('seconds').textContent = '00';
+                document.getElementById('message').textContent = '抽選期限を迎えました!';
+                return;
+            }
+            
+            // 日、時、分、秒に変換
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+            
+            // 2桁表示
+            document.getElementById('days').textContent = String(days).padStart(2, '0');
+            document.getElementById('hours').textContent = String(hours).padStart(2, '0');
+            document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
+            document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
+            
+            document.getElementById('message').textContent = '';
+        }
+
+        // 初回実行
+        updateCountdown();
+
+        // 1秒ごとに更新
+        setInterval(updateCountdown, 1000);
+    </script>
+  <!--タイマー-->
  
     <script src="../../CoreImplementation/TweetManager.js" defer="defer"></script> <script> const hamburger = document.getElementById('hamburger'); const navLinks = document.getElementById('navLinks'); hamburger.addEventListener('click', () => { hamburger.classList.toggle('active'); navLinks.classList.toggle('active'); }); const navItems = navLinks.querySelectorAll('a'); navItems.forEach(item => {  item.addEventListener('click', () => {  if (window.innerWidth <= 768) {   hamburger.classList.remove('active');  navLinks.classList.remove('active');   }   });  }); </script>  <script src="../../Ads/ToolAds.js" defer="defer"></script><script defer="defer"> document.oncontextmenu = function () { return false; }; document.getElementsByTagName('html')[0].oncontextmenu = function () { return false; }; document.addEventListener('contextmenu', function (event) { event.preventDefault();  }); </script>
 </body>
