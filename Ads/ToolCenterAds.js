@@ -6,23 +6,43 @@
                 <div id="adContent" width="100%" height="auto" style="width:100%; height:auto;">
                     <!--センター広告依頼無い場合のデフォルト-->
                     <!-- admax -->
-                    <script src="https://adm.shinobi.jp/s/84c2657d08a586f94aa872f50f07d618" rel="preload"></script>
+                    <!-- <script src="https://adm.shinobi.jp/s/84c2657d08a586f94aa872f50f07d618" rel="preload"></script> -->
                     <!-- admax -->
                     
                     <!--センター広告依頼で有効化-->
-                    <!-- <a class="center-ads-link" href="#" rel="nofollow" referrerpolicy="no-referrer-when-downgrade" alt="広告リンク"><img class="center-ads-image" src="#" alt=
-                    "広告画像" style="width:300px;height:auto;max-width:100%;" /></a> -->
+                    <a class="center-ads-link" href="#" target="_blank" rel="nofollow" referrerpolicy="no-referrer-when-downgrade" alt="広告リンク"><img class="center-ads-image" src="#" alt=
+                    "広告画像" style="width:300px;height:auto;max-width:100%;" /></a>
                 </div>
                 <div id="closeButton" style="display: none; position: absolute; top: 25px; right: 30px;  margin-top:35px; cursor: pointer; background: red; color: white; width: 12px; height: 12px; text-align: center; border-radius: 50%; font-size: 9px; line-height: 12px;">            ✕        </div>
             </div>
         </div>
 
-         <script>
+    `;
+
+
+    // ページ読み込み完了後に自動挿入
+    document.addEventListener('DOMContentLoaded', function() {
+        const containers = document.querySelectorAll('.centerad-widget');
+        containers.forEach(function(container) {
+            container.innerHTML = adHTML;
+
             //メイン機能
             // 組み合わせリスト
             const centercombinations = [
                 {
-                    "imageUrl": "../../Ads/CenterImage/Sample.jpg",
+                    "imageUrl": "../../Ads/CenterImage/AdsImage1.jpg",
+                    "siteUrl": "https://note.com/hayadebi_ai/n/n9f71a3b80529"
+                },
+                {
+                    "imageUrl": "../../Ads/CenterImage/AdsImage2.jpg",
+                    "siteUrl": "https://hayadebi.github.io/Accounting-ai-app/Tools/DevilGame/devilgame.html"
+                },
+                {
+                    "imageUrl": "../../Ads/CenterImage/AdsImage3.jpg",
+                    "siteUrl": "https://cointiply.com/r/KrAZKx"
+                },
+                {
+                    "imageUrl": "../../Ads/CenterImage/AdsImage4.gif",
                     "siteUrl": "#"
                 }
             ];
@@ -46,15 +66,6 @@
                 link.href = centerselected.siteUrl;
                 });
             }
-         </script>
-    `;
-
-
-    // ページ読み込み完了後に自動挿入
-    document.addEventListener('DOMContentLoaded', function() {
-        const containers = document.querySelectorAll('.centerad-widget');
-        containers.forEach(function(container) {
-            container.innerHTML = adHTML;
         });
     });
 

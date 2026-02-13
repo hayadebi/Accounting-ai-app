@@ -10,7 +10,7 @@
   },
   {
     "imageUrl": "../../Ads/BlogImage/AdsImage3.gif",
-    "siteUrl": "https://dlaf.jp/home/dlaf/=/aid/hayadebitools/url/https%3A%2F%2Fwww.dlsite.com%2Fhome%2F%3Futm_medium%3Daffiliate%26utm_campaign%3Dbnlink%26utm_content%3Dtext"
+    "siteUrl": "#"
   },
   {
     "imageUrl": "../../Ads/BlogImage/AdsImage4.jpg",
