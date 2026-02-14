@@ -1,4 +1,4 @@
-(function( ) {
+(async function( ) {
     const QUERY_PREFIX = "?q=";
     const currentUrl = window.location.href;
     
@@ -16,13 +16,19 @@
             // 3. クエリ文字列をデコードして新しいURLの候補とする
             let newUrl = decodeURIComponent(encodedUrl);
             
+            //クリックを記録する。
+            const d = new Date();
+            const days = d.toISOString();
+            const api = GASStorage.createSimpleAPI('#');
+            await api.set('ClickDatas', days, JSON.stringify({ nexturl: newUrl }));
+
             // 5. デコード後のURLにプロトコルがない場合、'https://'を付与
             // 'http://' または 'https://' で始まっているかチェック
             if (!newUrl.startsWith('http://' ) && !newUrl.startsWith('https://' )) {
                 // プロトコルがない場合は 'https://' を追加
                 newUrl = 'https://' + newUrl;
             }
-            
+
             // 4. 0.1秒（100ミリ秒 ）の遅延後にリダイレクトを実行
             setTimeout(() => {
                 // location.replace() で履歴を残さずにページ遷移
