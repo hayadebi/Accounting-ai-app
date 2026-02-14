@@ -5,4 +5,4 @@ Disallow：/*?filter=
 Disallow：/*?q=
 Disallow：/*?from=
 
-Sitemap: https://hayadebi-tools.netlify.app/sitemap.xml
+Sitemap: https://hayadebi.github.io/Accounting-ai-app/sitemap.xml
