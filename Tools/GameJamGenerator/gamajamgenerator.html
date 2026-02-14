@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-T4G6KMKK');</script>
+<!-- End Google Tag Manager -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ゲームジャム企画ジェネレーター ― ハヤデビのツール工房</title>
+    <meta content="ゲームジャムのアイデア出し、もう悩まない！「ゲームジャム企画ジェネレーター」は、unity1weekなど短期間でのゲーム開発に最適な、ランダムなテーマからユニークなゲーム企画を無料で自動生成するWebツールです。ボタン一つで斬新なお題が無限に生まれ、あなたの創造性を刺激します。企画が思いつかない時、ありきたりなアイデアから脱却したい時、このツールがあなたのゲーム開発の強力なパートナーになります。さあ、最高のゲームアイデアを見つけて、開発をスタートしましょう！" name="description" />
+    <meta name="keywords" content="ゲームジャム, ゲーム企画, アイデア, ジェネレーター, unity1week, お題, ランダム, 無料, Webツール, ゲーム開発, Unity, AIツール, AI活用" />
+    <meta property="og:image" content="https://pbs.twimg.com/media/HBHfcGXa4AAuZQS?format=jpg&name=large" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="prev" href="../../tools.html">
+    <!-- <link rel="next" href="#"> -->
+    <link rel="stylesheet" href="../../AssetConfiguration/MainStyleProcessor.css">
+    <link rel="stylesheet" href="../../AssetConfiguration/SecondaryLayoutModule.css">
+    <link rel="stylesheet" href="../../AssetConfiguration/SubStyleProcessor.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/png" href="https://pbs.twimg.com/media/G2H3yzRaIAIIHjw?format=png&name=240x240">
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-GLW3M3X7B3" defer></script>
+    <script defer>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-GLW3M3X7B3');
+    </script>
+
+    <style>
+    .section {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    @media (max-width: 768px){
+        .section {
+            grid-template-columns: 1fr;
+        }
+    }
+    </style>
+</head>
+<body>
+    <!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-T4G6KMKK"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+
+    <!-- ヘッダー・ナビゲーション -->
+    <header class="header">
+        <nav class="nav-container">
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="../../index.html" alt="ハヤデビのツール工房ホームページ">ホーム</a></li>
+                <li><a href="../../tools.html" alt="ハヤデビのツール工房/ツール一覧">ツール</a></li>
+                <li><a href="../../coconala.html" alt="ハヤデビのツール工房/ココナラ事業一覧">事業</a></li>
+                <li><a href="../../blogs.html" alt="ハヤデビのツール工房/ブログ一覧">ブログ</a></li>
+                <li><a href="../../profile.html" alt="ハヤデビのツール工房/プロフィール詳細">プロフィール</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <div class="container">
+        <!-- タイトル -->
+        <div class="hero">
+            <h1>ゲームジャム企画ジェネレーター</h1>
+            <p class="hero-subtitle">2つのテーマから、1週間で作れるゲーム企画を生成</p>
+        </div>
+
+       <div class="section api-config-section">
+            <div class="section-title">API設定</div>
+            <input 
+                type="password" 
+                id="apiKey" 
+                class="api-input-field" 
+                placeholder="Gemini API キーを入力してください"
+            >
+            <small class="api-notice">※APIキーはブラウザに一切保存されません。ページを再読み込みすると消去されます。</small>
+        </div>
+
+        <div class="section">
+            <div class="section-title">使い方</div>
+            <div class="usage-content">0.実行時の消費トークンはユーザーの自己負担です。<a href="https://aistudio.google.com/" target="_blank" referrerpolicy="no-referrer-when-downgrade" alt="Google AI Studio" style="color: #a8d0ff;overflow-wrap: break-word;">Google AI Studio</a>からご自身のAPIキーを作成して、API設定に入力してください。
+1.画面上部に2つの入力ボックスがあります。「【テーマ1】左側の青紫色のボックス」に1つ目のテーマワードを入力。「【テーマ2】右側の紫色のボックス」に2つ目のテーマワードを入力。
+テーマが思いつかない場合も大丈夫。各入力ボックスの右上にある 🔄 ボタン をクリックすると、全290語以上の語彙からランダムでテーマワードが決まります。
+2.テーマが決まったら、画面中央の大きな青紫色のボタン「ゲーム企画を生成」 をクリック。数秒待つと、AIが5つのゲーム企画案を提案してくれます。</div>
+                <button onclick="generateTweetURL( '無料で利用できる！\nゲーム企画ジェネレーターを使ってみよう↓', '#', 'ゲーム企画,Unity' )" class="btn" style="border: none;">Xでツールをシェア</button>
+        </div>
+
+        <!--機能UI-->
+        <div class="section" style="display: grid;gap: 1.5rem;margin-bottom: 2rem;">
+            <div class="word-input-wrapper">
+                <div class="word-input word-input-1">
+                    <label class="word-label">テーマ 1</label>
+                    <input 
+                        type="text" 
+                        id="word1" 
+                        class="word-text" 
+                        placeholder="走る">
+                    <button class="shuffle-btn shuffle-btn-1" id="shuffle1" title="ランダムなテーマを生成">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="16 3 21 3 21 8"></polyline>
+                            <line x1="4" y1="20" x2="21" y2="3"></line>
+                            <polyline points="21 16 21 21 16 21"></polyline>
+                            <line x1="15" y1="15" x2="21" y2="21"></line>
+                            <line x1="4" y1="4" x2="9" y2="9"></line>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+            <div class="word-input-wrapper">
+                <div class="word-input word-input-2">
+                    <label class="word-label">テーマ 2</label>
+                    <input 
+                        type="text" 
+                        id="word2" 
+                        class="word-text" 
+                        placeholder="光">
+                    <button class="shuffle-btn shuffle-btn-2" id="shuffle2" title="ランダムなテーマを生成">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="16 3 21 3 21 8"></polyline>
+                            <line x1="4" y1="20" x2="21" y2="3"></line>
+                            <polyline points="21 16 21 21 16 21"></polyline>
+                            <line x1="15" y1="15" x2="21" y2="21"></line>
+                            <line x1="4" y1="4" x2="9" y2="9"></line>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+            <button id="generateBtn" class="generate-btn">
+                <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="6" y1="12" x2="10" y2="12"></line>
+                    <line x1="8" y1="10" x2="8" y2="14"></line>
+                    <line x1="15" y1="13" x2="15.01" y2="13"></line>
+                    <line x1="18" y1="11" x2="18.01" y2="11"></line>
+                    <rect x="2" y="6" width="20" height="12" rx="2"></rect>
+                </svg>
+                <span class="btn-text">ゲーム企画を生成</span>
+            </button>
+        </div>
+        <!--広告-->
+        <div class="random-adcontents" style="width:100%; height:auto;padding: 0;margin: 0 0 20px 0;">
+            <center><div style="position: relative; height:auto;display: inline-block;">
+                <a href="#" class="random-ads-link" alt="広告リンク" target="_blank" rel="nofollow" referrerpolicy="no-referrer-when-downgrade"><img src="#" class="random-ads-image" alt="広告画像" style="max-width:100%; height:auto;" /></a>
+                <p style="position: absolute;top: 3%;left: 3%;color: rgba(255,255,255,0.6);font-size: 14px;font-weight: bold;margin: 0;">PR</p>
+            </div>
+            </center>
+        </div>
+        <div class="section" id="ideasSection" style="display: none;">
+            <div class="section-title">生成された企画</div>
+            <button id="resetBtn" class="btn">リセット</button>
+            <div id="ideasText" class="output-area"></div>
+        </div>
+
+        <div class="section">
+            <div class="section-title">注意点</div>
+            <div class="notice-content">・使用ブラウザごとの動作制限、及びAIの仕様変更等により正常に作動しない可能性もあります。
+・無料サービスなため、Webサイト内に広告が表示されます。</div>
+        </div>
+        <section class="section">
+            <h2>他のツール</h2>
+            <p>本サイトでは、他にも暮らしや作業をサポートする 様々なウェブツールを運営しております。</p>
+            <a href="../../tools.html" class="btn" alt="ツール一覧">ツール一覧</a>
+        </section>
+    </div>
+    <!-- フッター -->
+    <footer class="footer">
+        <div class="footer-content">
+            <a href="../../notation.html">運営上必要表記</a>
+            <a href="../../sitemap.html" alt="必要表記一覧">サイトマップ</a>
+            <p>© ハヤデビのツール工房</p>
+        </div>
+    </footer>
+
+    <!--忍者Admax-->
+    <div class="affiliate-banner" style=
+    "border: 1px solid #5592b7; padding: 0.2em; display: flex; flex-wrap: wrap; align-items: flex-start; width: 100%; height:auto; box-sizing: border-box; position: fixed; bottom: 0px; left: 0; right: 0; transition: bottom 0.5s ease; background: rgba(255, 255, 255, 0.9);">
+        <div style="width:100%; height:auto;" class="admax-container">
+            <center>
+                <!-- admax -->
+<script src="https://adm.shinobi.jp/o/edb95f1374c43ecb818d1773165ad3a7"></script>
+<!-- admax -->
+            </center>
+        </div>
+    </div>
+
+    <div class="centerad-widget"></div>
+    <script src="../../Ads/ToolCenterAds.js" rel="preload"></script>
+    <script defer="defer"> let adDisplayed = false; let adClosed = false; var url = location.href;function isMobile() { return window.innerWidth <= 600; } window.addEventListener("scroll", function() { if (url.indexOf("cms.e.jimdo.com") === -1) { if (adDisplayed || adClosed) return; let scrollPosition = window.scrollY + window.innerHeight; let pageHeight = document.body.scrollHeight; }}); function showAd() { if (url.indexOf("cms.e.jimdo.com") === -1) { let adContainer = document.getElementById("adContainer"); let closeButton = document.getElementById("closeButton"); if (isMobile()) { adContainer.style.width = "90%"; closeButton.style.top = "25px"; closeButton.style.right = "30px"; } else { adContainer.style.width = "300px"; closeButton.style.top = "25px"; closeButton.style.right = "30px"; } document.getElementById("adOverlay").style.display = "flex"; disableScroll(); startCountdown(); }} function startCountdown() { if (url.indexOf("cms.e.jimdo.com") === -1) { let timeLeft = 5; let countdownInterval = setInterval(() => { document.getElementById("countdown").innerText = timeLeft + " seconds until you can close the ad"; if (timeLeft === 0) { clearInterval(countdownInterval); document.getElementById("closeButton").style.display = "block"; document.getElementById("countdown").innerText = "You can now close the ad"; } timeLeft--; }, 1000); document.getElementById("closeButton").addEventListener("click", closeAd); }} function closeAd() { if (url.indexOf("cms.e.jimdo.com") === -1) { document.getElementById("adOverlay").style.display = "none"; enableScroll(); adClosed = true; let pageHeight = document.body.scrollHeight; window.scrollTo({ top: pageHeight / 2, behavior: "smooth" }); }} function disableScroll() { document.body.style.overflow = "hidden"; document.body.style.height = "100%"; document.documentElement.style.overflow = "hidden"; document.documentElement.style.height = "100%"; } function enableScroll() { document.body.style.overflow = "auto"; document.body.style.height = "auto"; document.documentElement.style.overflow = "auto"; document.documentElement.style.height = "auto"; } </script>
+
+    <script src="script.js" defer="defer"></script><script src="../../CoreImplementation/TweetManager.js" defer="defer"></script> <script> const hamburger = document.getElementById('hamburger'); const navLinks = document.getElementById('navLinks'); hamburger.addEventListener('click', () => { hamburger.classList.toggle('active'); navLinks.classList.toggle('active'); }); const navItems = navLinks.querySelectorAll('a'); navItems.forEach(item => {  item.addEventListener('click', () => {  if (window.innerWidth <= 768) {   hamburger.classList.remove('active');  navLinks.classList.remove('active');   }   });  }); </script>  <script src="../../Ads/ToolAds.js" defer="defer"></script><script defer="defer"> document.oncontextmenu = function () { return false; }; document.getElementsByTagName('html')[0].oncontextmenu = function () { return false; }; document.addEventListener('contextmenu', function (event) { event.preventDefault();  }); </script>
+</body>
+</html>
