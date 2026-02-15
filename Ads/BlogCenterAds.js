@@ -52,6 +52,10 @@
         {
             "imageUrl": "../../Ads/CenterImage/AdsImage5.jpg",
             "siteUrl": "https://note.com/hayadebi_ai/n/nd7234ba28c72"
+        },
+        {
+            "imageUrl": "../../Ads/CenterImage/AdsImage6.jpg",
+            "siteUrl": "https://hayadebi.github.io/Accounting-ai-app/Tools/BlogEditor/blogeditor.html"
         }
     ];
     // ランダムに1つ選択
