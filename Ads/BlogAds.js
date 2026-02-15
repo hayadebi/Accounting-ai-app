@@ -19,6 +19,10 @@
   {
     "imageUrl": "../../Ads/BlogImage/AdsImage5.jpg",
     "siteUrl": "https://note.com/hayadebi_ai/n/nd7234ba28c72"
+  },
+  {
+    "imageUrl": "../../Ads/BlogImage/AdsImage6.jpg",
+    "siteUrl": "https://hayadebi.github.io/Accounting-ai-app/Tools/BlogEditor/blogeditor.html"
   }
 ];
   
