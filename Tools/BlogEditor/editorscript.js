@@ -274,9 +274,9 @@ function renderBodyEditor() {
     container.innerHTML = '';
     elementMap.clear(); // マップをクリア
 
-    const main = currentDOM.querySelector('main');
+    const main = currentDOM.querySelector('body');
     if (!main) {
-        container.innerHTML = '<p style="color: var(--error);">mainタグが見つかりません</p>';
+        container.innerHTML = '<p style="color: var(--error);">bodyタグが見つかりません</p>';
         return;
     }
 

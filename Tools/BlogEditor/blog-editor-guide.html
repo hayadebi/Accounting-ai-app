@@ -1,0 +1,911 @@
+<!DOCTYPE html>
+        <html>
+        <head>
+            <meta charset="UTF-8">
+            <meta name="robots" content="noindex">
+                <link rel="stylesheet" href="../../AssetConfiguration/MainStyleProcessor.css">
+    <link rel="stylesheet" href="../../AssetConfiguration/SubStyleProcessor.css">
+            <title>&#x30d6;&#x30ed;&#x30b0;HTML&#x30a8;&#x30c7;&#x30a3;&#x30bf; &#x5b8c;&#x5168;&#x30ac;&#x30a4;&#x30c9;</title>
+            <style>
+              a {
+            color: #a8d0ff;
+        }
+/* From extension vscode.github */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+.vscode-dark img[src$=\#gh-light-mode-only],
+.vscode-light img[src$=\#gh-dark-mode-only],
+.vscode-high-contrast:not(.vscode-high-contrast-light) img[src$=\#gh-light-mode-only],
+.vscode-high-contrast-light img[src$=\#gh-dark-mode-only] {
+	display: none;
+}
+
+</style>
+            
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
+<style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', system-ui, 'Ubuntu', 'Droid Sans', sans-serif;
+                font-size: 14px;
+                line-height: 1.6;
+            }
+        </style>
+        <style>
+.task-list-item {
+    list-style-type: none;
+}
+
+.task-list-item-checkbox {
+    margin-left: -20px;
+    vertical-align: middle;
+    pointer-events: none;
+}
+</style>
+<style>
+:root {
+  --color-note: #0969da;
+  --color-tip: #1a7f37;
+  --color-warning: #9a6700;
+  --color-severe: #bc4c00;
+  --color-caution: #d1242f;
+  --color-important: #8250df;
+}
+
+</style>
+<style>
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-note: #2f81f7;
+    --color-tip: #3fb950;
+    --color-warning: #d29922;
+    --color-severe: #db6d28;
+    --color-caution: #f85149;
+    --color-important: #a371f7;
+  }
+}
+
+</style>
+<style>
+.markdown-alert {
+  padding: 0.5rem 1rem;
+  margin-bottom: 16px;
+  color: inherit;
+  border-left: .25em solid #888;
+}
+
+.markdown-alert>:first-child {
+  margin-top: 0
+}
+
+.markdown-alert>:last-child {
+  margin-bottom: 0
+}
+
+.markdown-alert .markdown-alert-title {
+  display: flex;
+  font-weight: 500;
+  align-items: center;
+  line-height: 1
+}
+
+.markdown-alert .markdown-alert-title .octicon {
+  margin-right: 0.5rem;
+  display: inline-block;
+  overflow: visible !important;
+  vertical-align: text-bottom;
+  fill: currentColor;
+}
+
+.markdown-alert.markdown-alert-note {
+  border-left-color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-note .markdown-alert-title {
+  color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-important {
+  border-left-color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-important .markdown-alert-title {
+  color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-warning {
+  border-left-color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-warning .markdown-alert-title {
+  color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-tip {
+  border-left-color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-tip .markdown-alert-title {
+  color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-caution {
+  border-left-color: var(--color-caution);
+}
+
+.markdown-alert.markdown-alert-caution .markdown-alert-title {
+  color: var(--color-caution);
+}
+
+</style>
+        
+        </head>
+        <body class="vscode-body vscode-light">
+            <!-- <h1 id="ビジュアルブログエディタ-完全ガイド">ビジュアルブログエディタ 完全ガイド</h1> -->
+            <section class="section">
+<h2 id="-目次">📋 目次</h2>
+<ol>
+<li><a href="#%E6%A6%82%E8%A6%81">概要</a></li>
+<li><a href="#%E7%89%B9%E5%BE%B4">特徴</a></li>
+<li><a href="#%E3%83%A1%E3%83%AA%E3%83%83%E3%83%88%E3%83%87%E3%83%A1%E3%83%AA%E3%83%83%E3%83%88">メリット・デメリット</a></li>
+<li><a href="#%E5%A7%8B%E3%82%81%E6%96%B9">始め方</a></li>
+<li><a href="#%E4%BD%BF%E3%81%84%E6%96%B9">使い方</a></li>
+<li><a href="#%E6%B3%A8%E6%84%8F%E7%82%B9">注意点</a></li>
+<li><a href="#%E3%83%88%E3%83%A9%E3%83%96%E3%83%AB%E3%82%B7%E3%83%A5%E3%83%BC%E3%83%86%E3%82%A3%E3%83%B3%E3%82%B0">トラブルシューティング</a></li>
+</ol>
+            </section>
+            <section class="section">
+<h2 id="概要">概要</h2>
+<h3 id="このツールは何か">このツールは何か？</h3>
+<p>ビジュアルブログエディタは、<strong>HTMLの知識がない初心者でも、既存のブログHTMLテンプレートを簡単に編集できる</strong>Webベースのノーコードエディタです。ブラウザ上で完結するため、インストール不要で即座に使用できます。</p>
+<h3 id="誰のためのツールか">誰のためのツールか？</h3>
+<ul>
+<li>HTMLを直接編集するのが苦手なブロガー</li>
+<li>既存のブログテンプレートをカスタマイズしたい方</li>
+<li>メタタグやJSON-LDを正確に編集したい方</li>
+<li>コーディングとビジュアル編集を使い分けたい方</li>
+<li>SEO対策のため正確なメタ情報を管理したい方</li>
+</ul>
+<h3 id="動作環境">動作環境</h3>
+<ul>
+<li>モダンなWebブラウザ（Chrome、Firefox、Edge、Safari）</li>
+<li>OS: Windows、Mac、Linux対応</li>
+</ul>
+            </section>
+            <section class="section">
+<h2 id="特徴">特徴</h2>
+<h3 id="1-デュアル編集モード">1. <strong>デュアル編集モード</strong></h3>
+<h4 id="ビジュアル編集モード">ビジュアル編集モード</h4>
+<ul>
+<li>直感的なGUI操作</li>
+<li>フォーム形式で各要素を編集</li>
+<li>タグ構造を視覚的に把握</li>
+</ul>
+<h4 id="コード編集モード">コード編集モード</h4>
+<ul>
+<li>HTML全体を直接編集</li>
+<li>シンタックスハイライト風の黒背景エディタ</li>
+<li>リアルタイム双方向同期</li>
+</ul>
+<p><strong>切り替え方法</strong>: 画面上部の「🎨 ビジュアル編集」「💻 コード編集」ボタンで自由に切り替え</p>
+<h3 id="2-head編集機能">2. <strong>Head編集機能</strong></h3>
+<h4 id="metaタグ編集">Metaタグ編集</h4>
+<ul>
+<li>すべてのmetaタグのcontent属性を編集可能</li>
+<li>og:title、og:description、og:imageなど</li>
+<li>自動で<code>&lt;meta name=&quot;robots&quot; content=&quot;noindex&quot;&gt;</code>を削除</li>
+</ul>
+<h4 id="linkタグ編集">Linkタグ編集</h4>
+<ul>
+<li><code>rel=&quot;prev&quot;</code>と<code>rel=&quot;next&quot;</code>のhref属性を編集</li>
+<li>ページネーション対応</li>
+</ul>
+<h4 id="json-ld編集">JSON-LD編集</h4>
+<ul>
+<li>構造化データを安全に編集</li>
+<li>編集可能項目：
+<ul>
+<li>headline（記事タイトル）</li>
+<li>image（記事画像）</li>
+<li>datePublished（公開日）</li>
+<li>dateModified（更新日）</li>
+<li>mainEntityOfPage @id（記事URL）</li>
+</ul>
+</li>
+<li>JSON構造を保持したまま安全に更新</li>
+</ul>
+<h3 id="3-body編集機能">3. <strong>Body編集機能</strong></h3>
+<h4 id="編集範囲">編集範囲</h4>
+<ul>
+<li><code>&lt;main&gt;</code>要素内のすべての要素が編集対象</li>
+<li>テキスト、画像、リンクなどを個別に編集</li>
+</ul>
+<h4 id="編集可能な内容">編集可能な内容</h4>
+<ul>
+<li><strong>テキスト</strong>: タグ間のテキストコンテンツ</li>
+<li><strong>画像</strong>: <code>&lt;img&gt;</code>タグのsrc属性</li>
+<li><strong>リンク</strong>: <code>&lt;a&gt;</code>タグのhref属性</li>
+</ul>
+<h4 id="要素の追加">要素の追加</h4>
+<ul>
+<li>➕ボタンから要素追加メニューを表示</li>
+<li>標準タグ: p, h2, h3, img, a, ul, div</li>
+<li>カスタムタグ: 登録したHTMLコードを挿入</li>
+<li>挿入位置: 「タグの下に追加」または「タグ内の末端に追加」を選択可能</li>
+</ul>
+<h4 id="要素の削除">要素の削除</h4>
+<ul>
+<li>📝ボタンでコード編集モードにジャンプ</li>
+<li>該当箇所を自動ハイライト表示</li>
+<li>手動で削除を実行</li>
+</ul>
+<h3 id="4-カスタムタグ機能">4. <strong>カスタムタグ機能</strong></h3>
+<h4 id="登録">登録</h4>
+<ol>
+<li>「🏷️ カスタムタグ」セクションを開く</li>
+<li>「➕ カスタムタグを追加」をクリック</li>
+<li>タグ名とHTMLコードを入力</li>
+<li>保存</li>
+</ol>
+<h4 id="編集削除">編集・削除</h4>
+<ul>
+<li>カスタムタグカードをクリックして編集</li>
+<li>タグ名またはコードを空にして保存すると削除</li>
+</ul>
+<h4 id="使用方法">使用方法</h4>
+<ul>
+<li>要素追加メニューに自動表示</li>
+<li>ワンクリックで挿入可能</li>
+<li>複数のカスタムタグを登録可能</li>
+</ul>
+<h3 id="5-自動同期機能">5. <strong>自動同期機能</strong></h3>
+<h4 id="h1同期">h1同期</h4>
+<p><strong>対象</strong>: <code>&lt;div class=&quot;hero&quot;&gt;</code> 内の <code>&lt;h1&gt;</code> タグ</p>
+<p><strong>自動更新されるもの</strong>:</p>
+<ul>
+<li><code>&lt;title&gt;</code> タグ</li>
+<li>JSON-LDの <code>headline</code></li>
+</ul>
+<p><strong>タイミング</strong>: h1のテキスト編集完了時</p>
+<h4 id="サムネイル同期">サムネイル同期</h4>
+<p><strong>対象</strong>: <code>alt=&quot;記事サムネイル&quot;</code> を持つ <code>&lt;img&gt;</code> タグ</p>
+<p><strong>自動更新されるもの</strong>:</p>
+<ul>
+<li><code>&lt;meta property=&quot;og:image&quot;&gt;</code> の content</li>
+<li>JSON-LDの <code>image</code></li>
+</ul>
+<p><strong>タイミング</strong>: 画像src編集完了時</p>
+<h3 id="6-下書き保存復帰">6. <strong>下書き保存・復帰</strong></h3>
+<h4 id="下書き保存">下書き保存</h4>
+<ul>
+<li>💾ボタンで現在の編集状態を保存</li>
+<li>ファイル形式: <code>.txt</code>（JSON構造）</li>
+<li>ファイル名: <code>draft_YYYY-MM-DDTHH-mm-ss.txt</code></li>
+</ul>
+<h4 id="保存内容">保存内容</h4>
+<ul>
+<li>HTML全体（head、body含む）</li>
+<li>カスタムタグのすべて</li>
+<li>タイムスタンプ</li>
+</ul>
+<h4 id="下書き復帰">下書き復帰</h4>
+<ul>
+<li>📂ボタンでファイル選択ダイアログを表示</li>
+<li>下書きファイルを選択して復帰</li>
+<li>HTML内容とカスタムタグを完全復元</li>
+</ul>
+<h3 id="7-履歴管理undoredo">7. <strong>履歴管理（Undo/Redo）</strong></h3>
+<ul>
+<li>最大100段階の履歴を保持</li>
+<li>↶ボタンで元に戻す</li>
+<li>↷ボタンでやり直す</li>
+<li>すべての編集操作を記録</li>
+</ul>
+<h3 id="8-リサイザー機能">8. <strong>リサイザー機能</strong></h3>
+<ul>
+<li>Body編集セクションの高さを調整可能</li>
+<li>マウスドラッグで200px〜800pxの範囲で調整</li>
+<li>大量の要素がある場合に便利</li>
+</ul>
+<h3 id="9-コードで編集機能">9. <strong>コードで編集機能</strong></h3>
+<ul>
+<li>📝ボタンで該当箇所にジャンプ</li>
+<li>コード編集モードに自動切替</li>
+<li>該当タグを自動ハイライト</li>
+<li>スクロール位置も自動調整</li>
+</ul>
+            </section>
+            <section class="section">
+<h2 id="メリットデメリット">メリット・デメリット</h2>
+<h3 id="-メリット">✅ メリット</h3>
+<h4 id="1-初心者に優しい">1. <strong>初心者に優しい</strong></h4>
+<ul>
+<li>HTMLの知識不要</li>
+<li>視覚的なインターフェース</li>
+<li>直感的な操作</li>
+</ul>
+<h4 id="2-安全な編集">2. <strong>安全な編集</strong></h4>
+<ul>
+<li>HTML構造を破壊しない</li>
+<li>JSON-LDの整合性を維持</li>
+<li>パースエラーを検出</li>
+</ul>
+<h4 id="3-柔軟な編集方式">3. <strong>柔軟な編集方式</strong></h4>
+<ul>
+<li>ビジュアルとコードを使い分け</li>
+<li>リアルタイム双方向同期</li>
+<li>自分に合った方法で編集</li>
+</ul>
+<h4 id="4-自動化機能">4. <strong>自動化機能</strong></h4>
+<ul>
+<li>h1とtitleの自動同期</li>
+<li>サムネイルとog:imageの自動同期</li>
+<li>noindexの自動削除</li>
+</ul>
+<h4 id="5-カスタマイズ性">5. <strong>カスタマイズ性</strong></h4>
+<ul>
+<li>カスタムタグで頻繁に使うコードを登録</li>
+<li>作業効率の向上</li>
+<li>繰り返し作業の削減</li>
+</ul>
+<h4 id="6-データの永続性">6. <strong>データの永続性</strong></h4>
+<ul>
+<li>ファイルベースの下書き保存</li>
+<li>ブラウザキャッシュに依存しない</li>
+<li>複数のバックアップを保持可能</li>
+</ul>
+<h4 id="7-無料">7. <strong>無料</strong></h4>
+<ul>
+<li>無料で利用できる</li>
+</ul>
+<h3 id="-デメリット">❌ デメリット</h3>
+<h4 id="1-編集範囲の制限">1. <strong>編集範囲の制限</strong></h4>
+<ul>
+<li><code>&lt;body&gt;</code>要素内のみ編集可能（それ以外はコードモードで可能）</li>
+<li>全体的なレイアウト変更は難しい</li>
+</ul>
+<h4 id="2-テンプレート依存">2. <strong>テンプレート依存</strong></h4>
+<ul>
+<li>既存HTMLが必要</li>
+<li>ゼロからの作成には不向き</li>
+<li>テンプレートの品質に依存</li>
+</ul>
+<h4 id="3-特定構造への依存">3. <strong>特定構造への依存</strong></h4>
+<ul>
+<li>自動同期は特定のclass名に依存
+<ul>
+<li><code>&lt;div class=&quot;hero&quot;&gt;</code> 内の h1</li>
+<li><code>alt=&quot;記事サムネイル&quot;</code> の画像</li>
+</ul>
+</li>
+<li>構造が異なる場合は自動同期されない</li>
+</ul>
+<h4 id="4-高度な編集の難しさ">4. <strong>高度な編集の難しさ</strong></h4>
+<ul>
+<li>複雑なHTML構造の編集は困難</li>
+<li>CSS、JavaScriptの編集はコードモードが必要</li>
+<li>レイアウトの大幅な変更は不向き</li>
+</ul>
+<h4 id="5-ブラウザ依存">5. <strong>ブラウザ依存</strong></h4>
+<ul>
+<li>ブラウザの性能に依存</li>
+<li>大規模なHTMLでは動作が遅い可能性</li>
+<li>モバイルブラウザでは操作しづらい</li>
+</ul>
+<h4 id="6-バージョン管理なし">6. <strong>バージョン管理なし</strong></h4>
+<ul>
+<li>Git的なバージョン管理機能なし</li>
+<li>履歴は100段階まで</li>
+<li>ページ再読み込みで履歴はリセット</li>
+</ul>
+<h4 id="7-プレビュー機能なし">7. <strong>プレビュー機能なし</strong></h4>
+<ul>
+<li>編集結果をリアルタイムでプレビューできない</li>
+<li>別途ブラウザで開く必要あり</li>
+</ul>
+            </section>
+            <section class="section">
+<h2 id="始め方">始め方</h2>
+<h3 id="ステップ1-エディタを開く">ステップ1: エディタを開く</h3>
+<ol>
+<li><code>https://hayadebi.github.io/Accounting-ai-app/Tools/BlogEditor/blogeditor.html</code> にアクセスする</li>
+<li>ドラッグ&amp;ドロップゾーンが表示される</li>
+</ol>
+<h3 id="ステップ2-htmlファイルを読み込む">ステップ2: HTMLファイルを読み込む</h3>
+<p><strong>方法1: ドラッグ&amp;ドロップ</strong></p>
+<ol>
+<li>編集したいHTMLファイルを用意</li>
+<li>ドロップゾーンにドラッグ&amp;ドロップ</li>
+</ol>
+<p><strong>方法2: クリックして選択</strong></p>
+<ol>
+<li>ドロップゾーンをクリック</li>
+<li>ファイル選択ダイアログが表示</li>
+<li>HTMLファイルを選択</li>
+</ol>
+<h3 id="ステップ3-編集開始">ステップ3: 編集開始</h3>
+<ul>
+<li>ファイルが読み込まれると、自動的に編集画面が表示される</li>
+<li>Head編集、Body編集、カスタムタグのセクションが表示される</li>
+<li>ビジュアル編集モードで編集開始</li>
+</ul>
+<h3 id="ステップ4-html出力">ステップ4: HTML出力</h3>
+<ol>
+<li>編集完了後、「⬇ HTML出力」ボタンをクリック</li>
+<li>ファイル名を入力（デフォルト: output.html）</li>
+<li>「ダウンロード」をクリック</li>
+<li>編集済みHTMLファイルが保存される</li>
+</ol>
+            </section>
+            <section class="section">
+<h2 id="使い方">使い方</h2>
+<h3 id="head編集">Head編集</h3>
+<h4 id="metaタグの編集">Metaタグの編集</h4>
+<ol>
+<li>「🔧 Head編集」セクションを展開</li>
+<li>「Meta タグ」セクションで各metaタグを確認</li>
+<li>content属性の値を編集</li>
+<li>変更は自動保存される</li>
+</ol>
+<p><strong>編集例</strong>:</p>
+<pre><code>og:title → 「新しい記事タイトル」
+og:description → 「この記事では〜について解説します」
+og:image → 「https://example.com/new-image.jpg」
+</code></pre>
+<h4 id="json-ldの編集">JSON-LDの編集</h4>
+<ol>
+<li>「JSON-LD」セクションを確認</li>
+<li>各フィールドを編集
+<ul>
+<li>headline: 記事のタイトル</li>
+<li>image: 記事のサムネイル画像URL</li>
+<li>datePublished: 公開日（ISO 8601形式）</li>
+<li>dateModified: 更新日（ISO 8601形式）</li>
+<li>mainEntityOfPage @id: 記事のURL</li>
+</ul>
+</li>
+</ol>
+<p><strong>注意</strong>: JSON構造を破壊しないよう、値のみ編集してください</p>
+<h3 id="body編集">Body編集</h3>
+<h4 id="テキストの編集">テキストの編集</h4>
+<ol>
+<li>「✏️ Body編集」セクションを展開</li>
+<li>編集したい要素を探す</li>
+<li>「テキスト」フィールドに新しい内容を入力</li>
+<li>Enter または フィールド外クリックで確定</li>
+</ol>
+<h4 id="画像の変更">画像の変更</h4>
+<ol>
+<li><code>&lt;img&gt;</code> タグを探す</li>
+<li>「src」フィールドに新しい画像URLを入力</li>
+<li>変更は自動保存される</li>
+</ol>
+<h4 id="リンクの変更">リンクの変更</h4>
+<ol>
+<li><code>&lt;a&gt;</code> タグを探す</li>
+<li>「href」フィールドに新しいリンクURLを入力</li>
+<li>変更は自動保存される</li>
+</ol>
+<h4 id="要素の追加-1">要素の追加</h4>
+<ol>
+<li>要素を追加したい位置の➕ボタンをクリック</li>
+<li>要素追加メニューが表示される</li>
+<li>追加したいタグを選択
+<ul>
+<li>段落 (p)</li>
+<li>見出し2 (h2)</li>
+<li>見出し3 (h3)</li>
+<li>画像 (img)</li>
+<li>リンク (a)</li>
+<li>リスト (ul)</li>
+<li>コンテナ (div)</li>
+<li>または登録済みカスタムタグ</li>
+</ul>
+</li>
+<li>挿入位置を選択
+<ul>
+<li>「タグの下に追加」: 選択した要素の直後に追加</li>
+<li>「タグ内の末端に追加」: 選択した要素の子要素として末端に追加</li>
+</ul>
+</li>
+<li>要素が挿入される</li>
+</ol>
+<h4 id="要素の削除-1">要素の削除</h4>
+<ol>
+<li>削除したい要素の📝ボタンをクリック</li>
+<li>コード編集モードに自動切替</li>
+<li>該当箇所がハイライト表示される</li>
+<li>手動でコードを削除</li>
+<li>ビジュアルモードに戻ると削除が反映される</li>
+</ol>
+<h3 id="カスタムタグの使用">カスタムタグの使用</h3>
+<h4 id="カスタムタグの登録">カスタムタグの登録</h4>
+<ol>
+<li>「🏷️ カスタムタグ」セクションを展開</li>
+<li>「➕ カスタムタグを追加」をクリック</li>
+<li>モーダルが開く</li>
+<li>「タグ名」を入力（例: カスタムボタン）</li>
+<li>「HTMLコード」を入力<pre><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;custom-btn&quot;</span> <span class="hljs-attr">onclick</span>=<span class="hljs-string">&quot;alert(&#x27;Hello!&#x27;)&quot;</span>&gt;</span>
+  クリック
+<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+</code></pre>
+</li>
+<li>「保存」をクリック</li>
+</ol>
+<h4 id="カスタムタグの使用-1">カスタムタグの使用</h4>
+<ol>
+<li>Body編集セクションで➕ボタンをクリック</li>
+<li>要素追加メニューの下部にカスタムタグが表示される</li>
+<li>カスタムタグを選択</li>
+<li>挿入位置を選択</li>
+<li>HTMLコードが挿入される</li>
+</ol>
+<h4 id="カスタムタグの編集削除">カスタムタグの編集・削除</h4>
+<p><strong>編集</strong>:</p>
+<ol>
+<li>カスタムタグカードをクリック</li>
+<li>モーダルが開く（編集モード）</li>
+<li>タグ名またはコードを変更</li>
+<li>「更新」をクリック</li>
+</ol>
+<p><strong>削除</strong>:</p>
+<ol>
+<li>カスタムタグカードをクリック</li>
+<li>タグ名またはコードを空にする</li>
+<li>「更新」をクリック</li>
+<li>自動的に削除される</li>
+</ol>
+<h3 id="モード切替">モード切替</h3>
+<h4 id="ビジュアル--コード">ビジュアル → コード</h4>
+<ol>
+<li>画面上部の「💻 コード編集」ボタンをクリック</li>
+<li>HTML全体がコードエディタに表示される</li>
+<li>直接編集可能</li>
+</ol>
+<h4 id="コード--ビジュアル">コード → ビジュアル</h4>
+<ol>
+<li>「🎨 ビジュアル編集」ボタンをクリック</li>
+<li>コードエディタの内容がパースされる</li>
+<li>ビジュアルエディタに反映される</li>
+</ol>
+<p><strong>注意</strong>: コード編集で不正なHTMLを入力すると、パースエラーが発生します</p>
+<h3 id="コード整形">コード整形</h3>
+<ol>
+<li>コード編集モードで「整形」ボタンをクリック</li>
+<li>HTMLが自動的に整形される</li>
+</ol>
+<h3 id="下書き保存復帰">下書き保存・復帰</h3>
+<h4 id="保存">保存</h4>
+<ol>
+<li>「💾 下書き保存」ボタンをクリック</li>
+<li><code>draft_YYYY-MM-DDTHH-mm-ss.txt</code> ファイルが自動ダウンロード</li>
+<li>安全な場所に保存</li>
+</ol>
+<h4 id="復帰">復帰</h4>
+<ol>
+<li>「📂 下書き復帰」ボタンをクリック</li>
+<li>ファイル選択ダイアログが表示</li>
+<li>保存した下書きファイルを選択</li>
+<li>編集状態が復元される</li>
+</ol>
+<p><strong>保存内容</strong>:</p>
+<ul>
+<li>HTML全体</li>
+<li>カスタムタグ</li>
+<li>タイムスタンプ</li>
+</ul>
+<h3 id="undoredo">Undo/Redo</h3>
+<ul>
+<li><strong>元に戻す</strong>: 「↶ 元に戻す」ボタンをクリック</li>
+<li><strong>やり直す</strong>: 「↷ やり直す」ボタンをクリック</li>
+<li>最大100段階まで</li>
+</ul>
+<h3 id="リサイザー">リサイザー</h3>
+<ol>
+<li>Body編集セクションとカスタムタグセクションの間にあるバーを探す</li>
+<li>バーをマウスでドラッグ</li>
+<li>Body編集エリアの高さが変更される</li>
+<li>200px〜800pxの範囲で調整可能</li>
+</ol>
+            </section>
+            <section class="section">
+<h2 id="注意点">注意点</h2>
+<h3 id="1-htmlファイルのバックアップ">1. <strong>HTMLファイルのバックアップ</strong></h3>
+<p><strong>重要</strong>: 編集前に必ずオリジナルファイルのバックアップを作成してください</p>
+<ul>
+<li>誤って上書きした場合、元に戻せません</li>
+<li>定期的にバックアップを取ることを推奨</li>
+</ul>
+<h3 id="2-編集範囲の理解">2. <strong>編集範囲の理解</strong></h3>
+<h4 id="編集可能">編集可能</h4>
+<ul>
+<li><code>&lt;main&gt;</code> 要素内のコンテンツ</li>
+<li>Metaタグのcontent属性</li>
+<li>Linkタグのhref属性（prev/next）</li>
+<li>JSON-LD</li>
+</ul>
+<h4 id="編集不可ビジュアルモードでは">編集不可（ビジュアルモードでは）</h4>
+<ul>
+<li><code>&lt;header&gt;</code> 要素</li>
+<li><code>&lt;footer&gt;</code> 要素</li>
+<li><code>&lt;nav&gt;</code> 要素</li>
+<li><code>&lt;script&gt;</code> タグ</li>
+<li><code>&lt;style&gt;</code> タグ</li>
+</ul>
+<p><strong>回避策</strong>: コード編集モードで直接編集可能</p>
+<h3 id="3-自動同期の条件">3. <strong>自動同期の条件</strong></h3>
+<h4 id="h1同期-1">h1同期</h4>
+<ul>
+<li><code>&lt;div class=&quot;hero&quot;&gt;</code> 内の <code>&lt;h1&gt;</code> タグが対象</li>
+<li>class名が異なる場合は同期されない</li>
+</ul>
+<h4 id="サムネイル同期-1">サムネイル同期</h4>
+<ul>
+<li><code>alt=&quot;記事サムネイル&quot;</code> の画像が対象</li>
+<li>alt属性が異なる場合は同期されない</li>
+</ul>
+<p><strong>対策</strong>: テンプレートに合わせてclass名やalt属性を確認</p>
+<h3 id="4-noindexの自動削除">4. <strong>noindexの自動削除</strong></h3>
+<ul>
+<li>ファイル読み込み時に <code>&lt;meta name=&quot;robots&quot; content=&quot;noindex&quot;&gt;</code> は自動削除される</li>
+<li>意図的にnoindexを設定している場合は注意</li>
+<li>必要な場合はコード編集モードで再追加</li>
+</ul>
+<h3 id="5-ブラウザの制限">5. <strong>ブラウザの制限</strong></h3>
+<h4 id="ファイルサイズ">ファイルサイズ</h4>
+<ul>
+<li>大きすぎるHTML（数MB以上）は動作が遅くなる可能性</li>
+<li>推奨: 1MB以下</li>
+</ul>
+<h4 id="メモリ">メモリ</h4>
+<ul>
+<li>履歴機能により、長時間の編集でメモリを消費</li>
+<li>定期的にページをリフレッシュすることを推奨</li>
+</ul>
+<h3 id="6-下書きファイルの管理">6. <strong>下書きファイルの管理</strong></h3>
+<ul>
+<li>下書きファイルは<code>.txt</code>形式</li>
+<li>ファイル名に日時が含まれる</li>
+<li>適切なフォルダに整理して保存</li>
+<li>定期的に古い下書きを削除</li>
+</ul>
+<h3 id="7-jsonパースエラー">7. <strong>JSONパースエラー</strong></h3>
+<h4 id="json-ld編集時">JSON-LD編集時</h4>
+<ul>
+<li>不正な値を入力すると保存時にエラーが発生</li>
+<li>エラーメッセージが表示される</li>
+<li>元の値に戻して再試行</li>
+</ul>
+<h4 id="対策">対策</h4>
+<ul>
+<li>日付はISO 8601形式（YYYY-MM-DD）</li>
+<li>URLは完全なURL（https://〜）</li>
+<li>特殊文字はエスケープ不要</li>
+</ul>
+<h3 id="8-コード編集時の注意">8. <strong>コード編集時の注意</strong></h3>
+<h4 id="構造破壊">構造破壊</h4>
+<ul>
+<li>閉じタグを削除しない</li>
+<li>タグのネストを維持</li>
+<li>DOCTYPE宣言を削除しない</li>
+</ul>
+<h4 id="パースエラー">パースエラー</h4>
+<ul>
+<li>不正なHTMLを入力すると、ビジュアルモードへの切り替え時にエラー</li>
+<li>エラー通知が表示される</li>
+<li>コード編集モードに戻って修正</li>
+</ul>
+<h3 id="9-画面サイズ">9. <strong>画面サイズ</strong></h3>
+<ul>
+<li>最小推奨解像度: 1280x720px</li>
+<li>モバイルブラウザでは操作しづらい可能性</li>
+<li>デスクトップブラウザでの使用を推奨</li>
+</ul>
+<h3 id="10-セキュリティ">10. <strong>セキュリティ</strong></h3>
+<ul>
+<li>ファイルはサーバーにアップロードされない</li>
+<li>JavaScriptが実行可能な環境が必要</li>
+</ul>
+<h3 id="11-互換性">11. <strong>互換性</strong></h3>
+<h4 id="サポートブラウザ">サポートブラウザ</h4>
+<ul>
+<li>✅ Chrome 90+</li>
+<li>✅ Firefox 88+</li>
+<li>✅ Edge 90+</li>
+<li>✅ Safari 14+</li>
+</ul>
+<h4 id="非サポート">非サポート</h4>
+<ul>
+<li>❌ Internet Explorer</li>
+</ul>
+<h3 id="12-ページリロード時の注意">12. <strong>ページリロード時の注意</strong></h3>
+<ul>
+<li>履歴（Undo/Redo）はリセットされる</li>
+<li>編集内容は保持される（リロード前に読み込んだHTML）</li>
+<li>下書き保存していない変更は、ページを閉じると失われる</li>
+</ul>
+            </section>
+            <section class="section">
+<h2 id="トラブルシューティング">トラブルシューティング</h2>
+<h3 id="q1-ファイルが読み込めない">Q1: ファイルが読み込めない</h3>
+<p><strong>症状</strong>: HTMLファイルをドロップしても何も起こらない</p>
+<p><strong>原因</strong>:</p>
+<ul>
+<li>ファイルが.html形式でない</li>
+<li>ブラウザがファイル読み込みをブロック</li>
+</ul>
+<p><strong>解決策</strong>:</p>
+<ol>
+<li>ファイルの拡張子が<code>.html</code>であることを確認</li>
+<li>別のブラウザで試す</li>
+<li>ブラウザのコンソールでエラーを確認（F12キー）</li>
+</ol>
+<h3 id="q2-編集が反映されない">Q2: 編集が反映されない</h3>
+<p><strong>症状</strong>: 値を変更しても保存されていない</p>
+<p><strong>原因</strong>:</p>
+<ul>
+<li>Enterキーを押していない</li>
+<li>フィールド外をクリックしていない</li>
+</ul>
+<p><strong>解決策</strong>:</p>
+<ol>
+<li>編集後にEnterキーを押す、またはフィールド外をクリック</li>
+<li>コード編集モードで確認</li>
+<li>ブラウザをリロードして再度読み込む</li>
+</ol>
+<h3 id="q3-json-ldが保存できない">Q3: JSON-LDが保存できない</h3>
+<p><strong>症状</strong>: JSON-LD編集時にエラーが表示される</p>
+<p><strong>原因</strong>:</p>
+<ul>
+<li>不正なJSON形式</li>
+<li>必須フィールドが空</li>
+</ul>
+<p><strong>解決策</strong>:</p>
+<ol>
+<li>エラーメッセージを確認</li>
+<li>元の値に戻す</li>
+<li>正しい形式で入力</li>
+<li>コード編集モードで直接編集</li>
+</ol>
+<h3 id="q4-要素追加ポップアップが閉じない">Q4: 要素追加ポップアップが閉じない</h3>
+<p><strong>症状</strong>: 要素追加メニューが画面に残る</p>
+<p><strong>原因</strong>:</p>
+<ul>
+<li>JavaScriptエラー</li>
+<li>ブラウザの不具合</li>
+</ul>
+<p><strong>解決策</strong>:</p>
+<ol>
+<li>画面の空白部分をクリック</li>
+<li>Escキーを押す</li>
+<li>ページをリロード</li>
+</ol>
+<h3 id="q5-コード編集が反映されない">Q5: コード編集が反映されない</h3>
+<p><strong>症状</strong>: コードモードで編集してもビジュアルモードに反映されない</p>
+<p><strong>原因</strong>:</p>
+<ul>
+<li>HTMLのパースエラー</li>
+<li>閉じタグの欠落</li>
+</ul>
+<p><strong>解決策</strong>:</p>
+<ol>
+<li>エラー通知を確認</li>
+<li>HTML構造を確認（閉じタグ、ネスト）</li>
+<li>「整形」ボタンで構造を確認</li>
+</ol>
+<h3 id="q6-下書きが復帰できない">Q6: 下書きが復帰できない</h3>
+<p><strong>症状</strong>: 下書きファイルを選択してもエラーが表示される</p>
+<p><strong>原因</strong>:</p>
+<ul>
+<li>ファイルが破損している</li>
+<li>JSON形式が不正</li>
+</ul>
+<p><strong>解決策</strong>:</p>
+<ol>
+<li>エラーメッセージを確認</li>
+<li>別の下書きファイルを試す</li>
+<li>テキストエディタでファイルを開いてJSON構造を確認</li>
+</ol>
+<h3 id="q7-自動同期されない">Q7: 自動同期されない</h3>
+<p><strong>症状</strong>: h1を編集してもtitleが更新されない</p>
+<p><strong>原因</strong>:</p>
+<ul>
+<li>h1が <code>&lt;div class=&quot;hero&quot;&gt;</code> 内にない</li>
+<li>class名が異なる</li>
+</ul>
+<p><strong>解決策</strong>:</p>
+<ol>
+<li>コード編集モードでHTML構造を確認</li>
+<li>h1が正しい位置にあるか確認</li>
+<li>手動でtitleを編集</li>
+</ol>
+<h3 id="q8-動作が遅い">Q8: 動作が遅い</h3>
+<p><strong>症状</strong>: 編集時に遅延が発生する</p>
+<p><strong>原因</strong>:</p>
+<ul>
+<li>HTMLファイルが大きすぎる</li>
+<li>ブラウザのメモリ不足</li>
+<li>多数の要素</li>
+</ul>
+<p><strong>解決策</strong>:</p>
+<ol>
+<li>HTMLファイルを分割</li>
+<li>ブラウザを再起動</li>
+<li>他のタブを閉じる</li>
+<li>より高性能なPCを使用</li>
+</ol>
+<h3 id="q9-カスタムタグが表示されない">Q9: カスタムタグが表示されない</h3>
+<p><strong>症状</strong>: 登録したカスタムタグが要素追加メニューに表示されない</p>
+<p><strong>原因</strong>:</p>
+<ul>
+<li>タグ名またはコードが空</li>
+<li>保存されていない</li>
+</ul>
+<p><strong>解決策</strong>:</p>
+<ol>
+<li>カスタムタグセクションを確認</li>
+<li>タグ名とコードの両方が入力されているか確認</li>
+<li>再度保存を試みる</li>
+</ol>
+<h3 id="q10-htmlが壊れた">Q10: HTMLが壊れた</h3>
+<p><strong>症状</strong>: 出力したHTMLが正しく表示されない</p>
+<p><strong>原因</strong>:</p>
+<ul>
+<li>タグの削除ミス</li>
+<li>構造の破壊</li>
+</ul>
+<p><strong>解決策</strong>:</p>
+<ol>
+<li>Undo（↶）で元に戻す</li>
+<li>バックアップから復元</li>
+<li>下書きから復帰</li>
+</ol>
+            </section>
+            <section class="section">
+<h2 id="ベストプラクティス">ベストプラクティス</h2>
+<h3 id="1-編集前の準備">1. <strong>編集前の準備</strong></h3>
+<ul>
+<li>オリジナルファイルをバックアップ</li>
+<li>テンプレートの構造を確認</li>
+<li>編集計画を立てる</li>
+</ul>
+<h3 id="2-効率的な編集">2. <strong>効率的な編集</strong></h3>
+<ul>
+<li>頻繁に使うコードはカスタムタグに登録</li>
+<li>ビジュアルとコードを使い分け</li>
+<li>大きな変更前に下書き保存</li>
+</ul>
+<h3 id="3-品質管理">3. <strong>品質管理</strong></h3>
+<ul>
+<li>編集後にブラウザでプレビュー</li>
+<li>metaタグの内容を確認</li>
+<li>JSON-LDのエラーをチェック</li>
+</ul>
+<h3 id="4-データ管理">4. <strong>データ管理</strong></h3>
+<ul>
+<li>定期的に下書き保存</li>
+<li>重要な編集前にバックアップ</li>
+<li>古い下書きは整理</li>
+</ul>
+<h3 id="5-トラブル回避">5. <strong>トラブル回避</strong></h3>
+<ul>
+<li>複雑な編集は少しずつ</li>
+<li>頻繁にUndoポイントを作成</li>
+<li>エラーメッセージを確認</li>
+</ul>
+            </section>
+            <section class="section">
+<h2 id="まとめ">まとめ</h2>
+<p>ビジュアルブログエディタは、HTMLの知識がなくても既存のブログテンプレートを簡単に編集できる強力なツールです。ビジュアル編集とコード編集の両方をサポートし、自動同期機能やカスタムタグ機能により、効率的な編集作業を実現します。</p>
+<p>適切に使用すれば、ブログの更新作業を大幅に効率化できます。このガイドを参考に、安全で効果的な編集を行ってください。</p>
+<hr>
+<p><strong>バージョン</strong>: 1.0<br>
+<strong>最終更新</strong>: 2026年2月16日</p>
+
+            
+          </section>  
+        </body>
+        </html>
