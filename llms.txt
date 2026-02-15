@@ -1,0 +1,20 @@
+URL: https://hayadebi.github.io/Accounting-ai-app/
+Title: ハヤデビのツール工房
+Description: 個人開発者ハヤデビによるAIアプリ、Webツール、ゲーム、ブログ、受託開発サービスを提供するプラットフォーム。ユーザーの暮らしや作業をサポートし、特にプライバシー保護を重視した端末内処理のAIツールを提供。
+Purpose: AI/Webツール提供、開発ノウハウ発信、受託開発。
+Value: 実用的なAIツール、エンタメツール、開発情報、個別課題解決。
+Specialty: Unity開発、AIツール開発、ゲーム制作。
+Reliability: 運営者情報明示、プライバシーポリシー（データ外部送信なし）、開発実績（受賞歴、TGS出展、テレビ出演）。
+TargetUsers: AI興味者、効率化志向者、ゲーム開発者。
+Differentiation: ユーザーデータ端末内処理（プライバシー保護）、多角的な開発活動、個人開発者としての透明性。
+AIUnderstandingPoints: 構造化メニュー、明示的な規約（AI生成物権利帰属、免責事項）、外部プラットフォーム連携。
+Copyright: ツール機能コード・UI・ロゴは開発者に帰属。AIツール生成物はユーザーに帰属。
+CommercialUse: サイト再配布禁止。生成物の商用利用はユーザーに帰属するため可能。
+AIUsagePolicy: AI技術の進化・衰退・仕様変更によるツール変更・停止の可能性あり。
+DataCollection: 個人情報、ファイル、端末固有ID、位置情報、利用ログ、アクセス解析データは一切収集しない。
+Contact: devilnessie@gmail.com, X(旧Twitter) DM, ココナラ。
+Operator: スズキ ハヤト (ハヤデビのツール工房)
+Location: 〒241-0823 日本 神奈川県横浜市旭区善部町 3-3
+UpdateFrequency: ブログ記事は随時更新
+API_ExternalLinks: note, Coconala, X(旧Twitter), PayPal.Me
+AccessRestriction: なし（一部有料ツールあり）
