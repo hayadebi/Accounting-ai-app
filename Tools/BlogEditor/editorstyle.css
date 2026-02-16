@@ -574,6 +574,15 @@ body {
     border-left-color: var(--warning);
 }
 
+.ninjabox {
+    transform: scale(1);
+    margin-left: 0;
+}
+.ninjaleft {
+    transform: scale(1);
+    margin-left: 0;
+}
+
 @keyframes slideIn {
     from {
         opacity: 0;
@@ -609,6 +618,15 @@ body {
 
     .custom-tag-list {
         grid-template-columns: 1fr;
+    }
+
+    .ninjabox {
+    transform: scale(0.6);
+    margin-left: -10px;
+    }
+    .ninjaleft {
+        transform: scale(0.7);
+        margin-left: -2rem;
     }
 }
 
