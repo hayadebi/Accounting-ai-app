@@ -12,6 +12,15 @@ body {
     color: #ffffff;
 }
 
+.ninjabox {
+    transform: scale(1);
+    margin-left: 0;
+}
+.ninjaleft {
+    transform: scale(1);
+    margin-left: 0;
+}
+
 .container {
     max-width: 900px;
     margin: 0 auto;
@@ -201,6 +210,15 @@ h1 {
         padding: 15px 40px;
         font-size: 1rem;
     }
+
+    .ninjabox {
+    transform: scale(0.8);
+    margin-left: -10px;
+    }
+    .ninjaleft {
+        transform: scale(0.8);
+        margin-left: -2rem;
+    }
 }
 
 @media (max-width: 480px) {
@@ -214,5 +232,14 @@ h1 {
 
     .section-title {
         font-size: 1.1rem;
+    }
+
+    .ninjabox {
+    transform: scale(0.8);
+    margin-left: -10px;
+    }
+    .ninjaleft {
+        transform: scale(0.8);
+        margin-left: -2rem;
     }
 }
