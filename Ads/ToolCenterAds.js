@@ -19,62 +19,84 @@
 
     `;
 
+    // 非表示にする条件となるクエリ値
+    const targetQuery = "nsSUfQXkaZVJETmnGZWysrzWmecEfTbk";
+
+    // 非表示にしたいクラス名の配列
+    const hideClasses = ["random-adcontents", "affiliate-banner"];
+
+    // URLからクエリパラメータを取得
+    const urlParams = new URLSearchParams(window.location.search);
+    const queryValue = urlParams.get('q');
+    var isPremium = false;
+    // クエリ値が一致する場合、指定されたクラスの要素を非表示
+    if (queryValue === targetQuery) {
+        hideClasses.forEach(className => {
+            isPremium = true;
+            const elements = document.querySelectorAll(`.${className}`);
+            elements.forEach(element => {
+                element.style.display = 'none';
+            });
+        });
+    }
 
     // ページ読み込み完了後に自動挿入
     document.addEventListener('DOMContentLoaded', function() {
-        const containers = document.querySelectorAll('.centerad-widget');
-        containers.forEach(function(container) {
-            container.innerHTML = adHTML;
+        if(!isPremium){
+            const containers = document.querySelectorAll('.centerad-widget');
+            containers.forEach(function(container) {
+                container.innerHTML = adHTML;
 
-            //メイン機能
-            // 組み合わせリスト
-            const centercombinations = [
-                {
-                    "imageUrl": "../../Ads/CenterImage/AdsImage1.jpg",
-                    "siteUrl": "https://note.com/hayadebi_ai/n/n9f71a3b80529"
-                },
-                {
-                    "imageUrl": "../../Ads/CenterImage/AdsImage2.jpg",
-                    "siteUrl": "https://hayadebi.github.io/Accounting-ai-app/adnextcenter.html?q=hayadebi.github.io%2FAccounting-ai-app%2FTools%2FDevilGame%2Fdevilgame.html"
-                },
-                {
-                    "imageUrl": "../../Ads/CenterImage/AdsImage3.jpg",
-                    "siteUrl": "https://cointiply.com/r/KrAZKx"
-                },
-                {
-                    "imageUrl": "../../Ads/CenterImage/AdsImage4.gif",
-                    "siteUrl": "https://dlaf.jp/home/dlaf/=/aid/githubhayadebitools/url/https%3A%2F%2Fwww.dlsite.com%2Fhome%2Franking%2Fweek%2F%3Futm_medium%3Daffiliate%26utm_campaign%3Dbnlink%26utm_content%3Dtext"
-                },
-                {
-                    "imageUrl": "../../Ads/CenterImage/AdsImage5.jpg",
-                    "siteUrl": "https://note.com/hayadebi_ai/n/nd7234ba28c72"
-                },
-                {
-                    "imageUrl": "../../Ads/CenterImage/AdsImage6.jpg",
-                    "siteUrl": "https://hayadebi.github.io/Accounting-ai-app/Tools/BlogEditor/blogeditor.html"
+                //メイン機能
+                // 組み合わせリスト
+                const centercombinations = [
+                    {
+                        "imageUrl": "../../Ads/CenterImage/AdsImage1.jpg",
+                        "siteUrl": "https://note.com/hayadebi_ai/n/n9f71a3b80529"
+                    },
+                    {
+                        "imageUrl": "../../Ads/CenterImage/AdsImage2.jpg",
+                        "siteUrl": "https://hayadebi.github.io/Accounting-ai-app/adnextcenter.html?q=hayadebi.github.io%2FAccounting-ai-app%2FTools%2FDevilGame%2Fdevilgame.html"
+                    },
+                    {
+                        "imageUrl": "../../Ads/CenterImage/AdsImage3.jpg",
+                        "siteUrl": "https://cointiply.com/r/KrAZKx"
+                    },
+                    {
+                        "imageUrl": "../../Ads/CenterImage/AdsImage4.gif",
+                        "siteUrl": "https://dlaf.jp/home/dlaf/=/aid/githubhayadebitools/url/https%3A%2F%2Fwww.dlsite.com%2Fhome%2Franking%2Fweek%2F%3Futm_medium%3Daffiliate%26utm_campaign%3Dbnlink%26utm_content%3Dtext"
+                    },
+                    {
+                        "imageUrl": "../../Ads/CenterImage/AdsImage5.jpg",
+                        "siteUrl": "https://note.com/hayadebi_ai/n/nd7234ba28c72"
+                    },
+                    {
+                        "imageUrl": "../../Ads/CenterImage/AdsImage6.jpg",
+                        "siteUrl": "https://hayadebi.github.io/Accounting-ai-app/Tools/BlogEditor/blogeditor.html"
+                    }
+                ];
+                // ランダムに1つ選択
+                const centerselected = centercombinations[Math.floor(Math.random() * centercombinations.length)];
+                // DOMが読み込まれた後に実行
+                if (document.readyState === 'loading') {
+                    document.addEventListener('DOMContentLoaded', replaceCombination);
+                } else {
+                    replaceCombination();
                 }
-            ];
-            // ランダムに1つ選択
-            const centerselected = centercombinations[Math.floor(Math.random() * centercombinations.length)];
-            // DOMが読み込まれた後に実行
-            if (document.readyState === 'loading') {
-                document.addEventListener('DOMContentLoaded', replaceCombination);
-            } else {
-                replaceCombination();
-            }
-            function replaceCombination() {
-                // 画像の置き換え
-                const centerimages = document.querySelectorAll('.center-ads-image');
-                centerimages.forEach(function(img) {
-                img.src = centerselected.imageUrl;
-                });
-                // リンクの置き換え
-                const centerlinks = document.querySelectorAll('.center-ads-link');
-                centerlinks.forEach(function(link) {
-                link.href = centerselected.siteUrl;
-                });
-            }
-        });
+                function replaceCombination() {
+                    // 画像の置き換え
+                    const centerimages = document.querySelectorAll('.center-ads-image');
+                    centerimages.forEach(function(img) {
+                    img.src = centerselected.imageUrl;
+                    });
+                    // リンクの置き換え
+                    const centerlinks = document.querySelectorAll('.center-ads-link');
+                    centerlinks.forEach(function(link) {
+                    link.href = centerselected.siteUrl;
+                    });
+                }
+            });
+        }
     });
 
 })();

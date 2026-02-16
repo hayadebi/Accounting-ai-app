@@ -19,16 +19,37 @@
 
     `;
 
+    // 非表示にする条件となるクエリ値
+    const targetQuery = "nsSUfQXkaZVJETmnGZWysrzWmecEfTbk";
+
+    // 非表示にしたいクラス名の配列
+    const hideClasses = ["random-adcontents", "affiliate-banner"];
+
+    // URLからクエリパラメータを取得
+    const urlParams = new URLSearchParams(window.location.search);
+    const queryValue = urlParams.get('q');
+    var isPremium = false;
+    // クエリ値が一致する場合、指定されたクラスの要素を非表示
+    if (queryValue === targetQuery) {
+        hideClasses.forEach(className => {
+            isPremium = true;
+            const elements = document.querySelectorAll(`.${className}`);
+            elements.forEach(element => {
+                element.style.display = 'none';
+            });
+        });
+    }
 
     // ページ読み込み完了後に自動挿入
     document.addEventListener('DOMContentLoaded', function() {
-        const containers = document.querySelectorAll('.centerad-widget');
-        containers.forEach(function(container) {
-            container.innerHTML = adHTML;
-            
-        });
+        if(!isPremium){
+            const containers = document.querySelectorAll('.centerad-widget');
+            containers.forEach(function(container) {
+                container.innerHTML = adHTML;
+                
+            });
+        }
     });
-
 
     //メイン機能
     // 組み合わせリスト
@@ -58,27 +79,28 @@
             "siteUrl": "https://hayadebi.github.io/Accounting-ai-app/Tools/BlogEditor/blogeditor.html"
         }
     ];
-    // ランダムに1つ選択
-    const centerselected = centercombinations[Math.floor(Math.random() * centercombinations.length)];
-    // DOMが読み込まれた後に実行
-    if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', replaceCombination);
-    } else {
-        replaceCombination();
+    if(!isPremium){
+        // ランダムに1つ選択
+        const centerselected = centercombinations[Math.floor(Math.random() * centercombinations.length)];
+        // DOMが読み込まれた後に実行
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', replaceCombination);
+        } else {
+            replaceCombination();
+        }
+        function replaceCombination() {
+            // 画像の置き換え
+            const centerimages = document.querySelectorAll('.center-ads-image');
+            centerimages.forEach(function(img) {
+            img.src = centerselected.imageUrl;
+            });
+            // リンクの置き換え
+            const centerlinks = document.querySelectorAll('.center-ads-link');
+            centerlinks.forEach(function(link) {
+            link.href = centerselected.siteUrl;
+            });
+        }
     }
-    function replaceCombination() {
-        // 画像の置き換え
-        const centerimages = document.querySelectorAll('.center-ads-image');
-        centerimages.forEach(function(img) {
-        img.src = centerselected.imageUrl;
-        });
-        // リンクの置き換え
-        const centerlinks = document.querySelectorAll('.center-ads-link');
-        centerlinks.forEach(function(link) {
-        link.href = centerselected.siteUrl;
-        });
-    }
-
 
     let adDisplayed = false;
     let adClosed = false;
