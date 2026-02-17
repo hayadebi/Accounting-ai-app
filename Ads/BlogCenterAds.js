@@ -16,14 +16,14 @@
                 <div id="closeButton" style="display: none; position: absolute; top: 25px; right: 30px;  margin-top:35px; cursor: pointer; background: red; color: white; width: 12px; height: 12px; text-align: center; border-radius: 50%; font-size: 9px; line-height: 12px;">            ✕        </div>
             </div>
         </div>
-
+        <script src="../../Ads/ShowAds.js" defer="preload"></script>
     `;
 
     // 非表示にする条件となるクエリ値
     const targetQuery = "nsSUfQXkaZVJETmnGZWysrzWmecEfTbk";
 
     // 非表示にしたいクラス名の配列
-    const hideClasses = ["random-adcontents", "affiliate-banner"];
+    const hideClasses = ["random-adcontents", "affiliate-banner", "center-adcontents"];
 
     // URLからクエリパラメータを取得
     const urlParams = new URLSearchParams(window.location.search);
@@ -40,7 +40,7 @@
         });
     }
 
-    // ページ読み込み完了後に自動挿入
+    // ページ読み込み完了後に自動挿入 ココナラ依頼無い場合はここの挿入を消す
     document.addEventListener('DOMContentLoaded', function() {
         if(!isPremium){
             const containers = document.querySelectorAll('.centerad-widget');
@@ -102,10 +102,97 @@
         }
     }
 
+    //ShowAdsと同様ココナラ依頼に応じて置き換え
     let adDisplayed = false;
     let adClosed = false;
     var url = location.href;
-    function isMobile() {    return window.innerWidth <= 600;}window.addEventListener("scroll", function() {    if (url.indexOf("cms.e.jimdo.com") === -1) {        if (adDisplayed || adClosed) return;        let scrollPosition = window.scrollY + window.innerHeight;        let pageHeight = document.body.scrollHeight;        if (scrollPosition >= pageHeight / 2) {            adDisplayed = true;            showAd();        }    }});
-    function showAd() {    if (url.indexOf("cms.e.jimdo.com") === -1) {        let adContainer = document.getElementById("adContainer");        let closeButton = document.getElementById("closeButton");        if (isMobile()) {            adContainer.style.width = "90%";            closeButton.style.top = "25px";            closeButton.style.right = "30px";        } else {            adContainer.style.width = "300px";            closeButton.style.top = "25px";            closeButton.style.right = "30px";        }        document.getElementById("adOverlay").style.display = "flex";        disableScroll();        startCountdown();    }}function startCountdown() {    if (url.indexOf("cms.e.jimdo.com") === -1) {        let timeLeft = 5;        let countdownInterval = setInterval(() => {            document.getElementById("countdown").innerText = timeLeft + " seconds until you can close the ad";            if (timeLeft === 0) {                clearInterval(countdownInterval);                document.getElementById("closeButton").style.display = "block";                document.getElementById("countdown").innerText = "You can now close the ad";            }            timeLeft--;        }, 1000);        document.getElementById("closeButton").addEventListener("click", closeAd);    }}function closeAd() {    if (url.indexOf("cms.e.jimdo.com") === -1) {        document.getElementById("adOverlay").style.display = "none";        enableScroll();        adClosed = true;        let pageHeight = document.body.scrollHeight;        window.scrollTo({ top: pageHeight / 2, behavior: "smooth" });    }}function disableScroll() {    document.body.style.overflow = "hidden";    document.body.style.height = "100%";    document.documentElement.style.overflow = "hidden";    document.documentElement.style.height = "100%";}function enableScroll() {    document.body.style.overflow = "auto";    document.body.style.height = "auto";    document.documentElement.style.overflow = "auto";    document.documentElement.style.height = "auto";}
 
+    function isMobile() {
+    return window.innerWidth <= 600;
+    }
+    window.addEventListener("scroll", function() {
+    if (url.indexOf("cms.e.jimdo.com") === -1) {
+        if (adDisplayed || adClosed) return;
+        let scrollPosition = window.scrollY + window.innerHeight;
+        let pageHeight = document.body.scrollHeight;
+        if (scrollPosition >= pageHeight / 2) {
+            adDisplayed = true;
+            showAd();
+        }
+    }
+    });
+
+    const showHTML = `
+            <div class="center-adcontents" >
+                
+            </div>
+        `;
+
+    function showAd() {
+    if (url.indexOf("cms.e.jimdo.com") === -1 && queryValue !== targetQuery) {
+        //ココナラ時のshowAd
+        let adContainer = document.getElementById("adContainer");
+        let closeButton = document.getElementById("closeButton");
+        if (isMobile()) {
+            adContainer.style.width = "90%";
+            closeButton.style.top = "25px";
+            closeButton.style.right = "30px";
+        } else {
+            adContainer.style.width = "300px";
+            closeButton.style.top = "25px";
+            closeButton.style.right = "30px";
+        }
+        document.getElementById("adOverlay").style.display = "flex";
+        disableScroll();
+        startCountdown();
+        //非ココナラ時はAdstir挿入
+        // const containers = document.querySelectorAll('.centerad-widget');
+        // containers.forEach(function(container) {
+        //     container.innerHTML = showHTML;
+        // });
+    }
+    }
+
+    function startCountdown() {
+    if (url.indexOf("cms.e.jimdo.com") === -1) {
+        let timeLeft = 5;
+        let countdownInterval = setInterval(() => {
+        document.getElementById("countdown").innerText = timeLeft + " seconds until you can close the ad";
+        if (timeLeft === 0) {
+            clearInterval(countdownInterval);
+            document.getElementById("closeButton").style.display = "block";
+            document.getElementById("countdown").innerText = "You can now close the ad";
+        }
+        timeLeft--;
+        }, 1000);
+        document.getElementById("closeButton").addEventListener("click", closeAd);
+    }
+    }
+
+    function closeAd() {
+    if (url.indexOf("cms.e.jimdo.com") === -1) {
+        document.getElementById("adOverlay").style.display = "none";
+        enableScroll();
+        adClosed = true;
+        let pageHeight = document.body.scrollHeight;
+        window.scrollTo({
+        top: pageHeight / 2,
+        behavior: "smooth"
+        });
+    }
+    }
+
+    function disableScroll() {
+    document.body.style.overflow = "hidden";
+    document.body.style.height = "100%";
+    document.documentElement.style.overflow = "hidden";
+    document.documentElement.style.height = "100%";
+    }
+
+    function enableScroll() {
+    document.body.style.overflow = "auto";
+    document.body.style.height = "auto";
+    document.documentElement.style.overflow = "auto";
+    document.documentElement.style.height = "auto";
+    }
 })();

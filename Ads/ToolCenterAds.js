@@ -23,7 +23,7 @@
     const targetQuery = "nsSUfQXkaZVJETmnGZWysrzWmecEfTbk";
 
     // 非表示にしたいクラス名の配列
-    const hideClasses = ["random-adcontents", "affiliate-banner"];
+    const hideClasses = ["random-adcontents", "affiliate-banner", "center-adcontents"];
 
     // URLからクエリパラメータを取得
     const urlParams = new URLSearchParams(window.location.search);
@@ -40,15 +40,13 @@
         });
     }
 
-    // ページ読み込み完了後に自動挿入
+    // ページ読み込み完了後に自動挿入  ココナラ依頼無い場合はここの挿入を消す
     document.addEventListener('DOMContentLoaded', function() {
         if(!isPremium){
             const containers = document.querySelectorAll('.centerad-widget');
             containers.forEach(function(container) {
                 container.innerHTML = adHTML;
 
-                //メイン機能
-                // 組み合わせリスト
                 const centercombinations = [
                     {
                         "imageUrl": "../../Ads/CenterImage/AdsImage1.jpg",
@@ -75,21 +73,21 @@
                         "siteUrl": "https://hayadebi.github.io/Accounting-ai-app/Tools/BlogEditor/blogeditor.html"
                     }
                 ];
-                // ランダムに1つ選択
+                
                 const centerselected = centercombinations[Math.floor(Math.random() * centercombinations.length)];
-                // DOMが読み込まれた後に実行
+                
                 if (document.readyState === 'loading') {
                     document.addEventListener('DOMContentLoaded', replaceCombination);
                 } else {
                     replaceCombination();
                 }
                 function replaceCombination() {
-                    // 画像の置き換え
+                    
                     const centerimages = document.querySelectorAll('.center-ads-image');
                     centerimages.forEach(function(img) {
                     img.src = centerselected.imageUrl;
                     });
-                    // リンクの置き換え
+                    
                     const centerlinks = document.querySelectorAll('.center-ads-link');
                     centerlinks.forEach(function(link) {
                     link.href = centerselected.siteUrl;
