@@ -16,7 +16,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     <link rel="stylesheet" href="../../AssetConfiguration/SubStyleProcessor.css">
     <meta content="記事概要" name="description" />
     <meta name="keywords" content="記事タグ" />
-    <meta property="og:image" content="#" />
+    <meta property="og:image" content="https://pbs.twimg.com/media/GszfGSzawAEgprQ?format=png&name=medium" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="generator" content="Hayadebi Blog">
     <link rel="icon" type="image/png" href="https://pbs.twimg.com/media/G2H3yzRaIAIIHjw?format=png&name=240x240">
@@ -97,7 +97,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
         <!-- 本番執筆で内容に応じて目次セクション更新 -->
         <section class="section">
-            <div class="recommend-icon"><img src="#" alt="記事サムネイル" style="object-fit: cover;max-width:100%;height: auto; display: block;border-radius:2%;" /></div>
+            <div class="recommend-icon">
+                <center><img src="https://pbs.twimg.com/media/GszfGSzawAEgprQ?format=png&name=medium" alt="記事サムネイル" style="object-fit: cover;width:75%;max-width:100%;height: auto; display: block;border-radius:2%;padding:10px 0;"></center>
+            </div>
             <h2>目次</h2>
              <div style="display: flex; flex-wrap: wrap; gap: 10px;">
             <a href="#section-1" style=
@@ -114,15 +116,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             4. まとめ</a>
         </div>
         <p class="hero-subtitle">※当記事はプロモーションも含みます</p></section>
-
-        <!--広告-->
-        <div class="random-adcontents" style="width:100%; height:auto;padding: 0;margin: 0 0 20px 0;">
-            <center>
-                <!-- admax -->
-<script src="https://adm.shinobi.jp/o/edb95f1374c43ecb818d1773165ad3a7"></script>
-<!-- admax -->
-            </center>
-        </div>
 
         <section class="section" id="section-1">
             <!--コピペテンプレート-->
@@ -148,26 +141,175 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <p>説明</p>
         </section>
 
-        <!--広告-->
-        <div class="random-adcontents" style="width:100%; height:auto;padding: 0;margin: 0 0 20px 0;">
-            <center><div style="position: relative; height:auto;display: inline-block;">
-                <a href="#" class="random-ads-link" alt="広告リンク" target="_blank" rel="nofollow" referrerpolicy="no-referrer-when-downgrade"><img src="#" class="random-ads-image" alt="広告画像" style="max-width:100%; height:auto;" /></a>
-                <p style="position: absolute;top: 3%;left: 3%;color: rgba(255,255,255,0.6);font-size: 14px;font-weight: bold;margin: 0;">PR</p>
-            </div>
-            </center>
+        <!--サイト内誘導広告-->
+        <div style="width:100%; height:auto;padding: 0;margin: 0 0 20px 0;">
+            <!-- <div style="width: 100%; max-width: 1200px; margin: 0 auto; padding: 20px 10px; box-sizing: border-box; font-family: 'Hiragino Kaku Gothic ProN', 'メイリオ', sans-serif;"> -->
+                
+                <!-- スクロールコンテナ -->
+                <div style="position: relative; overflow: hidden; background: rgba(255, 255, 255, 0.08); border-radius: 15px; padding: 15px;border: 1px solid rgba(255, 255, 255, 0.1);">
+                    <!-- 左矢印 -->
+                    <div id="prevBtn" style="position: absolute; left: 0; top: 50%; transform: translateY(-50%); width: 40px; height: 40px; background: rgba(0,0,0,0.5); color: white; display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 10; border-radius: 50%; font-size: 20px; user-select: none;">❮</div>
+                    
+                    <!-- 右矢印 -->
+                    <div id="nextBtn" style="position: absolute; right: 0; top: 50%; transform: translateY(-50%); width: 40px; height: 40px; background: rgba(0,0,0,0.5); color: white; display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 10; border-radius: 50%; font-size: 20px; user-select: none;">❯</div>
+                    
+                    <!-- コンテンツ表示エリア -->
+                    <div id="contentWrapper" style="display: flex; transition: transform 0.5s ease; margin: 0 50px;"></div>
+                </div>
+                
+                <!-- インジケーター -->
+                <div id="indicators" style="display: flex; justify-content: center; gap: 8px; margin-top: 15px;"></div>
+            <!-- </div> -->
         </div>
+        <script defer="defer">
+            (function() {
+        // ========================================
+        // ここでコンテンツを編集できます
+        // ========================================
+        const contents =     [
+            {
+                "title": "アセットタイトル",
+                "image": "#",
+                "link": "#"
+            }
+        ];
+        // ========================================
+
+        let currentIndex = 0;
+        let autoScrollTimer;
+        const autoScrollInterval = 8000; // 8秒ごとに自動スクロール
+
+        const contentWrapper = document.getElementById('contentWrapper');
+        const indicatorsDiv = document.getElementById('indicators');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+
+        // レスポンシブ判定
+        function isMobile() {
+            return window.innerWidth < 768;
+        }
+
+        // 1ページあたりの表示数
+        function getItemsPerPage() {
+            return isMobile() ? 1 : 3;
+        }
+
+        // 総ページ数
+        function getTotalPages() {
+            return Math.ceil(contents.length / getItemsPerPage());
+        }
+
+        // コンテンツHTML生成
+        function createContentHTML(content, index) {
+            const itemsPerPage = getItemsPerPage();
+            const width = isMobile() ? '100%' : 'calc(33.333% - 10px)';
+            
+            return `
+            <div style="flex: 0 0 ${width}; min-width: ${width}; padding: 10px; box-sizing: border-box;">
+                <a href="${content.link}" target="_blank" style="text-decoration: none; color: inherit; display: block;">
+                <div style=" background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 8px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.1); transition: transform 0.3s, box-shadow 0.3s; height: 100%;" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 4px 12px rgba(0,0,0,0.2)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 2px 8px rgba(0,0,0,0.1)';">
+                    <div style="position: relative; padding-top: 133.33%; overflow: hidden;  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                    <img src="${content.image}" alt="${content.title}" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22300%22 height=%22400%22%3E%3Crect fill=%22%23ddd%22 width=%22300%22 height=%22400%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22 fill=%22%23999%22%3ENo Image%3C/text%3E%3C/svg%3E';">
+                    </div>
+                    <div style="padding: 12px;">
+                    <div style="font-size: 14px; font-weight: bold; line-height: 1.4; color: #ffffff; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; min-height: 2.8em;">${content.title}</div>
+                    </div>
+                </div>
+                </a>
+            </div>
+            `;
+        }
+
+        // コンテンツ描画
+        function renderContents() {
+            contentWrapper.innerHTML = contents.map((content, index) => createContentHTML(content, index)).join('');
+        }
+
+        // インジケーター描画
+        function renderIndicators() {
+            const totalPages = getTotalPages();
+            indicatorsDiv.innerHTML = '';
+            
+            for (let i = 0; i < totalPages; i++) {
+            const dot = document.createElement('div');
+            dot.style.cssText = `
+                width: 10px;
+                height: 10px;
+                border-radius: 50%;
+                background: ${i === currentIndex ? '#007bff' : '#ccc'};
+                cursor: pointer;
+                transition: background 0.3s;
+            `;
+            dot.addEventListener('click', () => goToPage(i));
+            indicatorsDiv.appendChild(dot);
+            }
+        }
+
+        // ページ移動
+        function goToPage(index) {
+            const totalPages = getTotalPages();
+            currentIndex = (index + totalPages) % totalPages;
+            
+            const itemsPerPage = getItemsPerPage();
+            const wrapperWidth = contentWrapper.offsetWidth;
+            const offset = currentIndex * wrapperWidth;
+            contentWrapper.style.transform = `translateX(-${offset}px)`;
+            
+            renderIndicators();
+            resetAutoScroll();
+        }
+
+        // 次へ
+        function nextPage() {
+            goToPage(currentIndex + 1);
+        }
+
+        // 前へ
+        function prevPage() {
+            goToPage(currentIndex - 1);
+        }
+
+        // 自動スクロールリセット
+        function resetAutoScroll() {
+            clearInterval(autoScrollTimer);
+            autoScrollTimer = setInterval(nextPage, autoScrollInterval);
+        }
+
+        // イベントリスナー
+        nextBtn.addEventListener('click', nextPage);
+        prevBtn.addEventListener('click', prevPage);
+
+        // リサイズ対応
+        let resizeTimer;
+        window.addEventListener('resize', () => {
+            clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(() => {
+            currentIndex = 0;
+            renderContents();
+            goToPage(0);
+            }, 250);
+        });
+
+        // 初期化
+        renderContents();
+        renderIndicators();
+        goToPage(0);
+
+        // マウスオーバーで自動スクロール一時停止
+        contentWrapper.parentElement.addEventListener('mouseenter', () => {
+            clearInterval(autoScrollTimer);
+        });
+
+        contentWrapper.parentElement.addEventListener('mouseleave', () => {
+            resetAutoScroll();
+        });
+        })();
+        </script>
 
         <section class="section" id="section-4">
             <h2>まとめ</h2>
             <p>締めの言葉</p>
              <a href="#" class="btn" target="_blank" rel="nofollow" referrerpolicy="no-referrer-when-downgrade" alt="リンク説明">リンク</a>
-        </section>
-
-        <section class="section">
-            <h2>いいなと思ったら応援</h2>
-            <p>以下の方法で応援を受け付けております。</p>
-            <a href="https://www.paypal.com/paypalme/hayadebisub" class="btn" target="_blank" rel="nofollow" referrerpolicy="no-referrer-when-downgrade" alt="PayPalで支援">PayPal.Me:チップを送って応援</a>
-            <button onclick="generateTweetURL( 'ハヤデビのツール工房では役立つブログ記事も発信中！\n是非チェックしてみよう↓', 'hayadebi.github.io/Accounting-ai-app/', 'ブログ' )" class="btn" style="border: none;" alt="Xでシェア" >X:シェアして応援</button>
         </section>
 
         <section class="section">
@@ -183,6 +325,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <h2>ツール</h2>
             <p>本サイトでは、暮らしや作業をサポートするウェブツールの運営もしております。</p>
             <a href="../../tools.html" class="btn" alt="ツール一覧">ツール一覧</a>
+        </section>
+
+        <section class="section">
+            <h2>いいなと思ったら応援</h2>
+            <p>以下の方法で応援を受け付けております。</p>
+            <a href="https://www.paypal.com/paypalme/hayadebisub" class="btn" target="_blank" rel="nofollow" referrerpolicy="no-referrer-when-downgrade" alt="PayPalで支援">PayPal.Me:チップを送って応援</a>
+            <button onclick="generateTweetURL( 'ハヤデビのツール工房では役立つブログ記事も発信中！\n是非チェックしてみよう↓', 'hayadebi.github.io/Accounting-ai-app/', 'ブログ' )" class="btn" style="border: none;" alt="Xでシェア" >X:シェアして応援</button>
         </section>
 
         <section class="section">
@@ -203,6 +352,15 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <p>© ハヤデビのツール工房</p>
         </div>
     </footer>
+
+    <div class="affiliate-banner" style=
+    "border: 1px solid #5592b7; padding: 0.2em; display: flex; flex-wrap: wrap; align-items: flex-start; width: 100%; height:auto; box-sizing: border-box; position: fixed; bottom: 0px; left: 0; right: 0; transition: bottom 0.5s ease; background: rgba(255, 255, 255, 0.9);">
+        <div style="width:100%; height:auto;" class="admax-container">
+            <center>
+                <iframe src="https://assetstore.unity.com/linkmaker/embed/list/top-new/widget-wide?aid=1101l3IyTm" style="width:600px; max-width:100%; height:100px; border:0px;"></iframe>
+            </center>
+        </div>
+    </div>
 
     <script defer="defer">
         // ハンバーガーメニューの動作
