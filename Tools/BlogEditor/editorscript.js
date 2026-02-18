@@ -369,6 +369,26 @@ function renderElement(element, container, depth = 0) {
             item.appendChild(group);
         }
 
+        // iframe編集
+        if (child.tagName.toLowerCase() === 'iframe') {
+            const group = document.createElement('div');
+            group.className = 'form-group';
+            group.innerHTML = `
+                <label>src</label>
+                <input type="text" class="form-input" value="${escapeHtml(child.getAttribute('src') || '')}">
+            `;
+
+            const input = group.querySelector('input');
+            input.addEventListener('change', (e) => {
+                child.setAttribute('src', e.target.value);
+                updateCodeEditor();
+                saveToHistory();
+                checkForThumbnailSync(child, e.target.value);
+            });
+
+            item.appendChild(group);
+        }
+
         // a編集
         if (child.tagName.toLowerCase() === 'a') {
             const group = document.createElement('div');
@@ -716,6 +736,11 @@ function addElement(tag) {
             newElement = currentDOM.createElement('img');
             newElement.setAttribute('src', 'https://via.placeholder.com/600x400');
             newElement.setAttribute('alt', '画像の説明');
+            break;
+        case 'iframe':
+            newElement = currentDOM.createElement('iframe');
+            newElement.setAttribute('src', 'https://via.placeholder.com/600x400');
+            newElement.setAttribute('alt', 'Iframeの説明');
             break;
         case 'a':
             newElement = currentDOM.createElement('a');
