@@ -1,0 +1,856 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ja"><head>
+    <!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-T4G6KMKK');</script>
+<!-- End Google Tag Manager -->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!--本番執筆の際にhead情報更新-->
+    <title>【Unity】WebViewを1行で実装！戻る・進む・閉じるボタン完備のマネージャースクリプト大公開</title>
+    <link rel="stylesheet" href="../../AssetConfiguration/MainStyleProcessor.css" />
+    <link rel="stylesheet" href="../../AssetConfiguration/SubStyleProcessor.css" />
+    <meta content="Unityアプリ内でWebページを表示するWebViewの実装方法を詳しく解説します。人気プラグイン「unity-webview」を活用し、実質1行のコードで呼び出し可能な高機能マネージャーを作成。利用規約やお知らせ表示に欠かせない「戻る・進む・閉じる」ボタンのGUI実装はもちろん、Android端末特有の「戻るボタン」への対応（1回押しでページ戻り、0.3秒以内の2回押しで閉じるダブルタップ判定）まで網羅しています。シングルトン設計によりシーンを跨いだ管理も容易で、初心者でもコピペで即座に導入可能です。WebViewの前面にUIを表示する工夫や、マージン設定によるレイアウト調整など、実戦で役立つカスタマイズのポイントも深掘りして紹介。この記事を読めば、ユーザーにとってストレスのない快適なアプリ内ブラウザ体験を最短で実装できるようになります。" name="description" />
+    <meta name="keywords" content="Unity, WebView, unity-webview, C#, 実装方法, 戻るボタン, Android対応, アプリ内ブラウザ, シングルトン, GUI, コピペ, ゲーム開発" />
+    <meta property="og:image" content="https://pbs.twimg.com/media/GszfGSzawAEgprQ?format=png&name=medium" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="generator" content="Hayadebi Blog" />
+    <link rel="icon" type="image/png" href="https://pbs.twimg.com/media/G2H3yzRaIAIIHjw?format=png&name=240x240" />
+    <!--本番執筆の際に前と次を設定↓-->
+    <link rel="prev" href="blog_dev_1.html" />
+    <link rel="next" href="blog_dev_3.html" /> 
+    <!--本番執筆の際にnoindex削除↓-->
+    
+    <script async="" src="https://www.googletagmanager.com/gtag/js?id=G-GLW3M3X7B3" defer=""></script>
+    <script defer="">
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-GLW3M3X7B3');
+    </script>
+
+    <script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "【Unity】WebViewを1行で実装！戻る・進む・閉じるボタン完備のマネージャースクリプト大公開",
+  "image": "#",
+  "datePublished": "2026-02-18",
+  "dateModified": "2026-02-18",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://hayadebi.github.io/Accounting-ai-app/Blogs/Developer/blog_dev_2.html"
+  },
+  "author": {
+    "@type": "Person",
+    "name": "ハヤデビ",
+    "jobTitle": "フリーランスエンジニア",
+    "url": "https://hayadebi.github.io/Accounting-ai-app/profile.html",
+    "sameAs": [
+      "https://x.com/hayadebi",
+      "https://unitygamehayadebi.jimdofree.com"
+    ]
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "ハヤデビ",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://pbs.twimg.com/media/G5mBHiiacAIWGvt?format=png&name=900x900"
+    }
+  }
+}</script>
+</head>
+<body>
+    <!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-T4G6KMKK" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+    <header class="header">
+        <nav class="nav-container">
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="../../index.html" alt="ハヤデビのツール工房ホームページ">ホーム</a></li>
+                <li><a href="../../tools.html" alt="ハヤデビのツール工房/ツール一覧">ツール</a></li>
+                <li><a href="../../coconala.html" alt="ハヤデビのツール工房/ココナラ事業一覧">事業</a></li>
+                <li><a href="../../blogs.html" alt="ハヤデビのツール工房/ブログ一覧">ブログ</a></li>
+                <li><a href="../../profile.html" alt="ハヤデビのツール工房/プロフィール詳細">プロフィール</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="main-container">
+        <!-- タイトル本番執筆更新 -->
+        <div class="hero">
+            <h1>【Unity】WebViewを1行で実装！戻る・進む・閉じるボタン完備のマネージャースクリプト大公開</h1>
+        </div>
+
+        <!-- 本番執筆で内容に応じて目次セクション更新 -->
+        <section class="section">
+            <div class="recommend-icon">
+                <center><img src="https://pbs.twimg.com/media/GszfGSzawAEgprQ?format=png&name=medium" alt="記事サムネイル" style="object-fit: cover;width:75%;max-width:100%;height: auto; display: block;border-radius:2%;padding:10px 0;" /></center>
+            </div>
+            <h2>目次</h2>
+             <div style="display: flex; flex-wrap: wrap; gap: 10px;">
+            <a href="#section-1" style="padding: 8px 15px; background: linear-gradient(135deg, #0066cc 0%, #00bfff 100%); color: #fff; text-decoration: none; border-radius: 4px; font-weight: 600; font-size: 0.9rem; transition: opacity 0.3s ease;">
+            1. はじめに</a>
+            <a href="#section-2" style="padding: 8px 15px; background: linear-gradient(135deg, #0066cc 0%, #00bfff 100%); color: #fff; text-decoration: none; border-radius: 4px; font-weight: 600; font-size: 0.9rem; transition: opacity 0.3s ease;">
+            2. メインコード</a>
+            <a href="#section-3" style="padding: 8px 15px; background: linear-gradient(135deg, #0066cc 0%, #00bfff 100%); color: #fff; text-decoration: none; border-radius: 4px; font-weight: 600; font-size: 0.9rem; transition: opacity 0.3s ease;">
+            3. 使い方</a>
+            <a href="#section-4" style="padding: 8px 15px; background: linear-gradient(135deg, #0066cc 0%, #00bfff 100%); color: #fff; text-decoration: none; border-radius: 4px; font-weight: 600; font-size: 0.9rem; transition: opacity 0.3s ease;">
+            4. まとめ</a>
+        </div>
+        <p class="hero-subtitle">※当記事はプロモーションも含みます</p></section>
+
+        <section class="section" id="section-1">
+            <!--コピペテンプレート-->
+            <!-- <div class="recommend-icon"><img src="#" alt="記事サムネイル" style="object-fit: cover;max-width:100%;height: auto; display: block;border-radius:2%;" /></div> -->
+            <!-- <a href="#" style="color: #a8d0ff;overflow-wrap: break-word;" alt="リンク説明" target="_blank" referrerpolicy="no-referrer-when-downgrade">リンク</a> -->
+            <h2>はじめに</h2>
+            <p><strong>Unity</strong>でアプリを作っていると、ふとした瞬間に「あ、ここでWebページを表示したいな」と思うこと、ありませんか？
+例えば、最新のお知らせをWeb側で更新したかったり、利用規約やプライバシーポリシーを外部URLで管理していたり。
+そんな時に便利なのが<strong>WebView</strong>ですが、いざ実装しようとすると「ボタンはどうする？」「Androidの戻るボタン対応は？」と、意外と考えること付ける機能が多くて手が止まってしまいがちです。
+
+今回は、そんな悩みを一気に解決してくれる
+戻る・進む・閉じるボタンを完備したWebViewマネージャーの実装方法をご紹介します。
+これさえあれば、実質1行のコードでアプリ内ブラウザを呼び出せるようになるので、開発効率がグッと上がるはずです。
+*当記事はプロモーションも含みます。</p>
+        </section>
+
+        <section class="section" id="section-2">
+            <h2>メインコード</h2>
+            <p>以下のコードを、新しく作成した<strong>WebviewManager.cs</strong>にコピー＆ペーストして使ってください。</p>
+            <div style="position: relative; background-color: #1e1e1e; border-radius: 8px; padding: 16px; font-family: 'Consolas', 'Monaco', 'Courier New', monospace; font-size: 14px; line-height: 1.5; max-height: 600px; overflow-y: auto; color: #d4d4d4; box-shadow: 0 4px 6px rgba(0,0,0,0.3);">
+    <button id="copyBtn" style="position: absolute; top: 12px; right: 12px; background-color: #0e639c; color: white; border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer; font-size: 12px; font-weight: bold; z-index: 10; transition: background-color 0.2s;" onmouseover="this.style.backgroundColor='#1177bb'" onmouseout="this.style.backgroundColor='#0e639c'">コピー</button>
+
+    <pre style="margin: 0; padding-top: 40px; white-space: pre; word-wrap: normal;"><span style="color: #569cd6;">using</span> System;
+<span style="color: #569cd6;">using</span> System.Collections;
+<span style="color: #569cd6;">using</span> System.Collections.Generic;
+<span style="color: #569cd6;">using</span> UnityEngine;
+
+<span style="color: #569cd6;">public</span> <span style="color: #569cd6;">class</span> <span style="color: #4ec9b0;">WebviewManager</span> : <span style="color: #4ec9b0;">MonoBehaviour</span>
+{
+    <span style="color: #569cd6;">public</span> <span style="color: #4ec9b0;">WebViewObject</span> webViewObject;
+    <span style="color: #569cd6;">public</span> <span style="color: #569cd6;">static</span> <span style="color: #4ec9b0;">WebviewManager</span> instance = <span style="color: #569cd6;">null</span>;
+
+    <span style="color: #6a9955;">// GUI用の変数</span>
+    <span style="color: #569cd6;">private</span> <span style="color: #569cd6;">bool</span> showButtons = <span style="color: #569cd6;">false</span>;
+    <span style="color: #569cd6;">private</span> <span style="color: #4ec9b0;">Rect</span> closeButtonRect;
+    <span style="color: #569cd6;">private</span> <span style="color: #4ec9b0;">Rect</span> backButtonRect;
+    <span style="color: #569cd6;">private</span> <span style="color: #4ec9b0;">Rect</span> forwardButtonRect;
+
+    <span style="color: #569cd6;">private</span> <span style="color: #569cd6;">void</span> <span style="color: #dcdcaa;">Awake</span>()
+    {
+        <span style="color: #569cd6;">if</span> (instance == <span style="color: #569cd6;">null</span>)
+        {
+            instance = <span style="color: #569cd6;">this</span>;
+            <span style="color: #dcdcaa;">DontDestroyOnLoad</span>(<span style="color: #569cd6;">this</span>.gameObject);
+        }
+        <span style="color: #569cd6;">else</span>
+        {
+            <span style="color: #dcdcaa;">Destroy</span>(<span style="color: #569cd6;">this</span>.gameObject);
+        }
+    }
+
+    <span style="color: #6a9955;">/// <summary></span>
+    <span style="color: #6a9955;">/// WebViewを開く</span>
+    <span style="color: #6a9955;">/// </summary></span>
+    <span style="color: #6a9955;">/// <param name="url">表示するURL</param></span>
+    <span style="color: #569cd6;">public</span> <span style="color: #569cd6;">void</span> <span style="color: #dcdcaa;">OpenWebview</span>(<span style="color: #569cd6;">string</span> url)
+    {
+        <span style="color: #6a9955;">// 既存のWebViewがあれば破棄</span>
+        <span style="color: #569cd6;">if</span> (webViewObject != <span style="color: #569cd6;">null</span>) <span style="color: #dcdcaa;">Destroy</span>(webViewObject.gameObject);
+        
+        <span style="color: #6a9955;">// 新しいWebViewを生成</span>
+        webViewObject = (<span style="color: #569cd6;">new</span> <span style="color: #4ec9b0;">GameObject</span>(<span style="color: #ce9178;">"WebViewObject"</span>)).<span style="color: #dcdcaa;">AddComponent</span><<span style="color: #4ec9b0;">WebViewObject</span>>();
+        webViewObject.<span style="color: #dcdcaa;">Init</span>(
+            ld: (msg) => Debug.<span style="color: #dcdcaa;">Log</span>(<span style="color: #569cd6;">string</span>.<span style="color: #dcdcaa;">Format</span>(<span style="color: #ce9178;">"CallOnLoaded[{0}]"</span>, msg)),
+            enableWKWebView: <span style="color: #569cd6;">true</span>);
+
+<span style="color: #c586c0;">#if</span> UNITY_EDITOR_OSX || UNITY_STANDALONE_OSX
+        webViewObject.bitmapRefreshCycle = <span style="color: #b5cea8;">1</span>;
+<span style="color: #c586c0;">#endif</span>
+
+        <span style="color: #6a9955;">// ボタン用のスペースを確保（上部に120pxのマージン）</span>
+        <span style="color: #569cd6;">int</span> topMargin = <span style="color: #b5cea8;">120</span>;
+        webViewObject.<span style="color: #dcdcaa;">SetMargins</span>(<span style="color: #b5cea8;">0</span>, topMargin, <span style="color: #b5cea8;">0</span>, <span style="color: #b5cea8;">0</span>);
+        webViewObject.<span style="color: #dcdcaa;">LoadURL</span>(url);
+        webViewObject.<span style="color: #dcdcaa;">SetVisibility</span>(<span style="color: #569cd6;">true</span>);
+
+        <span style="color: #6a9955;">// ボタンを表示</span>
+        showButtons = <span style="color: #569cd6;">true</span>;
+        <span style="color: #dcdcaa;">SetupButtonRects</span>();
+    }
+
+    <span style="color: #6a9955;">/// <summary></span>
+    <span style="color: #6a9955;">/// ボタンの位置を設定</span>
+    <span style="color: #6a9955;">/// </summary></span>
+    <span style="color: #569cd6;">private</span> <span style="color: #569cd6;">void</span> <span style="color: #dcdcaa;">SetupButtonRects</span>()
+    {
+        <span style="color: #569cd6;">float</span> buttonSize = <span style="color: #b5cea8;">80f</span>;
+        <span style="color: #569cd6;">float</span> margin = <span style="color: #b5cea8;">20f</span>;
+
+        <span style="color: #6a9955;">// 閉じるボタン（右上）</span>
+        closeButtonRect = <span style="color: #569cd6;">new</span> <span style="color: #4ec9b0;">Rect</span>(Screen.width - buttonSize - margin, margin, buttonSize, buttonSize);
+
+        <span style="color: #6a9955;">// 戻るボタン（左上）</span>
+        backButtonRect = <span style="color: #569cd6;">new</span> <span style="color: #4ec9b0;">Rect</span>(margin, margin, buttonSize, buttonSize);
+
+        <span style="color: #6a9955;">// 進むボタン（左上、戻るボタンの右）</span>
+        forwardButtonRect = <span style="color: #569cd6;">new</span> <span style="color: #4ec9b0;">Rect</span>(margin + buttonSize + <span style="color: #b5cea8;">10f</span>, margin, buttonSize, buttonSize);
+    }
+
+    <span style="color: #569cd6;">void</span> <span style="color: #dcdcaa;">OnGUI</span>()
+    {
+        <span style="color: #569cd6;">if</span> (!showButtons || webViewObject == <span style="color: #569cd6;">null</span>) <span style="color: #569cd6;">return</span>;
+
+        <span style="color: #6a9955;">// ボタンのスタイル設定</span>
+        <span style="color: #4ec9b0;">GUIStyle</span> buttonStyle = <span style="color: #569cd6;">new</span> <span style="color: #4ec9b0;">GUIStyle</span>(GUI.skin.button);
+        buttonStyle.fontSize = <span style="color: #b5cea8;">30</span>;
+        buttonStyle.fontStyle = FontStyle.Bold;
+        buttonStyle.normal.textColor = Color.white;
+        buttonStyle.hover.textColor = Color.yellow;
+
+        <span style="color: #6a9955;">// 背景色設定（半透明の黒）</span>
+        <span style="color: #4ec9b0;">Color</span> backgroundColor = <span style="color: #569cd6;">new</span> <span style="color: #4ec9b0;">Color</span>(<span style="color: #b5cea8;">0.2f</span>, <span style="color: #b5cea8;">0.2f</span>, <span style="color: #b5cea8;">0.2f</span>, <span style="color: #b5cea8;">0.8f</span>);
+        <span style="color: #4ec9b0;">Texture2D</span> backgroundTexture = <span style="color: #dcdcaa;">MakeTexture</span>(<span style="color: #b5cea8;">2</span>, <span style="color: #b5cea8;">2</span>, backgroundColor);
+        buttonStyle.normal.background = backgroundTexture;
+        buttonStyle.hover.background = backgroundTexture;
+        buttonStyle.active.background = backgroundTexture;
+
+        <span style="color: #6a9955;">// 戻るボタン</span>
+        <span style="color: #569cd6;">if</span> (GUI.<span style="color: #dcdcaa;">Button</span>(backButtonRect, <span style="color: #ce9178;">"←"</span>, buttonStyle))
+        {
+            <span style="color: #dcdcaa;">GoBack</span>();
+        }
+
+        <span style="color: #6a9955;">// 進むボタン</span>
+        <span style="color: #569cd6;">if</span> (GUI.<span style="color: #dcdcaa;">Button</span>(forwardButtonRect, <span style="color: #ce9178;">"→"</span>, buttonStyle))
+        {
+            <span style="color: #dcdcaa;">GoForward</span>();
+        }
+
+        <span style="color: #6a9955;">// 閉じるボタン</span>
+        <span style="color: #569cd6;">if</span> (GUI.<span style="color: #dcdcaa;">Button</span>(closeButtonRect, <span style="color: #ce9178;">"X"</span>, buttonStyle))
+        {
+            <span style="color: #dcdcaa;">CloseWebview</span>();
+        }
+    }
+
+    <span style="color: #6a9955;">/// <summary></span>
+    <span style="color: #6a9955;">/// 単色のテクスチャを生成</span>
+    <span style="color: #6a9955;">/// </summary></span>
+    <span style="color: #569cd6;">private</span> <span style="color: #4ec9b0;">Texture2D</span> <span style="color: #dcdcaa;">MakeTexture</span>(<span style="color: #569cd6;">int</span> width, <span style="color: #569cd6;">int</span> height, <span style="color: #4ec9b0;">Color</span> color)
+    {
+        <span style="color: #4ec9b0;">Color</span>[] pixels = <span style="color: #569cd6;">new</span> <span style="color: #4ec9b0;">Color</span>[width * height];
+        <span style="color: #569cd6;">for</span> (<span style="color: #569cd6;">int</span> i = <span style="color: #b5cea8;">0</span>; i < pixels.Length; i++)
+        {
+            pixels[i] = color;
+        }
+
+        <span style="color: #4ec9b0;">Texture2D</span> texture = <span style="color: #569cd6;">new</span> <span style="color: #4ec9b0;">Texture2D</span>(width, height);
+        texture.<span style="color: #dcdcaa;">SetPixels</span>(pixels);
+        texture.<span style="color: #dcdcaa;">Apply</span>();
+        <span style="color: #569cd6;">return</span> texture;
+    }
+
+    <span style="color: #6a9955;">/// <summary></span>
+    <span style="color: #6a9955;">/// WebViewを閉じる</span>
+    <span style="color: #6a9955;">/// </summary></span>
+    <span style="color: #569cd6;">public</span> <span style="color: #569cd6;">void</span> <span style="color: #dcdcaa;">CloseWebview</span>()
+    {
+        <span style="color: #569cd6;">if</span> (webViewObject != <span style="color: #569cd6;">null</span>)
+        {
+            webViewObject.<span style="color: #dcdcaa;">SetVisibility</span>(<span style="color: #569cd6;">false</span>);
+            <span style="color: #dcdcaa;">Destroy</span>(webViewObject.gameObject);
+            webViewObject = <span style="color: #569cd6;">null</span>;
+        }
+        showButtons = <span style="color: #569cd6;">false</span>;
+    }
+
+    <span style="color: #6a9955;">/// <summary></span>
+    <span style="color: #6a9955;">/// 前のページに戻る</span>
+    <span style="color: #6a9955;">/// </summary></span>
+    <span style="color: #569cd6;">private</span> <span style="color: #569cd6;">void</span> <span style="color: #dcdcaa;">GoBack</span>()
+    {
+        <span style="color: #569cd6;">if</span> (webViewObject != <span style="color: #569cd6;">null</span>)
+        {
+            webViewObject.<span style="color: #dcdcaa;">GoBack</span>();
+        }
+    }
+
+    <span style="color: #6a9955;">/// <summary></span>
+    <span style="color: #6a9955;">/// 次のページに進む</span>
+    <span style="color: #6a9955;">/// </summary></span>
+    <span style="color: #569cd6;">private</span> <span style="color: #569cd6;">void</span> <span style="color: #dcdcaa;">GoForward</span>()
+    {
+        <span style="color: #569cd6;">if</span> (webViewObject != <span style="color: #569cd6;">null</span>)
+        {
+            webViewObject.<span style="color: #dcdcaa;">GoForward</span>();
+        }
+    }
+
+    <span style="color: #569cd6;">private</span> <span style="color: #569cd6;">int</span> touchCount = <span style="color: #b5cea8;">0</span>;
+
+    <span style="color: #569cd6;">void</span> <span style="color: #dcdcaa;">Update</span>()
+    {
+        <span style="color: #6a9955;">// Escapeキーまたは戻るボタン（Android）の処理</span>
+        <span style="color: #569cd6;">if</span> (Input.<span style="color: #dcdcaa;">GetKeyDown</span>(KeyCode.Escape))
+        {
+            touchCount++;
+            <span style="color: #6a9955;">// 1回目は前のページに戻る</span>
+            <span style="color: #569cd6;">if</span> (touchCount != <span style="color: #b5cea8;">2</span> && webViewObject != <span style="color: #569cd6;">null</span>) 
+            {
+                webViewObject.<span style="color: #dcdcaa;">GoBack</span>();
+            }
+            <span style="color: #dcdcaa;">Invoke</span>(<span style="color: #ce9178;">"DoubleEvent"</span>, <span style="color: #b5cea8;">0.3f</span>);
+        }
+    }
+
+    <span style="color: #6a9955;">/// <summary></span>
+    <span style="color: #6a9955;">/// ダブルタップ判定処理</span>
+    <span style="color: #6a9955;">/// </summary></span>
+    <span style="color: #569cd6;">void</span> <span style="color: #dcdcaa;">DoubleEvent</span>()
+    {
+        <span style="color: #6a9955;">// ダブルタップされていない場合</span>
+        <span style="color: #569cd6;">if</span> (touchCount != <span style="color: #b5cea8;">2</span>) 
+        { 
+            touchCount = <span style="color: #b5cea8;">0</span>; 
+            <span style="color: #569cd6;">return</span>; 
+        }
+        
+        <span style="color: #6a9955;">// ダブルタップされた場合、WebViewを閉じる</span>
+        touchCount = <span style="color: #b5cea8;">0</span>;
+        <span style="color: #dcdcaa;">CloseWebview</span>();
+    }
+}</pre>
+</div>
+<script>
+/* <![CDATA[ */
+document.getElementById('copyBtn').addEventListener('click', function() {
+  const code = `using System;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class WebviewManager : MonoBehaviour
+{
+    public WebViewObject webViewObject;
+    public static WebviewManager instance = null;
+
+    // GUI用の変数
+    private bool showButtons = false;
+    private Rect closeButtonRect;
+    private Rect backButtonRect;
+    private Rect forwardButtonRect;
+
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(this.gameObject);
+        }
+        else
+        {
+            Destroy(this.gameObject);
+        }
+    }
+
+    /// <summary>
+    /// WebViewを開く
+    /// <\/summary>
+    /// <param name="url">表示するURL<\/param>
+    public void OpenWebview(string url)
+    {
+        // 既存のWebViewがあれば破棄
+        if (webViewObject != null) Destroy(webViewObject.gameObject);
+        
+        // 新しいWebViewを生成
+        webViewObject = (new GameObject("WebViewObject")).AddComponent<WebViewObject>();
+        webViewObject.Init(
+            ld: (msg) => Debug.Log(string.Format("CallOnLoaded[{0}]", msg)),
+            enableWKWebView: true);
+
+#if UNITY_EDITOR_OSX || UNITY_STANDALONE_OSX
+        webViewObject.bitmapRefreshCycle = 1;
+#endif
+
+        // ボタン用のスペースを確保（上部に120pxのマージン）
+        int topMargin = 120;
+        webViewObject.SetMargins(0, topMargin, 0, 0);
+        webViewObject.LoadURL(url);
+        webViewObject.SetVisibility(true);
+
+        // ボタンを表示
+        showButtons = true;
+        SetupButtonRects();
+    }
+
+    /// <summary>
+    /// ボタンの位置を設定
+    /// <\/summary>
+    private void SetupButtonRects()
+    {
+        float buttonSize = 80f;
+        float margin = 20f;
+
+        // 閉じるボタン（右上）
+        closeButtonRect = new Rect(Screen.width - buttonSize - margin, margin, buttonSize, buttonSize);
+
+        // 戻るボタン（左上）
+        backButtonRect = new Rect(margin, margin, buttonSize, buttonSize);
+
+        // 進むボタン（左上、戻るボタンの右）
+        forwardButtonRect = new Rect(margin + buttonSize + 10f, margin, buttonSize, buttonSize);
+    }
+
+    void OnGUI()
+    {
+        if (!showButtons || webViewObject == null) return;
+
+        // ボタンのスタイル設定
+        GUIStyle buttonStyle = new GUIStyle(GUI.skin.button);
+        buttonStyle.fontSize = 30;
+        buttonStyle.fontStyle = FontStyle.Bold;
+        buttonStyle.normal.textColor = Color.white;
+        buttonStyle.hover.textColor = Color.yellow;
+
+        // 背景色設定（半透明の黒）
+        Color backgroundColor = new Color(0.2f, 0.2f, 0.2f, 0.8f);
+        Texture2D backgroundTexture = MakeTexture(2, 2, backgroundColor);
+        buttonStyle.normal.background = backgroundTexture;
+        buttonStyle.hover.background = backgroundTexture;
+        buttonStyle.active.background = backgroundTexture;
+
+        // 戻るボタン
+        if (GUI.Button(backButtonRect, "←", buttonStyle))
+        {
+            GoBack();
+        }
+
+        // 進むボタン
+        if (GUI.Button(forwardButtonRect, "→", buttonStyle))
+        {
+            GoForward();
+        }
+
+        // 閉じるボタン
+        if (GUI.Button(closeButtonRect, "X", buttonStyle))
+        {
+            CloseWebview();
+        }
+    }
+
+    /// <summary>
+    /// 単色のテクスチャを生成
+    /// <\/summary>
+    private Texture2D MakeTexture(int width, int height, Color color)
+    {
+        Color[] pixels = new Color[width * height];
+        for (int i = 0; i < pixels.Length; i++)
+        {
+            pixels[i] = color;
+        }
+
+        Texture2D texture = new Texture2D(width, height);
+        texture.SetPixels(pixels);
+        texture.Apply();
+        return texture;
+    }
+
+    /// <summary>
+    /// WebViewを閉じる
+    /// <\/summary>
+    public void CloseWebview()
+    {
+        if (webViewObject != null)
+        {
+            webViewObject.SetVisibility(false);
+            Destroy(webViewObject.gameObject);
+            webViewObject = null;
+        }
+        showButtons = false;
+    }
+
+    /// <summary>
+    /// 前のページに戻る
+    /// <\/summary>
+    private void GoBack()
+    {
+        if (webViewObject != null)
+        {
+            webViewObject.GoBack();
+        }
+    }
+
+    /// <summary>
+    /// 次のページに進む
+    /// <\/summary>
+    private void GoForward()
+    {
+        if (webViewObject != null)
+        {
+            webViewObject.GoForward();
+        }
+    }
+
+    private int touchCount = 0;
+
+    void Update()
+    {
+        // Escapeキーまたは戻るボタン（Android）の処理
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            touchCount++;
+            // 1回目は前のページに戻る
+            if (touchCount != 2 && webViewObject != null) 
+            {
+                webViewObject.GoBack();
+            }
+            Invoke("DoubleEvent", 0.3f);
+        }
+    }
+
+    /// <summary>
+    /// ダブルタップ判定処理
+    /// <\/summary>
+    void DoubleEvent()
+    {
+        // ダブルタップされていない場合
+        if (touchCount != 2) 
+        { 
+            touchCount = 0; 
+            return; 
+        }
+        
+        // ダブルタップされた場合、WebViewを閉じる
+        touchCount = 0;
+        CloseWebview();
+    }
+}`;
+
+  navigator.clipboard.writeText(code).then(function() {
+    const btn = document.getElementById('copyBtn');
+    const originalText = btn.textContent;
+    btn.textContent = 'コピー完了!';
+    btn.style.backgroundColor = '#28a745';
+    setTimeout(function() {
+      btn.textContent = originalText;
+      btn.style.backgroundColor = '#0e639c';
+    }, 2000);
+  }, function(err) {
+    alert('コピーに失敗しました');
+  });
+});
+/*]]>*/
+</script>
+        </section>
+        
+        <section class="section" id="section-3">
+            <h2>使い方</h2>
+            <p>さて、コードをコピペした後の具体的な使い方についてお話ししますね。
+このマネージャーは「シングルトン」という仕組みを使っているので、一度シーンに置いてしまえば、どこからでも簡単に呼び出せます。
+ </p><h3 style="font-size:1.4rem;color: #a8d0ff;">セットアップの手順</h3><p>まずは、GitHubなどで公開されている「<a href="https://github.com/gree/unity-webview" style="color: #a8d0ff;overflow-wrap: break-word;" alt="リンク" target="_blank" referrerpolicy="no-referrer-when-downgrade">unity-webview</a>」プラグインをプロジェクトにインポートしておいてください。
+その後、空のGameObject（名前は WebviewManager などでOK）を作成し、先ほどのスクリプトをアタッチします。
+これだけで準備は完了です。
+Awake メソッド内で DontDestroyOnLoad を呼んでいるので、シーンを切り替えてもこのマネージャーは消えずに残り続けてくれます。
+ </p><h3 style="font-size:1.4rem;color: #a8d0ff;">WebViewを開く・閉じる</h3><p>実際に<strong>WebView</strong>を表示したい時は、
+他のスクリプトからたった1行書くだけです。
+ </p><div class="recommend-boxes">
+
+<div class="recommend-box" style="text-align: left;margin-bottom:0;">
+
+<p>// Googleを開く例
+WebviewManager.instance.OpenWebview("https://www.google.com" );</p></div></div><p>OpenWebview メソッドの中では、古いWebViewが残っていれば破棄し、新しく WebViewObject を生成しています。
+ </p><h3 style="font-size:1.4rem;color: #a8d0ff;">便利なGUIボタンの仕組み</h3><p><strong>WebView</strong>が開くと、画面上部に「←」「→」「X」のボタンが表示されます。これらは OnGUI メソッドで描画されています。
+ </p><h3 style="font-size:1.4rem;color: #a8d0ff;">戻るボタンの対応</h3><p>意外と忘れがちなのが、端末自体の「戻るボタン」への対応です。
+このコードでは Update メソッド内で KeyCode.Escape を監視しています。</p><div class="recommend-boxes">
+
+<div class="recommend-box" style="text-align: left;margin-bottom:0;">
+
+<p>・1回押し: ブラウザ内で前のページに戻る
+・0.3秒以内に2回押し: WebView自体を閉じる</p></div></div><p>というダブルタップ判定（DoubleEvent）を実装しているので、ユーザーが「前のページに戻りたいだけなのに、アプリの画面まで戻っちゃった！」というストレスを感じにくい設計になっています。</p>
+        </section>
+
+        <!--サイト内誘導広告-->
+        <div style="width:100%; height:auto;padding: 0;margin: 0 0 20px 0;">
+            <!-- <div style="width: 100%; max-width: 1200px; margin: 0 auto; padding: 20px 10px; box-sizing: border-box; font-family: 'Hiragino Kaku Gothic ProN', 'メイリオ', sans-serif;"> -->
+                
+                <!-- スクロールコンテナ -->
+                <div style="position: relative; overflow: hidden; background: rgba(255, 255, 255, 0.08); border-radius: 15px; padding: 15px;border: 1px solid rgba(255, 255, 255, 0.1);">
+                    <!-- 左矢印 -->
+                    <div id="prevBtn" style="position: absolute; left: 0; top: 50%; transform: translateY(-50%); width: 40px; height: 40px; background: rgba(0,0,0,0.5); color: white; display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 10; border-radius: 50%; font-size: 20px; user-select: none;">❮</div>
+                    
+                    <!-- 右矢印 -->
+                    <div id="nextBtn" style="position: absolute; right: 0; top: 50%; transform: translateY(-50%); width: 40px; height: 40px; background: rgba(0,0,0,0.5); color: white; display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 10; border-radius: 50%; font-size: 20px; user-select: none;">❯</div>
+                    
+                    <!-- コンテンツ表示エリア -->
+                    <div id="contentWrapper" style="display: flex; transition: transform 0.5s ease; margin: 0 50px;"></div>
+                </div>
+                
+                <!-- インジケーター -->
+                <div id="indicators" style="display: flex; justify-content: center; gap: 8px; margin-top: 15px;"></div>
+            <!-- </div> -->
+        </div>
+        <script defer="defer">
+            (function() {
+        // ========================================
+        // ここでコンテンツを編集できます
+        // ========================================
+        const contents =     [
+            {
+                "title": "DOTween Pro",
+                "image": "https://assetstorev1-prd-cdn.unity3d.com/key-image/9488fcf5-a4fd-4876-a114-f59349607009.webp",
+                "link": "https://assetstore.unity.com/packages/tools/visual-scripting/dotween-pro-32416?aid=1101l3IyTm"
+            },
+            {
+                "title": "Easy Save",
+                "image": "https://assetstorev1-prd-cdn.unity3d.com/key-image/2b3d230f-49d0-456a-9678-6fbf7b4e2722.webp",
+                "link": "https://assetstore.unity.com/packages/tools/utilities/easy-save-the-complete-save-data-serializer-system-768?aid=1101l3IyTm"
+            },
+            {
+                "title": "Text Animator for Unity",
+                "image": "https://assetstorev1-prd-cdn.unity3d.com/key-image/455730a2-b1ff-4a8f-b844-08b5f16c352c.webp",
+                "link": "https://assetstore.unity.com/packages/tools/gui/text-animator-for-unity-ui-toolkit-and-text-mesh-pro-341308?aid=1101l3IyTm"
+            }
+        ];
+        // ========================================
+
+        let currentIndex = 0;
+        let autoScrollTimer;
+        const autoScrollInterval = 8000; // 8秒ごとに自動スクロール
+
+        const contentWrapper = document.getElementById('contentWrapper');
+        const indicatorsDiv = document.getElementById('indicators');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+
+        // レスポンシブ判定
+        function isMobile() {
+            return window.innerWidth < 768;
+        }
+
+        // 1ページあたりの表示数
+        function getItemsPerPage() {
+            return isMobile() ? 1 : 3;
+        }
+
+        // 総ページ数
+        function getTotalPages() {
+            return Math.ceil(contents.length / getItemsPerPage());
+        }
+
+        // コンテンツHTML生成
+        function createContentHTML(content, index) {
+            const itemsPerPage = getItemsPerPage();
+            const width = isMobile() ? '100%' : 'calc(33.333% - 10px)';
+            
+            return `
+            <div style="flex: 0 0 ${width}; min-width: ${width}; padding: 10px; box-sizing: border-box;">
+                <a href="${content.link}" target="_blank" style="text-decoration: none; color: inherit; display: block;">
+                <div style=" background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 8px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.1); transition: transform 0.3s, box-shadow 0.3s; height: 100%;" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 4px 12px rgba(0,0,0,0.2)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 2px 8px rgba(0,0,0,0.1)';">
+                    <div style="position: relative; padding-top: 133.33%; overflow: hidden;  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                    <img src="${content.image}" alt="${content.title}" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22300%22 height=%22400%22%3E%3Crect fill=%22%23ddd%22 width=%22300%22 height=%22400%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22 fill=%22%23999%22%3ENo Image%3C/text%3E%3C/svg%3E';">
+                    </div>
+                    <div style="padding: 12px;">
+                    <div style="font-size: 14px; font-weight: bold; line-height: 1.4; color: #ffffff; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; min-height: 2.8em;">${content.title}</div>
+                    </div>
+                </div>
+                </a>
+            </div>
+            `;
+        }
+
+        // コンテンツ描画
+        function renderContents() {
+            contentWrapper.innerHTML = contents.map((content, index) => createContentHTML(content, index)).join('');
+        }
+
+        // インジケーター描画
+        function renderIndicators() {
+            const totalPages = getTotalPages();
+            indicatorsDiv.innerHTML = '';
+            
+            for (let i = 0; i < totalPages; i++) {
+            const dot = document.createElement('div');
+            dot.style.cssText = `
+                width: 10px;
+                height: 10px;
+                border-radius: 50%;
+                background: ${i === currentIndex ? '#007bff' : '#ccc'};
+                cursor: pointer;
+                transition: background 0.3s;
+            `;
+            dot.addEventListener('click', () => goToPage(i));
+            indicatorsDiv.appendChild(dot);
+            }
+        }
+
+        // ページ移動
+        function goToPage(index) {
+            const totalPages = getTotalPages();
+            currentIndex = (index + totalPages) % totalPages;
+            
+            const itemsPerPage = getItemsPerPage();
+            const wrapperWidth = contentWrapper.offsetWidth;
+            const offset = currentIndex * wrapperWidth;
+            contentWrapper.style.transform = `translateX(-${offset}px)`;
+            
+            renderIndicators();
+            resetAutoScroll();
+        }
+
+        // 次へ
+        function nextPage() {
+            goToPage(currentIndex + 1);
+        }
+
+        // 前へ
+        function prevPage() {
+            goToPage(currentIndex - 1);
+        }
+
+        // 自動スクロールリセット
+        function resetAutoScroll() {
+            clearInterval(autoScrollTimer);
+            autoScrollTimer = setInterval(nextPage, autoScrollInterval);
+        }
+
+        // イベントリスナー
+        nextBtn.addEventListener('click', nextPage);
+        prevBtn.addEventListener('click', prevPage);
+
+        // リサイズ対応
+        let resizeTimer;
+        window.addEventListener('resize', () => {
+            clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(() => {
+            currentIndex = 0;
+            renderContents();
+            goToPage(0);
+            }, 250);
+        });
+
+        // 初期化
+        renderContents();
+        renderIndicators();
+        goToPage(0);
+
+        // マウスオーバーで自動スクロール一時停止
+        contentWrapper.parentElement.addEventListener('mouseenter', () => {
+            clearInterval(autoScrollTimer);
+        });
+
+        contentWrapper.parentElement.addEventListener('mouseleave', () => {
+            resetAutoScroll();
+        });
+        })();
+        </script>
+
+        <section class="section" id="section-4">
+            <h2>まとめ</h2><p>いかがでしたか？
+今回は、<strong>Unity</strong>で<strong>WebView</strong>をスマートに管理するための<strong>WebviewManager</strong>をご紹介しました。
+URLを渡すだけで、ナビゲーションボタン付きのブラウザがサクッと立ち上がるのは、一度使うと手放せなくなる便利さです。
+ 
+皆さんのプロジェクトでも、ぜひこのコードを活用して、ユーザーに優しいアプリ体験を届けてみてくださいね。
+それでは、また別の記事でお会いましょう。。_(:3 」∠)_</p>
+        </section>
+
+        <section class="section">
+            <h2>他の記事</h2>
+            <p>AIツール・開発・アプリ関連の記事を取り扱っています。</p>
+            <a href="../../blogs.html" class="btn" alt="ブログ記事一覧">全記事一覧</a>
+            <!--本番執筆の際に前と次を設定↓-->
+            <a href="blog_dev_1.html" class="btn" alt="前の記事">←前の記事</a>
+            <a href="blog_dev_3.html" class="btn" alt="次の記事">次の記事→</a>
+        </section>
+
+        <section class="section">
+            <h2>ツール</h2>
+            <p>本サイトでは、暮らしや作業をサポートするウェブツールの運営もしております。</p>
+            <a href="../../tools.html" class="btn" alt="ツール一覧">ツール一覧</a>
+        </section>
+
+        <section class="section">
+            <h2>いいなと思ったら応援</h2>
+            <p>以下の方法で応援を受け付けております。</p>
+            <a href="https://www.paypal.com/paypalme/hayadebisub" class="btn" target="_blank" rel="nofollow" referrerpolicy="no-referrer-when-downgrade" alt="PayPalで支援">PayPal.Me:チップを送って応援</a>
+            <button onclick="generateTweetURL( 'ハヤデビのツール工房では役立つブログ記事も発信中！\n是非チェックしてみよう↓', 'hayadebi.github.io/Accounting-ai-app/', 'ブログ' )" class="btn" style="border: none;" alt="Xでシェア">X:シェアして応援</button>
+        </section>
+
+        <section class="section">
+            <div style="margin-bottom: 20px;">
+                <center><img src="https://pbs.twimg.com/media/G5mBHiiacAIWGvt?format=png&name=900x900" alt="ハヤデビのロゴ" style="width: 150px; height: 150px; border-radius: 50%; object-fit: cover; border: 4px solid #00bfff; box-shadow: 0 0 15px rgba(0, 191, 255, 0.5);" /></center>
+            </div>
+            <h2>著者兼運営:ハヤデビ</h2>
+            <p>長きにわたりゲームやアプリの開発・動画編集・ブログ運営等を続けている個人クリエイター</p>
+            <a href="https://x.com/hayadebi" class="btn" target="_blank" rel="nofollow" referrerpolicy="no-referrer-when-downgrade" alt="X公式アカウント">X(旧Twitter):公式アカウント</a>
+        </section>
+    </main>
+    
+    <footer class="footer">
+        <div class="footer-content">
+            <a href="../../notation.html" alt="必要表記一覧">運営上必要表記</a>
+            <a href="../../sitemap.html" alt="必要表記一覧">サイトマップ</a>
+            <p>© ハヤデビのツール工房</p>
+        </div>
+    </footer>
+
+    <div class="affiliate-banner" style="border: 1px solid #5592b7; padding: 0.2em; display: flex; flex-wrap: wrap; align-items: flex-start; width: 100%; height:auto; box-sizing: border-box; position: fixed; bottom: 0px; left: 0; right: 0; transition: bottom 0.5s ease; background: rgba(255, 255, 255, 0.9);">
+        <div style="width:100%; height:auto;" class="admax-container">
+            <center>
+                <iframe src="https://assetstore.unity.com/linkmaker/embed/list/top-new/widget-wide?aid=1101l3IyTm" style="width:600px; max-width:100%; height:100px; border:0px;"></iframe>
+            </center>
+        </div>
+    </div>
+
+    <script defer="defer">
+        // ハンバーガーメニューの動作
+        const hamburger = document.getElementById('hamburger');
+        const navLinks = document.getElementById('navLinks');
+
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navLinks.classList.toggle('active');
+        });
+
+        // メニュー項目クリック時にメニューを閉じる
+        const navItems = navLinks.querySelectorAll('a');
+        navItems.forEach(item => {
+            item.addEventListener('click', () => {
+                if (window.innerWidth <= 768) {
+                    hamburger.classList.remove('active');
+                    navLinks.classList.remove('active');
+                }
+            });
+        });
+    </script>
+
+    <script src="../../CoreImplementation/TweetManager.js" defer="defer"></script>
+    <script src="../../Ads/BlogAds.js" defer="defer"></script>
+    <script defer="defer">
+        function toggleDetails(button, targetId) {
+            const targetElement = document.getElementById(targetId);
+            if (targetElement.style.display === 'none' || targetElement.style.display === '') {
+                targetElement.style.display = 'grid';
+                button.textContent = '一覧を隠す';
+            } else {
+                targetElement.style.display = 'none';
+                button.textContent = '一覧を表示';
+            }
+        }
+
+    </script>
+
+    <div class="centerad-widget"></div>
+    <script src="../../Ads/BlogCenterAds.js" rel="preload"></script>
+
+</body></html>
