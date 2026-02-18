@@ -17,21 +17,6 @@
             "title": "YouTubeアラーム",
             "image": "https://pbs.twimg.com/media/HASPSB1aMAA3jp9?format=jpg&amp;name=large",
             "link": "https://hayadebi.github.io/Accounting-ai-app/Tools/YoutubeAuto/youtubeauto.html"
-        },
-        {
-            "title": "ドメインパワー分析AIツール",
-            "image": "https://pbs.twimg.com/media/HBDuWQOakAMNdW7?format=jpg&name=large",
-            "link": "https://hayadebi.github.io/Accounting-ai-app/Tools/DomainPower/domainpower.html"
-        },
-        {
-            "title": "競輪AI予想ツール",
-            "image": "https://pbs.twimg.com/media/G_kTN5EWgAADpAa?format=jpg&name=large",
-            "link": "https://hayadebi.github.io/Accounting-ai-app/Tools/KeirinPredictions/predictiontool.html"
-        },
-        {
-            "title": "デビルゲームズ",
-            "image": "https://pbs.twimg.com/media/HA-VlwbakAAd0BW?format=jpg&name=large",
-            "link": "https://hayadebi.github.io/Accounting-ai-app/Tools/DevilGame/devilgame.html"
         }
     ];
     // ========================================
