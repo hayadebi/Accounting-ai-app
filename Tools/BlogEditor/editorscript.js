@@ -1103,8 +1103,10 @@ function decodeHtml(str) {
 function exportHTML(fileName) {
     const serializer = new XMLSerializer();
     const htmlString = '<!DOCTYPE html>\n' + serializer.serializeToString(currentDOM.documentElement);
-    const replaceString = decodeHtml(htmlString);//htmlString.replace(/&lt;/g, "<").replace(/&gt;/g, ">").replace(/&amp;/g, "&").replace(/&quot;/g, '"').replace(/&#39;/g, "'");
-    const blob = new Blob([replaceString], { type: 'text/html' });
+    const ampString = htmlString.replaceAll("amp;amp;amp;amp;","amp;").replaceAll("amp;amp;amp;","amp;").replaceAll("amp;amp;","amp;").replaceAll("amp;amp;","amp;").replaceAll("amp;amp;","amp;").replaceAll("gt;gt;","gt;").replaceAll("gt;gt;","gt;").replaceAll("lt;lt;","lt;").replaceAll("lt;lt;","lt;");
+    const replaceString = decodeHtml(ampString);//htmlString.replace(/&lt;/g, "<").replace(/&gt;/g, ">").replace(/&amp;/g, "&").replace(/&quot;/g, '"').replace(/&#39;/g, "'");
+    const gtltString = replaceString.replaceAll("&gt;",">").replaceAll("&lt;","<");
+    const blob = new Blob([gtltString], { type: 'text/html' });
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
