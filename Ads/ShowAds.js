@@ -17,12 +17,6 @@ const targetQuery = "nsSUfQXkaZVJETmnGZWysrzWmecEfTbk";
 const urlParams = new URLSearchParams(window.location.search);
 const queryValue = urlParams.get('q');
 
-const showHTML = `
-        <div class="center-adcontents" >
-            
-        </div>
-    `;
-
 function showAd() {
   if (url.indexOf("cms.e.jimdo.com") === -1 && queryValue !== targetQuery) {
       //ココナラ時のshowAd
@@ -40,11 +34,7 @@ function showAd() {
       document.getElementById("adOverlay").style.display = "flex";
       disableScroll();
       startCountdown();
-      //非ココナラ時はAdstir挿入
-      // const containers = document.querySelectorAll('.centerad-widget');
-      // containers.forEach(function(container) {
-      //     container.innerHTML = showHTML;
-      // });
+      //ココナラ以外はadstir
   }
 }
 
