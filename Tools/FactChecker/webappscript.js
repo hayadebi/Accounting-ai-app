@@ -840,6 +840,10 @@ async function sendMessage() {
   } finally {
     AppState.isLoading = false;
     document.getElementById('sendBtn').disabled = false;
+    if(!AppState.isSpecial){
+      adDisplayed = true;
+      showAd();
+    }
   }
 }
 
