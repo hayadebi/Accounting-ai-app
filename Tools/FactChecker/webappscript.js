@@ -3,14 +3,7 @@
 // 設定・定数 (GAS URL難読化)
 // ============================================================
 
-// GAS URL難読化 — 分割して文字列合成
-// 【運営者設定】以下の _s2 を自分のGASスクリプトIDに置き換えてください
-const _s0 = 'https://scri';
-const _s1 = 'pt.google';
-const _s3 = '.com/macros/s/';
-const _s2 = 'AKfycbz01Z9P2gmSzcTeEIxXvGkXirJITp-jA4NQ3IZJDLs8Npsu1IV9PAaI4uczrO0tPQe7Gw'; // ← ここをあなたのスクリプトIDに変更
-const _s4 = '/ex' + 'ec';
-const GAS_URL = [_s0, _s1, _s3, _s2, _s4].join('');
+const GAS_URL = 'https://script.google.com/macros/s/AKfycbz01Z9P2gmSzcTeEIxXvGkXirJITp-jA4NQ3IZJDLs8Npsu1IV9PAaI4uczrO0tPQe7Gw/exec';
 
 // Gemini API設定
 const GEMINI_MODEL = 'gemini-2.5-flash';
