@@ -64,6 +64,10 @@
                     {
                         "imageUrl": "../../Ads/CenterImage/AdsImage6.jpg",
                         "siteUrl": "https://hayadebi.github.io/Accounting-ai-app/Tools/BlogEditor/blogeditor.html"
+                    },
+                    {
+                        "imageUrl": "../../Ads/CenterImage/AdsImage7.jpg",
+                        "siteUrl": "https://hayadebi.github.io/Accounting-ai-app/Tools/FactChecker/factcheck.html"
                     }
                 ];
                 
