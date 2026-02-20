@@ -3,7 +3,7 @@
 // 設定・定数 (GAS URL難読化)
 // ============================================================
 
-const GAS_URL = 'https://script.google.com/macros/s/AKfycbz01Z9P2gmSzcTeEIxXvGkXirJITp-jA4NQ3IZJDLs8Npsu1IV9PAaI4uczrO0tPQe7Gw/exec';
+const GAS_URL = 'https://script.google.com/macros/s/AKfycby0tcD2q1pn5EjCfydok6dp0KRFjAE0EnFRc09Lej_SCMsifbLNWeoCQQihi4DQrIC3kA/exec';
 
 // Gemini API設定
 const GEMINI_MODEL = 'gemini-2.5-flash';
