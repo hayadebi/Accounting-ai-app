@@ -68,7 +68,8 @@ class GASStorageClient {
   }
 
   async set(parentKey, childKey, data) {
-    const d = typeof data === 'object' ? JSON.stringify(data) : String(data);
+    // objectの場合はJSON文字列化、それ以外はそのまま渡す (inquiry.js準拠)
+    const d = typeof data === 'object' ? JSON.stringify(data) : data;
     const r = await this._request({ action: 'set', parentKey, childKey, data: d });
     return r.data;
   }
