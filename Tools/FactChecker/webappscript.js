@@ -851,7 +851,7 @@ function addMessage(role, text, thinkingText = '', isError = false) {
   div.className = `message ${role}`;
   div.id = id;
 
-  const avatar = role === 'ai' ? '🤖' : '👤';
+  const avatar = role === 'ai' ? '🕵️‍♂️' : '👤';
   const contentHtml = role === 'ai' ? renderMarkdown(text) : `<p>${text}</p>`;
   const thinkHtml = thinkingText
     ? `<div class="msg-thinking">🧠 思考中... (${thinkingText.length}文字の推論)</div>`
@@ -876,7 +876,7 @@ function addLoadingMessage() {
   div.className = 'message ai';
   div.id = id;
   div.innerHTML = `
-    <div class="msg-avatar">🤖</div>
+    <div class="msg-avatar">🕵️‍♂️</div>
     <div class="msg-content">
       <div class="msg-thinking">🔍 Google検索 + 🧠 思考中... しばらくお待ちください</div>
       <div class="loading-dots"><span></span><span></span><span></span></div>
