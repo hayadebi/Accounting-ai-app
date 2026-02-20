@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-T4G6KMKK');</script>
+    <!-- End Google Tag Manager -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-GLW3M3X7B3" defer></script>
+    <script defer>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-GLW3M3X7B3');
+    </script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ファクト探偵君 ― ハヤデビのツール工房</title>
+    <meta content="AI生成文章をファクトチェックと一次情報を特定するツール" name="description" />
+    <meta name="keywords" content="AIアプリタグキーワード" />
+    <meta property="og:image" content="#" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="icon" type="image/png" href="https://pbs.twimg.com/media/G2H3yzRaIAIIHjw?format=png&name=240x240">
+    <link rel="prev" href="../../tools.html">
+
+    <!-- 代替ページ (英語) -->
+    <!-- <link rel="alternate" hreflang="en" href="#" /> -->
+    <!-- 言語未対応ユーザー用 (デフォルト) -->
+    <!-- <link rel="alternate" hreflang="x-default" href="#" /> -->
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Outfit:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="webappstyle.css">
+    <meta name="robots" content="noindex">
+    <!--後で構造化データを生成して貼る-->
+</head>
+<body>
+    <!-- Google Tag Manager (noscript) -->
+        <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-T4G6KMKK"
+        height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    
+    <!-- ============================================================
+        トースト通知コンテナ
+    ============================================================ -->
+    <div id="toastContainer"></div>
+
+    <!-- ============================================================
+        ヘッダー
+    ============================================================ -->
+    <header id="header">
+    <div class="logo" onclick="scrollTo(0,0)">
+        GEMINI<span>AI Web Service</span>
+    </div>
+    <nav class="header-nav" id="headerNav">
+        <!-- ログイン前 -->
+        <button class="btn btn-ghost" id="btnContact" onclick="openModal('inquiryModal')">お問い合わせ</button>
+        <button class="btn btn-ghost" id="btnRegister" onclick="openModal('registerModal')">新規登録</button>
+        <button class="btn btn-primary" id="btnLogin" onclick="openModal('loginModal')">ログイン</button>
+        <!-- ログイン後 -->
+        <button class="btn btn-ghost contact-btn" id="btnContactLogged" style="display:none" onclick="openModal('inquiryModal')">お問い合わせ</button>
+        <div class="hamburger-wrap" id="hamburgerWrap" style="display:none">
+        <button class="hamburger-btn" onclick="toggleMenu()" id="hamburgerBtn" aria-label="メニュー">
+            <span></span><span></span><span></span>
+        </button>
+        <div class="dropdown-menu" id="dropdownMenu">
+            <div class="dropdown-item" onclick="openModal('subscribeModal')">
+            <span class="di-icon">💎</span> サブスクリプション
+            </div>
+            <div class="dropdown-item" id="usageMenuItem">
+            <span class="di-icon">📊</span> 残り回数
+            <span class="dropdown-badge" id="usageBadge">-</span>
+            </div>
+            <div class="dropdown-item" onclick="logout()">
+            <span class="di-icon">🚪</span> ログアウト
+            </div>
+            <div class="dropdown-item danger" onclick="requestDeleteAccount()">
+            <span class="di-icon">⚠️</span> アカウント削除申請
+            </div>
+        </div>
+        </div>
+    </nav>
+    </header>
+
+    <!-- ============================================================
+        メインコンテンツ
+    ============================================================ -->
+    <main id="main">
+    <div class="hero">
+        <h1>ファクト探偵君</h1>
+        <p>AI生成文章をファクトチェックと一次情報を特定するツール</p>
+        <div class="hero-badges">
+        <span class="badge">🔍 Google検索対応</span>
+        <span class="badge">🧠 高度な思考モード</span>
+        <span class="badge cyan">⚡ Gemini 2.5 Flash</span>
+        </div>
+    </div>
+    <div style="width:100%;height:auto;margin-bottom:10px"><center>
+        <script type="text/javascript">
+            var adstir_vars = {
+            ver: "4.0",
+            app_id: "MEDIA-8d0588f8",
+            ad_spot: 2,
+            center: false
+            };
+        </script>
+    <script type="text/javascript" src="https://js.ad-stir.com/js/adstir.js"></script></center></div>
+    <div class="chat-container">
+        <!-- 未ログイン時APIキー入力 -->
+        <div class="api-key-panel" id="apiKeyPanel">
+        <h3>🔑 Gemini APIキーを入力してください</h3>
+        <p>ログインせずに利用する場合は、ご自身のAPIキーが必要です。<br>
+            <a href="https://aistudio.google.com/app/apikey" target="_blank" rel="noopener">Google AI Studio</a>で無料取得できます。
+            ログインするとAPIキー不要で利用できます。</p>
+        <div style="display:flex; gap:8px; align-items:center;">
+            <input type="password" class="form-input" id="userApiKey" placeholder="AIza..." style="flex:1">
+            <button class="btn btn-primary" onclick="saveUserApiKey()">設定</button>
+        </div>
+        <p style="margin-top:8px; font-size:0.78rem; color:var(--text-muted);">※ APIキーはブラウザのメモリのみに保存。サーバーへは送信しません。</p>
+        </div>
+        <div class="usage-bar-wrap"><center>
+        <script type="text/javascript">
+        var adstir_vars = {
+            ver: "4.0",
+            type: "native",
+            app_id: "MEDIA-8d0588f8",
+            ad_spot: 3
+        };
+        </script>
+        <script type="text/javascript" src="https://js.ad-stir.com/js/adstir_native.js"></script></center></div>
+        <!-- 利用回数バー -->
+        <div class="usage-bar-wrap" id="usageBarWrap">
+        <div class="usage-bar-header">
+            <span id="usageLabelText">本日の利用回数</span>
+            <span id="usageLabelCount">- / -</span>
+        </div>
+        <div class="usage-bar"><div class="usage-bar-fill" id="usageFill" style="width:0%"></div></div>
+        </div>
+
+        <!-- チャットメッセージ -->
+        <div class="chat-messages" id="chatMessages">
+        <div class="message ai">
+            <div class="msg-avatar">🕵️‍♂️</div>
+            <div class="msg-content">
+            <strong>ファクト探偵</strong>
+            <p>特定したいAI生成文章をコピペしてください。<br>
+                <small style="color:var(--text-muted)">Google検索と高度な思考機能で、最新かつ正確な回答をご提供します。</small></p>
+            </div>
+        </div>
+        </div>
+        
+        <!-- 利用制限到達時のパネル -->
+        <div class="limit-panel" id="limitPanel">
+        <h3>✨ もっと使いたいですか？</h3>
+        <p>本日の利用回数に達しました。<br>アプリ版ではサブスクリプションで毎日100回利用できます！</p>
+        <div class="sub-cards">
+            <div class="sub-card">
+            <div class="price">¥980</div>
+            <div class="period">/月</div>
+            <ul class="sub-benefits">
+                <li>毎日100回利用</li>
+                <li>広告非表示</li>
+                <li>優先サポート</li>
+            </ul>
+            </div>
+            <div class="sub-card featured">
+            <span class="sub-badge">おすすめ</span>
+            <div class="price">¥9,800</div>
+            <div class="period">/年 (2ヶ月分お得)</div>
+            <ul class="sub-benefits">
+                <li>毎日100回利用</li>
+                <li>広告非表示</li>
+                <li>優先サポート</li>
+            </ul>
+            </div>
+        </div>
+        <p style="font-size:0.8rem; color:var(--text-muted);">※ サブスクリプションはアプリ内限定です。アプリをダウンロードしてお申し込みください。</p>
+        <button class="btn btn-primary" onclick="openModal('subscribeModal')">アプリについて詳しく</button>
+        </div>
+    </div>
+    
+    <!-- ヘルプ・ガイドセクション -->
+    <div class="help-section" id="helpSection">
+        <!--広告-->
+        <div style="max-width:860px;width: 100%; margin: 0 auto; padding: 0;">
+            <div style="width:100%; height:auto; padding: 0; margin:10px 0;">
+                <center>
+                    <div style="position: relative; height:auto; display: inline-block;">
+                        <a href="#" class="random-ads-link" alt="広告リンク" target="_blank" rel="nofollow" referrerpolicy="no-referrer-when-downgrade">
+                            <img src="#" class="random-ads-image" alt="広告画像" style="max-width:100%; height:auto;" />
+                        </a>
+                        <p style="position: absolute; top: 3%; left: 3%; color: rgba(255,255,255,0.6); font-size: 14px; font-weight: bold; margin: 0;">PR</p>
+                    </div>
+                </center>
+            </div>
+        </div>
+        <h2>📖 ガイド・ヘルプ</h2>
+        <div class="accordion">
+        <div class="accordion-header" onclick="toggleAccordion(this)">
+            🚀 はじめての方へ — 基本的な使い方 <span class="acc-icon">▾</span>
+        </div>
+        <div class="accordion-body">
+            <p><strong>【基本的な使い方】</strong></p>
+            <p>1. 画面下の入力欄に特定したいAI生成文章をコピペしてください。<br>
+            2. 送信ボタン（→）または Enter キーで送信します。<br>
+            3. AIが検索・考察した上で回答します（少し時間がかかる場合があります）。</p>
+            <p><strong>【利用制限について】</strong></p>
+            <p>・未ログイン：ご自身のAPIキーが必要（1日3回・1分間隔）<br>
+            ・ログイン済み：APIキー不要（1日3回・1分間隔）<br>
+            ・制限の詳細はアカウントメニューからご確認いただけます。</p>
+        </div>
+        </div>
+        <div class="accordion">
+        <div class="accordion-header" onclick="toggleAccordion(this)">
+            🔑 APIキーなしで使うには？（ログイン） <span class="acc-icon">▾</span>
+        </div>
+        <div class="accordion-body">
+            <p>右上の「新規登録」からアカウントを作成すると、APIキーなしでGemini AIをご利用いただけます。</p>
+            <p>登録に必要な情報：メールアドレス・パスワード・秘密の質問。すべての情報は暗号化してサーバーに保存されます。</p>
+            <p>パスワードを忘れた場合は、登録時の秘密の質問で確認できます。</p>
+        </div>
+        </div>
+        <div class="accordion">
+        <div class="accordion-header" onclick="toggleAccordion(this)">
+            ⚠️ 注意事項・免責事項 <span class="acc-icon">▾</span>
+        </div>
+        <div class="accordion-body">
+            <p>・AIの回答は参考情報です。重要な判断は専門家にご相談ください。<br>
+            ・個人情報・機密情報の入力はお控えください。<br>
+            ・医療・法律・金融に関する回答は参考程度にとどめてください。<br>
+            ・本サービスは予告なく変更・停止する場合があります。</p>
+        </div>
+        </div>
+        <div class="accordion">
+        <div class="accordion-header" onclick="toggleAccordion(this)">
+            🔒 セキュリティについて <span class="acc-icon">▾</span>
+        </div>
+        <div class="accordion-body">
+            <p>・すべての通信はHTTPS（TLS）で暗号化されています。<br>
+            ・パスワードはハッシュ化して保存（平文では保存しません）。<br>
+            ・APIキーはブラウザのメモリのみで管理。外部送信・ログ記録なし。<br>
+            ・入力内容はXSS対策のためエスケープ処理されます。<br>
+            ・不正アクセス検知時はアカウントを自動ロックします。</p>
+        </div>
+        </div>
+        <div class="accordion">
+        <div class="accordion-header" onclick="toggleAccordion(this)">
+            ❓ よくある質問（FAQ） <span class="acc-icon">▾</span>
+        </div>
+        <div class="accordion-body">
+            <p><strong>Q: APIキーとは？</strong><br>
+            A: Google AIサービスを利用するための認証コードです。<a href="https://aistudio.google.com/app/apikey" target="_blank" rel="noopener" style="color:var(--blue-5)">こちら</a>から無料で取得できます。</p>
+            <p style="margin-top:10px"><strong>Q: 回答に時間がかかるのはなぜ？</strong><br>
+            A: Google検索 + 高度な思考プロセスのため、通常30秒〜2分かかります。</p>
+            <p style="margin-top:10px"><strong>Q: アカウントを削除したい</strong><br>
+            A: ログイン後、右上メニュー→「アカウント削除申請」からお手続きください。</p>
+            <p style="margin-top:10px"><strong>Q: お問い合わせの返信はいつ来る？</strong><br>
+            A: 通常2〜7営業日以内に devilnessie@gmail.com からご返信します。</p>
+        </div>
+        </div>
+        <div class="security-strip">
+        <span class="sec-badge">HTTPS暗号化</span>
+        <span class="sec-badge">XSS対策済み</span>
+        <span class="sec-badge">APIキー非保存</span>
+        <span class="sec-badge">入力エスケープ処理</span>
+        </div>
+
+        <div style="background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px; margin-bottom: 20px; display: none;">
+            <h3>🔧 他のツール</h3>
+            <p>本サイトでは、他にも暮らしや作業をサポートする 様々なウェブツールを運営しております。</p>
+            <a href="../../tools.html" class="btn" alt="ツール一覧" style="display: inline-block; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 15px 35px; border-radius: 50px; text-decoration: none; font-weight: 600; transition: all 0.3s ease; box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4); margin: 10px 10px 10px 0;">ツール一覧</a>
+            <button onclick="generateTweetURL( 'AIアプリタイトルはAIアプリ概要できる！\n是非アプリを利用してみよう↓', 'hayadebi.github.io/Accounting-ai-app/', 'AI活用,AIアプリ' )" class="btn" style="display: inline-block; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 15px 35px; border-radius: 50px; text-decoration: none; font-weight: 600; transition: all 0.3s ease; box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4); margin: 10px 10px 10px 0; border: none;" alt="Xでシェア">X:ツールをシェア</button>
+        </div>
+
+    </div>
+    </main>
+
+    <!-- 入力パネル（固定フッター） -->
+    <div class="input-panel">
+    <div class="input-inner">
+        <div class="input-wrap">
+        <textarea id="userInput" placeholder="必要事項を入力してください..." rows="1" onkeydown="handleInputKey(event)" oninput="autoResize(this)"></textarea>
+        <div class="input-info">
+            <span id="cooldownLabel"></span>
+            <span id="charCount">0文字</span>
+        </div>
+        </div>
+        <button id="sendBtn" onclick="sendMessage()" aria-label="送信">➤</button>
+    </div>
+    </div>
+
+    <footer>
+    <p>© ハヤデビのツール工房 | Powered by Google Gemini 2.5 Flash</p>
+    <p style="margin-top:4px"><a href="../../notation.html" style="color:var(--blue-5)">運営上必要表記</a></p>
+    <p style="margin-top:4px"><a href="../../sitemap.html" style="color:var(--blue-5)">サイトマップ</a></p>
+    <p style="margin-top:4px"><a href="mailto:devilnessie@gmail.com" style="color:var(--blue-5)">お問い合わせ</a></p>
+    </footer>
+
+    <!-- ============================================================
+        モーダル群
+    ============================================================ -->
+
+    <!-- 登録モーダル -->
+    <div class="modal-overlay" id="registerModal">
+    <div class="modal-box" style="position:relative">
+        <button class="modal-close-btn" onclick="closeModal('registerModal')">×</button>
+        <div class="modal-title">新規登録</div>
+        <div class="modal-subtitle">アカウントを作成して、APIキーなしで利用できます</div>
+        <div id="registerAlert"></div>
+        <div class="form-group">
+        <label class="form-label">メールアドレス *</label>
+        <input type="email" class="form-input" id="regEmail" placeholder="example@email.com">
+        <div class="form-error" id="regEmailErr"></div>
+        </div>
+        <div class="form-group">
+        <label class="form-label">パスワード * (8文字以上)</label>
+        <input type="password" class="form-input" id="regPass" placeholder="••••••••">
+        <div class="form-error" id="regPassErr"></div>
+        </div>
+        <div class="form-group">
+        <label class="form-label">パスワード確認 *</label>
+        <input type="password" class="form-input" id="regPass2" placeholder="••••••••">
+        <div class="form-error" id="regPass2Err"></div>
+        </div>
+        <div class="form-group">
+        <label class="form-label">秘密の質問 *</label>
+        <select class="form-select" id="regQuestion">
+            <option value="">選択してください</option>
+            <option value="pet">最初のペットの名前は？</option>
+            <option value="school">初めて通った学校の名前は？</option>
+            <option value="city">生まれた都市は？</option>
+            <option value="mother">母親の旧姓は？</option>
+            <option value="book">好きな本のタイトルは？</option>
+        </select>
+        <div class="form-error" id="regQErr"></div>
+        </div>
+        <div class="form-group">
+        <label class="form-label">秘密の質問の答え *</label>
+        <input type="text" class="form-input" id="regAnswer" placeholder="答えを入力">
+        <div class="form-error" id="regAErr"></div>
+        </div>
+        <div class="form-actions">
+        <button class="btn btn-ghost" onclick="closeModal('registerModal')">キャンセル</button>
+        <button class="btn btn-primary" id="regSubmitBtn" onclick="register()">登録する</button>
+        </div>
+        <p style="text-align:center; font-size:0.8rem; color:var(--text-muted); margin-top:16px">
+        すでにアカウントをお持ちの方は <span style="color:var(--blue-5); cursor:pointer" onclick="closeModal('registerModal');openModal('loginModal')">ログイン</span>
+        </p>
+    </div>
+    </div>
+
+    <!-- ログインモーダル -->
+    <div class="modal-overlay" id="loginModal">
+    <div class="modal-box" style="position:relative">
+        <button class="modal-close-btn" onclick="closeModal('loginModal')">×</button>
+        <div class="modal-title">ログイン</div>
+        <div class="modal-subtitle">メールアドレスとパスワードでログイン</div>
+        <div id="loginAlert"></div>
+        <div class="form-group">
+        <label class="form-label">メールアドレス</label>
+        <input type="email" class="form-input" id="loginEmail" placeholder="example@email.com">
+        </div>
+        <div class="form-group">
+        <label class="form-label">パスワード</label>
+        <input type="password" class="form-input" id="loginPass" placeholder="••••••••">
+        </div>
+        <div class="form-actions">
+        <button class="btn btn-ghost" onclick="closeModal('loginModal')">キャンセル</button>
+        <button class="btn btn-primary" id="loginSubmitBtn" onclick="login()">ログイン</button>
+        </div>
+        <p style="text-align:center; font-size:0.8rem; color:var(--text-sub); margin-top:16px">
+        パスワードを忘れた方は <span style="color:var(--blue-5); cursor:pointer" onclick="closeModal('loginModal');openModal('forgotModal')">こちら</span>
+        </p>
+        <p style="text-align:center; font-size:0.8rem; color:var(--text-muted); margin-top:8px">
+        アカウントをお持ちでない方は <span style="color:var(--blue-5); cursor:pointer" onclick="closeModal('loginModal');openModal('registerModal')">新規登録</span>
+        </p>
+    </div>
+    </div>
+
+    <!-- パスワード忘れモーダル -->
+    <div class="modal-overlay" id="forgotModal">
+    <div class="modal-box" style="position:relative">
+        <button class="modal-close-btn" onclick="closeModal('forgotModal')">×</button>
+        <div class="modal-title">パスワード確認</div>
+        <div class="modal-subtitle">登録時の秘密の質問で本人確認します</div>
+        <div id="forgotAlert"></div>
+        <div id="forgotStep1">
+        <div class="form-group">
+            <label class="form-label">メールアドレス</label>
+            <input type="email" class="form-input" id="forgotEmail" placeholder="登録したメールアドレス">
+        </div>
+        <div class="form-actions">
+            <button class="btn btn-ghost" onclick="closeModal('forgotModal')">キャンセル</button>
+            <button class="btn btn-primary" onclick="checkForgotEmail()">次へ</button>
+        </div>
+        </div>
+        <div id="forgotStep2" style="display:none">
+        <div class="form-group">
+            <label class="form-label" id="forgotQuestionLabel">秘密の質問</label>
+            <input type="text" class="form-input" id="forgotAnswer" placeholder="答えを入力">
+        </div>
+        <div class="alert alert-error" style="display:none" id="forgotFail">
+            <span>認証に失敗しました。</span>
+            <button onclick="closeModal('forgotModal'); openModal('inquiryModal')" style="background:none;border:none;color:var(--blue-5);cursor:pointer;margin-left:8px">お問い合わせへ</button>
+        </div>
+        <div class="form-actions">
+            <button class="btn btn-ghost" onclick="showForgotStep1()">戻る</button>
+            <button class="btn btn-primary" onclick="verifyForgot()">確認する</button>
+        </div>
+        </div>
+    </div>
+    </div>
+
+    <!-- お問い合わせモーダル -->
+    <div class="modal-overlay" id="inquiryModal">
+    <div class="modal-box" style="position:relative">
+        <button class="modal-close-btn" onclick="closeModal('inquiryModal')">×</button>
+        <div class="modal-title">お問い合わせ</div>
+        <div class="modal-subtitle">1日1回まで送信できます</div>
+        <div id="inquiryAlert"></div>
+        <div id="inquiryForm">
+        <div class="form-group">
+            <label class="form-label">お名前 *</label>
+            <input type="text" class="form-input" id="inqName" placeholder="山田 太郎">
+        </div>
+        <div class="form-group">
+            <label class="form-label">メールアドレス *</label>
+            <input type="email" class="form-input" id="inqEmail" placeholder="example@email.com">
+        </div>
+        <div class="form-group">
+            <label class="form-label">件名 *</label>
+            <input type="text" class="form-input" id="inqSubject" placeholder="お問い合わせ件名">
+        </div>
+        <div class="form-group">
+            <label class="form-label">内容 *</label>
+            <textarea class="form-textarea" id="inqBody" placeholder="お問い合わせ内容を詳しくご記入ください"></textarea>
+        </div>
+        <div class="form-actions">
+            <button class="btn btn-ghost" onclick="closeModal('inquiryModal')">キャンセル</button>
+            <button class="btn btn-primary" id="inqSubmitBtn" onclick="submitInquiry()">送信する</button>
+        </div>
+        </div>
+        <div id="inquiryDone" style="display:none; text-align:center; padding:20px 0">
+        <div style="font-size:2.5rem; margin-bottom:16px">✅</div>
+        <h3 style="margin-bottom:8px">お問い合わせを受け付けました</h3>
+        <p style="color:var(--text-sub); font-size:0.9rem">メールが届くまでお待ちください。<br>
+            (<a href="mailto:devilnessie@gmail.com" style="color:var(--blue-5)">devilnessie@gmail.com</a>)</p>
+        </div>
+    </div>
+    </div>
+
+    <!-- サブスクリプション情報モーダル -->
+    <div class="modal-overlay" id="subscribeModal">
+    <div class="modal-box" style="position:relative">
+        <button class="modal-close-btn" onclick="closeModal('subscribeModal')">×</button>
+        <div class="modal-title">💎 プレミアムプラン</div>
+        <div class="modal-subtitle">アプリ版でより快適にご利用いただけます</div>
+        <div class="sub-cards" style="flex-direction:column; gap:16px">
+        <div class="sub-card" style="width:100%">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px">
+            <div>
+                <div class="price" style="font-size:1.8rem">¥980</div>
+                <div class="period">月額プラン</div>
+            </div>
+            </div>
+            <ul class="sub-benefits">
+            <li>毎日100回のAI利用</li>
+            <li>広告完全非表示</li>
+            <li>Google検索強化モード</li>
+            <li>優先サポート対応</li>
+            </ul>
+        </div>
+        <div class="sub-card featured" style="width:100%">
+            <span class="sub-badge">2ヶ月分お得！</span>
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px">
+            <div>
+                <div class="price" style="font-size:1.8rem">¥9,800</div>
+                <div class="period">年額プラン (¥817/月相当)</div>
+            </div>
+            </div>
+            <ul class="sub-benefits">
+            <li>毎日100回のAI利用</li>
+            <li>広告完全非表示</li>
+            <li>Google検索強化モード</li>
+            <li>優先サポート対応</li>
+            <li>新機能優先アクセス</li>
+            </ul>
+        </div>
+        </div>
+        <div class="alert alert-info" style="margin-top:20px">
+        <span>💡 サブスクリプションはアプリ内限定です。まずはアプリをダウンロードしてください。</span>
+        </div>
+        <button class="btn btn-primary" style="width:100%; margin-top:12px; padding:14px" onclick="closeModal('subscribeModal')">閉じる</button>
+    </div>
+    </div>
+
+    <!-- ============================================================
+        JavaScript
+        ============================================================ -->
+    <!--忍者Admax-->
+
+
+    <div class="centerad-widget"></div>
+    <script src="../../Ads/ToolCenterAds.js" rel="preload"></script>
+    <script src="../../Ads/ShowAds.js" defer="defer"></script>
+    <script src="../../CoreImplementation/TweetManager.js" defer="defer"></script><script src="../../Ads/ToolAds.js" defer="defer"></script>
+    <script src="webappscript.js" defer="defer"></script>
+    <script src="SecurityValidator.js" defer="defer"></script>
+    <script defer="defer"> document.oncontextmenu = function () { return false; }; document.getElementsByTagName('html')[0].oncontextmenu = function () { return false; }; document.addEventListener('contextmenu', function (event) { event.preventDefault();  }); </script>
+<!-- admax -->
+<script src="https://adm.shinobi.jp/o/eb1a0fadde0b1abac026285d553cece6"></script>
+<!-- admax -->
+</body>
+</html>
