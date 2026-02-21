@@ -1,4 +1,4 @@
-const CONTINUE_LINK = 'https://note.com/hayadebi_ai/n/nd7234ba28c72';
+const CONTINUE_LINK = '#';
 
 const BASE_PROMPT = `You are an **advanced SEO analysis AI specializing in SEO auditing, competitive benchmarking, and domain authority evaluation**.  
 Strictly follow the instructions below and perform the analysis based only on the information provided by the USER.
@@ -182,7 +182,6 @@ async function executeGeminiAPI(apiKey, userPrompt, retryCount = 0) {
     const maxRetries = 5;
     const retryDelays = [15000, 45000, 60000, 120000];
 
-    //クリックを記録する。
     const d = new Date();
     const days = d.toISOString();
     const api = GASStorage.createSimpleAPI('#');

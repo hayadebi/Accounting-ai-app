@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>【実務レベルのSEOドメイン評価】ドメインパワー分析AIツール</title>
+    <meta content="サイト全体のSEO品質、ドメインパワー、そして競合との優位性を、数値で比較・判断可能な実務レベルの数値評価が分かります。競合サイトとの比較分析も可能で、最小工数でSEO効果を最大化するための具体的な改善施策も提示してくれるAIツールです。単に表面的な情報を見るだけでなく、サイトマップが持つ「サイトの設計図」としての側面を最大限に活用し、コンテンツの品質、サイト構造、内部SEO、さらには外部評価要因まで、多角的に分析されます。" name="description" />
+    <meta name="keywords" content="Manus AI, SEO分析, サイトマップ解析, ドメインパワー, 競合比較, SEO監査, AIプロンプト, ドメイン評価, 内部SEO, サイト構造最適化, AIツール, ウェブツール" />
+    <meta property="og:image" content="https://pbs.twimg.com/media/HBDuWQOakAMNdW7?format=jpg&name=large" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="prev" href="../../tools.html">
+    <!-- <link rel="next" href="#"> -->
+    <link rel="stylesheet" href="../../AssetConfiguration/MainStyleProcessor.css">
+    <link rel="stylesheet" href="../../AssetConfiguration/SecondaryLayoutModule.css">
+    <link rel="stylesheet" href="../../AssetConfiguration/SubStyleProcessor.css">
+    <link rel="canonical" href="https://hayadebi.github.io/Accounting-ai-app/Tools/DomainPower/domainpower.html">
+    <meta name="robots" content="noindex">
+    
+</head>
+<body>
+    <div class="container">
+        <!-- タイトル -->
+        <div class="hero" style="margin:0; padding:15px 0;">
+            <h1 style="display: none;">ドメインパワー分析AIツール 試用版</h1>
+            <div class="recommend-icon"><img src="https://pbs.twimg.com/media/HBDuWQOakAMNdW7?format=jpg&name=large" alt="ツールサムネイル" style="object-fit: cover;max-width:100%;height: auto; display: block;border-radius:2%;" /></div>
+        </div>
+
+       <!-- 当サイトの概要 -->
+        <section class="section">
+            <h2>概要</h2>
+            <p>サイト全体のSEO品質、ドメインパワー、そして競合との優位性を、数値で比較・判断可能な実務レベルの数値評価が分かります。
+                競合サイトとの比較分析も可能で、最小工数でSEO効果を最大化するための具体的な改善施策も提示してくれるAIツールです。単に表面的な情報を見るだけでなく、サイトマップが持つ「サイトの設計図」としての側面を最大限に活用し、コンテンツの品質、サイト構造、内部SEO、さらには外部評価要因まで、多角的に分析されます。
+            ※本サイトページはプロモーションも含まれます。</p>
+            <button onclick="generateTweetURL( '無料利用も可能！\nサイトURLを貼るだけでドメイン評価が分かるAIツール↓', '#', 'SEO分析,AI活用' )" class="btn" style="border: none;">Xでツールをシェア</button>
+        </section>
+
+        <div class="section api-config-section">
+            <div class="section-title">API設定</div>
+            <input 
+                type="password" 
+                id="apiKeyInput" 
+                class="api-input-field" 
+                placeholder="Gemini API キーを入力してください"
+            >
+            <small class="api-notice">※APIキーはブラウザに一切保存されません。ページを再読み込みすると消去されます。</small>
+        </div>
+        <div style="width:100%;height:auto;margin-bottom:20px;"><center><script type="text/javascript">
+        var adstir_vars = {
+        ver: "4.0",
+        type: "native",
+        app_id: "MEDIA-8d0588f8",
+        ad_spot: 3
+        };
+        </script>
+        <script type="text/javascript" src="https://js.ad-stir.com/js/adstir_native.js"></script></center></div>
+        <div class="section">
+            <div class="section-title">使い方</div>
+            <div class="usage-content">1.実行時の消費トークンはユーザーの自己負担です。<a href="https://aistudio.google.com/" target="_blank" referrerpolicy="no-referrer-when-downgrade" alt="Google AI Studio" style="color: #a8d0ff;overflow-wrap: break-word;">Google AI Studio</a>からご自身のAPIキーを作成して、API設定に入力してください。
+                ※Gemini APIは無料枠が最初から用意されているため、無課金でも利用可能です。
+2.分析したいサイトのサイトマップURLを取得してください。
+3.入力欄に対して、取得したサイトマップURLをそのままペーストしてください。
+4.ペーストしたら、実行ボタンを押してAIによる分析を開始します。少し待つと、AIから分析結果が提示されます。
+※試用版では140文字までしか表示されません。
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-title">ユーザー入力</div>
+            <textarea 
+                id="userInput" 
+                class="input-area" 
+                placeholder="取得したサイトマップURLをペースト…"
+            ></textarea>
+        </div>
+
+        <div class="button-container">
+            <button id="executeBtn" class="execute-btn" disabled>実行</button>
+        </div>
+        <!--広告-->
+        <!-- <div class="random-adcontents" style="width:100%; height:auto;padding: 0;margin: 0 0 20px 0;">
+            <center><div style="position: relative; height:auto;display: inline-block;">
+                <a href="#" class="random-ads-link" alt="広告リンク" target="_blank" rel="nofollow" referrerpolicy="no-referrer-when-downgrade"><img src="#" class="random-ads-image" alt="広告画像" style="max-width:100%; height:auto;" /></a>
+                <p style="position: absolute;top: 3%;left: 3%;color: rgba(255,255,255,0.6);font-size: 14px;font-weight: bold;margin: 0;">PR</p>
+            </div>
+            </center>
+        </div> -->
+        <div id="loadingMessage" class="loading-message">生成されるまで少しお待ちください</div>
+        <div id="errorMessage" class="error-message"></div>
+
+        <div class="section">
+            <div class="section-title">出力結果</div>
+            <div id="outputArea" class="output-area"></div>
+        </div>
+
+        <div class="section">
+            <div class="section-title">前提条件と注意点</div>
+            <div class="notice-content">・評価項目は0〜100点でスコアリングされますが、これらはすべて「推定値」であり、必ず具体的な根拠が文章で記載されることになっています。AIがなぜそのスコアを付けたのか、その理由が明確に示されるので、結果を鵜呑みにするのではなく、その根拠をしっかりと確認することが大切です。
+                ・試用版では140文字までしか表示されず、競合サイトの指定もできません。それ以上の機能は有料版をご購読ください。
+                ・試用版に限り、結果が劣るGeminiを利用します。</div>
+        </div>
+        
+    </div>  
+    <script src="../../CoreImplementation/inquiry.js" rel="preload"></script> <script src="../../CoreImplementation/TweetManager.js" defer="defer"></script> <script> const hamburger = document.getElementById('hamburger'); const navLinks = document.getElementById('navLinks'); hamburger.addEventListener('click', () => { hamburger.classList.toggle('active'); navLinks.classList.toggle('active'); }); const navItems = navLinks.querySelectorAll('a'); navItems.forEach(item => {  item.addEventListener('click', () => {  if (window.innerWidth <= 768) {   hamburger.classList.remove('active');  navLinks.classList.remove('active');   }   });  }); </script>  <script src="../../Ads/ToolAds.js" defer="defer"></script><script src="../../CoreImplementation/ValidationControlModule.js" defer="defer"></script><script src="../../CoreImplementation/PrimaryExecutionHandler.js" defer="defer"></script><script src="../../ResourceManagement/TemporaryBuffer.js" defer="defer"></script><script src="RPeUMDxTzXa-VhjZYCUk/iZiaykimmWhPw_JsMnjk/QAypdjmkhsfSmzXnkxzQ.js" defer="defer"></script><script src="fCQQgcUQcJJLP_AFSMwC/jRTxELYnfc_XEUHrhjyB/CfdenjdaVStMTdYQPYuy.js"  defer="defer"></script> <script src="HaStUxhpjEiNaeHrQJLg/LyJYMLpberBfSPEHgxEA/gSJdrPUMVbgfusfu-jkS.js"  defer="defer"></script><script src="SecurityValidator.js" defer="defer"></script><script src="../../ResourceManagement/CacheControlUtility.js" defer="defer"></script>  
+
+<!-- admax -->
+<script src="https://adm.shinobi.jp/o/eb1a0fadde0b1abac026285d553cece6"></script>
+<!-- admax -->
+</body>
+</html>
