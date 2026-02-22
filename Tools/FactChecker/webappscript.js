@@ -1,31 +1,23 @@
 'use strict';
-// ============================================================
-// 設定・定数 (GAS URL難読化)
-// ============================================================
 
-const GAS_URL = 'https://script.google.com/macros/s/AKfycby0tcD2q1pn5EjCfydok6dp0KRFjAE0EnFRc09Lej_SCMsifbLNWeoCQQihi4DQrIC3kA/exec';
+const GAS_URL = atob('aHR0cHM6Ly9zY3JpcHQuZ29vZ2xlLmNvbS9tYWNyb3Mvcy9BS2Z5Y2J5MHRjRDJxMXBuNUVqQ2Z5ZG9rNmRwMEtSRmpBRTBFbkZSYzA5TGVqX1NDTXNpZmJMTldlb0NRUWloaTREUXJJQzNrQS9leGVj');
 
-// Gemini API設定
 const GEMINI_MODEL = 'gemini-2.5-flash';
 const GEMINI_API_BASE = ['https://generative', 'language.googleapis.com', '/v1beta/models/'].join('');
 
-// 利用制限設定（実際の値はGASから取得）
-const DEFAULT_LIMIT = 3;         // 通常1日上限
-const DEFAULT_INTERVAL_MS = 60000; // 通常インターバル (1分)
-const SPECIAL_LIMIT = 100;        // 特例1日上限
-const SPECIAL_INTERVAL_MS = 15000; // 特例インターバル (15秒)
+const DEFAULT_LIMIT = 3;         
+const DEFAULT_INTERVAL_MS = 60000; 
+const SPECIAL_LIMIT = 100;        
+const SPECIAL_INTERVAL_MS = 15000; 
 
-// ============================================================
-// アプリ状態
-// ============================================================
 const AppState = {
   loggedIn: false,
-  currentUser: null,  // { email, userData }
-  userApiKey: '',     // 未ログイン時のAPIキー
-  geminiApiKeys: [],  // GASから取得したAPIキー配列
-  geminiPrompt: '',   // GASから取得したプロンプト
-  specialQuery: '',   // 特例クエリ文字列
-  isSpecial: false,   // 特例モードかどうか
+  currentUser: null, 
+  userApiKey: '',    
+  geminiApiKeys: [],  
+  geminiPrompt: '',   
+  specialQuery: '',   
+  isSpecial: false,   
   maxUsage: DEFAULT_LIMIT,
   intervalMs: DEFAULT_INTERVAL_MS,
   lastUsedAt: 0,
@@ -34,20 +26,17 @@ const AppState = {
   inquiryUsedToday: false,
 };
 
-// ============================================================
-// GASストレージクライアント (inquiry.js準拠)
-// ============================================================
 class GASStorageClient {
   constructor(url) {
     if (!url || url.includes('YOUR_GAS')) {
-      console.warn('[GAS] URLが設定されていません。GASとの通信はできません。');
+      console.warn('URLが設定されていません。通信はできません。');
     }
     this.gasUrl = url;
   }
 
   async _request(params) {
     if (!this.gasUrl || this.gasUrl.includes('YOUR_GAS')) {
-      throw new Error('GAS URLが設定されていません。index.html内の _s2 を設定してください。');
+      throw new Error('URLが設定されていません。index.html内の _s2 を設定してください。');
     }
     const formData = new URLSearchParams(params);
     const resp = await fetch(this.gasUrl, { method: 'POST', body: formData, redirect: 'follow' });
@@ -80,12 +69,8 @@ class GASStorageClient {
   }
 }
 
-// GASクライアントインスタンス
 const gas = new GASStorageClient(GAS_URL);
 
-// ============================================================
-// セキュリティ: HTMLエスケープ
-// ============================================================
 function escapeHtml(str) {
   if (!str) return '';
   return String(str)
@@ -96,7 +81,6 @@ function escapeHtml(str) {
     .replace(/'/g, '&#x27;');
 }
 
-// 簡易ハッシュ (パスワード用 — 本番ではより強固なものを推奨)
 async function hashPassword(password) {
   const data = new TextEncoder().encode(password + 'gemini_salt_2024');
   const hashBuffer = await crypto.subtle.digest('SHA-256', data);
@@ -104,7 +88,6 @@ async function hashPassword(password) {
   return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
 }
 
-// マークダウン風レンダリング (簡易版)
 function renderMarkdown(text) {
   if (!text) return '';
   let html = escapeHtml(text);
@@ -130,9 +113,6 @@ function renderMarkdown(text) {
   return html;
 }
 
-// ============================================================
-// トースト通知
-// ============================================================
 function showToast(message, type = 'info', duration = 4000) {
   const icons = { success: '✅', error: '❌', info: 'ℹ️', warn: '⚠️' };
   const toast = document.createElement('div');
@@ -145,9 +125,6 @@ function showToast(message, type = 'info', duration = 4000) {
   }, duration);
 }
 
-// ============================================================
-// モーダル制御
-// ============================================================
 function openModal(id) {
   document.getElementById(id).classList.add('open');
   document.body.style.overflow = 'hidden';
@@ -158,7 +135,6 @@ function closeModal(id) {
   document.body.style.overflow = '';
 }
 
-// 背景クリックで閉じる
 document.addEventListener('click', e => {
   if (e.target.classList.contains('modal-overlay')) {
     e.target.classList.remove('open');
@@ -228,9 +204,6 @@ function updateHeaderUI() {
   updateUsageDisplay();
 }
 
-// ============================================================
-// 利用回数表示更新
-// ============================================================
 function updateUsageDisplay() {
   if (!AppState.currentUser && !AppState.userApiKey) return;
 
@@ -248,9 +221,6 @@ function updateUsageDisplay() {
   fill.className = 'usage-bar-fill' + (pct >= 100 ? ' danger' : pct >= 80 ? ' warn' : '');
 }
 
-// ============================================================
-// セッション管理 (localStorage)
-// ============================================================
 const SESSION_KEY = 'geminiApp_session';
 
 function saveSession(email) {
@@ -272,9 +242,6 @@ function clearSession() {
   sessionStorage.removeItem(SESSION_KEY);
 }
 
-// ============================================================
-// 利用回数管理 (sessionStorage/userDataのai_count)
-// ============================================================
 function getTodayStr() {
   return new Date().toISOString().slice(0, 10);
 }
@@ -303,12 +270,12 @@ async function incrementUsed() {
     if (ud.aiDate !== today) { ud.aiDate = today; ud.aiCount = 0; }
     ud.aiCount = (ud.aiCount || 0) + 1;
     ud.updatedAt = new Date().toISOString();
-    // GASに保存
+    // 保存
     try {
       await gas.set('users', AppState.currentUser.email,
         JSON.stringify(ud));
     } catch (err) {
-      console.error('[GAS] 利用回数保存失敗:', err);
+      console.error('利用回数保存失敗:', err);
     }
   } else {
     const today = getTodayStr();
@@ -351,9 +318,9 @@ async function loadConfigFromGAS() {
     const sq = await gas.get('config', 'special_query');
     if (sq) AppState.specialQuery = sq;
 
-    console.log('[Config] GASから設定を読み込みました');
+    console.log('[Config] 設定を読み込みました');
   } catch (err) {
-    console.warn('[Config] GAS設定取得失敗 (GAS URLが未設定の可能性):', err.message);
+    console.warn('[Config] 設定取得失敗 (URLが未設定の可能性):', err.message);
     // フォールバック: APIキーなし、プロンプトはデフォルト
     AppState.geminiPrompt = 'ユーザーからの質問に丁寧に回答してください。\n\nUSER_INPUT_PLACEHOLDER';
   }
@@ -962,7 +929,7 @@ async function restoreSession() {
 // 初期化
 // ============================================================
 async function init() {
-  // GAS設定読み込み
+  // 設定読み込み
   await loadConfigFromGAS();
 
   // セッション復元
