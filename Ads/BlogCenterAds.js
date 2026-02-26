@@ -52,10 +52,6 @@
             "siteUrl": "https://note.com/hayadebi_ai/n/n9f71a3b80529"
         },
         {
-            "imageUrl": "../../Ads/CenterImage/AdsImage2.jpg",
-            "siteUrl": "https://hayadebi.github.io/Accounting-ai-app/adnextcenter.html?q=hayadebi.github.io%2FAccounting-ai-app%2FTools%2FDevilGame%2Fdevilgame.html"
-        },
-        {
             "imageUrl": "../../Ads/CenterImage/AdsImage3.jpg",
             "siteUrl": "https://cointiply.com/r/KrAZKx"
         },
