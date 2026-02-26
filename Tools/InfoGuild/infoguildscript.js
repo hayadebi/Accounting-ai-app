@@ -567,7 +567,7 @@ async function loadSubmissions() {
     App.quests.forEach(q => { qMap[q.taskId] = q; });
 
     const STATUS = {
-      pending:  { label:'確認中（1〜3営業日）',   cls:'badge-pending'  },
+      pending:  { label:'確認中（各クエスト指定営業日以内）',   cls:'badge-pending'  },
       approved: { label:'承認：報酬支払済み',       cls:'badge-approved' },
       rejected: { label:'却下：注意事項該当',       cls:'badge-rejected' }
     };
