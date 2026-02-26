@@ -17,6 +17,16 @@
             "title": "YouTubeアラーム",
             "image": "https://pbs.twimg.com/media/HASPSB1aMAA3jp9?format=jpg&amp;name=large",
             "link": "https://hayadebi.github.io/Accounting-ai-app/Tools/YoutubeAuto/youtubeauto.html"
+        },
+        {
+            "title": "ファクト探偵君",
+            "image": "https://hayadebi.github.io/Accounting-ai-app/Ads/CenterImage/AdsImage7.jpg",
+            "link": "https://hayadebi.github.io/Accounting-ai-app/Tools/FactChecker/factcheck.html"
+        },
+        {
+            "title": "InfoGuild",
+            "image": "https://hayadebi.github.io/Accounting-ai-app/Ads/CenterImage/AdsImage2.jpg",
+            "link": "https://hayadebi.github.io/Accounting-ai-app/Tools/InfoGuild/infoguild.html"
         }
     ];
     // ========================================
