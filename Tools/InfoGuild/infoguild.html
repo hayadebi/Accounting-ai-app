@@ -1,0 +1,822 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-T4G6KMKK');</script>
+    <!-- End Google Tag Manager -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>InfoGuild ～冒険者の情報ギルド～ ― ハヤデビのツール工房</title>
+    <meta content="サイト概要" name="description" />
+    <meta name="keywords" content="サイトキーワード" />
+    <meta property="og:image" content="#" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="icon" type="image/png" href="https://pbs.twimg.com/media/G2H3yzRaIAIIHjw?format=png&name=240x240">
+    <link rel="prev" href="../../tools.html">
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-GLW3M3X7B3" defer></script>
+    <script defer>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-GLW3M3X7B3');
+    </script>
+    <!--playgama-->
+    <script async src="https://widgets.playgama.com/index.js"></script>
+    <link rel="stylesheet" href="infoguildstyle.css">
+    <script src="infoguilddata.js" rel="preload"></script>
+    <!--後で構造化データを生成して貼る-->
+    
+</head>
+<body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-T4G6KMKK"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    <div id="loading-overlay">
+    <div class="spinner"></div>
+    <p id="loading-text">読み込み中...</p>
+    </div>
+
+    <div id="toast"></div>
+
+    <div id="notice-bar">
+        <span>⚔ InfoGuild へようこそ。クエストを受注して LTC 報酬を獲得しよう。承認・支払いは1〜3営業日以内。不正行為はアカウント停止対象。注意事項をよく確認のうえご利用ください。⚔</span>
+        <span>⚔ 登録時の報酬受取用ウォレットアドレスは、<a href="https://bitflyer.com/invitation?id=hhhv5jly&lang=ja-JP" target="_blank" rel="nofollow" referrerpolicy="no-referrer-when-downgrade">BitFlyer</a>のLTC預入ウォレットアドレスを推奨します。⚔</span>
+    </div>
+
+    <header id="header">
+    <div id="logo" onclick="scrollToTop()">
+        <h1>⚔ InfoGuild</h1>
+        <div class="tagline">～ 冒険者の情報ギルド ～</div>
+    </div>
+    <nav id="nav-buttons">
+        <div id="nav-guest" style="display:flex;gap:6px;flex-wrap:wrap">
+        <button class="btn btn-dark btn-sm" onclick="openModal('modal-guide')">初心者ガイド</button>
+        <button class="btn btn-dark btn-sm" onclick="openModal('modal-help')">ヘルプ</button>
+        <button class="btn btn-dark btn-sm" onclick="openContactModal()">お問い合わせ</button>
+        <button class="btn btn-dark btn-sm" onclick="openModal('modal-login')">ログイン</button>
+        <button class="btn btn-gold btn-sm" onclick="openModal('modal-register')">登録</button>
+        <button onclick="generateTweetURL( 'InfoGuildでは情報提供でお金を稼げる！\n是非利用してみよう↓', 'hayadebi.github.io/Accounting-ai-app/', 'ポイ活,副業' )" class="btn btn-gold btn-sm" alt="Xでシェア">Xでシェア</button>
+        </div>
+        <div id="nav-user" style="display:none;gap:6px;flex-wrap:wrap;align-items:center">
+        <button class="btn btn-dark btn-sm" onclick="openModal('modal-guide')">初心者ガイド</button>
+        <button class="btn btn-dark btn-sm" onclick="openModal('modal-help')">ヘルプ</button>
+        <button class="btn btn-dark btn-sm" onclick="openContactModal()">お問い合わせ</button>
+        <div class="dropdown" id="user-dropdown">
+            <button class="btn btn-gold btn-sm" onclick="toggleDropdown(event)">⚔ <span id="nav-uname"></span> ▾</button>
+            <div class="dropdown-menu">
+            <a onclick="openModal('modal-account')">アカウント情報</a>
+            <a onclick="openModal('modal-submissions')">受注済みクエスト</a>
+            <a onclick="openModal('modal-pw-reset')">パスワード変更</a>
+            <a class="danger" onclick="openModal('modal-delete-req')">アカウント削除申請</a>
+            <a class="danger" onclick="doLogout()">ログアウト</a>
+            </div>
+        </div>
+        </div>
+    </nav>
+    </header>
+
+    <main id="main">
+    <div class="board-header">
+        <div class="board-ornament">✦ ✦ ✦</div>
+        <div class="board-title">クエスト掲示板</div>
+        <p class="board-subtitle">挑戦者求む。情報提供で報酬を獲得せよ。</p>
+        <div class="board-ornament" style="margin-top:8px">✦ ✦ ✦</div>
+    </div>
+    <div id="quest-board">
+        <div class="empty-state" style="grid-column:1/-1">
+        <div class="spinner" style="margin:0 auto 16px"></div>
+        <p>クエストを読み込んでいます...</p>
+        </div>
+    </div>
+
+    <div id="stats-bar" style="display:none">
+        <div class="stats-ornament">✦ ✦ ✦</div>
+        <div class="stats-title">クエスト実績</div>
+        <div class="stats-row">
+        <div class="stats-item">
+            <div class="stats-value" id="stat-count">—</div>
+            <div class="stats-label">承認済み提出数</div>
+        </div>
+        <div class="stats-sep">❖</div>
+        <div class="stats-item">
+            <div class="stats-value" id="stat-reward">—</div>
+            <div class="stats-label">これまでに支払われた報酬総額</div>
+        </div>
+        </div>
+    </div>
+
+    <div style="width:100%; height:auto; padding: 0; margin:10px 0;">
+        <center>
+            <div style="position: relative; height:auto; display: inline-block;">
+                <a href="#" class="random-ads-link" alt="広告リンク" target="_blank" rel="nofollow" referrerpolicy="no-referrer-when-downgrade">
+                    <img src="#" class="random-ads-image" alt="広告画像" style="max-width:100%; height:auto;" />
+                </a>
+                <p style="position: absolute; top: 3%; left: 3%; color: rgba(255,255,255,0.6); font-size: 14px; font-weight: bold; margin: 0;">PR</p>
+            </div>
+        </center>
+    </div>
+
+    <div class="board-header">
+        <div class="board-ornament">✦ ✦ ✦</div>
+        <div class="board-title">ブラウザゲーム狩場</div>
+        <p class="board-subtitle">達成目標まで攻略せよ。クエスト掲示板で募集中</p>
+        <div class="board-ornament" style="margin-top:8px">✦ ✦ ✦</div>
+    </div>
+
+    <div style="margin-top: 36px;padding: 20px 24px;background: linear-gradient(180deg, #1e1108 0%, #2a1a0a 100%);border: 1px solid var(--gold-dark);border-radius: 3px;text-align: center;position: relative;box-shadow: 0 4px 20px rgba(0,0,0,0.4), inset 0 1px 0 rgba(212,175,55,0.1);animation: fadeInUp 0.5s ease both;">
+        <center><div class="stats-title">アクション</div>
+        <div id="widget-playgama2">
+            <div style="opacity: 0.2;font-family: sans-serif;font-size: 10px;max-width:100%;">
+            Powered by <a href="https://playgama.com/partners" target="_blank" rel="noopener">Playgama</a>
+            </div>
+        </div>
+        <p>　</p>
+        <div class="stats-title">アイドル</div>
+        <div id="widget-playgama1">
+            <div style="opacity: 0.2;font-family: sans-serif;font-size: 10px;max-width:100%;">
+            Powered by <a href="https://playgama.com/partners" target="_blank" rel="noopener">Playgama</a>
+            </div>
+        </div>
+        <p>　</p>
+        <div class="stats-title">ランナー</div>     
+        <div id="widget-playgama3">
+            <div style="opacity: 0.2;font-family: sans-serif;font-size: 10px;max-width:100%;">
+            Powered by <a href="https://playgama.com/partners" target="_blank" rel="noopener">Playgama</a>
+            </div>
+        </div></center>
+    </div>
+
+    <div style="width:100%;height:auto;margin-top:10px;"><center>
+    <script type="text/javascript">
+        var adstir_vars = {
+        ver: "4.0",
+        app_id: "MEDIA-8d0588f8",
+        ad_spot: 2,
+        center: false
+        };
+    </script>
+    <script type="text/javascript" src="https://js.ad-stir.com/js/adstir.js"></script></center></div>
+
+    <div style="margin-top: 36px;padding: 20px 24px;background: linear-gradient(180deg, #1e1108 0%, #2a1a0a 100%);border: 1px solid var(--gold-dark);border-radius: 3px;text-align: center;position: relative;box-shadow: 0 4px 20px rgba(0,0,0,0.4), inset 0 1px 0 rgba(212,175,55,0.1);animation: fadeInUp 0.5s ease both;">
+        <center><div class="stats-title">アーケード</div>
+        <div id="widget-playgama4">
+            <div style="opacity: 0.2;font-family: sans-serif;font-size: 10px;max-width:100%;">
+            Powered by <a href="https://playgama.com/partners" target="_blank" rel="noopener">Playgama</a>
+            </div>
+        </div>
+        <p>　</p>
+        <div class="stats-title">シミュレーション</div>
+        <div id="widget-playgama5">
+            <div style="opacity: 0.2;font-family: sans-serif;font-size: 10px;max-width:100%;">
+            Powered by <a href="https://playgama.com/partners" target="_blank" rel="noopener">Playgama</a>
+            </div>
+        </div>
+        <p>　</p>
+        <div class="stats-title">パズル</div>     
+        <div id="widget-playgama6">
+            <div style="opacity: 0.2;font-family: sans-serif;font-size: 10px;max-width:100%;">
+            Powered by <a href="https://playgama.com/partners" target="_blank" rel="noopener">Playgama</a>
+            </div>
+        </div></center>
+    </div>
+
+    <!--広告-->
+    <div style="width:100%; height:auto;padding: 0;margin: 0 0 20px 0;text-align: left;">
+        <div class="stats-value">ツール</div>
+        <div class="board-subtitle">本サイトでは、他にも暮らしや作業をサポートする 様々なウェブツールも運営しております。</div>
+        <a href="../../tools.html" class="btn btn-gold btn-sm" alt="ツール一覧" style="margin-top:10px;text-decoration: none;">ツール一覧</a>
+    </div>
+
+    <div style="margin-top: 36px;padding: 20px 24px;background: linear-gradient(180deg, #1e1108 0%, #2a1a0a 100%);border: 1px solid var(--gold-dark);border-radius: 3px;text-align: center;position: relative;box-shadow: 0 4px 20px rgba(0,0,0,0.4), inset 0 1px 0 rgba(212,175,55,0.1);animation: fadeInUp 0.5s ease both;">
+        <center><div class="stats-title">シューター</div>
+        <div id="widget-playgama7">
+            <div style="opacity: 0.2;font-family: sans-serif;font-size: 10px;max-width:100%;">
+            Powered by <a href="https://playgama.com/partners" target="_blank" rel="noopener">Playgama</a>
+            </div>
+        </div>
+        <p>　</p>
+        <div class="stats-title">ストラテジー</div>
+        <div id="widget-playgama8">
+            <div style="opacity: 0.2;font-family: sans-serif;font-size: 10px;max-width:100%;">
+            Powered by <a href="https://playgama.com/partners" target="_blank" rel="noopener">Playgama</a>
+            </div>
+        </div>
+        <p>　</p>
+        <div class="stats-title">トレーディング</div>     
+        <div id="widget-playgama9">
+            <div style="opacity: 0.2;font-family: sans-serif;font-size: 10px;max-width:100%;">
+            Powered by <a href="https://playgama.com/partners" target="_blank" rel="noopener">Playgama</a>
+            </div>
+        </div></center>
+    </div>
+
+    <!--広告-->
+    <div style="width:100%; height:auto;padding: 0;margin-top:10px;">
+        <script type="text/javascript">blogparts={"base":"https://www.dlsite.com/","type":"ranking","site":"home","query":{"period":"week","options":["-GRO","-MEN"]},"title":"ランキング","display":"horizontal","detail":"1","column":"v","image":"small","count":"3","wrapper":"0","autorotate":true,"aid":"githubhayadebitools"}</script><script type="text/javascript" src="https://www.dlsite.com/js/blogparts.js" charset="UTF-8"></script>
+    </div>
+
+    <div style="margin-top: 36px;padding: 20px 24px;background: linear-gradient(180deg, #1e1108 0%, #2a1a0a 100%);border: 1px solid var(--gold-dark);border-radius: 3px;text-align: center;position: relative;box-shadow: 0 4px 20px rgba(0,0,0,0.4), inset 0 1px 0 rgba(212,175,55,0.1);animation: fadeInUp 0.5s ease both;">
+        <center><div class="stats-title">カジュアル</div>
+        <div id="widget-playgama10">
+            <div style="opacity: 0.2;font-family: sans-serif;font-size: 10px;max-width:100%;">
+            Powered by <a href="https://playgama.com/partners" target="_blank" rel="noopener">Playgama</a>
+            </div>
+        </div>
+        <p>　</p>
+        <div class="stats-title">ポピュラー</div>
+        <div id="widget-playgama11">
+            <div style="opacity: 0.2;font-family: sans-serif;font-size: 10px;max-width:100%;">
+            Powered by <a href="https://playgama.com/partners" target="_blank" rel="noopener">Playgama</a>
+            </div>
+        </div>
+        <p>　</p>
+        <div class="stats-title">キッズ</div>     
+        <div id="widget-playgama12">
+            <div style="opacity: 0.2;font-family: sans-serif;font-size: 10px;max-width:100%;">
+            Powered by <a href="https://playgama.com/partners" target="_blank" rel="noopener">Playgama</a>
+            </div>
+        </div></center>
+    </div>
+    </main>
+
+    <footer id="footer">
+    <div class="footer-links">
+        <a onclick="openModal('modal-guide')">初心者ガイド</a>
+        <a onclick="openModal('modal-help')">ヘルプ・FAQ</a>
+        <a onclick="openModal('modal-terms')">注意事項</a>
+        <a onclick="openModal('modal-security')">セキュリティ</a>
+        <a onclick="openContactModal()">お問い合わせ</a>
+        <a href="../../notation.html">運営上必要表記</a>
+        <a href="../../sitemap.html">サイトマップ</a>
+    </div>
+    <p>© ハヤデビのツール工房</p>
+    </footer>
+
+    <div id="modal-register" class="modal-overlay">
+    <div class="modal">
+        <div class="modal-header">
+        <span class="modal-title">⚔ 冒険者登録</span>
+        <button class="modal-close" onclick="closeModal('modal-register')">×</button>
+        </div>
+        <div class="warn-box">
+        <h4>⚠ 登録前に必ずお読みください</h4>
+        <ul>
+            <li>ウォレットアドレス・アカウント名・秘密の質問は<strong>登録後に変更できません</strong></li>
+            <li>入力内容を十分に確認してから登録してください</li>
+            <li>LTCウォレットアドレスは報酬受け取りに使用します</li>
+        </ul>
+        </div>
+        <form id="form-register" onsubmit="doRegister(event)">
+        <div class="form-group">
+            <label class="form-label">LTC ウォレットアドレス（Litecoinネットワーク）<span class="req">*</span></label>
+            <input id="reg-wallet" type="text" class="form-input" placeholder="0x..." maxlength="42" autocomplete="off" required>
+            <p class="form-hint">Litecoin アドレス。変更不可。</p>
+            <p id="err-reg-wallet" class="form-error"></p>
+        </div>
+        <div class="form-group">
+            <label class="form-label">アカウント名<span class="req">*</span></label>
+            <input id="reg-uname" type="text" class="form-input" placeholder="例: adventurer_01" maxlength="20" autocomplete="off" required>
+            <p class="form-hint">3〜20 文字の半角英数字・アンダースコアのみ。変更不可。</p>
+            <p id="err-reg-uname" class="form-error"></p>
+        </div>
+        <div class="form-group">
+            <label class="form-label">パスワード<span class="req">*</span></label>
+            <input id="reg-pw" type="password" class="form-input" placeholder="8文字以上" minlength="8" autocomplete="new-password" required>
+        </div>
+        <div class="form-group">
+            <label class="form-label">パスワード確認<span class="req">*</span></label>
+            <input id="reg-pw2" type="password" class="form-input" placeholder="再入力" autocomplete="new-password" required>
+            <p id="err-reg-pw" class="form-error"></p>
+        </div>
+        <div class="form-group">
+            <label class="form-label">秘密の質問<span class="req">*</span></label>
+            <select id="reg-q" class="form-input" required>
+            <option value="">選択してください</option>
+            <option value="pet">最初に飼ったペットの名前は？</option>
+            <option value="school">最初に通った小学校の名前は？</option>
+            <option value="city">生まれた街の名前は？</option>
+            <option value="hero">子供の頃の憧れの人物は？</option>
+            <option value="food">一番好きな食べ物は？</option>
+            </select>
+            <p class="form-hint">パスワード再設定時の本人確認に使用。変更不可。</p>
+        </div>
+        <div class="form-group">
+            <label class="form-label">秘密の質問の回答<span class="req">*</span></label>
+            <input id="reg-ans" type="text" class="form-input" placeholder="回答" autocomplete="off" required>
+            <p class="form-hint">大文字・小文字・全角半角を正確に。忘れないようご注意ください。</p>
+        </div>
+        <p id="err-reg-general" class="form-error" style="margin-bottom:10px"></p>
+        <button type="submit" class="btn btn-gold btn-wide">⚔ 冒険者として登録する</button>
+        </form>
+        <div class="divider">✦ ✦ ✦</div>
+        <p class="tc" style="font-size:14px;color:var(--sepia-mid)">
+        既に登録済みの方は
+        <a class="link-gold" onclick="switchModal('modal-register','modal-login')">ログイン</a>
+        </p>
+    </div>
+    </div>
+    <div id="modal-login" class="modal-overlay">
+    <div class="modal">
+        <div class="modal-header">
+        <span class="modal-title">⚔ ログイン</span>
+        <button class="modal-close" onclick="closeModal('modal-login')">×</button>
+        </div>
+        <form id="form-login" onsubmit="doLogin(event)">
+        <div class="form-group">
+            <label class="form-label">アカウント名<span class="req">*</span></label>
+            <input id="login-uname" type="text" class="form-input" autocomplete="username" required>
+        </div>
+        <div class="form-group">
+            <label class="form-label">パスワード<span class="req">*</span></label>
+            <input id="login-pw" type="password" class="form-input" autocomplete="current-password" required>
+        </div>
+        <p id="err-login" class="form-error" style="margin-bottom:10px"></p>
+        <button type="submit" class="btn btn-gold btn-wide">ログイン</button>
+        </form>
+        <div class="divider">✦ ✦ ✦</div>
+        <p class="tc" style="font-size:14px;color:var(--sepia-mid)">
+        <a class="link-gold" onclick="switchModal('modal-login','modal-pw-reset')">パスワードを忘れた方</a>
+        &nbsp;|&nbsp;
+        <a class="link-gold" onclick="switchModal('modal-login','modal-register')">新規登録</a>
+        </p>
+        <p class="tc mt8" style="font-size:13px;color:var(--sepia-mid)">
+        ログインできない場合は
+        <a class="link-gold" onclick="switchModal('modal-login','modal-login-issue')">こちら</a>
+        </p>
+    </div>
+    </div>
+    <div id="modal-pw-reset" class="modal-overlay">
+    <div class="modal">
+        <div class="modal-header">
+        <span class="modal-title">パスワード再設定</span>
+        <button class="modal-close" onclick="closeModal('modal-pw-reset')">×</button>
+        </div>
+        <form id="form-pw-reset" onsubmit="doPwReset(event)">
+        <div class="form-group">
+            <label class="form-label">アカウント名<span class="req">*</span></label>
+            <input id="reset-uname" type="text" class="form-input" autocomplete="off" required>
+        </div>
+        <div class="form-group">
+            <label class="form-label">現在のパスワード<span class="req">*</span></label>
+            <input id="reset-cur-pw" type="password" class="form-input" autocomplete="current-password" required>
+        </div>
+        <div class="form-group">
+            <label class="form-label">秘密の質問の回答<span class="req">*</span></label>
+            <input id="reset-ans" type="text" class="form-input" autocomplete="off" required>
+        </div>
+        <div class="form-group">
+            <label class="form-label">新しいパスワード<span class="req">*</span></label>
+            <input id="reset-new-pw" type="password" class="form-input" minlength="8" autocomplete="new-password" required>
+        </div>
+        <div class="form-group">
+            <label class="form-label">新しいパスワード確認<span class="req">*</span></label>
+            <input id="reset-new-pw2" type="password" class="form-input" autocomplete="new-password" required>
+        </div>
+        <p id="err-pw-reset" class="form-error" style="margin-bottom:10px"></p>
+        <button type="submit" class="btn btn-gold btn-wide">パスワードを変更する</button>
+        </form>
+    </div>
+    </div>
+    <div id="modal-quest-detail" class="modal-overlay">
+    <div class="modal modal-lg">
+        <div class="modal-header">
+        <span class="modal-title" id="detail-title">クエスト詳細</span>
+        <button class="modal-close" onclick="closeModal('modal-quest-detail')">×</button>
+        </div>
+        <div id="detail-body"></div>
+        <div class="divider">✦ ✦ ✦</div>
+        <div id="detail-action" class="tc"></div>
+    </div>
+    </div>
+    <div id="modal-submit" class="modal-overlay">
+    <div class="modal">
+        <div class="modal-header">
+        <span class="modal-title">📜 クエスト提出</span>
+        <button class="modal-close" onclick="closeModal('modal-submit')">×</button>
+        </div>
+        <div id="submit-quest-info" class="info-box"></div>
+        <div id="submit-notes-box" class="warn-box"></div>
+        <form id="form-submit" onsubmit="doSubmitQuest(event)">
+        <input type="hidden" id="submit-tid">
+        <input type="hidden" id="submit-reward-val">
+        <div class="form-group">
+            <label class="form-label">提出内容<span class="req">*</span></label>
+            <textarea id="submit-content" class="form-input" placeholder="クエストの要件に従い、必要な情報を記入してください" required></textarea>
+        </div>
+        <p id="err-submit" class="form-error" style="margin-bottom:10px"></p>
+        <button type="submit" class="btn btn-gold btn-wide">⚔ 提出する</button>
+        </form>
+    </div>
+    </div>
+    <div id="modal-submit-done" class="modal-overlay">
+    <div class="modal">
+        <div class="modal-header">
+        <span class="modal-title">✅ 提出完了</span>
+        <button class="modal-close" onclick="closeModal('modal-submit-done')">×</button>
+        </div>
+        <div class="tc" style="padding:20px 0">
+        <div style="font-size:52px;margin-bottom:16px">📜</div>
+        <h3 style="font-family:var(--font-display);color:var(--sepia-dark);margin-bottom:12px">クエストが提出されました</h3>
+        <div class="info-box">
+            <p><strong>現在の状態：確認中</strong></p>
+            <p>内容確認後、<strong>1〜3営業日以内</strong>に審査結果をお知らせします。</p>
+            <p style="margin-top:6px">承認された場合、登録ウォレットアドレスへ報酬が送金されます。</p>
+        </div>
+        <button class="btn btn-gold mt16" onclick="closeModal('modal-submit-done')">閉じる</button>
+        </div>
+    </div>
+    </div>
+    <div id="modal-account" class="modal-overlay">
+    <div class="modal">
+        <div class="modal-header">
+        <span class="modal-title">⚔ アカウント情報</span>
+        <button class="modal-close" onclick="closeModal('modal-account')">×</button>
+        </div>
+        <div id="account-body"></div>
+    </div>
+    </div>
+    <div id="modal-submissions" class="modal-overlay">
+    <div class="modal modal-lg">
+        <div class="modal-header">
+        <span class="modal-title">📜 受注済みクエスト</span>
+        <button class="modal-close" onclick="closeModal('modal-submissions')">×</button>
+        </div>
+        <div id="submissions-body">
+        <div class="empty-state"><p>読み込み中...</p></div>
+        </div>
+    </div>
+    </div>
+    <div id="modal-contact-user" class="modal-overlay">
+    <div class="modal">
+        <div class="modal-header">
+        <span class="modal-title">📧 お問い合わせ</span>
+        <button class="modal-close" onclick="closeModal('modal-contact-user')">×</button>
+        </div>
+        <div class="info-box"><p>ログインユーザーのお問い合わせは1日1回まで可能です。</p></div>
+        <form id="form-contact-user" onsubmit="doContactUser(event)">
+        <div class="form-group">
+            <label class="form-label">問い合わせ内容<span class="req">*</span></label>
+            <textarea id="cu-content" class="form-input" placeholder="お問い合わせの内容を詳しく記入してください" required></textarea>
+        </div>
+        <p id="err-cu" class="form-error" style="margin-bottom:10px"></p>
+        <button type="submit" class="btn btn-gold btn-wide">メーラーを起動して送信する</button>
+        </form>
+    </div>
+    </div>
+    <div id="modal-contact-guest" class="modal-overlay">
+    <div class="modal">
+        <div class="modal-header">
+        <span class="modal-title">📧 お問い合わせ（非会員）</span>
+        <button class="modal-close" onclick="closeModal('modal-contact-guest')">×</button>
+        </div>
+        <div class="warn-box">
+        <h4>⚠ 非ログインユーザーのお問い合わせ</h4>
+        <p>非会員のお問い合わせには本人確認のため LTC 送金が必要です。</p>
+        <p style="margin-top:6px"><strong>送金先ウォレット：</strong></p>
+        <p id="guest-admin-wallet" style="word-break:break-all;background:rgba(0,0,0,0.05);padding:6px;margin-top:4px;font-size:12px;border-radius:2px"></p>
+        </div>
+        <form id="form-contact-guest" onsubmit="doContactGuest(event)">
+        <div class="form-group">
+            <label class="form-label">送金 LTC 額<span class="req">*</span></label>
+            <input id="cg-LTC" type="text" class="form-input" placeholder="例: 0.001" required>
+        </div>
+        <div class="form-group">
+            <label class="form-label">送金元ウォレットアドレス<span class="req">*</span></label>
+            <input id="cg-wallet" type="text" class="form-input" placeholder="0x..." required>
+        </div>
+        <div class="form-group">
+            <label class="form-label">問い合わせ内容<span class="req">*</span></label>
+            <textarea id="cg-content" class="form-input" placeholder="お問い合わせの内容を詳しく記入してください" required></textarea>
+        </div>
+        <p id="err-cg" class="form-error" style="margin-bottom:10px"></p>
+        <button type="submit" class="btn btn-gold btn-wide">メーラーを起動して送信する</button>
+        </form>
+    </div>
+    </div>
+    <div id="modal-login-issue" class="modal-overlay">
+    <div class="modal">
+        <div class="modal-header">
+        <span class="modal-title">🆘 ログインできない場合</span>
+        <button class="modal-close" onclick="closeModal('modal-login-issue')">×</button>
+        </div>
+        <div class="warn-box">
+        <h4>⚠ メールに必ず記載してください</h4>
+        <ul>
+            <li>仮パスワード（新しく設定したいパスワード）</li>
+            <li>秘密の質問の回答</li>
+            <li>送金 LTC 額（本人確認用）</li>
+            <li>登録ウォレットアドレス（送金元）</li>
+            <li>その他必要事項</li>
+        </ul>
+        </div>
+        <form id="form-login-issue" onsubmit="doLoginIssue(event)">
+        <div class="form-group">
+            <label class="form-label">登録アカウント名<span class="req">*</span></label>
+            <input id="li-uname" type="text" class="form-input" required>
+        </div>
+        <div class="form-group">
+            <label class="form-label">秘密の質問の回答<span class="req">*</span></label>
+            <input id="li-ans" type="text" class="form-input" required>
+        </div>
+        <div class="form-group">
+            <label class="form-label">登録ウォレットアドレス（送金元）<span class="req">*</span></label>
+            <input id="li-wallet" type="text" class="form-input" placeholder="0x..." required>
+        </div>
+        <div class="form-group">
+            <label class="form-label">仮パスワード（新しいパスワード）<span class="req">*</span></label>
+            <input id="li-new-pw" type="text" class="form-input" required>
+        </div>
+        <div class="form-group">
+            <label class="form-label">送金 LTC 額<span class="req">*</span></label>
+            <input id="li-LTC" type="text" class="form-input" placeholder="例: 0.001" required>
+        </div>
+        <div class="form-group">
+            <label class="form-label">詳細・状況説明<span class="req">*</span></label>
+            <textarea id="li-detail" class="form-input" placeholder="状況を詳しく記入してください" required></textarea>
+        </div>
+        <button type="submit" class="btn btn-gold btn-wide">メーラーを起動して送信する</button>
+        </form>
+    </div>
+    </div>
+    <div id="modal-guide" class="modal-overlay">
+    <div class="modal modal-lg">
+        <div class="modal-header">
+        <span class="modal-title">📖 初心者ガイド</span>
+        <button class="modal-close" onclick="closeModal('modal-guide')">×</button>
+        </div>
+        <div class="guide-step">
+        <div class="guide-num">1</div>
+        <div class="guide-text">
+            <h4>アカウント登録</h4>
+            <p>LTC ウォレットアドレス・アカウント名・パスワード・秘密の質問を設定し冒険者登録を行います。ウォレットは報酬受け取りに使用します。アドレスは変更不可のため正確に入力してください。</p>
+        </div>
+        </div>
+        <div class="guide-step">
+        <div class="guide-num">2</div>
+        <div class="guide-text">
+            <h4>クエストを探す</h4>
+            <p>掲示板のクエスト一覧を確認します。タイトルと報酬額が表示されており、クリックすると詳細・手順・注意事項を確認できます。</p>
+        </div>
+        </div>
+        <div class="guide-step">
+        <div class="guide-num">3</div>
+        <div class="guide-text">
+            <h4>受注＆提出</h4>
+            <p>詳細を確認後「受注＆提出」ボタンを押します。手順に従い、注意事項を守って回答を入力して提出してください。</p>
+        </div>
+        </div>
+        <div class="guide-step">
+        <div class="guide-num">4</div>
+        <div class="guide-text">
+            <h4>審査・報酬受け取り</h4>
+            <p>提出後 1〜3 営業日以内に審査が行われます。承認されると登録ウォレットアドレスへ LTC 報酬が送金されます。</p>
+        </div>
+        </div>
+        <div class="warn-box">
+        <h4>⚠ 注意事項</h4>
+        <ul>
+            <li>クエストの注意事項に違反した提出は却下されます</li>
+            <li>同一クエストは募集タイプに従って再受注可能です</li>
+            <li>不正行為・虚偽報告はアカウント停止の対象です</li>
+        </ul>
+        </div>
+    </div>
+    </div>
+    <div id="modal-help" class="modal-overlay">
+    <div class="modal modal-lg">
+        <div class="modal-header">
+        <span class="modal-title">❓ ヘルプ・FAQ</span>
+        <button class="modal-close" onclick="closeModal('modal-help')">×</button>
+        </div>
+        <div style="font-size:14px;color:var(--sepia-mid);line-height:1.8">
+        <p style="font-family:var(--font-display);font-size:13px;color:var(--brown-mid);margin-bottom:6px">Q. 報酬はいつ支払われますか？</p>
+        <p>提出後 1〜3 営業日以内に確認を行い、承認後にウォレットへ送金します。</p>
+        <p style="font-family:var(--font-display);font-size:13px;color:var(--brown-mid);margin-bottom:6px">Q. クエストの表示報酬額より貰った額が少ないのは何故？</p>
+        <p>クエストでは手数料抜きの報酬額が表示されています。実際に受け取る際は、ウォレットアドレスから送金する都合上、小額の手数料が引かれています。</p>
+        <div class="divider" style="font-size:12px;letter-spacing:3px">⸻</div>
+        <p style="font-family:var(--font-display);font-size:13px;color:var(--brown-mid);margin-bottom:6px">Q. 却下された場合は？</p>
+        <p>注意事項に違反した場合に却下されます。注意事項を再確認し、再受注可能なクエストは再チャレンジできます。</p>
+        <div class="divider" style="font-size:12px;letter-spacing:3px">⸻</div>
+        <p style="font-family:var(--font-display);font-size:13px;color:var(--brown-mid);margin-bottom:6px">Q. ウォレットアドレスは変更できますか？</p>
+        <p>変更できません。正確なアドレスを登録してください。</p>
+        <div class="divider" style="font-size:12px;letter-spacing:3px">⸻</div>
+        <p style="font-family:var(--font-display);font-size:13px;color:var(--brown-mid);margin-bottom:6px">Q. パスワードを忘れました</p>
+        <p>ログイン画面の「パスワードを忘れた方」から秘密の質問で再設定できます。それも不明な場合はお問い合わせください。</p>
+        <div class="divider" style="font-size:12px;letter-spacing:3px">⸻</div>
+        <p style="font-family:var(--font-display);font-size:13px;color:var(--brown-mid);margin-bottom:6px">Q. 対応しているウォレットは？</p>
+        <p>Litecoinネットワーク 対応の Litecoin ウォレット（MetaMask 等）であればすべて対応しています。</p>
+        <div class="divider" style="font-size:12px;letter-spacing:3px">⸻</div>
+        <p style="font-family:var(--font-display);font-size:13px;color:var(--brown-mid);margin-bottom:6px">Q. 同じクエストを複数回受注できますか？</p>
+        <p>クエストの「募集タイプ」に依存します。「1人1回」は再受注不可、「指定日数ごと」は期間経過後に再受注できます。</p>
+        </div>
+    </div>
+    </div>
+    <div id="modal-terms" class="modal-overlay">
+    <div class="modal modal-lg">
+        <div class="modal-header">
+        <span class="modal-title">📋 注意事項</span>
+        <button class="modal-close" onclick="closeModal('modal-terms')">×</button>
+        </div>
+        <div style="font-size:13px;color:var(--sepia-mid);line-height:1.9">
+        <p>InfoGuild をご利用いただくにあたり、以下の注意事項をご確認ください。</p>
+        <ul style="padding-left:20px;margin-top:12px">
+            <li>提出内容は必ずクエストの手順・注意事項に従ってください</li>
+            <li>虚偽・不正な情報の提出は即座に却下され、アカウント停止の対象となります</li>
+            <li>他者のウォレットアドレスでの登録・提出は禁止です</li>
+            <li>同一クエストへの不正多重提出は禁止です</li>
+            <li>運営の判断で予告なくクエストを変更・削除する場合があります</li>
+            <li>LTCの価格変動に応じて、定期的にクエストの報酬額は調整されます</li>
+            <li>報酬の支払いは LTC（Litecoinネットワーク）のみです</li>
+            <li>承認後の報酬支払いには通常 1〜3 営業日かかります</li>
+            <li>お問い合わせへの返信は対応状況により遅れる場合があります</li>
+        </ul>
+        </div>
+    </div>
+    </div>
+    <div id="modal-security" class="modal-overlay">
+    <div class="modal">
+        <div class="modal-header">
+        <span class="modal-title">🔒 セキュリティ</span>
+        <button class="modal-close" onclick="closeModal('modal-security')">×</button>
+        </div>
+        <div style="font-size:13px;color:var(--sepia-mid);line-height:1.9">
+        <p>InfoGuild では以下のセキュリティ対策を実施しています。</p>
+        <ul style="padding-left:20px;margin-top:12px">
+            <li>パスワードは <strong>SHA-256 ハッシュ化</strong>して保存（平文保存なし）</li>
+            <li>通信は <strong>HTTPS</strong></li>
+            <li>入力データは XSS 対策のためエスケープ処理</li>
+            <li>秘密の質問回答もハッシュ化保存</li>
+        </ul>
+        <div class="warn-box" style="margin-top:14px">
+            <h4>⚠ ご自身でもご注意ください</h4>
+            <p>パスワードの使い回しは避けてください。秘密の質問の回答は第三者に教えないでください。不審なメールにご注意ください。</p>
+        </div>
+        </div>
+    </div>
+    </div>
+    <div id="modal-delete-req" class="modal-overlay">
+    <div class="modal">
+        <div class="modal-header">
+        <span class="modal-title">🗑 アカウント削除申請</span>
+        <button class="modal-close" onclick="closeModal('modal-delete-req')">×</button>
+        </div>
+        <div class="warn-box">
+        <h4>⚠ 削除前に確認</h4>
+        <ul>
+            <li>削除後はデータの復元ができません</li>
+            <li>未承認の提出は自動的にキャンセルされます</li>
+            <li>未受取の報酬が失効する場合があります</li>
+        </ul>
+        </div>
+        <form id="form-delete-req" onsubmit="doDeleteReq(event)">
+        <div class="form-group">
+            <label class="form-label">パスワード確認<span class="req">*</span></label>
+            <input id="dr-pw" type="password" class="form-input" autocomplete="current-password" required>
+        </div>
+        <div class="form-group">
+            <label class="form-label">削除理由<span class="req">*</span></label>
+            <textarea id="dr-reason" class="form-input" placeholder="削除理由を記入してください" required></textarea>
+        </div>
+        <p id="err-dr" class="form-error" style="margin-bottom:10px"></p>
+        <button type="submit" class="btn btn-danger btn-wide">削除申請を送信する</button>
+        </form>
+    </div>
+    </div>
+    <div class="centerad-widget"></div>
+    <script src="../../Ads/ToolCenterAds.js" rel="preload"></script>
+    <script src="../../Ads/ShowAds.js" defer="defer"></script>
+    <script src="../../Ads/ToolAds.js" defer="defer"></script>
+    <script src="infoguildscript.js" defer="defer"></script>
+    <!--playgama-->
+    <script nonce="widget-playgama1" defer="defer">
+        window.playgama_widgets = window.playgama_widgets || { clbs: [] };
+        window.playgama_widgets.clbs.push(() => {
+        window.playgama_widgets.defineWidget({
+            widget_id: "WA0000000001005",
+            element_id: "widget-playgama1",
+        });
+        window.playgama_widgets.showWidget("widget-playgama1");
+        });
+    </script>
+    <script nonce="widget-playgama2" defer="defer">
+        window.playgama_widgets = window.playgama_widgets || { clbs: [] };
+        window.playgama_widgets.clbs.push(() => {
+        window.playgama_widgets.defineWidget({
+            widget_id: "WA0000000001006",
+            element_id: "widget-playgama2",
+        });
+        window.playgama_widgets.showWidget("widget-playgama2");
+        });
+    </script>
+    <script nonce="widget-playgama3" defer="defer">
+        window.playgama_widgets = window.playgama_widgets || { clbs: [] };
+        window.playgama_widgets.clbs.push(() => {
+        window.playgama_widgets.defineWidget({
+            widget_id: "WA0000000001007",
+            element_id: "widget-playgama3",
+        });
+        window.playgama_widgets.showWidget("widget-playgama3");
+        });
+    </script>
+    <script nonce="widget-playgama4" defer="defer">
+        window.playgama_widgets = window.playgama_widgets || { clbs: [] };
+        window.playgama_widgets.clbs.push(() => {
+        window.playgama_widgets.defineWidget({
+            widget_id: "WA0000000001008",
+            element_id: "widget-playgama4",
+        });
+        window.playgama_widgets.showWidget("widget-playgama4");
+        });
+    </script>
+    <script nonce="widget-playgama5" defer="defer">
+        window.playgama_widgets = window.playgama_widgets || { clbs: [] };
+        window.playgama_widgets.clbs.push(() => {
+        window.playgama_widgets.defineWidget({
+            widget_id: "WA0000000001009",
+            element_id: "widget-playgama5",
+        });
+        window.playgama_widgets.showWidget("widget-playgama5");
+        });
+    </script>
+    <script nonce="widget-playgama6" defer="defer">
+        window.playgama_widgets = window.playgama_widgets || { clbs: [] };
+        window.playgama_widgets.clbs.push(() => {
+        window.playgama_widgets.defineWidget({
+            widget_id: "WA0000000001010",
+            element_id: "widget-playgama6",
+        });
+        window.playgama_widgets.showWidget("widget-playgama6");
+        });
+    </script>
+
+    <script nonce="widget-playgama7" defer="defer">
+        window.playgama_widgets = window.playgama_widgets || { clbs: [] };
+        window.playgama_widgets.clbs.push(() => {
+        window.playgama_widgets.defineWidget({
+            widget_id: "WA0000000001011",
+            element_id: "widget-playgama7",
+        });
+        window.playgama_widgets.showWidget("widget-playgama7");
+        });
+    </script>
+    <script nonce="widget-playgama8" defer="defer">
+        window.playgama_widgets = window.playgama_widgets || { clbs: [] };
+        window.playgama_widgets.clbs.push(() => {
+        window.playgama_widgets.defineWidget({
+            widget_id: "WA0000000001012",
+            element_id: "widget-playgama8",
+        });
+        window.playgama_widgets.showWidget("widget-playgama8");
+        });
+    </script>
+    <script nonce="widget-playgama9" defer="defer">
+        window.playgama_widgets = window.playgama_widgets || { clbs: [] };
+        window.playgama_widgets.clbs.push(() => {
+        window.playgama_widgets.defineWidget({
+            widget_id: "WA0000000001013",
+            element_id: "widget-playgama9",
+        });
+        window.playgama_widgets.showWidget("widget-playgama9");
+        });
+    </script>
+    <script nonce="widget-playgama10" defer="defer">
+        window.playgama_widgets = window.playgama_widgets || { clbs: [] };
+        window.playgama_widgets.clbs.push(() => {
+        window.playgama_widgets.defineWidget({
+            widget_id: "WA0000000001014",
+            element_id: "widget-playgama10",
+        });
+        window.playgama_widgets.showWidget("widget-playgama10");
+        });
+    </script>
+    <script nonce="widget-playgama11" defer="defer">
+        window.playgama_widgets = window.playgama_widgets || { clbs: [] };
+        window.playgama_widgets.clbs.push(() => {
+        window.playgama_widgets.defineWidget({
+            widget_id: "WA0000000001015",
+            element_id: "widget-playgama11",
+        });
+        window.playgama_widgets.showWidget("widget-playgama11");
+        });
+    </script>
+    <script nonce="widget-playgama12" defer="defer">
+        window.playgama_widgets = window.playgama_widgets || { clbs: [] };
+        window.playgama_widgets.clbs.push(() => {
+        window.playgama_widgets.defineWidget({
+            widget_id: "WA0000000001016",
+            element_id: "widget-playgama12",
+        });
+        window.playgama_widgets.showWidget("widget-playgama12");
+        });
+    </script>
+  <!--playgama-->
+    <script src="../../CoreImplementation/TweetManager.js" defer="defer"></script>
+    <script src="SecurityValidator.js" defer="defer"></script>
+</body>
+</html>

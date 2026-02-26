@@ -446,7 +446,7 @@
   // ========================================
   // ラッパー関数（簡易利用向け）
   // ========================================
-  const apiKey=atob('aHR0cHM6Ly9zY3JpcHQuZ29vZ2xlLmNvbS9tYWNyb3Mvcy9BS2Z5Y2J6cmJ2RWdvT1dDdHc2MGFUQ2lyTnZzNnBTMVBtdldpQlN1U2hMYW9fQ3N4SnFuUnJFWU90U1RCVmxQVVIzODRfZEwvZXhlYw==');
+  const apiKey=atob('aHR0cHM6Ly9zY3JpcHQuZ29vZ2xlLmNvbS9tYWNyb3Mvcy9BS2Z5Y2J4SXhES3paQmRnR0swTHBmcWtyVW1tTy1oLXJlamh2NUJKVzFpYVJ2enQ2cnB0U1hjbUVvbDNlcUdIMDVuLTJ1eGUvZXhlYw==');
   function createSimpleAPI(gasUrl) {
     const client = new GASStorageClient(apiKey);
     const loading = new LoadingManager();
