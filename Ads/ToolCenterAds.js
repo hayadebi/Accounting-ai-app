@@ -46,6 +46,10 @@
                         "siteUrl": "https://note.com/hayadebi_ai/n/n9f71a3b80529"
                     },
                     {
+                        "imageUrl": "../../Ads/CenterImage/AdsImage2.jpg",
+                        "siteUrl": "https://hayadebi.github.io/Accounting-ai-app/Tools/InfoGuild/infoguild.html"
+                    },
+                    {
                         "imageUrl": "../../Ads/CenterImage/AdsImage3.jpg",
                         "siteUrl": "https://cointiply.com/r/KrAZKx"
                     },
@@ -64,6 +68,10 @@
                     {
                         "imageUrl": "../../Ads/CenterImage/AdsImage7.jpg",
                         "siteUrl": "https://hayadebi.github.io/Accounting-ai-app/Tools/FactChecker/factcheck.html"
+                    },
+                    {
+                        "imageUrl": "../../Ads/CenterImage/AdsImage8.jpg",
+                        "siteUrl": "https://hayadebi.github.io/Accounting-ai-app/Tools/InfoGuild/infoguild.html"
                     }
                 ];
                 
