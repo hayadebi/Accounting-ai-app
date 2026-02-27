@@ -9,6 +9,10 @@
     "siteUrl": "https://bitflyer.com/invitation?id=hhhv5jly&lang=ja-JP"
   },
   {
+    "imageUrl": "../../Ads/BlogImage/AdsImage4.jpg",
+    "siteUrl": "https://cointiply.com/r/KrAZKx"
+  },
+  {
     "imageUrl": "../../Ads/BlogImage/AdsImage5.jpg",
     "siteUrl": "https://note.com/hayadebi_ai/n/nd7234ba28c72"
   },
