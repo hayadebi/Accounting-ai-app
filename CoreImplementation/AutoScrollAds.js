@@ -24,6 +24,11 @@
             "link": "https://hayadebi.github.io/Accounting-ai-app/Tools/FactChecker/factcheck.html"
         },
         {
+            "title": "自動スクロールバナー広告作成ウェブツール",
+            "image": "https://hayadebi.github.io/Accounting-ai-app/Images/autoscrollbanner.jpg",
+            "link": "https://hayadebi.github.io/Accounting-ai-app/Tools/AutoScrollBanner/autoscrollbanner.html"
+        },
+        {
             "title": "InfoGuild",
             "image": "https://hayadebi.github.io/Accounting-ai-app/Ads/CenterImage/AdsImage2.jpg",
             "link": "https://hayadebi.github.io/Accounting-ai-app/Tools/InfoGuild/infoguild.html"
