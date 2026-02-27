@@ -100,7 +100,7 @@ document.addEventListener('DOMContentLoaded', function() {
         continueImage.width = '1';
         continueImage.height = '1';
         continueImage.alt = '';
-        continueImage.style = 'border: none;';
+        continueImage.style.cssText = 'border: none;';
         outputArea.appendChild(continueImage);
     }
 });

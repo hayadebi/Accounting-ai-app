@@ -32,23 +32,58 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     </script>
 
     <script type="application/ld+json">
+    {
+    "@context": "https://schema.org",
+    "@graph": [
+
         {
-        "@context": "https://schema.org",
-        "@type": "WebSite",
+        "@type": "Organization",
+        "@id": "https://hayadebi.github.io/Accounting-ai-app/#organization",
         "name": "ハヤデビのツール工房",
-        "datePublished": "2026-02-08",
-        "dateModified": "2026-02-22",
         "url": "https://hayadebi.github.io/Accounting-ai-app/",
-        "description": "無料で使える便利な自作AI・Webツールをまとめたサイトです。",
-        "publisher": {
-            "@type": "Organization",
-            "name": "ハヤデビ",
-            "logo": {
+        "logo": {
             "@type": "ImageObject",
-            "url": "https://pbs.twimg.com/media/G5mBHiiacAIWGvt?format=png&name=900x900"
-            }
+            "url": "https://hayadebi.github.io/Accounting-ai-app/Images/logo.png"
+        },
+        "founder": {
+            "@id": "https://hayadebi.github.io/Accounting-ai-app/profile.html#person"
+        }
+        },
+
+        {
+        "@type": "Person",
+        "@id": "https://hayadebi.github.io/Accounting-ai-app/profile.html#person",
+        "name": "ハヤデビ",
+        "url": "https://hayadebi.github.io/Accounting-ai-app/profile.html",
+        "jobTitle": "フリーランスエンジニア",
+        "worksFor": {
+            "@id": "https://hayadebi.github.io/Accounting-ai-app/#organization"
+        }
+        },
+
+        {
+        "@type": "WebSite",
+        "@id": "https://hayadebi.github.io/Accounting-ai-app/#website",
+        "name": "ハヤデビのツール工房",
+        "url": "https://hayadebi.github.io/Accounting-ai-app/",
+        "description": "無料で使えるAI・Webツールを提供するサイト。確定申告、SEO、ブログ、ゲームなど幅広い分野の便利ツールを公開しています。",
+        "inLanguage": "ja",
+
+        "publisher": {
+            "@id": "https://hayadebi.github.io/Accounting-ai-app/#organization"
+        },
+
+        "creator": {
+            "@id": "https://hayadebi.github.io/Accounting-ai-app/profile.html#person"
+        },
+
+        "copyrightHolder": {
+            "@id": "https://hayadebi.github.io/Accounting-ai-app/#organization"
         }
         }
+
+    ]
+    }
     </script>
 
 </head>
@@ -128,23 +163,19 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </section>
         <!--サイト内誘導広告-->
         <div style="width:100%; height:auto;padding: 0;margin: 0 0 20px 0;">
-            <!-- <div style="width: 100%; max-width: 1200px; margin: 0 auto; padding: 20px 10px; box-sizing: border-box; font-family: 'Hiragino Kaku Gothic ProN', 'メイリオ', sans-serif;"> -->
+            <!-- スクロールコンテナ -->
+            <div style="position: relative; overflow: hidden; background: rgba(255, 255, 255, 0.08); border-radius: 15px; padding: 15px;border: 1px solid rgba(255, 255, 255, 0.1);">
+                <!-- 左矢印 -->
+                <div id="prevBtn" style="position: absolute; left: 0; top: 50%; transform: translateY(-50%); width: 40px; height: 40px; background: rgba(0,0,0,0.5); color: white; display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 10; border-radius: 50%; font-size: 20px; user-select: none;">❮</div>
                 
-                <!-- スクロールコンテナ -->
-                <div style="position: relative; overflow: hidden; background: rgba(255, 255, 255, 0.08); border-radius: 15px; padding: 15px;border: 1px solid rgba(255, 255, 255, 0.1);">
-                    <!-- 左矢印 -->
-                    <div id="prevBtn" style="position: absolute; left: 0; top: 50%; transform: translateY(-50%); width: 40px; height: 40px; background: rgba(0,0,0,0.5); color: white; display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 10; border-radius: 50%; font-size: 20px; user-select: none;">❮</div>
-                    
-                    <!-- 右矢印 -->
-                    <div id="nextBtn" style="position: absolute; right: 0; top: 50%; transform: translateY(-50%); width: 40px; height: 40px; background: rgba(0,0,0,0.5); color: white; display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 10; border-radius: 50%; font-size: 20px; user-select: none;">❯</div>
-                    
-                    <!-- コンテンツ表示エリア -->
-                    <div id="contentWrapper" style="display: flex; transition: transform 0.5s ease; margin: 0 50px;"></div>
-                </div>
+                <!-- 右矢印 -->
+                <div id="nextBtn" style="position: absolute; right: 0; top: 50%; transform: translateY(-50%); width: 40px; height: 40px; background: rgba(0,0,0,0.5); color: white; display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 10; border-radius: 50%; font-size: 20px; user-select: none;">❯</div>
                 
-                <!-- インジケーター -->
-                <div id="indicators" style="display: flex; justify-content: center; gap: 8px; margin-top: 15px;"></div>
-            <!-- </div> -->
+                <!-- コンテンツ表示エリア -->
+                <div id="contentWrapper" style="display: flex; transition: transform 0.5s ease; margin: 0 50px;"></div>
+            </div>
+            <!-- インジケーター -->
+            <div id="indicators" style="display: flex; justify-content: center; gap: 8px; margin-top: 15px;"></div>
         </div>
         <script src="CoreImplementation/AutoScrollAds.js" defer="defer"></script>
         <!-- 提携別サイト -->

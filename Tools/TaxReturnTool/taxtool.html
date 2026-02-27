@@ -34,47 +34,87 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     {
     "@context": "https://schema.org",
     "@graph": [
+
         {
-        "@type": ["SoftwareApplication", "WebApplication"],
+        "@type": "Organization",
+        "@id": "https://hayadebi.github.io/Accounting-ai-app/#organization",
+        "name": "ハヤデビのツール工房",
+        "url": "https://hayadebi.github.io/Accounting-ai-app/"
+        },
+
+        {
+        "@type": "Person",
+        "@id": "https://hayadebi.github.io/Accounting-ai-app/profile.html#person",
+        "name": "ハヤデビ",
+        "url": "https://hayadebi.github.io/Accounting-ai-app/profile.html"
+        },
+
+        {
+        "@type": "WebSite",
+        "@id": "https://hayadebi.github.io/Accounting-ai-app/#website",
+        "url": "https://hayadebi.github.io/Accounting-ai-app/",
+        "name": "ハヤデビのツール工房",
+        "inLanguage": "ja",
+        "publisher": {
+            "@id": "https://hayadebi.github.io/Accounting-ai-app/#organization"
+        }
+        },
+
+        {
+        "@type": ["SoftwareApplication","WebApplication"],
         "@id": "https://hayadebi.github.io/Accounting-ai-app/Tools/TaxReturnTool/taxtool.html#software",
         "name": "確定申告補助AIツール",
-        "datePublished": "2026-02-04",
-        "dateModified": "2026-02-22",
-        "description": "公認会計士レベルの専門知識を再現した高度なAIツールです 。個人事業主の複雑な仕訳判断を強力にバックアップし、領収書や請求書から最適な勘定科目や摘要を瞬時に提示します。",
+        "description": "税務実務の知見を参考に設計されたAIベースの仕訳支援Webツール。個人事業主向けに、領収書や請求書の内容から勘定科目候補や摘要案を提示します。",
         "applicationCategory": "FinanceApplication",
         "operatingSystem": "Web",
         "inLanguage": "ja",
-        "keywords": "確定申告, 税務, 個人事業主, AI, 会計",
+        "isAccessibleForFree": true,
+        "url": "https://hayadebi.github.io/Accounting-ai-app/Tools/TaxReturnTool/taxtool.html",
+
+        "image": "https://pbs.twimg.com/media/HAISrAmbYAE8TkV?format=jpg&name=large",
+
+        "publisher": {
+            "@id": "https://hayadebi.github.io/Accounting-ai-app/#organization"
+        },
+
+        "author": {
+            "@id": "https://hayadebi.github.io/Accounting-ai-app/profile.html#person"
+        },
+
+        "creator": {
+            "@id": "https://hayadebi.github.io/Accounting-ai-app/profile.html#person"
+        },
+
+        "brand": {
+            "@id": "https://hayadebi.github.io/Accounting-ai-app/#organization"
+        },
+
         "offers": {
             "@type": "Offer",
             "price": "0",
             "priceCurrency": "JPY"
         },
-        "publisher": {
-            "@type": "Organization",
-            "name": "ハヤデビ"
-        },
-        "author": {
-            "@type": "Person",
-            "name": "ハヤデビ",
-            "url": "https://hayadebi.github.io/Accounting-ai-app/profile.html"
-        },
-        "image": "https://pbs.twimg.com/media/HAISrAmbYAE8TkV?format=jpg&name=large",
-        "url": "https://hayadebi.github.io/Accounting-ai-app/Tools/TaxReturnTool/taxtool.html",
+
         "featureList": [
-            "公認会計士レベルの専門知識に基づく仕訳判断",
-            "日本の税務実務に準拠した勘定科目の提示",
-            "個人事業主向けの最適化されたAIプロンプト",
-            "Gemini AIを活用した高度な解析",
-            "インストール不要のブラウザ完結型ツール"
+            "税務実務に基づく仕訳候補の提示",
+            "日本の税制に配慮した勘定科目サジェスト",
+            "個人事業主向け最適化設計",
+            "AIによるテキスト解析"
         ]
         },
+
         {
         "@type": "WebPage",
         "@id": "https://hayadebi.github.io/Accounting-ai-app/Tools/TaxReturnTool/taxtool.html",
         "url": "https://hayadebi.github.io/Accounting-ai-app/Tools/TaxReturnTool/taxtool.html",
         "name": "確定申告補助AIツール ― ハヤデビのツール工房",
-        "description": "確定申告の仕訳で、もう迷わない 。公認会計士レベルの専門知識を再現したAIが、個人事業主の複雑な仕訳判断を強力にバックアップします。",
+        "description": "個人事業主向けのAI仕訳支援Webツール。",
+        "inLanguage": "ja",
+
+        "isPartOf": {
+            "@id": "https://hayadebi.github.io/Accounting-ai-app/#website"
+        },
+
         "breadcrumb": {
             "@type": "BreadcrumbList",
             "itemListElement": [
@@ -98,10 +138,12 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             }
             ]
         },
+
         "mainEntity": {
             "@id": "https://hayadebi.github.io/Accounting-ai-app/Tools/TaxReturnTool/taxtool.html#software"
         }
         }
+
     ]
     }
     </script>
@@ -159,12 +201,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <div style="width:100%;height:auto;margin-bottom:20px;"><center><script type="text/javascript">
 var adstir_vars = {
   ver: "4.0",
-  type: "native",
   app_id: "MEDIA-8d0588f8",
-  ad_spot: 3
+  ad_spot: 1,
+  center: false
 };
 </script>
-<script type="text/javascript" src="https://js.ad-stir.com/js/adstir_native.js"></script></center></div>
+<script type="text/javascript" src="https://js.ad-stir.com/js/adstir.js"></script></center></div>
         <div class="section">
             <div class="section-title">使い方</div>
             <div class="usage-content">1.API:実行時の消費トークンはユーザーの自己負担です。<a href="https://aistudio.google.com/" target="_blank" referrerpolicy="no-referrer-when-downgrade" alt="Google AI Studio" style="color: #a8d0ff;overflow-wrap: break-word;">Google AI Studio</a>からご自身のAPIキーを作成して、API設定に入力してください。

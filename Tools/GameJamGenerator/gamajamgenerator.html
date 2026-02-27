@@ -47,47 +47,88 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     {
     "@context": "https://schema.org",
     "@graph": [
+
+        {
+        "@type": "Organization",
+        "@id": "https://hayadebi.github.io/Accounting-ai-app/#organization",
+        "name": "ハヤデビのツール工房",
+        "url": "https://hayadebi.github.io/Accounting-ai-app/"
+        },
+
+        {
+        "@type": "Person",
+        "@id": "https://hayadebi.github.io/Accounting-ai-app/profile.html#person",
+        "name": "ハヤデビ",
+        "url": "https://hayadebi.github.io/Accounting-ai-app/profile.html"
+        },
+
+        {
+        "@type": "WebSite",
+        "@id": "https://hayadebi.github.io/Accounting-ai-app/#website",
+        "url": "https://hayadebi.github.io/Accounting-ai-app/",
+        "name": "ハヤデビのツール工房",
+        "inLanguage": "ja",
+        "publisher": {
+            "@id": "https://hayadebi.github.io/Accounting-ai-app/#organization"
+        }
+        },
+
         {
         "@type": ["SoftwareApplication","WebApplication"],
         "@id": "https://hayadebi.github.io/Accounting-ai-app/Tools/GameJamGenerator/gamajamgenerator.html#software",
         "name": "ゲームジャム企画ジェネレーター",
-        "datePublished": "2026-02-14",
-        "dateModified": "2026-02-22",
-        "description": "ゲームジャムのアイデア出し、もう悩まない！「ゲームジャム企画ジェネレーター」は、unity1weekなど短期間でのゲーム開発に最適な、ランダムなテーマからユニークなゲーム企画を無料で自動生成するWebツールです 。ボタン一つで斬新なお題が無限に生まれ、あなたの創造性を刺激します。",
+        "description": "ゲームジャム向けのアイデアを自動生成する無料Webツール。Unity開発やunity1weekなど短期間開発に最適で、ランダムテーマから独創的な企画を生成できます。",
         "applicationCategory": "DeveloperApplication",
         "operatingSystem": "Web",
         "isAccessibleForFree": true,
         "inLanguage": "ja",
-        "keywords": "ゲームジャム, Unity, AI, 企画生成, 開発",
+
+        "image": "https://pbs.twimg.com/media/HBHfcGXa4AAuZQS?format=jpg&name=large",
+        "url": "https://hayadebi.github.io/Accounting-ai-app/Tools/GameJamGenerator/gamajamgenerator.html",
+
+        "publisher": {
+            "@id": "https://hayadebi.github.io/Accounting-ai-app/#organization"
+        },
+
+        "author": {
+            "@id": "https://hayadebi.github.io/Accounting-ai-app/profile.html#person"
+        },
+
+        "creator": {
+            "@id": "https://hayadebi.github.io/Accounting-ai-app/profile.html#person"
+        },
+
+        "brand": {
+            "@id": "https://hayadebi.github.io/Accounting-ai-app/#organization"
+        },
+
         "offers": {
             "@type": "Offer",
             "price": "0",
             "priceCurrency": "JPY"
         },
-        "publisher": {
-            "@type": "Organization",
-            "name": "ハヤデビ"
-        },
-        "author": {
-            "@type": "Person",
-            "name": "ハヤデビ",
-            "url": "https://hayadebi.github.io/Accounting-ai-app/profile.html"
-        },
-        "image": "https://pbs.twimg.com/media/HBHfcGXa4AAuZQS?format=jpg&name=large",
-        "url": "https://hayadebi.github.io/Accounting-ai-app/Tools/GameJamGenerator/gamajamgenerator.html",
+
         "featureList": [
-            "2つのテーマワードからゲーム企画を自動生成",
-            "290語以上の語彙からランダムにテーマを選択可能",
-            "Gemini APIを利用した高度な企画提案",
-            "1週間で作れる現実的な企画内容"
+            "ゲームジャム企画の自動生成",
+            "2テーマワードによるアイデア作成",
+            "ランダムテーマ生成",
+            "Gemini APIによる企画提案",
+            "短期開発に適した現実的な内容"
         ]
         },
+
         {
         "@type": "WebPage",
         "@id": "https://hayadebi.github.io/Accounting-ai-app/Tools/GameJamGenerator/gamajamgenerator.html",
         "url": "https://hayadebi.github.io/Accounting-ai-app/Tools/GameJamGenerator/gamajamgenerator.html",
         "name": "ゲームジャム企画ジェネレーター ― ハヤデビのツール工房",
-        "description": "ゲームジャムのアイデア出し、もう悩まない！「ゲームジャム企画ジェネレーター」は、unity1weekなど短期間でのゲーム開発に最適な、ランダムなテーマからユニークなゲーム企画を無料で自動生成するWebツールです 。",
+        "description": "Unity開発やゲームジャム向けのアイデアを自動生成する無料Webツール。",
+        "inLanguage": "ja",
+
+        "isPartOf": {
+            "@id": "https://hayadebi.github.io/Accounting-ai-app/#website"
+        },
+
         "breadcrumb": {
             "@type": "BreadcrumbList",
             "itemListElement": [
@@ -111,10 +152,12 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             }
             ]
         },
+
         "mainEntity": {
             "@id": "https://hayadebi.github.io/Accounting-ai-app/Tools/GameJamGenerator/gamajamgenerator.html#software"
         }
         }
+
     ]
     }
     </script>
@@ -165,12 +208,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <div style="width:100%;height:auto;margin-bottom:20px;"><center><script type="text/javascript">
 var adstir_vars = {
   ver: "4.0",
-  type: "native",
   app_id: "MEDIA-8d0588f8",
-  ad_spot: 3
+  ad_spot: 1,
+  center: false
 };
 </script>
-<script type="text/javascript" src="https://js.ad-stir.com/js/adstir_native.js"></script></center></div>
+<script type="text/javascript" src="https://js.ad-stir.com/js/adstir.js"></script></center></div>
         <div class="section">
             <div class="section-title">使い方</div>
             <div class="usage-content">0.実行時の消費トークンはユーザーの自己負担です。<a href="https://aistudio.google.com/" target="_blank" referrerpolicy="no-referrer-when-downgrade" alt="Google AI Studio" style="color: #a8d0ff;overflow-wrap: break-word;">Google AI Studio</a>からご自身のAPIキーを作成して、API設定に入力してください。
