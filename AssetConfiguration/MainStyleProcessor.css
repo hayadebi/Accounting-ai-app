@@ -12,6 +12,10 @@ body {
     color: #ffffff;
 }
 
+.pconly {
+    display: inline;
+}
+
 .container {
     max-width: 900px;
     margin: 0 auto;
@@ -214,5 +218,9 @@ h1 {
 
     .section-title {
         font-size: 1.1rem;
+    }
+
+    .pconly {
+        display: none;
     }
 }
