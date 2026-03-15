@@ -939,7 +939,7 @@ function showShopCommands(shopItems,keeper,boughtOnce){
 function processStairs(){
   playSFX('stairs');addLog(randFrom(ANON_NAMES),randFrom(EXPLORE_TEXTS.stairs),'',1000,'anon');
   setTimeout(()=>{addLog(randFrom(ANON_NAMES),'次の階層 B'+(GS.floor+1)+' への階段を見つけた！','gold',700,'anon');
-    setTimeout(()=>{addCmd([{label:'▼ B'+(GS.floor+1)+'へ進む',action:()=>{addLog(GS.explorerName,'B'+(GS.floor+1)+'へ向かった…','',600,'player');setTimeout(()=>goToFloor(GS.floor+1),1500);}}]);setTimeout(()=>{stairAds();},700);},900);},1200);
+    setTimeout(()=>{addCmd([{label:'▼ B'+(GS.floor+1)+'へ進む',action:()=>{addLog(GS.explorerName,'B'+(GS.floor+1)+'へ向かった…','',600,'player');setTimeout(()=>goToFloor(GS.floor+1),1500);}}]);setTimeout(()=>{stairAds();},300);},900);},1200);
     
 }
 
