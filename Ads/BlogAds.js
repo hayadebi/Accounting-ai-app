@@ -19,6 +19,14 @@
   {
     "imageUrl": "../../Ads/BlogImage/AdsImage6.jpg",
     "siteUrl": "https://hayadebi.github.io/Accounting-ai-app/Tools/BlogEditor/blogeditor.html"
+  },
+  {
+    "imageUrl": "../../Ads/BlogImage/AdsImage7.png",
+    "siteUrl": "https://hayadebi.github.io/Accounting-ai-app/Tools/InfoGuild/infoguild.html"
+  },
+  {
+    "imageUrl": "https://www.dlsite.com/img/male/dojin/bn_pc_468_60_dojin_01.gif",
+    "siteUrl": "https://dlaf.jp/home/dlaf/=/aid/githubhayadebitools/url/https%3A%2F%2Fwww.dlsite.com%2Fhome%2Franking%2Fweek%2F%3Futm_medium%3Daffiliate%26utm_campaign%3Dbnlink%26utm_content%3Dbn_pc_468_60_dojin_01.gif"
   }
 ];
   
