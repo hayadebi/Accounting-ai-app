@@ -9,7 +9,8 @@ const CFG = {
     USERS:       'users',
     USERNAMES:   'usernames',
     QUESTS:      'quests',
-    SUBMISSIONS: 'submissions'
+    SUBMISSIONS: 'submissions',
+    BLACKLIST: 'blacklist'
   }
 };
 
@@ -517,18 +518,36 @@ async function doSubmitQuest(e) {
 
   startLoading('提出中...');
   try {
-    const sid  = uid();
-    const sub  = {
-      submissionId: sid,
-      taskId:       taskId,
-      rewardAmount: reward,
-      content:      content,
+    // ---- ブラックリスト照合 ----
+    // blacklistシートのA列（keys）に登録されたウォレットと一致する場合は
+    // 提出を記録するが status を問答無用で 'rejected' にセットする
+    let isBlacklisted = false;
+    try {
+      const blResult = await api.getAll(CFG.SHEET.BLACKLIST);
+      const userWallet = App.user.walletAddress.toLowerCase();
+      for (let i = 0; i < blResult.keys.length; i++) {
+        if (blResult.keys[i] && blResult.keys[i].toString().toLowerCase() === userWallet) {
+          isBlacklisted = true;
+          break;
+        }
+      }
+    } catch (_) {
+      // blacklistシートが存在しない・取得失敗の場合は照合をスキップ（通常フローへ）
+    }
+
+    const sid = uid();
+    const sub = {
+      submissionId:  sid,
+      taskId:        taskId,
+      rewardAmount:  reward,
+      content:       content,
       walletAddress: App.user.walletAddress,
-      status:       'pending',
-      createdAt:    now()
+      status:        isBlacklisted ? 'rejected' : 'pending',  // BAN済みは即rejected
+      createdAt:     now()
     };
     await api.set(CFG.SHEET.SUBMISSIONS, sid, JSON.stringify(sub));
 
+    // 提出回数はBAN済みでもカウント（記録として残す）
     App.user.submittedCount = (App.user.submittedCount || 0) + 1;
     App.user.updatedAt = now();
     await api.set(CFG.SHEET.USERS, App.user.walletAddress, JSON.stringify(App.user));

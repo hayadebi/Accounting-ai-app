@@ -4,6 +4,11 @@
     // ========================================
     const contents =     [
         {
+            "title": "YouTubeアラーム",
+            "image": "https://pbs.twimg.com/media/HASPSB1aMAA3jp9?format=jpg&amp;name=large",
+            "link": "https://hayadebi.github.io/Accounting-ai-app/Tools/YoutubeAuto/youtubeauto.html"
+        },
+        {
             "title": "ビジュアルブログエディタ",
             "image": "https://pbs.twimg.com/media/HBODZTzaUAA9Z7e?format=jpg&amp;name=large",
             "link": "https://hayadebi.github.io/Accounting-ai-app/Tools/BlogEditor/blogeditor.html"
@@ -14,19 +19,9 @@
             "link": "https://hayadebi.github.io/Accounting-ai-app/Tools/GameJamGenerator/gamajamgenerator.html"
         },
         {
-            "title": "YouTubeアラーム",
-            "image": "https://pbs.twimg.com/media/HASPSB1aMAA3jp9?format=jpg&amp;name=large",
-            "link": "https://hayadebi.github.io/Accounting-ai-app/Tools/YoutubeAuto/youtubeauto.html"
-        },
-        {
-            "title": "ファクト探偵君",
-            "image": "https://hayadebi.github.io/Accounting-ai-app/Ads/CenterImage/AdsImage7.jpg",
-            "link": "https://hayadebi.github.io/Accounting-ai-app/Tools/FactChecker/factcheck.html"
-        },
-        {
-            "title": "自動スクロールバナー広告作成ウェブツール",
-            "image": "https://hayadebi.github.io/Accounting-ai-app/Images/autoscrollbanner.jpg",
-            "link": "https://hayadebi.github.io/Accounting-ai-app/Tools/AutoScrollBanner/autoscrollbanner.html"
+            "title": "掲示板スレダンジョン",
+            "image": "https://hayadebi.github.io/Accounting-ai-app/Ads/CenterImage/AdsImage9.jpg",
+            "link": "https://hayadebi.github.io/Accounting-ai-app/Tools/ThreadDungeon/threaddungeon.html"
         },
         {
             "title": "InfoGuild",

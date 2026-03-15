@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-T4G6KMKK');</script>
+    <!-- End Google Tag Manager -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>【無料ブラウザゲーム】掲示板スレダンジョン【ローグライク/2ちゃんねる（現5ch）風】 ― ハヤデビのツール工房</title>
+    <link rel="stylesheet" href="threaddungeonstyle.css">
+    <meta content="後で考える" name="description" />
+    <meta name="keywords" content="後で考える" />
+    <meta property="og:image" content="../../Ads/CenterImage/AdsImage9.jpg" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="icon" type="image/png" href="https://pbs.twimg.com/media/G2H3yzRaIAIIHjw?format=png&name=240x240">
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-GLW3M3X7B3" defer></script>
+    <script defer>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-GLW3M3X7B3');
+    </script>
+    <!--後で構造化データを生成して貼る-->
+  </head>
+  <body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-T4G6KMKK"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    <!-- LOADING -->
+    <div id="loadingDiv"><div class="ld-text">▼ 読み込み中... ▼</div></div>
+    
+    <!-- REGISTRATION MODAL -->
+    <div id="regModal" class="modal-overlay hidden">
+      <div class="modal-box">
+        <h2>⚔ 探索者ギルド 登録窓口 ⚔</h2>
+        <p class="modal-note">※これは実際の掲示板登録ではありません</p>
+        <label for="nameInput">探索者名（英数字のみ・最大16文字）</label>
+        <input type="text" id="nameInput" maxlength="16" placeholder="例: Adventurer01" autocomplete="off">
+        <div id="nameError" style="color:var(--red);font-size:0.72rem;min-height:1em;margin-top:0.2rem;"></div>
+        <button class="btn-gold" id="regBtn">▶ 登録して探索を始める</button>
+      </div>
+    </div>
+    
+    <!-- BATTLE MODAL -->
+    <div id="battleModal" class="modal-overlay hidden">
+      <div class="modal-box">
+        <h2 id="battleTitle">⚔ 戦闘 ⚔</h2>
+        <div class="battle-enemy-info" id="battleEnemyInfo">
+          <div class="battle-enemy-name" id="enemyName"></div>
+          <div id="enemyStats" style="font-size:0.7rem;color:var(--text2);margin:2px 0;"></div>
+          <div class="enemy-hp-bar-wrap"><div class="enemy-hp-bar" id="enemyHpBar"></div></div>
+          <div id="enemyHpText" style="font-size:0.68rem;text-align:right;color:var(--text3);"></div>
+        </div>
+        <div class="battle-player-stats" id="battlePlayerStats">
+          <div class="bps-row"><span class="bps-label">探索者</span><span class="bps-val" id="bps-name">---</span></div>
+          <div class="bps-row"><span class="bps-label">LV</span><span class="bps-val" id="bps-lv">1</span></div>
+          <div class="bps-row"><span class="bps-label">HP</span><span class="bps-val bps-hp" id="bps-hp">0/0</span></div>
+          <div class="bps-row"><span class="bps-label">MC</span><span class="bps-val bps-gold" id="bps-coins">0</span></div>
+          <div class="bps-row"><span class="bps-label">AT</span><span class="bps-val" id="bps-at">0</span></div>
+          <div class="bps-row"><span class="bps-label">DF</span><span class="bps-val" id="bps-df">0</span></div>
+          <div class="bps-row"><span class="bps-label">SP</span><span class="bps-val" id="bps-sp">0</span></div>
+          <div class="bps-row"><span class="bps-label">EXP</span><span class="bps-val" id="bps-exp">0/0</span></div>
+        </div>
+        <div class="battle-log" id="battleLog"></div>
+        <div class="battle-cmds" id="battleCmds"></div>
+        <div id="battleItemList" style="display:none;flex-wrap:wrap;gap:0.3rem;margin-top:0.4rem;"></div>
+      </div>
+    </div>
+
+    <!-- ITEM POPUP -->
+    <div id="itemPopup" class="modal-overlay hidden">
+      <div class="modal-box">
+        <button class="popup-close" id="itemPopupClose">✕</button>
+        <div class="item-popup-name" id="ipName"></div>
+        <div class="item-popup-desc" id="ipDesc"></div>
+        <div class="item-popup-detail" id="ipDetail"></div>
+      </div>
+    </div>
+    
+    <!-- MAIN LAYOUT -->
+    <div id="mainLayout">
+    
+      <!-- LEFT SIDEBAR -->
+      <aside id="leftSide">
+        <div class="left-section">
+          <div class="section-header" data-target="invBody">
+            <span>🎒 所持アイテム</span><span class="toggle-icon">▼</span>
+          </div>
+          <div class="section-body" id="invBody">
+            <div id="invList"><div class="inv-empty">なし</div></div>
+          </div>
+        </div>
+        <div class="left-section">
+          <div class="section-header" data-target="achBody">
+            <span>🏆 実績</span><span class="toggle-icon">▼</span>
+          </div>
+          <div class="section-body" id="achBody">
+            <div id="achList"></div>
+          </div>
+        </div>
+        <div class="left-section">
+          <div class="section-header" data-target="soundBody">
+            <span>🔊 音量設定</span><span class="toggle-icon">▼</span>
+          </div>
+          <div class="section-body" id="soundBody">
+            <div class="sound-row">BGM<input type="range" id="bgmVol" min="0" max="100" value="2"><span id="bgmVolLabel">2</span></div>
+            <div class="sound-row">SFX<input type="range" id="sfxVol" min="0" max="100" value="10"><span id="sfxVolLabel">10</span></div>
+          </div>
+        </div>
+      </aside>
+    
+      <!-- CENTER -->
+      <main id="centerMain">
+        <div id="threadTitle">【掲示板スレダンジョン】読み込み中...</div>
+        <div id="logContainer" style="height:auto;"></div>
+        <div id="stair-ads" style="width:100%;height:auto; padding: 0; margin:10px 0; display:none;">
+          <center>
+              <div style="position: relative; height:auto; display: inline-block;max-width:468px; ">
+                  <a href="#" class="random-ads-link" alt="広告リンク" target="_blank" rel="nofollow" referrerpolicy="no-referrer-when-downgrade">
+                      <img src="#" class="random-ads-image" alt="広告画像" style="max-width:100%; height:auto;" />
+                  </a>
+                  <p style="position: absolute; top: 3%; left: 3%; color: rgba(255,255,255,0.6); font-size: 14px; font-weight: bold; margin: 0;">PR</p>
+              </div>
+          </center>
+        </div>
+        <div id="commandArea">
+          <div class="cmd-label">▼ コマンドを選択してください</div>
+          <div class="cmd-grid" id="cmdGrid"></div>
+        </div>
+      </main>
+    
+      <!-- RIGHT SIDEBAR STATUS -->
+      <aside id="rightSide">
+        <div class="status-panel">
+          <h3>── 探索者情報 ──</h3>
+          <div class="stat-row"><span class="stat-label">階層</span><span class="stat-val" id="s-floor">B0</span></div>
+          <div class="stat-row"><span class="stat-label">名前</span><span class="stat-val" id="s-name">---</span></div>
+          <div class="stat-row"><span class="stat-label">LV</span><span class="stat-val lv-val" id="s-lv">1</span></div>
+          <div class="exp-bar-wrap"><div class="exp-bar" id="s-expbar" style="width:0%"></div></div>
+          <div class="stat-row"><span class="stat-label">EXP</span><span class="stat-val" id="s-exp">0/100</span></div>
+          <div class="stat-row"><span class="stat-label">🪙 MC</span><span class="stat-val gold-val" id="s-coins">0</span></div>
+          <hr class="stat-divider">
+          <div class="stat-row"><span class="stat-label">HP</span><span class="stat-val hp-val" id="s-hp">0/0</span></div>
+          <div class="stat-row"><span class="stat-label">AT</span><span class="stat-val" id="s-at">0</span></div>
+          <div class="stat-row"><span class="stat-label">DF</span><span class="stat-val" id="s-df">0</span></div>
+          <div class="stat-row"><span class="stat-label">SP</span><span class="stat-val" id="s-sp">0</span></div>
+        </div>
+        <button id="creditBtn" style="margin-top:10px;width:100%;padding:6px 4px;background:var(--parchment2);border:1px solid var(--gold2);color:var(--text2);font-size:0.7rem;cursor:pointer;border-radius:3px;font-family:inherit;">クレジット・表記</button>
+        <button onclick="generateTweetURL( '掲示板スレ風のローグライク！\n是非ブラウザで遊んでみよう↓', 'hayadebi.github.io/Accounting-ai-app/', 'ゲーム実況者と繋がりたい,フリーゲーム' )" style="margin-top:10px;width:100%;padding:6px 4px;background:var(--parchment2);border:1px solid var(--gold2);color:var(--text2);font-size:0.7rem;cursor:pointer;border-radius:3px;font-family:inherit;" alt="Xでシェア">Xでシェア</button>
+        <button onclick="window.open(`https:\/\/hayadebi.github.io/Accounting-ai-app/tools.html`, '_blank');" style="margin-top:10px;width:100%;padding:6px 4px;background:var(--parchment2);border:1px solid var(--gold2);color:var(--text2);font-size:0.7rem;cursor:pointer;border-radius:3px;font-family:inherit;" alt="ハヤデビのツール工房">様々なウェブツールも運営中</button>
+        <div style="width:100%;height:auto; padding: 0; margin:10px 0;">
+          <!-- admax -->
+          <script src="https://adm.shinobi.jp/s/2d0b81719a6832db0a1394702cf52fb8"></script>
+          <!-- admax -->
+        </div>
+        <button onclick="window.open(`https:\/\/claude.ai/public/artifacts/130fd9a9-9a51-4d27-87f1-704d07ff4099`, '_blank');" style="margin-top:10px;width:100%;padding:6px 4px;background:var(--parchment2);border:1px solid var(--gold2);color:var(--text2);font-size:0.7rem;cursor:pointer;border-radius:3px;font-family:inherit;" alt="攻略ガイド">完全攻略ガイド（3/15更新）</button>
+      </aside>
+    </div>
+    
+    <!-- CREDIT MODAL -->
+    <div id="creditModal" class="modal-overlay hidden">
+      <div class="modal-box" style="max-width:420px;max-height:80vh;overflow-y:auto;">
+        <button class="popup-close" id="creditClose">✕</button>
+        <h3 style="text-align:center;color:var(--gold2);margin-bottom:12px;">📜 クレジット・著作権表記</h3>
+        <div style="font-size:0.75rem;line-height:1.8;color:var(--text1);">
+          <p style="margin:0 0 10px;font-weight:bold;border-bottom:1px solid var(--gold2);padding-bottom:4px;">── ゲーム製作 ──</p>
+          <p style="margin:0 0 12px;">※プロモーションも含みます。<br>本作はフリーゲームです。<br>開発：ハヤデビ<br>BGM：イワシロ音楽素材（https://iwashiro-sounds.work/）様<br>効果音：しーでんでん（https://seadenden-8bit.com/）様</p>
+          <p style="margin:0 0 10px;font-weight:bold;border-bottom:1px solid var(--gold2);padding-bottom:4px;">── 使用キャラクター素材 ──</p>
+          <p style="margin:0 0 12px;">本作に登場するキャラクターは、日本の掲示板文化（2ch等）由来のAAキャラクターを使用しています。<br>
+          モナー、ギコ、しぃ、モララー、やる夫 等のキャラクターは各々の権利者・コミュニティに帰属します。<br>
+          これらは営利目的での使用ではなく、リスペクトとオマージュを込めた非営利・同人作品として制作されています。<br>掲示板風なテーマに沿って、AAキャラクターが所々登場します。</p>
+          <p style="margin:0 0 10px;font-weight:bold;border-bottom:1px solid var(--gold2);padding-bottom:4px;">── 参考・オマージュ作品（アイテム・敵として一部登場） ──</p>
+          <p style="margin:0 0 12px;">掲示板及び創作文化の様々なミームに敬意を表します。</p>
+          <p style="margin:0 0 10px;font-weight:bold;border-bottom:1px solid var(--gold2);padding-bottom:4px;">── 免責事項等 ──</p>
+          <p style="margin:0 0 4px;">本作は最後まで無料で遊べます。プレイによって生じた損害等について、開発者は一切の責任を負いません。</p>
+          <p style="margin:0 0 4px;">　</p>
+        </div>
+      </div>
+    </div>
+    <script src="threaddungeonscript.js" defer="defer"></script>
+    <div class="centerad-widget"></div>
+    <script src="../../Ads/ToolCenterAds.js" rel="preload"></script>
+    <script src="../../Ads/ShowAds.js" defer="defer"></script>
+    <script src="../../Ads/ToolAds.js" defer="defer"></script>
+    <script src="../../CoreImplementation/TweetManager.js" defer="defer"></script>
+    <script src="SecurityValidator.js" defer="defer"></script>
+    <!-- admax -->
+    <script src="https://adm.shinobi.jp/o/eb1a0fadde0b1abac026285d553cece6"></script>
+    <!-- admax -->
+  </body>
+</html>
