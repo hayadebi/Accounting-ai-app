@@ -1,5 +1,13 @@
 'use strict';
 
+bridge.initialize()
+    .then(() => {
+        // initialization was successful, SDK can be used
+    })
+    .catch(error => {
+        // error, something went wrong
+    });
+
 /* =====================================================
    SECTION 1: DATA DEFINITIONS
    ===================================================== */
