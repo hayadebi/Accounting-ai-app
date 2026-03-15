@@ -17,6 +17,10 @@
     <meta property="og:image" content="../../Ads/CenterImage/AdsImage9.jpg" />
     <meta name="twitter:card" content="summary_large_image" />
     <link rel="icon" type="image/png" href="https://pbs.twimg.com/media/G2H3yzRaIAIIHjw?format=png&name=240x240">
+    <!-- 代替ページ (英語) -->
+    <link rel="alternate" hreflang="en" href="threaddungeon_en.html" />
+    <!-- 言語未対応ユーザー用 (デフォルト) -->
+    <link rel="alternate" hreflang="x-default" href="threaddungeon_en.html" />
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-GLW3M3X7B3" defer></script>
     <script defer>
         window.dataLayer = window.dataLayer || [];
@@ -327,5 +331,26 @@
     <!-- admax -->
     <script src="https://adm.shinobi.jp/o/eb1a0fadde0b1abac026285d553cece6"></script>
     <!-- admax -->
+
+    <!--言語取得と自動リダイレクト-->
+    <script defer="defer">
+    (function() {
+    // リダイレクト先URL（ここを変更してください）
+    const redirectUrl = 'https://hayadebi.github.io/Accounting-ai-app/Tools/ThreadDungeon/threaddungeon_en.html';
+    
+    // ブラウザの言語設定を取得
+    const userLang = (navigator.language || navigator.userLanguage).toLowerCase();
+    
+    // 日本語かどうかを判定（ja、ja-JP等）
+    const isJapanese = userLang.startsWith('ja');
+    
+    // 日本人以外の場合、0.1秒後にリダイレクト
+    if (!isJapanese) {
+        setTimeout(function() {
+        location.replace(redirectUrl);
+        }, 100); // 100ミリ秒 = 0.1秒
+    }
+    })();
+    </script>
   </body>
 </html>
