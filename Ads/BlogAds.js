@@ -27,6 +27,14 @@
   {
     "imageUrl": "https://www.dlsite.com/img/male/dojin/bn_pc_468_60_dojin_01.gif",
     "siteUrl": "https://dlaf.jp/home/dlaf/=/aid/githubhayadebitools/url/https%3A%2F%2Fwww.dlsite.com%2Fhome%2Franking%2Fweek%2F%3Futm_medium%3Daffiliate%26utm_campaign%3Dbnlink%26utm_content%3Dbn_pc_468_60_dojin_01.gif"
+  },
+  {
+    "imageUrl": "../../Ads/BlogImage/AdsImage8.png",
+    "siteUrl": "https://freecash.com/r/devilnessie"
+  },
+  {
+    "imageUrl": "../../Ads/BlogImage/AdsImage9.png",
+    "siteUrl": "https://btcc.com/invite/Uf2pqnp"
   }
 ];
   

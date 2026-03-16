@@ -9,24 +9,32 @@
     "siteUrl": "https://bitflyer.com/invitation?id=hhhv5jly&lang=ja-JP"
   },
   {
-    "imageUrl": "../../Ads/BlogImage/AdsImage4.jpg",
+    "imageUrl": "../../Ads/ToolImage/AdsImage4.jpg",
     "siteUrl": "https://cointiply.com/r/KrAZKx"
   },
   {
-    "imageUrl": "../../Ads/BlogImage/AdsImage5.jpg",
+    "imageUrl": "../../Ads/ToolImage/AdsImage5.jpg",
     "siteUrl": "https://note.com/hayadebi_ai/n/nd7234ba28c72"
   },
   {
-    "imageUrl": "../../Ads/BlogImage/AdsImage6.jpg",
+    "imageUrl": "../../Ads/ToolImage/AdsImage6.jpg",
     "siteUrl": "https://hayadebi.github.io/Accounting-ai-app/Tools/BlogEditor/blogeditor.html"
   },
   {
-    "imageUrl": "../../Ads/BlogImage/AdsImage7.png",
+    "imageUrl": "../../Ads/ToolImage/AdsImage7.png",
     "siteUrl": "https://hayadebi.github.io/Accounting-ai-app/Tools/InfoGuild/infoguild.html"
   },
   {
     "imageUrl": "https://www.dlsite.com/img/male/dojin/bn_pc_468_60_dojin_01.gif",
     "siteUrl": "https://dlaf.jp/home/dlaf/=/aid/githubhayadebitools/url/https%3A%2F%2Fwww.dlsite.com%2Fhome%2Franking%2Fweek%2F%3Futm_medium%3Daffiliate%26utm_campaign%3Dbnlink%26utm_content%3Dbn_pc_468_60_dojin_01.gif"
+  },
+  {
+    "imageUrl": "../../Ads/ToolImage/AdsImage8.png",
+    "siteUrl": "https://freecash.com/r/devilnessie"
+  },
+  {
+    "imageUrl": "../../Ads/ToolImage/AdsImage9.png",
+    "siteUrl": "https://btcc.com/invite/Uf2pqnp"
   }
 ];
   
