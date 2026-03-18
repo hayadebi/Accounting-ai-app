@@ -188,6 +188,36 @@ h1 {
     display: none;
 }
 
+/* ボトムバナー基本レイアウト */
+.affiliate-banner {
+    bottom: 0;
+    border: 1px solid #5592b7;
+    padding: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    max-width: 100%;
+    box-sizing: border-box;
+    position: fixed;
+    transition: bottom 0.5s ease;
+    background: rgba(255, 255, 255, 0.9);
+}
+
+.affiliate-title {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #2a7186;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.affiliate-description {
+    color: #666;
+    margin: 5px 0;
+    font-size: 1em;
+    box-sizing: border-box;
+}
+
 @media (max-width: 768px) {
     .container {
         padding: 25px 5px;
@@ -204,6 +234,29 @@ h1 {
     .execute-btn {
         padding: 15px 40px;
         font-size: 1rem;
+    }
+}
+
+/* ボトムバナースマホレイアウト (画面幅600px以下) */
+@media (max-width: 600px) {
+    .affiliate-image-container {
+        display: none; /* スマホ時に画像を非表示 */
+    }
+
+    .affiliate-title a {
+        font-size: 1.1em;
+        color: #2a7186;
+        text-decoration: none;
+        box-sizing: border-box;
+    }
+
+    .affiliate-description {
+        font-size: 0.9em;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        max-width: 18em; /* 説明文を短縮して「...」を表示 */
+        box-sizing: border-box;
     }
 }
 
