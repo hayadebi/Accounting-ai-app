@@ -11,8 +11,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ココナラ事業一覧 ― ハヤデビのツール工房</title>
-    <link rel="stylesheet" href="AssetConfiguration/MainStyleProcessor.css">
-    <link rel="stylesheet" href="AssetConfiguration/SubStyleProcessor.css">
+    <link rel="preload" href="AssetConfiguration/MainStyleProcessor.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="AssetConfiguration/MainStyleProcessor.css"></noscript>
+    <link rel="preload" href="AssetConfiguration/SubStyleProcessor.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="AssetConfiguration/SubStyleProcessor.css"></noscript>
     <meta content="ハヤデビのツール工房の運営が手掛けているココナラ事業がまとめられています" name="description" />
     <!-- <link rel="prev" href="#">
     <link rel="next" href="#"> -->
@@ -60,12 +62,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <div id="scroll-fade">
             <section class="section" id="dev-service">
                 <h2>開発</h2>
-                <p class="hero-subtitle">開発関連のサービスがまとめられています。</p>
+                <p class="hero-subtitle">開発関連のサービスがまとめられています。（準備中）</p>
                 <button onclick="toggleDetails(this, 'dev-details')" class="btn" alt="一覧切り替え">一覧を表示</button>
                 <div class="tworecommend-boxes" id="dev-details" style="display: none; content-visibility: auto;contain-intrinsic-size: 0 500px;">
                     <!-- サービス -->
                     <!-- <div class="recommend-box">
-                        <div class="recommend-icon"><img src="#" alt="サービス" style="max-width:100%;height: auto; border-radius:2%; /></div>
+                        <div class="recommend-icon"><img src="#" loading="lazy" alt="サービス" style="max-width:100%;height: auto; border-radius:2%; /></div>
                             <h3>
                                 サービスタイトル
                             </h3>
@@ -80,12 +82,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
             <section class="section" id="art-service">
                 <h2>イラスト</h2>
-                <p class="hero-subtitle">イラスト関連のサービスがまとめられています。</p>
+                <p class="hero-subtitle">イラスト関連のサービスがまとめられています。（準備中）</p>
                 <button onclick="toggleDetails(this, 'art-details')" class="btn" alt="一覧切り替え">一覧を表示</button>
                 <div class="tworecommend-boxes" id="art-details" style="display: none; content-visibility: auto;contain-intrinsic-size: 0 500px;">
                     <!-- サービス -->
-                    <div class="recommend-box">
-                        <div class="recommend-icon"><img src="https://service-cdn.coconala.com/resize/1220/1240/service_images/original/3a27ab97-7547566.png" alt="サービス" style="max-width:100%;height: auto; border-radius:2%;" /></div>
+                    <!-- <div class="recommend-box">
+                        <div class="recommend-icon"><img src="https://service-cdn.coconala.com/resize/1220/1240/service_images/original/3a27ab97-7547566.png" loading="lazy" alt="サービス" style="max-width:100%;height: auto; border-radius:2%;" /></div>
                             <h3>
                                 オリジナルなゆっくり風キャラ立ち絵作成
                             </h3>
@@ -93,19 +95,19 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                             <p>ご依頼者様の動画や作品に合わせて、オリジナルなゆっくり風シンプル立ち絵を作成
                             </p>
                             <a href="https://coconala.com/services/3258496" class="minibtn" target="_blank" referrerpolicy="no-referrer-when-downgrade" alt="ココナラ">詳細を見る（相談無料）</a>
-                    </div>
+                    </div> -->
                 </div>
                 
             </section>
 
             <section class="section" id="video-service">
                 <h2>動画</h2>
-                <p class="hero-subtitle">動画関連のサービスがまとめられています。</p>
+                <p class="hero-subtitle">動画関連のサービスがまとめられています。（準備中）</p>
                 <button onclick="toggleDetails(this, 'video-details')" class="btn" alt="一覧切り替え">一覧を表示</button>
                 <div class="tworecommend-boxes" id="video-details" style="display: none; content-visibility: auto;contain-intrinsic-size: 0 500px;">
                     <!-- サービス -->
-                    <div class="recommend-box">
-                        <div class="recommend-icon"><img src="https://service-cdn.coconala.com/resize/1220/1240/service_images/original/3a27ab97-7547566.png" alt="サービス" style="max-width:100%;height: auto; border-radius:2%;" /></div>
+                    <!-- <div class="recommend-box">
+                        <div class="recommend-icon"><img src="https://service-cdn.coconala.com/resize/1220/1240/service_images/original/3a27ab97-7547566.png" loading="lazy" alt="サービス" style="max-width:100%;height: auto; border-radius:2%;" /></div>
                             <h3>
                                 オリジナルなゆっくり風キャラ立ち絵作成
                             </h3>
@@ -113,19 +115,19 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                             <p>ご依頼者様の動画や作品に合わせて、オリジナルなゆっくり風シンプル立ち絵を作成
                             </p>
                             <a href="https://coconala.com/services/3258496" class="minibtn" target="_blank" referrerpolicy="no-referrer-when-downgrade" alt="ココナラ">詳細を見る（相談無料）</a>
-                    </div>
+                    </div> -->
                 </div>
                 
             </section>
 
             <section class="section" id="ads-service">
                 <h2>広告</h2>
-                <p class="hero-subtitle">広告関連のサービスがまとめられています。</p>
+                <p class="hero-subtitle">広告関連のサービスがまとめられています。（準備中）</p>
                 <button onclick="toggleDetails(this, 'ads-details')" class="btn" alt="一覧切り替え">一覧を表示</button>
                 <div class="tworecommend-boxes" id="ads-details" style="display: none; content-visibility: auto;contain-intrinsic-size: 0 500px;">
                     <!-- サービス -->
                     <!-- <div class="recommend-box">
-                        <div class="recommend-icon"><img src="#" alt="サービス" style="max-width:100%;height: auto; border-radius:2%;" /></div>
+                        <div class="recommend-icon"><img src="#" loading="lazy" alt="サービス" style="max-width:100%;height: auto; border-radius:2%;" /></div>
                             <h3>
                                 サービスタイトル
                             </h3>

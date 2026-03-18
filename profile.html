@@ -11,8 +11,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>運営プロフィール ― ハヤデビのツール工房</title>
-    <link rel="stylesheet" href="AssetConfiguration/MainStyleProcessor.css">
-    <link rel="stylesheet" href="AssetConfiguration/SubStyleProcessor.css">
+    <link rel="preload" href="AssetConfiguration/MainStyleProcessor.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="AssetConfiguration/MainStyleProcessor.css"></noscript>
+    <link rel="preload" href="AssetConfiguration/SubStyleProcessor.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="AssetConfiguration/SubStyleProcessor.css"></noscript>
     <meta content="ハヤデビのツール工房の運営、ハヤデビのプロフィールがまとめられています。" name="description" />
     <!-- <link rel="prev" href="#">
     <link rel="next" href="#"> -->
@@ -59,7 +61,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <!-- 簡易プロフィール -->
         <section class="section">
             <div style="margin-bottom: 20px;">
-                <center><img src="https://pbs.twimg.com/media/G5mBHiiacAIWGvt?format=png&amp;name=900x900" alt="ハヤデビのロゴ" style=
+                <center><img src="https://pbs.twimg.com/media/G5mBHiiacAIWGvt?format=png&amp;name=900x900" loading="lazy" alt="ハヤデビのロゴ" style=
                 "width: 150px; height: 150px; border-radius: 50%; object-fit: cover; border: 4px solid #00bfff; box-shadow: 0 0 15px rgba(0, 191, 255, 0.5);" /></center>
             </div>
             <h2>活動名:ハヤデビ</h2>
