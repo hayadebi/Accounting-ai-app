@@ -276,6 +276,9 @@
 
         /* レスポンシブ */
         @media (max-width: 768px) {
+            .main-container {
+                padding: 30px 5px;
+            }
             .nav-links {
                 position: fixed;
                 top: 60px;
@@ -338,6 +341,9 @@
         }
 
         @media (max-width: 480px) {
+            .main-container {
+                padding: 25px 3px;
+            }
             h1 {
                 font-size: 1.6rem;
             }
