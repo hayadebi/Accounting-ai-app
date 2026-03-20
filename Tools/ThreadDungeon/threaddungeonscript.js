@@ -947,7 +947,7 @@ function showShopCommands(shopItems,keeper,boughtOnce){
 function processStairs(){
   playSFX('stairs');addLog(randFrom(ANON_NAMES),randFrom(EXPLORE_TEXTS.stairs),'',1000,'anon');
   setTimeout(()=>{addLog(randFrom(ANON_NAMES),'次の階層 B'+(GS.floor+1)+' への階段を見つけた！','gold',700,'anon');
-    setTimeout(()=>{addCmd([{label:'▼ B'+(GS.floor+1)+'へ進む',action:()=>{addLog(GS.explorerName,'B'+(GS.floor+1)+'へ向かった…','',600,'player');setTimeout(()=>playgamaAds(),1500);}}]);setTimeout(()=>{stairAds();},100);},900);},1200);
+    setTimeout(()=>{addCmd([{label:'▼ B'+(GS.floor+1)+'へ進む',action:()=>{addLog(GS.explorerName,'B'+(GS.floor+1)+'へ向かった…','',600,'player');setTimeout(()=>playgamaAds(),1500);}}]);},900);},1200);//setTimeout(()=>{stairAds();},100);},900);},1200);
 }
 function playgamaAds(){
   if(bridge.advertisement.isInterstitialSupported){
@@ -970,10 +970,10 @@ function playgamaAds(){
 
 function isPlaygamaAds(state){return state==='closed'||state==='failed';}
 
-function stairAds(){
-  const ads=document.getElementById('stair-ads');
-  ads.style.display=ads.style.display==='block'?'none':'block';
-}
+// function stairAds(){
+//   const ads=document.getElementById('stair-ads');
+//   ads.style.display=ads.style.display==='block'?'none':'block';
+// }
 
 
 
