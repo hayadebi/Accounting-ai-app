@@ -137,10 +137,10 @@ async function doRegister(e) {
   ['err-reg-wallet','err-reg-uname','err-reg-pw','err-reg-general']
     .forEach(id => { document.getElementById(id).textContent = ''; });
 
-  if (!isValidEth(wallet)) {
-    document.getElementById('err-reg-wallet').textContent = '有効な Litecoinネットワーク アドレスを入力してください';
-    return;
-  }
+  // if (!isValidEth(wallet)) {
+  //   document.getElementById('err-reg-wallet').textContent = '有効な Litecoinネットワーク アドレスを入力してください';
+  //   return;
+  // }
   if (!isValidName(uname)) {
     document.getElementById('err-reg-uname').textContent = '3〜20 文字の半角英数字・アンダースコアのみ使用できます';
     return;
@@ -659,7 +659,7 @@ function doContactGuest(e) {
   const wallet  = document.getElementById('cg-wallet').value.trim();
   const content = document.getElementById('cg-content').value.trim();
   document.getElementById('err-cg').textContent = '';
-  if (!isValidEth(wallet)) { document.getElementById('err-cg').textContent = '有効な LTC ウォレットアドレスを入力してください'; return; }
+  //if (!isValidEth(wallet)) { document.getElementById('err-cg').textContent = '有効な LTC ウォレットアドレスを入力してください'; return; }
 
   const subj = '[InfoGuild] 非会員お問い合わせ';
   const body = `送金元ウォレット：${wallet}\n送金 LTC 額：${eth}\n送金先ウォレット：${CFG.ADMIN_WALLET}\n---\n${content}`;
