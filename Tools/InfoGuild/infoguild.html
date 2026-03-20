@@ -202,6 +202,7 @@
         <p class="board-subtitle">挑戦者求む。情報提供で報酬を獲得せよ。</p>
         <div class="board-ornament" style="margin-top:8px">✦ ✦ ✦</div>
     </div>
+    <!-- <center><p style="color:rgb(210, 64, 64);font-size:13px;">重要：2026/3/21以前よりアカウント登録されていた方は、LTCウォレットアドレスで再登録をお願いします;</p></center> -->
     <div id="quest-board">
         <div class="empty-state" style="grid-column:1/-1">
         <div class="spinner" style="margin:0 auto 16px"></div>
@@ -384,7 +385,7 @@
         <form id="form-register" onsubmit="doRegister(event)">
         <div class="form-group">
             <label class="form-label">LTC ウォレットアドレス（Litecoinネットワーク）<span class="req">*</span></label>
-            <input id="reg-wallet" type="text" class="form-input" placeholder="0x..." maxlength="42" autocomplete="off" required>
+            <input id="reg-wallet" type="text" class="form-input" placeholder="ltc...or L..." maxlength="42" autocomplete="off" required>
             <p class="form-hint">Litecoin アドレス。変更不可。</p>
             <p id="err-reg-wallet" class="form-error"></p>
         </div>
@@ -597,7 +598,7 @@
         </div>
         <div class="form-group">
             <label class="form-label">送金元ウォレットアドレス<span class="req">*</span></label>
-            <input id="cg-wallet" type="text" class="form-input" placeholder="0x..." required>
+            <input id="cg-wallet" type="text" class="form-input" placeholder="ltc...or L..." required>
         </div>
         <div class="form-group">
             <label class="form-label">問い合わせ内容<span class="req">*</span></label>
@@ -635,7 +636,7 @@
         </div>
         <div class="form-group">
             <label class="form-label">登録ウォレットアドレス（送金元）<span class="req">*</span></label>
-            <input id="li-wallet" type="text" class="form-input" placeholder="0x..." required>
+            <input id="li-wallet" type="text" class="form-input" placeholder="ltc...or L..." required>
         </div>
         <div class="form-group">
             <label class="form-label">仮パスワード（新しいパスワード）<span class="req">*</span></label>
@@ -805,6 +806,7 @@
     <script src="../../Ads/ShowAds.js" defer="defer"></script>
     <script src="../../Ads/ToolAds.js" defer="defer"></script>
     <script src="infoguildscript.js" defer="defer"></script>
+    
     <!--playgama-->
     <script nonce="widget-playgama1" defer="defer">
         window.playgama_widgets = window.playgama_widgets || { clbs: [] };
