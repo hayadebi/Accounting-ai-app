@@ -27,6 +27,11 @@
             "title": "InfoGuild",
             "image": "https://hayadebi.github.io/Accounting-ai-app/Ads/CenterImage/AdsImage2.jpg",
             "link": "https://hayadebi.github.io/Accounting-ai-app/Tools/InfoGuild/infoguild.html"
+        },
+        {
+            "title": "SuperInspector",
+            "image": "https://hayadebi.github.io/Accounting-ai-app/Images/superinspector.png",
+            "link": "https://hayadebi.booth.pm/items/8106607"
         }
     ];
     // ========================================
