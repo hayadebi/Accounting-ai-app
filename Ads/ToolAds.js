@@ -1,10 +1,6 @@
   // 組み合わせリスト
   const combinations = [
   {
-    "imageUrl": "../../Ads/ToolImage/AdsImage1.jpg",
-    "siteUrl": "https://note.com/hayadebi_ai/n/n9f71a3b80529"
-  },
-  {
     "imageUrl": "../../Ads/ToolImage/AdsImage2.jpg",
     "siteUrl": "https://bitflyer.com/invitation?id=hhhv5jly&lang=ja-JP"
   },
