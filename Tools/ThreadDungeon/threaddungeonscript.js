@@ -989,7 +989,7 @@ function stairAds(){
   var elements = document.querySelectorAll('[id^="' + prefix + '"]');
   if (elements.length === 0) return;
   var randomIndex = Math.floor(Math.random() * elements.length);
-  elements[randomIndex].style.display = "inline-block";
+  elements[randomIndex+1].style.display = "inline-block";
 }
 
 
