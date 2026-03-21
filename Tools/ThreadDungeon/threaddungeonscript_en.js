@@ -241,7 +241,7 @@ const NPC_DATA = [
     [[['NPC','...You seem injured. Let me heal you.']],'allheal',0],
   ]},
   {id:7,name:'【PR】Sign Bro',events:[
-    [[['PLAYER','There is a person standing silently in front of you, holding a sign...'],['PLAYER',`The sign describes <strong>"Tool Workshop," which operates various web tools and services</strong>.`],['NPC',`Sign guide: <a href="https:\/\/hayadebi.github.io/Accounting-ai-app/" target="_blank" alt="Hayadebi's Tool Workshop">Enter the Tool Workshop</a>`]],'',0],
+    [[['PLAYER','There is a person standing silently in front of you, holding a sign...'],['PLAYER',`The sign describes "Tool Workshop," which operates various web tools and services.`],['NPC',`Sign guide: <a href="https:\/\/hayadebi.github.io/Accounting-ai-app/" target="_blank" alt="Hayadebi's Tool Workshop">Enter the Tool Workshop</a>`]],'',0],
   ]},
 ];
  

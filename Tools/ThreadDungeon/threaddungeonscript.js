@@ -239,7 +239,7 @@ const NPC_DATA = [
     [[['NPC','こんにちは！私は別のギルドからダンジョンに派遣された者です'],['NPC','インフォギルドは情報提供で仮想通貨報酬を得られるところなので、報酬に興味があれば寄ってみてください！'],['NPC',`InfoGuild案内：<a href="https:\/\/hayadebi.github.io/Accounting-ai-app/Tools/InfoGuild/infoguild.html" target="_blank" alt="InfoGuild">ギルド入り口</a>`]],'',0],
   ]},
   {id:8,name:'【PR】看板ニキ',events:[
-    [[['PLAYER','目の前に無言で看板持っている人がいる。'],['PLAYER',`看板には<strong>様々なウェブツールやサービスを運営している「ツール工房」</strong>について書かれている。`],['NPC',`看板案内：<a href="https:\/\/hayadebi.github.io/Accounting-ai-app/" target="_blank" alt="ハヤデビのツール工房">ツール工房入り口</a>`]],'',0],
+    [[['PLAYER','目の前に無言で看板持っている人がいる。'],['PLAYER',`看板には様々なウェブツールやサービスを運営している「ツール工房」について書かれている。`],['NPC',`看板案内：<a href="https:\/\/hayadebi.github.io/Accounting-ai-app/" target="_blank" alt="ハヤデビのツール工房">ツール工房入り口</a>`]],'',0],
   ]},
 ];
  
