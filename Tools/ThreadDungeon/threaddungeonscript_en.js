@@ -1,13 +1,5 @@
 'use strict';
 
-bridge.initialize()
-    .then(() => {
-        // initialization was successful, SDK can be used
-    })
-    .catch(error => {
-        // error, something went wrong
-    });
-
 /* =====================================================
    SECTION 1: DATA DEFINITIONS
    ===================================================== */
@@ -248,6 +240,9 @@ const NPC_DATA = [
     [[['NPC','...You seem injured. Let me heal you.']],'allheal',0],
     [[['NPC','...You seem injured. Let me heal you.']],'allheal',0],
   ]},
+  {id:7,name:'【PR】Sign Bro',events:[
+    [[['PLAYER','There is a person standing silently in front of you, holding a sign...'],['PLAYER',`The sign describes <strong>"Tool Workshop," which operates various web tools and services</strong>.`],['NPC',`Sign guide: <a href="https:\/\/hayadebi.github.io/Accounting-ai-app/" target="_blank" alt="Hayadebi's Tool Workshop">Enter the Tool Workshop</a>`]],'',0],
+  ]},
 ];
  
 const SHOP_KEEPER_DIALOGS = [
@@ -405,7 +400,12 @@ function _renderLog(item){
   let nc='';if(item.userType==='player')nc='is-player';else if(item.userType==='npc')nc='is-npc';else if(item.userType==='enemy')nc='is-enemy';else if(item.userType==='system')nc='is-system';
   metaDiv.innerHTML='<span class="log-num">'+numStr+'</span> Name：<span class="log-name '+nc+'">'+escHtml(item.user)+'</span> <span style="font-size:0.62rem;">'+getBoardDate()+'</span>';
   div.appendChild(metaDiv);
-  const bodyDiv=document.createElement('div');bodyDiv.className='log-body'+(item.style?' log-'+item.style:'');bodyDiv.textContent=item.text;
+  const bodyDiv=document.createElement('div');bodyDiv.className='log-body'+(item.style?' log-'+item.style:'');
+  if(item.userType==='npc'||item.userType==='system'){
+    bodyDiv.innerHTML=item.text.replace(/\n/g,'<br>');
+  }else{
+    bodyDiv.textContent=item.text;
+  }
   div.appendChild(bodyDiv);container.appendChild(div);container.scrollTop=container.scrollHeight;
 }
 function _showCommands(commands){
@@ -962,34 +962,40 @@ function showShopCommands(shopItems,keeper,boughtOnce){
 function processStairs(){
   playSFX('stairs');addLog(randFrom(ANON_NAMES),randFrom(EXPLORE_TEXTS.stairs),'',1000,'anon');
   setTimeout(()=>{addLog(randFrom(ANON_NAMES),'You found the stairs leading to the next floor B'+(GS.floor+1)+'!','gold',700,'anon');
-    setTimeout(()=>{addCmd([{label:'▼ Go to B'+(GS.floor+1),action:()=>{addLog(GS.explorerName,'Headed toward B'+(GS.floor+1)+'...','',600,'player');setTimeout(()=>playgamaAds(),1500);}}]);setTimeout(()=>{stairAds();},300);},900);},1200);
+    setTimeout(()=>{addCmd([{label:'▼ Go to B'+(GS.floor+1),action:()=>{addLog(GS.explorerName,'Headed toward B'+(GS.floor+1)+'...','',600,'player');setTimeout(()=>goToFloor(GS.floor+1),1500);}}]);setTimeout(()=>{stairAds();},100);},900);},1200);
     
 }
 
-function playgamaAds(){
-  if(bridge.advertisement.isInterstitialSupported){
-    playBGM(null,null);
-    bridge.advertisement.minimumDelayBetweenInterstitial;
-    bridge.advertisement.setMinimumDelayBetweenInterstitial(300);
+// function playgamaAds(){
+//   if(bridge.advertisement.isInterstitialSupported){
+//     playBGM(null,null);
+//     bridge.advertisement.minimumDelayBetweenInterstitial;
+//     bridge.advertisement.setMinimumDelayBetweenInterstitial(300);
 
-    bridge.advertisement.on(
-          bridge.EVENT_NAME.INTERSTITIAL_STATE_CHANGED, 
-          state => isPlaygamaAds(state)?goToFloor(GS.floor+1):console.log('Interstitial state: ', state)
-    ); 
+//     bridge.advertisement.on(
+//           bridge.EVENT_NAME.INTERSTITIAL_STATE_CHANGED, 
+//           state => isPlaygamaAds(state)?goToFloor(GS.floor+1):console.log('Interstitial state: ', state)
+//     ); 
 
-    let placement = 'interstitial_placement';
-    bridge.advertisement.showInterstitial(placement);
-  }
-  else {
-    goToFloor(GS.floor+1);
-  }  
-}
+//     let placement = 'interstitial_placement';
+//     bridge.advertisement.showInterstitial(placement);
+//   }
+//   else {
+//     goToFloor(GS.floor+1);
+//   }  
+// }
 
-function isPlaygamaAds(state){return state==='closed'||state==='failed';}
+// function isPlaygamaAds(state){return state==='closed'||state==='failed';}
 
 function stairAds(){
   const ads=document.getElementById('stair-ads');
   ads.style.display=ads.style.display==='block'?'none':'block';
+
+  var prefix = "element-playgama";
+  var elements = document.querySelectorAll('[id^="' + prefix + '"]');
+  if (elements.length === 0) return;
+  var randomIndex = Math.floor(Math.random() * elements.length);
+  elements[randomIndex].style.display = "inline-block";
 }
 
 function goToFloor(num){GS.floor=num;if(num>GS.achievements.maxFloor)GS.achievements.maxFloor=num;GS.threadId=generateThreadId();saveState();localStorage.removeItem(SAVE_KEY+'_floor');location.reload();}

@@ -235,6 +235,12 @@ const NPC_DATA = [
     [[['NPC','…ケガをしているか。治してあげよう。']],'allheal',0],
     [[['NPC','…ケガをしているか。治してあげよう。']],'allheal',0],
   ]},
+  {id:7,name:'【PR】InfoGuild職員',events:[
+    [[['NPC','こんにちは！私は別のギルドからダンジョンに派遣された者です'],['NPC','インフォギルドは情報提供で仮想通貨報酬を得られるところなので、報酬に興味があれば寄ってみてください！'],['NPC',`InfoGuild案内：<a href="https:\/\/hayadebi.github.io/Accounting-ai-app/Tools/InfoGuild/infoguild.html" target="_blank" alt="InfoGuild">ギルド入り口</a>`]],'',0],
+  ]},
+  {id:8,name:'【PR】看板ニキ',events:[
+    [[['PLAYER','目の前に無言で看板持っている人がいる。'],['PLAYER',`看板には<strong>様々なウェブツールやサービスを運営している「ツール工房」</strong>について書かれている。`],['NPC',`看板案内：<a href="https:\/\/hayadebi.github.io/Accounting-ai-app/" target="_blank" alt="ハヤデビのツール工房">ツール工房入り口</a>`]],'',0],
+  ]},
 ];
  
 const SHOP_KEEPER_DIALOGS = [
@@ -392,7 +398,12 @@ function _renderLog(item){
   let nc='';if(item.userType==='player')nc='is-player';else if(item.userType==='npc')nc='is-npc';else if(item.userType==='enemy')nc='is-enemy';else if(item.userType==='system')nc='is-system';
   metaDiv.innerHTML='<span class="log-num">'+numStr+'</span> 名前：<span class="log-name '+nc+'">'+escHtml(item.user)+'</span> <span style="font-size:0.62rem;">'+getBoardDate()+'</span>';
   div.appendChild(metaDiv);
-  const bodyDiv=document.createElement('div');bodyDiv.className='log-body'+(item.style?' log-'+item.style:'');bodyDiv.textContent=item.text;
+  const bodyDiv=document.createElement('div');bodyDiv.className='log-body'+(item.style?' log-'+item.style:'');
+  if(item.userType==='npc'||item.userType==='system'){
+    bodyDiv.innerHTML=item.text.replace(/\n/g,'<br>');
+  }else{
+    bodyDiv.textContent=item.text;
+  }
   div.appendChild(bodyDiv);container.appendChild(div);container.scrollTop=container.scrollHeight;
 }
 function _showCommands(commands){
@@ -947,7 +958,7 @@ function showShopCommands(shopItems,keeper,boughtOnce){
 function processStairs(){
   playSFX('stairs');addLog(randFrom(ANON_NAMES),randFrom(EXPLORE_TEXTS.stairs),'',1000,'anon');
   setTimeout(()=>{addLog(randFrom(ANON_NAMES),'次の階層 B'+(GS.floor+1)+' への階段を見つけた！','gold',700,'anon');
-    setTimeout(()=>{addCmd([{label:'▼ B'+(GS.floor+1)+'へ進む',action:()=>{addLog(GS.explorerName,'B'+(GS.floor+1)+'へ向かった…','',600,'player');setTimeout(()=>goToFloor(GS.floor+1),1500);}}]);},900);},1200);//setTimeout(()=>{stairAds();},100);},900);},1200);
+    setTimeout(()=>{addCmd([{label:'▼ B'+(GS.floor+1)+'へ進む',action:()=>{addLog(GS.explorerName,'B'+(GS.floor+1)+'へ向かった…','',600,'player');setTimeout(()=>goToFloor(GS.floor+1),1500);}}]);setTimeout(()=>{stairAds();},100);},900);},1200);
 }
 // function playgamaAds(){
 //   if(bridge.advertisement.isInterstitialSupported){
@@ -970,10 +981,16 @@ function processStairs(){
 
 // function isPlaygamaAds(state){return state==='closed'||state==='failed';}
 
-// function stairAds(){
-//   const ads=document.getElementById('stair-ads');
-//   ads.style.display=ads.style.display==='block'?'none':'block';
-// }
+function stairAds(){
+  const ads=document.getElementById('stair-ads');
+  ads.style.display=ads.style.display==='block'?'none':'block';
+
+  var prefix = "element-playgama";
+  var elements = document.querySelectorAll('[id^="' + prefix + '"]');
+  if (elements.length === 0) return;
+  var randomIndex = Math.floor(Math.random() * elements.length);
+  elements[randomIndex].style.display = "inline-block";
+}
 
 
 
