@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ja"><head>
+    <!-- Google Tag Manager -->
+<script async="">(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-T4G6KMKK');</script>
+<!-- End Google Tag Manager -->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!--本番執筆の際にhead情報更新-->
+    <title>【Unity】属性1行でインスペクターを劇的に効率化！SuperInspector導入・使い方完全ガイド</title>
+    <link rel="stylesheet" href="../../AssetConfiguration/MainStyleProcessor.css" />
+    <link rel="stylesheet" href="../../AssetConfiguration/SubStyleProcessor.css" />
+    <meta content="Unityでのゲーム開発において、インスペクターのカスタマイズは避けては通れない課題です。通常、表示を整えるには複雑なカスタムエディタのコードが必要ですが、自作アセット「SuperInspector」を使えば、C#属性を1行追加するだけでプロフェッショナルなUIを瞬時に構築できます。本記事では、30種類以上の強力な属性によるグループ化や条件表示、バリデーション機能に加え、標準のUnityでは不可能なDictionaryやHashSetのインスペクター編集・保存方法まで徹底解説します。導入手順から具体的な活用例、メソッドのボタン化といった実用的なテクニックまで網羅しており、個人開発からチーム制作まで、エディタ拡張にかける時間を大幅に削減してゲーム本編の開発に集中したいすべてのUnity開発者必見の内容です。この記事を読めば、標準のインスペクターには戻れないほどの快適な開発環境を手に入れることができます。" name="description" />
+    <meta name="keywords" content="Unity, SuperInspector, エディタ拡張, Inspector, インスペクター, アセット, BOOTH, C#, 属性, Attribute, CustomEditor, Dictionary表示, 開発効率化, Unity2021, Unity6" />
+    <meta property="og:image" content="https://hayadebi.github.io/Accounting-ai-app/Images/superinspector.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="generator" content="Hayadebi Blog" />
+    <link rel="icon" type="image/png" href="https://pbs.twimg.com/media/G2H3yzRaIAIIHjw?format=png&name=240x240" />
+    <!--本番執筆の際に前と次を設定↓-->
+    <link rel="prev" href="blog_dev_12.html" />
+    <link rel="next" href="blog_dev_14.html" /> 
+    <!--本番執筆の際にnoindex削除↓-->
+    
+    <script async="" src="https://www.googletagmanager.com/gtag/js?id=G-GLW3M3X7B3" defer=""></script>
+    <script async="">
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-GLW3M3X7B3');
+    </script>
+
+    <script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "【Unity】属性1行でインスペクターを劇的に効率化！SuperInspector導入・使い方完全ガイド",
+  "image": "https://hayadebi.github.io/Accounting-ai-app/Images/superinspector.png",
+  "datePublished": "2026-03-22",
+  "dateModified": "2026-03-22",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://hayadebi.github.io/Accounting-ai-app/Blogs/Developer/blog_dev_13.html"
+  },
+  "author": {
+    "@type": "Person",
+    "name": "ハヤデビ",
+    "jobTitle": "フリーランスエンジニア",
+    "url": "https://hayadebi.github.io/Accounting-ai-app/profile.html",
+    "sameAs": [
+      "https://x.com/hayadebi",
+      "https://unitygamehayadebi.jimdofree.com"
+    ]
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "ハヤデビ",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://pbs.twimg.com/media/G5mBHiiacAIWGvt?format=png&name=900x900"
+    }
+  }
+}</script>
+</head>
+<body>
+    <!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-T4G6KMKK" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+    <header class="header">
+        <nav class="nav-container">
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="../../index.html" alt="ハヤデビのツール工房ホームページ">ホーム</a></li>
+                <li><a href="../../tools.html" alt="ハヤデビのツール工房/ツール一覧">ツール</a></li>
+                <li><a href="../../coconala.html" alt="ハヤデビのツール工房/ココナラ事業一覧">事業</a></li>
+                <li><a href="../../blogs.html" alt="ハヤデビのツール工房/ブログ一覧">ブログ</a></li>
+                <li><a href="../../profile.html" alt="ハヤデビのツール工房/プロフィール詳細">プロフィール</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="main-container">
+        <!-- タイトル本番執筆更新 -->
+        <div class="hero">
+            <h1>【Unity】属性1行でインスペクターを劇的に効率化！SuperInspector導入・使い方完全ガイド</h1>
+        </div>
+
+        <!-- 本番執筆で内容に応じて目次セクション更新 -->
+        <section class="section">
+            <div class="recommend-icon">
+                <center><img src="https://hayadebi.github.io/Accounting-ai-app/Images/superinspector.png" loading="lazy" alt="記事サムネイル" style="object-fit: cover;width:75%;max-width:100%;height: auto; display: block;border-radius:2%;padding:10px 0;" /></center>
+            </div>
+            <h2>目次</h2>
+             <div style="display: flex; flex-wrap: wrap; gap: 10px;">
+            <a href="#section-1" style="padding: 8px 15px; background: linear-gradient(135deg, #0066cc 0%, #00bfff 100%); color: #fff; text-decoration: none; border-radius: 4px; font-weight: 600; font-size: 0.9rem; transition: opacity 0.3s ease;">
+            1. はじめに</a>
+            <a href="#section-2" style="padding: 8px 15px; background: linear-gradient(135deg, #0066cc 0%, #00bfff 100%); color: #fff; text-decoration: none; border-radius: 4px; font-weight: 600; font-size: 0.9rem; transition: opacity 0.3s ease;">2. 導入方法</a>
+            <a href="#section-3" style="padding: 8px 15px; background: linear-gradient(135deg, #0066cc 0%, #00bfff 100%); color: #fff; text-decoration: none; border-radius: 4px; font-weight: 600; font-size: 0.9rem; transition: opacity 0.3s ease;">3. 基本的な使い方</a><a href="#section-目次番号" style="padding: 8px 15px; background: linear-gradient(135deg, #0066cc 0%, #00bfff 100%); color: #fff; text-decoration: none; border-radius: 4px; font-weight: 600; font-size: 0.9rem; transition: opacity 0.3s ease;">4. 主要機能</a>
+            <a href="#section-4" style="padding: 8px 15px; background: linear-gradient(135deg, #0066cc 0%, #00bfff 100%); color: #fff; text-decoration: none; border-radius: 4px; font-weight: 600; font-size: 0.9rem; transition: opacity 0.3s ease;">
+            4. まとめ</a>
+        </div>
+        <p class="hero-subtitle">※当記事はプロモーションも含みます</p></section>
+
+        <section class="section" id="section-1">
+            <h2>はじめに</h2>
+            <p><strong>Unity</strong>でゲーム開発をしていると、避けては通れないのが<strong>インスペクターやエディタのカスタマイズ</strong>です。
+ 
+「標準のインスペクターだとフィールドが並びすぎて見づらい」
+「特定の条件の時だけフィールドを表示したい」
+「Dictionaryをインスペクターで直接編集したい」……。
+ 
+こうした悩みを一度は抱えるかもしれません。
+通常、これらを解決するには「<strong>エディタ拡張</strong>」を自作し、何百行ものGUIコードを書く必要もあります。
+しかし、今回ご紹介する<strong><a href="https://hayadebi.booth.pm/items/8106607" style="color: #a8d0ff;overflow-wrap: break-word;" alt="リンク" target="_blank" referrerpolicy="no-referrer-when-downgrade">SuperInspector</a></strong>を使えば、属性を1行追加するだけで、プロフェッショナルなUIを瞬時に構築できます。</p><a href="https://hayadebi.booth.pm/items/8106607" class="btn" target="_blank" rel="nofollow" referrerpolicy="no-referrer-when-downgrade" alt="リンクボタン">SuperInspector販売ページ</a><p>本記事では、Unityエディタ拡張の決定版とも言える「<strong>SuperInspector</strong>」の魅力から導入方法、具体的な使い方までを徹底解説します。</p><div class="recommend-boxes">
+
+<div class="recommend-box" style="text-align: left;margin-bottom:0;">
+
+<p><strong>【こんな方におすすめ】</strong>
+・インスペクターがフィールドだらけで整理がつかなくなっている方
+・カスタムエディタを書く時間を削減し、ゲーム本編の開発に集中したい方
+・チームメンバー（プランナーやデザイナー）が直感的に操作できるUIを提供したい方
+・DictionaryやHashSetをInspectorで直接編集・保存したい方</p></div></div>
+        </section>
+
+        <div style="width:100%;height:auto;">
+            <center><!-- admax -->
+            <script src="https://adm.shinobi.jp/o/edb95f1374c43ecb818d1773165ad3a7"></script>
+            <!-- admax --></center>
+        </div>
+
+        <section class="section" id="section-2">
+            <h2>導入方法</h2>
+            <p><strong>SuperInspector</strong>の導入自体は簡単にできます。
+複雑な設定とかは不要です。</p><a href="https://hayadebi.booth.pm/items/8106607" class="btn" target="_blank" rel="nofollow" referrerpolicy="no-referrer-when-downgrade" alt="リンクボタン">SuperInspector販売ページ</a><div class="recommend-icon"><img src="https://pbs.twimg.com/media/HD-y0Y4bMAA1PRz?format=png&name=900x900" alt="記事参考画像" style="object-fit: cover;max-width:100%;height: auto; display: block;border-radius:2%;" loading="lazy" /></div><div class="recommend-boxes">
+
+<div class="recommend-box" style="text-align: left;margin-bottom:0;">
+
+<p><strong>【ステップ1：アセットのインポート】</strong>
+1. BOOTHやItch.io版で購入したパッケージ（.unitypackage）を、Unityプロジェクトのプロジェクト上にドラッグ＆ドロップします。
+2. 表示されたインポート画面で「Import」をクリックします。</p></div></div><div class="recommend-icon"><img src="https://pbs.twimg.com/media/HD-y0Y3bIAAFo2k?format=jpg&name=large" alt="記事参考画像" style="object-fit: cover;max-width:100%;height: auto; display: block;border-radius:2%;" loading="lazy" /></div><div class="recommend-boxes">
+
+<div class="recommend-box" style="text-align: left;margin-bottom:0;">
+
+<p><strong>【ステップ2：動作確認】</strong>
+1. ヒエラルキー上で右クリックし、「Create Empty」で空のゲームオブジェクトを作成します。
+2. 作成したオブジェクトを選択し、インスペクターの「Add Component」から「SuperInspectorDemo」を検索してアタッチします。
+3. インスペクターにカラフルで整理されたデモ画面が表示されれば、導入は無事完了です。</p></div></div><p>初めのうちはSuperInspectorDemoを参考にして、色々試してみて下さい。</p>
+        </section>
+        
+        <section class="section" id="section-3">
+            <h2>基本的な使い方</h2>
+            <p>属性を使用するために、
+まずはスクリプトの先頭に以下の1行を追加しましょう。</p>
+<div id="jimdo-widget-1" style="font-family:'Consolas','Courier New',monospace;font-size:13px;line-height:1.7;background:#1e1e1e;border-radius:8px;border:1px solid #333;overflow:hidden;margin-bottom:24px;">
+  <div style="display:flex;align-items:center;justify-content:space-between;background:#2d2d2d;padding:8px 14px;border-bottom:1px solid #3a3a3a;">
+    <span style="color:#888;font-size:12px;letter-spacing:0.5px;">C#</span>
+    <button onclick="jimdoCopy1(this)" style="background:#3a3a3a;color:#ccc;border:1px solid #555;border-radius:4px;padding:4px 12px;font-size:12px;cursor:pointer;font-family:sans-serif;" onmouseover="this.style.background='#505050'" onmouseout="this.style.background='#3a3a3a'">Copy</button>
+  </div>
+  <div id="jimdo-code-1" style="max-height:320px;overflow-y:auto;padding:16px 18px;white-space:pre;color:#d4d4d4;box-sizing:border-box;"></div>
+</div>
+
+<p>これだけで、<strong>30種類以上の強力な属性が利用可能</strong>になります。
+基本的には、表示したいフィールドやメソッドの直前に[属性名]を書くだけでUIが変化します。
+以下例：RPGキャラクター↓</p>
+<div id="jimdo-widget-2" style="font-family:'Consolas','Courier New',monospace;font-size:13px;line-height:1.7;background:#1e1e1e;border-radius:8px;border:1px solid #333;overflow:hidden;">
+  <div style="display:flex;align-items:center;justify-content:space-between;background:#2d2d2d;padding:8px 14px;border-bottom:1px solid #3a3a3a;">
+    <span style="color:#888;font-size:12px;letter-spacing:0.5px;">C#</span>
+    <button onclick="jimdoCopy2(this)" style="background:#3a3a3a;color:#ccc;border:1px solid #555;border-radius:4px;padding:4px 12px;font-size:12px;cursor:pointer;font-family:sans-serif;" onmouseover="this.style.background='#505050'" onmouseout="this.style.background='#3a3a3a'">Copy</button>
+  </div>
+  <div id="jimdo-code-2" style="max-height:320px;overflow-y:auto;padding:16px 18px;white-space:pre;color:#d4d4d4;box-sizing:border-box;"></div>
+</div>
+<br />
+<div class="recommend-icon">
+    <img src="https://pbs.twimg.com/media/HD-y0Y5aQAAWIxy?format=png&name=small" alt="記事参考画像" style="object-fit: cover;max-width:100%;height: auto; display: block;border-radius:2%;" loading="lazy" />
+</div>
+</section>
+<section class="section" id="section-目次番号">
+
+<h2>主要機能</h2><h3 style="font-size:1.4rem;color: #a8d0ff;">グループ機能</h3><p>大量のパラメータを、ボックスやタブ、折り畳みメニューで整理できます。</p><div class="recommend-icon"><img src="https://pbs.twimg.com/media/HD0eWsLboAMJpG2?format=jpg&name=medium" alt="記事参考画像" style="object-fit: cover;max-width:100%;height: auto; display: block;border-radius:2%;" loading="lazy" /></div><div class="recommend-boxes">
+
+<div class="recommend-box" style="text-align: left;margin-bottom:0;">
+
+<p>・<strong>BoxGroup</strong>: 関連する項目を枠線付きのボックスで囲みます。
+・<strong>TabGroup</strong>: タブ切り替えUIを作成します。設定項目が多い場合に非常に有効です。
+・<strong>FoldoutGroup</strong>: クリックで開閉できるグループを作ります。普段は隠しておきたい詳細設定に最適です。
+・<strong>HorizontalGroup</strong>: フィールドを横並びに配置します。HPの現在値と最大値を並べる際などに便利です。</p></div></div><p>　</p><h3 style="font-size:1.4rem;color: #a8d0ff;">条件表示属性</h3><p>特定の条件を満たした時だけ、
+フィールドを表示したり編集可能にしたりできます。</p><div class="recommend-icon"><img src="https://pbs.twimg.com/media/HD-6Ay4a8AAy1hg?format=jpg&name=medium" alt="記事参考画像" style="object-fit: cover;max-width:100%;height: auto; display: block;border-radius:2%;" loading="lazy" /></div><div class="recommend-boxes">
+
+<div class="recommend-box" style="text-align: left;margin-bottom:0;">
+
+<p>・<strong>ShowIf / HideIf</strong>: 指定したフラグがtrueの時だけ表示（または非表示）にします。
+・<strong>EnableIf / DisableIf</strong>: 条件に応じてフィールドをグレーアウト（編集不可）にします。
+・<strong>ReadOnly</strong>: 常に読み取り専用として表示します。デバッグ用の数値確認に便利です。</p></div></div><p>「敵キャラクター」にチェックを入れた時だけ「攻撃力」の項目を表示させる、といった制御がコード1行で実現できます。
+ </p><h3 style="font-size:1.4rem;color: #a8d0ff;">バリデーション属性</h3><p>ヒューマンエラーを未然に防ぐための強力なチェック機能です。</p><div class="recommend-icon"><img src="https://pbs.twimg.com/media/HD-y2zIb0AAi34W?format=png&name=small" alt="記事参考画像" style="object-fit: cover;max-width:100%;height: auto; display: block;border-radius:2%;" loading="lazy" /></div><div class="recommend-boxes">
+
+<div class="recommend-box" style="text-align: left;margin-bottom:0;">
+
+<p>・<strong>Required</strong>: 参照が空（null）の場合に、Inspector上に赤いエラーメッセージを表示します。
+・<strong>ValidateInput</strong>: 独自の検証関数を使って、入力値が正しいかをリアルタイムでチェックします。
+・<strong>MinValue / MaxValue</strong>: 数値の範囲を制限し、範囲外の値が入力されたら自動でクランプします。</p></div></div><p>　</p><h3 style="font-size:1.4rem;color: #a8d0ff;">表示強化属性や型特化属性など</h3><p>数値やテキストをより分かりやすく表示したり、特定の型に特化した便利なUIや、メソッドの実行ボタンも追加できます。</p><div class="recommend-icon"><img src="https://pbs.twimg.com/media/HD-5_GTaAAAcgxX?format=jpg&name=medium" alt="記事参考画像" style="object-fit: cover;max-width:100%;height: auto; display: block;border-radius:2%;" loading="lazy" /></div><div class="recommend-icon"><img src="https://pbs.twimg.com/media/HD1Nc0YawAAyVxu?format=jpg&name=medium" alt="記事参考画像" style="object-fit: cover;max-width:100%;height: auto; display: block;border-radius:2%;" loading="lazy" /></div><div class="recommend-icon"><img src="https://pbs.twimg.com/media/HD1Nc0dbgAAnDsJ?format=jpg&name=medium" alt="記事参考画像" style="object-fit: cover;max-width:100%;height: auto; display: block;border-radius:2%;" loading="lazy" /></div><div class="recommend-boxes">
+
+<div class="recommend-box" style="text-align: left;margin-bottom:0;">
+
+<p>・<strong>ProgressBar</strong>: 数値をカラーバーとして表示します。HPや経験値の視覚化に最適です。
+・<strong>GUIColor</strong>: フィールドやボタンに色を付けます。重要な項目を赤くして目立たせるといった使い方が可能です。
+・<strong>InfoBox</strong>: 説明文や警告メッセージをInspector内に直接表示します。</p></div></div><div class="recommend-boxes">
+
+<div class="recommend-box" style="text-align: left;margin-bottom:0;">
+
+<p>・<strong>Button</strong>: メソッドをボタンとして表示します。ゲーム再生中に特定の処理をテストする際に非常に重宝します。
+・<strong>EnumToggleButtons</strong>: enum（列挙型）をドロップダウンではなく、横並びのボタンで選択できるようにします。
+・<strong>TableList</strong>: リスト構造をExcelのようなテーブル形式で表示・編集できます。</p></div></div><p>　</p><h3 style="font-size:1.4rem;color: #a8d0ff;">拡張シリアライザ</h3><p><strong><a href="https://hayadebi.booth.pm/items/8106607" style="color: #a8d0ff;overflow-wrap: break-word;" alt="リンク" target="_blank" referrerpolicy="no-referrer-when-downgrade">SuperInspector</a></strong>の真骨頂の一つが、標準のUnityでは不可能な型のシリアライズ（保存）です。
+通常、Unityのインスペクター上ではDictionaryやHashSetを表示・編集できませんが、SuperInspectorが提供する専用の型を使用することで、これらが可能になります。</p><div class="recommend-icon"><img src="https://pbs.twimg.com/media/HD1Nc0YboAEuOCP?format=jpg&name=medium" alt="記事参考画像" style="object-fit: cover;max-width:100%;height: auto; display: block;border-radius:2%;" loading="lazy" /></div><div class="recommend-boxes">
+
+<div class="recommend-box" style="text-align: left;margin-bottom:0;">
+
+<p>・<strong>SerializableDictionary<TKey, TValue></strong>: DictionaryをInspectorで直接編集。
+・<strong>SerializableHashSet<T></strong>: 重複のないリストをInspectorで管理。
+・<strong>PolymorphicList<T></strong>: インターフェース型のリストを、型選択ドロップダウン付きで管理。</p></div></div><p>これらは</p>
+    <div id="jimdo-widget-3" style="font-family:'Consolas','Courier New',monospace;font-size:13px;line-height:1.7;background:#1e1e1e;border-radius:8px;border:1px solid #333;overflow:hidden;">
+  <div style="display:flex;align-items:center;justify-content:space-between;background:#2d2d2d;padding:8px 14px;border-bottom:1px solid #3a3a3a;">
+    <span style="color:#888;font-size:12px;letter-spacing:0.5px;">C#</span>
+    <button onclick="jimdoCopy3(this)" style="background:#3a3a3a;color:#ccc;border:1px solid #555;border-radius:4px;padding:4px 12px;font-size:12px;cursor:pointer;font-family:sans-serif;" onmouseover="this.style.background='#505050'" onmouseout="this.style.background='#3a3a3a'">Copy</button>
+  </div>
+  <div id="jimdo-code-3" style="max-height:320px;overflow-y:auto;padding:16px 18px;white-space:pre;color:#d4d4d4;box-sizing:border-box;"></div>
+</div>
+<script>
+(function(){
+  var raw1 = "using SuperInspector.Attributes;";
+ 
+  var raw2 = "// ──────────────────────────────────────────────────\n// 基本情報\n// ──────────────────────────────────────────────────\n[Title(\"基本情報\")]\n[BoxGroup(\"プロフィール\")]\n[LabelText(\"キャラクター名\")]\npublic string characterName = \"勇者\";\n\n[BoxGroup(\"プロフィール\")]\n[ValueDropdown(\"GetClassList\")]\npublic string characterClass = \"戦士\";\n\n[BoxGroup(\"プロフィール\")]\n[PreviewField(64f)]\npublic Sprite portrait;\n\n[BoxGroup(\"プロフィール\")]\n[MultiLineProperty(3)]\n[LabelText(\"説明文\")]\npublic string description = \"\";\n\n// ──────────────────────────────────────────────────\n// ステータス（タブで整理）\n// ──────────────────────────────────────────────────\n[Title(\"ステータス\")]\n[TabGroup(\"ステータスタブ\", \"基本\")]\n[PropertyRange(1, 99)]\npublic int level = 1;\n\n[TabGroup(\"ステータスタブ\", \"基本\")]\n[ProgressBar(0, 500, r: 0.2f, g: 0.8f, b: 0.3f, height: 20f)]\n[LabelText(\"HP\")]\npublic float hp = 100f;\n\n[TabGroup(\"ステータスタブ\", \"基本\")]\n[ProgressBar(0, 200, r: 0.3f, g: 0.4f, b: 0.9f, height: 20f)]\n[LabelText(\"MP\")]\npublic float mp = 50f;\n\n[TabGroup(\"ステータスタブ\", \"攻防\")]\n[MinValue(1), MaxValue(999)]\npublic int attack = 10;\n\n[TabGroup(\"ステータスタブ\", \"攻防\")]\n[MinValue(0), MaxValue(999)]\npublic int defense = 5;\n\n[TabGroup(\"ステータスタブ\", \"攻防\")]\n[PropertyRange(1f, 5f)]\npublic float attackSpeed = 1.0f;";
+ 
+  var raw3 = "using SuperInspector.Serialization;";
+ 
+  function esc(s){
+    return s.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
+  }
+ 
+  function highlight(code){
+    var kw = {"abstract":1,"as":1,"base":1,"bool":1,"break":1,"byte":1,"case":1,"catch":1,"char":1,"checked":1,"class":1,"const":1,"continue":1,"decimal":1,"default":1,"delegate":1,"do":1,"double":1,"else":1,"enum":1,"event":1,"explicit":1,"extern":1,"false":1,"finally":1,"fixed":1,"float":1,"for":1,"foreach":1,"goto":1,"if":1,"implicit":1,"in":1,"int":1,"interface":1,"internal":1,"is":1,"lock":1,"long":1,"namespace":1,"new":1,"null":1,"object":1,"operator":1,"out":1,"override":1,"params":1,"private":1,"protected":1,"public":1,"readonly":1,"ref":1,"return":1,"sbyte":1,"sealed":1,"short":1,"sizeof":1,"stackalloc":1,"static":1,"string":1,"struct":1,"switch":1,"this":1,"throw":1,"true":1,"try":1,"typeof":1,"uint":1,"ulong":1,"unchecked":1,"unsafe":1,"ushort":1,"using":1,"var":1,"virtual":1,"void":1,"volatile":1,"while":1,"async":1,"await":1,"get":1,"set":1,"value":1,"yield":1,"partial":1};
+    var lines = code.split("\n"), result = [];
+    for(var i=0;i<lines.length;i++){
+      var line = lines[i], ci, ch, inStr=false, strChar='', commentIdx=-1;
+      for(ci=0;ci<line.length;ci++){
+        ch=line[ci];
+        if(!inStr&&(ch==='"'||ch==="'")){inStr=true;strChar=ch;}
+        else if(inStr&&ch===strChar&&line[ci-1]!=='\\'){inStr=false;}
+        else if(!inStr&&ch==='/'&&line[ci+1]==='/'){commentIdx=ci;break;}
+      }
+      var codePart = commentIdx>=0 ? line.substring(0,commentIdx) : line;
+      var commentPart = commentIdx>=0 ? line.substring(commentIdx) : null;
+      var tp = /("(?:[^"\\]|\\.)*"|'(?:[^'\\]|\\.)*'|\b[A-Za-z_][A-Za-z0-9_]*\b|\d+[\d.]*[fFdDmMlLuU]*|[^\w\s"'])/g;
+      var m, li=0, html="";
+      while((m=tp.exec(codePart))!==null){
+        if(m.index>li) html+=esc(codePart.substring(li,m.index));
+        var tok=m[0];
+        if(/^("(?:[^"\\]|\\.)*"|'(?:[^'\\]|\\.)*')$/.test(tok)){
+          html+='<span style="color:#ce9178;">'+esc(tok)+'</span>';
+        } else if(kw[tok]){
+          html+='<span style="color:#569cd6;">'+esc(tok)+'</span>';
+        } else if(/^\d/.test(tok)){
+          html+='<span style="color:#b5cea8;">'+esc(tok)+'</span>';
+        } else if(/^[A-Z][A-Za-z0-9_]*$/.test(tok)){
+          html+='<span style="color:#4ec9b0;">'+esc(tok)+'</span>';
+        } else if(/^[a-z_][A-Za-z0-9_]*$/.test(tok)){
+          html+=(codePart.substring(m.index+tok.length).match(/^\s*\(/))?'<span style="color:#dcdcaa;">'+esc(tok)+'</span>':'<span style="color:#9cdcfe;">'+esc(tok)+'</span>';
+        } else {
+          html+=esc(tok);
+        }
+        li=m.index+tok.length;
+      }
+      if(li<codePart.length) html+=esc(codePart.substring(li));
+      if(commentPart) html+='<span style="color:#6a9955;">'+esc(commentPart)+'</span>';
+      result.push(html);
+    }
+    return result.join("\n");
+  }
+ 
+  function fallbackCopy(text, btn){
+    var ta=document.createElement("textarea");
+    ta.value=text; ta.setAttribute("readonly","");
+    ta.style.cssText="position:fixed;top:0;left:0;opacity:0;pointer-events:none;";
+    document.body.appendChild(ta); ta.focus(); ta.select();
+    try{document.execCommand("copy");}catch(e){}
+    document.body.removeChild(ta);
+    btn.innerText="Copied!"; btn.style.color="#4ec9b0";
+    setTimeout(function(){btn.innerText="Copy"; btn.style.color="#ccc";},2000);
+  }
+ 
+  function copyText(text, btn){
+    if(navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(text).then(function(){
+        btn.innerText="Copied!"; btn.style.color="#4ec9b0";
+        setTimeout(function(){btn.innerText="Copy"; btn.style.color="#ccc";},2000);
+      }).catch(function(){ fallbackCopy(text, btn); });
+    } else {
+      fallbackCopy(text, btn);
+    }
+  }
+ 
+  document.getElementById("jimdo-code-1").innerHTML = highlight(raw1);
+  document.getElementById("jimdo-code-2").innerHTML = highlight(raw2);
+  document.getElementById("jimdo-code-3").innerHTML = highlight(raw3);
+ 
+  window.jimdoCopy1 = function(btn){ copyText(raw1, btn); };
+  window.jimdoCopy2 = function(btn){ copyText(raw2, btn); };
+  window.jimdoCopy3 = function(btn){ copyText(raw3, btn); };
+})();
+</script>
+<p>を追加するだけで、通常の型と同じ感覚で利用できます。</p></section>
+
+        <!--サイト内誘導広告-->
+        <div style="width:100%; height:auto;padding: 0;margin: 0 0 20px 0;">
+            <!-- <div style="width: 100%; max-width: 1200px; margin: 0 auto; padding: 20px 10px; box-sizing: border-box; font-family: 'Hiragino Kaku Gothic ProN', 'メイリオ', sans-serif;"> -->
+                
+                <!-- スクロールコンテナ -->
+                <div style="position: relative; overflow: hidden; background: rgba(255, 255, 255, 0.08); border-radius: 15px; padding: 15px;border: 1px solid rgba(255, 255, 255, 0.1);">
+                    <!-- 左矢印 -->
+                    <div id="prevBtn" style="position: absolute; left: 0; top: 50%; transform: translateY(-50%); width: 40px; height: 40px; background: rgba(0,0,0,0.5); color: white; display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 10; border-radius: 50%; font-size: 20px; user-select: none;">❮</div>
+                    
+                    <!-- 右矢印 -->
+                    <div id="nextBtn" style="position: absolute; right: 0; top: 50%; transform: translateY(-50%); width: 40px; height: 40px; background: rgba(0,0,0,0.5); color: white; display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 10; border-radius: 50%; font-size: 20px; user-select: none;">❯</div>
+                    
+                    <!-- コンテンツ表示エリア -->
+                    <div id="contentWrapper" style="display: flex; transition: transform 0.5s ease; margin: 0 50px;"></div>
+                </div>
+                
+                <!-- インジケーター -->
+                <div id="indicators" style="display: flex; justify-content: center; gap: 8px; margin-top: 15px;"></div>
+            <!-- </div> -->
+        </div>
+        <script defer="defer">(function() {
+        // ========================================
+        // ここでコンテンツを編集できます
+        // ========================================
+        const contents =     [
+            {
+                "title": "SuperInspector",
+                "image": "https://hayadebi.github.io/Accounting-ai-app/Images/superinspector.png",
+                "link": "https://hayadebi.booth.pm/items/8106607"
+            },
+            {
+                "title": "Odin Inspector and Serializer",
+                "image": "https://assetstorev1-prd-cdn.unity3d.com/key-image/9d926590-4d7f-4fd6-aec4-694500047d75.webp",
+                "link": "https://assetstore.unity.com/packages/tools/utilities/odin-inspector-and-serializer-89041?aid=1101l3IyTm"
+            },
+            {
+                "title": "Inspector Gadgets Pro",
+                "image": "https://assetstorev1-prd-cdn.unity3d.com/key-image/f6087b72-cfd3-40ca-9ee1-2155cbf88e2b.webp",
+                "link": "https://assetstore.unity.com/packages/tools/gui/inspector-gadgets-pro-83013?aid=1101l3IyTm"
+            }
+        ];
+        // ========================================
+
+        let currentIndex = 0;
+        let autoScrollTimer;
+        const autoScrollInterval = 8000; // 8秒ごとに自動スクロール
+
+        const contentWrapper = document.getElementById('contentWrapper');
+        const indicatorsDiv = document.getElementById('indicators');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+
+        // レスポンシブ判定
+        function isMobile() {
+            return window.innerWidth < 768;
+        }
+
+        // 1ページあたりの表示数
+        function getItemsPerPage() {
+            return isMobile() ? 1 : 3;
+        }
+
+        // 総ページ数
+        function getTotalPages() {
+            return Math.ceil(contents.length / getItemsPerPage());
+        }
+
+        // コンテンツHTML生成
+        function createContentHTML(content, index) {
+            const itemsPerPage = getItemsPerPage();
+            const width = isMobile() ? '100%' : 'calc(33.333% - 10px)';
+            
+            return `
+            <div style="flex: 0 0 ${width}; min-width: ${width}; padding: 10px; box-sizing: border-box;">
+                <a href="${content.link}" target="_blank" style="text-decoration: none; color: inherit; display: block;">
+                <div style=" background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 8px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.1); transition: transform 0.3s, box-shadow 0.3s; height: 100%;" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 4px 12px rgba(0,0,0,0.2)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 2px 8px rgba(0,0,0,0.1)';">
+                    <div style="position: relative; padding-top: 133.33%; overflow: hidden;  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                    <img src="${content.image}" loading="lazy" alt="${content.title}" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22300%22 height=%22400%22%3E%3Crect fill=%22%23ddd%22 width=%22300%22 height=%22400%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22 fill=%22%23999%22%3ENo Image%3C/text%3E%3C/svg%3E';">
+                    </div>
+                    <div style="padding: 12px;">
+                    <div style="font-size: 14px; font-weight: bold; line-height: 1.4; color: #ffffff; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; min-height: 2.8em;">${content.title}</div>
+                    </div>
+                </div>
+                </a>
+            </div>
+            `;
+        }
+
+        // コンテンツ描画
+        function renderContents() {
+            contentWrapper.innerHTML = contents.map((content, index) => createContentHTML(content, index)).join('');
+        }
+
+        // インジケーター描画
+        function renderIndicators() {
+            const totalPages = getTotalPages();
+            indicatorsDiv.innerHTML = '';
+            
+            for (let i = 0; i < totalPages; i++) {
+            const dot = document.createElement('div');
+            dot.style.cssText = `
+                width: 10px;
+                height: 10px;
+                border-radius: 50%;
+                background: ${i === currentIndex ? '#007bff' : '#ccc'};
+                cursor: pointer;
+                transition: background 0.3s;
+            `;
+            dot.addEventListener('click', () => goToPage(i));
+            indicatorsDiv.appendChild(dot);
+            }
+        }
+
+        // ページ移動
+        function goToPage(index) {
+            const totalPages = getTotalPages();
+            currentIndex = (index + totalPages) % totalPages;
+            
+            const itemsPerPage = getItemsPerPage();
+            const wrapperWidth = contentWrapper.offsetWidth;
+            const offset = currentIndex * wrapperWidth;
+            contentWrapper.style.transform = `translateX(-${offset}px)`;
+            
+            renderIndicators();
+            resetAutoScroll();
+        }
+
+        // 次へ
+        function nextPage() {
+            goToPage(currentIndex + 1);
+        }
+
+        // 前へ
+        function prevPage() {
+            goToPage(currentIndex - 1);
+        }
+
+        // 自動スクロールリセット
+        function resetAutoScroll() {
+            clearInterval(autoScrollTimer);
+            autoScrollTimer = setInterval(nextPage, autoScrollInterval);
+        }
+
+        // イベントリスナー
+        nextBtn.addEventListener('click', nextPage);
+        prevBtn.addEventListener('click', prevPage);
+
+        // リサイズ対応
+        let resizeTimer;
+        window.addEventListener('resize', () => {
+            clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(() => {
+            currentIndex = 0;
+            renderContents();
+            goToPage(0);
+            }, 250);
+        });
+
+        // 初期化
+        renderContents();
+        renderIndicators();
+        goToPage(0);
+
+        // マウスオーバーで自動スクロール一時停止
+        contentWrapper.parentElement.addEventListener('mouseenter', () => {
+            clearInterval(autoScrollTimer);
+        });
+
+        contentWrapper.parentElement.addEventListener('mouseleave', () => {
+            resetAutoScroll();
+        });
+        })();</script>
+
+        <section class="section" id="section-4">
+            <h2>まとめ</h2>
+            <p>いかがでしたか？
+<strong><a href="https://hayadebi.booth.pm/items/8106607" style="color: #a8d0ff;overflow-wrap: break-word;" alt="リンク" target="_blank" referrerpolicy="no-referrer-when-downgrade">SuperInspector</a></strong>は、単なる見た目の調整ツールではありません。
+開発者の「エディタ拡張にかける時間」を大幅に削減し、本来の目的である「面白いゲームを作る」ことに集中させてくれる強力なアセットです。
+ 
+個人開発からチーム開発まで、Unityでの制作効率を一段階引き上げたい方は、ぜひ導入を検討してみてはいかがでしょうか。
+一度この快適さを知ってしまうと、もう標準のインスペクターには戻れなくなるかもしれません。。_(:3 」∠)_</p><a href="https://hayadebi.booth.pm/items/8106607" class="btn" target="_blank" rel="nofollow" referrerpolicy="no-referrer-when-downgrade" alt="リンクボタン">SuperInspector販売ページ</a>
+            <a href="../../Tools/GameJamGenerator/gamajamgenerator.html" class="btn" alt="企画ジェネレーターツール">ゲーム企画ジェネレーターツールも試す【PR】</a>
+        </section>
+
+        <section class="section">
+            <h2>他の記事</h2>
+            <p>AIツール・開発・アプリ関連の記事を取り扱っています。</p>
+            <a href="../../blogs.html" class="btn" alt="ブログ記事一覧">全記事一覧</a>
+            <!--本番執筆の際に前と次を設定↓-->
+            <a href="blog_dev_12.html" class="btn" alt="前の記事">←前の記事</a>
+            <a href="blog_dev_14.html" class="btn" alt="次の記事">次の記事→</a>
+        </section>
+
+        <section class="section">
+            <h2>ツール</h2>
+            <p>本サイトでは、暮らしや作業をサポートするウェブツールの運営もしております。</p>
+            <a href="../../tools.html" class="btn" alt="ツール一覧">ツール一覧</a>
+        </section>
+
+        <section class="section">
+            <h2>いいなと思ったら応援</h2>
+            <p>以下の方法で応援を受け付けております。</p>
+            <a href="https://www.paypal.com/paypalme/hayadebisub" class="btn" target="_blank" rel="nofollow" referrerpolicy="no-referrer-when-downgrade" alt="PayPalで支援">PayPal.Me:チップを送って応援</a>
+            <button onclick="generateTweetURL( 'ハヤデビのツール工房では役立つブログ記事も発信中！\n是非チェックしてみよう↓', 'hayadebi.github.io/Accounting-ai-app/', 'ブログ' )" class="btn" style="border: none;" alt="Xでシェア">X:シェアして応援</button>
+        </section>
+
+        <section class="section">
+            <div style="margin-bottom: 20px;">
+                <center><img src="https://pbs.twimg.com/media/G5mBHiiacAIWGvt?format=png&name=900x900" loading="lazy" alt="ハヤデビのロゴ" style="width: 150px; height: 150px; border-radius: 50%; object-fit: cover; border: 4px solid #00bfff; box-shadow: 0 0 15px rgba(0, 191, 255, 0.5);" /></center>
+            </div>
+            <h2>著者兼運営:ハヤデビ</h2>
+            <p>長きにわたりゲームやアプリの開発・動画編集・ブログ運営等を続けている個人クリエイター</p>
+            <a href="https://x.com/hayadebi" class="btn" target="_blank" rel="nofollow" referrerpolicy="no-referrer-when-downgrade" alt="X公式アカウント">X(旧Twitter):公式アカウント</a>
+        </section>
+    </main>
+    
+    <footer class="footer">
+        <div class="footer-content">
+            <a href="../../notation.html" alt="必要表記一覧">運営上必要表記</a>
+            <a href="../../sitemap.html" alt="必要表記一覧">サイトマップ</a>
+            <p>© ハヤデビのツール工房</p>
+        </div>
+    </footer>
+
+    <div class="affiliate-banner" style="border: 1px solid #5592b7; padding: 0.2em; display: flex; flex-wrap: wrap; align-items: flex-start; width: 100%; height:auto; box-sizing: border-box; position: fixed; bottom: 0px; left: 0; right: 0; transition: bottom 0.5s ease; background: rgba(255, 255, 255, 0.9);">
+        <div style="width:100%; height:auto;" class="admax-container">
+            <center>
+                <iframe src="https://assetstore.unity.com/linkmaker/embed/list/top-new/widget-wide?aid=1101l3IyTm" loading="lazy" style="width:600px; max-width:100%; height:100px; border:0px;"></iframe>
+            </center>
+        </div>
+    </div>
+    
+    <script defer="defer">
+        // ハンバーガーメニューの動作
+        const hamburger = document.getElementById('hamburger');
+        const navLinks = document.getElementById('navLinks');
+
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navLinks.classList.toggle('active');
+        });
+
+        // メニュー項目クリック時にメニューを閉じる
+        const navItems = navLinks.querySelectorAll('a');
+        navItems.forEach(item => {
+            item.addEventListener('click', () => {
+                if (window.innerWidth <= 768) {
+                    hamburger.classList.remove('active');
+                    navLinks.classList.remove('active');
+                }
+            });
+        });
+    </script>
+
+    <script src="../../CoreImplementation/TweetManager.js" defer="defer"></script>
+    <script src="../../Ads/BlogAds.js" defer="defer"></script>
+    <script defer="defer">
+        function toggleDetails(button, targetId) {
+            const targetElement = document.getElementById(targetId);
+            if (targetElement.style.display === 'none' || targetElement.style.display === '') {
+                targetElement.style.display = 'grid';
+                button.textContent = '一覧を隠す';
+            } else {
+                targetElement.style.display = 'none';
+                button.textContent = '一覧を表示';
+            }
+        }
+
+    </script>
+
+    <!-- <div class="centerad-widget"></div> -->
+    <script src="../../Ads/BlogCenterAds.js" rel="preload"></script>
+    <!-- admax -->
+<script src="https://adm.shinobi.jp/o/eb1a0fadde0b1abac026285d553cece6"></script>
+<!-- admax -->
+
+</body></html>
