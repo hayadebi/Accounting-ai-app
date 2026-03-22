@@ -172,15 +172,16 @@
         <div id="nav-guest" style="display:flex;gap:6px;flex-wrap:wrap">
         <button class="btn btn-dark btn-sm" onclick="openModal('modal-guide')">初心者ガイド</button>
         <button class="btn btn-dark btn-sm" onclick="openModal('modal-help')">ヘルプ</button>
-        <button class="btn btn-dark btn-sm" onclick="openContactModal()">お問い合わせ</button>
+        <button class="btn btn-dark btn-sm" onclick="window.open(`https:\/\/lin.ee/ytQfFEH`, '_blank');">お問い合わせ</button>
         <button class="btn btn-dark btn-sm" onclick="openModal('modal-login')">ログイン</button>
         <button class="btn btn-gold btn-sm" onclick="openModal('modal-register')">登録</button>
         <button onclick="generateTweetURL( 'InfoGuildでは情報提供でお金を稼げる！\n是非利用してみよう↓', 'hayadebi.github.io/Accounting-ai-app/', 'ポイ活,副業' )" class="btn btn-gold btn-sm" alt="Xでシェア">Xでシェア</button>
+        <a href="https://lin.ee/togOWVq"><img src="https://scdn.line-apps.com/n/line_add_friends/btn/ja.png" alt="友だち追加" height="36" border="0"></a>
         </div>
         <div id="nav-user" style="display:none;gap:6px;flex-wrap:wrap;align-items:center">
         <button class="btn btn-dark btn-sm" onclick="openModal('modal-guide')">初心者ガイド</button>
         <button class="btn btn-dark btn-sm" onclick="openModal('modal-help')">ヘルプ</button>
-        <button class="btn btn-dark btn-sm" onclick="openContactModal()">お問い合わせ</button>
+        <button class="btn btn-dark btn-sm" onclick="window.open(`https:\/\/lin.ee/ytQfFEH`, '_blank');">お問い合わせ</button>
         <div class="dropdown" id="user-dropdown">
             <button class="btn btn-gold btn-sm" onclick="toggleDropdown(event)">⚔ <span id="nav-uname"></span> ▾</button>
             <div class="dropdown-menu">
@@ -355,29 +356,13 @@
     </div>
     </main>
 
-    
-    <!-- <div class="affiliate-banner" style="border: 1px solid #5592b7; padding: 10px; display: flex; flex-wrap: wrap; align-items: flex-start; max-width: 100%; box-sizing: border-box; position: fixed; bottom: 0px; left: 0; right: 0; transition: bottom 0.5s ease; background: rgba(255, 255, 255, 0.85);">
-        <div class="affiliate-image-container" style="flex: 0 0 80px; margin-right: 15px; max-width: 100%;">
-            <a href="https://lin.ee/VRdj6GM" target="_top">
-                <img class="affiliate-image" src="../..//Images/lineicon.svg" alt="アソシエイト画像" style="width:80px; max-width: 100%; height: auto; display: block;">
-            </a>
-        </div>
-        <div style="flex: 1;">
-            <p class="affiliate-title">
-                <a href="https://lin.ee/VRdj6GM" class="affititle" style="color: #2a7186; text-decoration: none;" target="_top">InfoGuild公式LINE</a>
-            </p>
-            <p class="affiliate-description" style="color: #666; margin: 0px 0;">最新・お得情報をいち早く知れる！今すぐお友達追加！</p>
-            
-        </div>
-    </div> -->
-
     <footer id="footer">
     <div class="footer-links">
         <a onclick="openModal('modal-guide')">初心者ガイド</a>
         <a onclick="openModal('modal-help')">ヘルプ・FAQ</a>
         <a onclick="openModal('modal-terms')">注意事項</a>
         <a onclick="openModal('modal-security')">セキュリティ</a>
-        <a onclick="openContactModal()">お問い合わせ</a>
+        <a onclick="window.open(`https:\/\/lin.ee/ytQfFEH`, '_blank');">お問い合わせ</a>
         <a href="../../notation.html">運営上必要表記</a>
         <a href="../../sitemap.html">サイトマップ</a>
     </div>
@@ -584,15 +569,8 @@
         <span class="modal-title">📧 お問い合わせ</span>
         <button class="modal-close" onclick="closeModal('modal-contact-user')">×</button>
         </div>
-        <div class="info-box"><p>ログインユーザーのお問い合わせは1日1回まで可能です。</p></div>
-        <form id="form-contact-user" onsubmit="doContactUser(event)">
-        <div class="form-group">
-            <label class="form-label">問い合わせ内容<span class="req">*</span></label>
-            <textarea id="cu-content" class="form-input" placeholder="お問い合わせの内容を詳しく記入してください" required></textarea>
-        </div>
-        <p id="err-cu" class="form-error" style="margin-bottom:10px"></p>
-        <button type="submit" class="btn btn-gold btn-wide">メーラーを起動して送信する</button>
-        </form>
+        <div class="info-box"><p>お問い合わせは公式LINEアカウントより可能です。</p></div>
+        <a href="https://lin.ee/oaAQtBi"><img src="https://scdn.line-apps.com/n/line_add_friends/btn/ja.png" alt="友だち追加" height="36" border="0"></a>
     </div>
     </div>
     <div id="modal-contact-guest" class="modal-overlay">
@@ -601,28 +579,9 @@
         <span class="modal-title">📧 お問い合わせ（非会員）</span>
         <button class="modal-close" onclick="closeModal('modal-contact-guest')">×</button>
         </div>
-        <div class="warn-box">
         <h4>⚠ 非ログインユーザーのお問い合わせ</h4>
-        <p>非会員のお問い合わせには本人確認のため LTC 送金が必要です。</p>
-        <p style="margin-top:6px"><strong>送金先ウォレット：</strong></p>
-        <p id="guest-admin-wallet" style="word-break:break-all;background:rgba(0,0,0,0.05);padding:6px;margin-top:4px;font-size:12px;border-radius:2px"></p>
-        </div>
-        <form id="form-contact-guest" onsubmit="doContactGuest(event)">
-        <div class="form-group">
-            <label class="form-label">送金 LTC 額<span class="req">*</span></label>
-            <input id="cg-LTC" type="text" class="form-input" placeholder="例: 0.001" required>
-        </div>
-        <div class="form-group">
-            <label class="form-label">送金元ウォレットアドレス<span class="req">*</span></label>
-            <input id="cg-wallet" type="text" class="form-input" placeholder="ltc...or L..." required>
-        </div>
-        <div class="form-group">
-            <label class="form-label">問い合わせ内容<span class="req">*</span></label>
-            <textarea id="cg-content" class="form-input" placeholder="お問い合わせの内容を詳しく記入してください" required></textarea>
-        </div>
-        <p id="err-cg" class="form-error" style="margin-bottom:10px"></p>
-        <button type="submit" class="btn btn-gold btn-wide">メーラーを起動して送信する</button>
-        </form>
+        <div class="info-box"><p>お問い合わせは公式LINEアカウントより可能です。</p></div>
+        <a href="https://lin.ee/oaAQtBi"><img src="https://scdn.line-apps.com/n/line_add_friends/btn/ja.png" alt="友だち追加" height="36" border="0"></a>
     </div>
     </div>
     <div id="modal-login-issue" class="modal-overlay">
@@ -733,7 +692,7 @@
         <p>変更できません。正確なアドレスを登録してください。</p>
         <div class="divider" style="font-size:12px;letter-spacing:3px">⸻</div>
         <p style="font-family:var(--font-display);font-size:13px;color:var(--brown-mid);margin-bottom:6px">Q. パスワードを忘れました</p>
-        <p>ログイン画面の「パスワードを忘れた方」から秘密の質問で再設定できます。それも不明な場合はお問い合わせください。</p>
+        <p>ログイン画面の「パスワードを忘れた方」から秘密の質問で再設定できます。それも不明な場合は公式LINEアカウントへお問い合わせください。</p>
         <div class="divider" style="font-size:12px;letter-spacing:3px">⸻</div>
         <p style="font-family:var(--font-display);font-size:13px;color:var(--brown-mid);margin-bottom:6px">Q. 対応しているウォレットは？</p>
         <p>Litecoinネットワーク 対応の Litecoin ウォレット（MetaMask 等）であればすべて対応しています。</p>
