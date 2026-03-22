@@ -165,6 +165,19 @@ async function doRegister(e) {
       if (r) { document.getElementById('err-reg-wallet').textContent = 'このウォレットアドレスは既に登録済みです'; return; }
     } catch (_) { /* 未登録 → OK */ }
 
+    try{
+      const blResult = await api.getAll(CFG.SHEET.BLACKLIST);
+      const lowerWallet = wallet.toLowerCase();
+      for (let i = 0; i < blResult.keys.length; i++) {
+        if (blResult.keys[i] && blResult.keys[i].toString().toLowerCase() === lowerWallet) {
+          document.getElementById('err-reg-wallet').textContent = 'このウォレットアドレスは使用できません';
+          return;
+        }
+      }
+    }catch (_) {
+      // blacklistシートが存在しない・取得失敗の場合はスキップ（登録を妨げない）
+    }
+
     try {
       const r = await api.get(CFG.SHEET.USERNAMES, uname.toLowerCase());
       if (r) { document.getElementById('err-reg-uname').textContent = 'このアカウント名は既に使用されています'; return; }
