@@ -83,10 +83,10 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         
         const continueLink = document.createElement('a');
-        continueLink.href = 'https://note.com/hayadebi_ai/n/nd7234ba28c72';
+        continueLink.href = 'https://px.a8.net/svt/ejp?a8mat=4AZMKJ+1LR2GI+2PEO+1NIX2A&a8ejpredirect=https%3A%2F%2Fcoconala.com%2Fcontents_market%2Farticles%2Fcmlmm547x00gk8h0gieys04hs';
         continueLink.className = 'continue-btn';
         continueLink.textContent = '続きの生成はこちら👈';
-        continueLink.target = '_blank';
+        continueLink.rel = 'nofollow';
         const continueLink2 = document.createElement('a');
         continueLink2.href = CONTINUE_LINK;
         continueLink2.className = 'continue-btn';

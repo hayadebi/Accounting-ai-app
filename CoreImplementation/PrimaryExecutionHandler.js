@@ -85,8 +85,8 @@ document.addEventListener('DOMContentLoaded', function() {
         const continueLink = document.createElement('a');
         continueLink.href = CONTINUE_LINK;
         continueLink.className = 'continue-btn';
-        continueLink.textContent = '続きを生成はこちらから';
-        continueLink.target = '_blank';
+        continueLink.textContent = '続きの生成はこちらから';
+        continueLink.rel = 'nofollow';
         outputArea.appendChild(document.createElement('br'));
         outputArea.appendChild(continueLink);
     }
