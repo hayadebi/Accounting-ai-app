@@ -25,8 +25,8 @@
         },
         {
             "title": "ブログ記事執筆自動化AIツール",
-            "image": "https://hayadebi.github.io/Accounting-ai-app//Ads/CenterImage/AdsImage10.jpg",
-            "link": "https://note.com/hayadebi_ai/n/n9679ee17ac93"
+            "image": "https://coconala.com/contents_market/_next/image?url=https%3A%2F%2Fcontents-market-cdn.coconala.com%2Fpermanent%2Fpublic%2FcoverImage%2Fcmn2qw9wm08wpbv0hihilnxzp%2F740b8ca1-cf34-4117-9b98-48da2e810680.png%3Ftype%3Dcrop%26width%3D1200%26height%3D628&w=3840&q=75&dpl=dpl_HCcTUeapn6DkSgZSfrumqKbuQKyL",
+            "link": "https://px.a8.net/svt/ejp?a8mat=4AZMKJ+1LR2GI+2PEO+1NJ4S1&a8ejpredirect=https%3A%2F%2Fcoconala.com%2Fcontents_market%2Farticles%2Fcmn2qw9wm08wpbv0hihilnxzp"
         },
         {
             "title": "SuperInspector",
@@ -67,7 +67,7 @@
         
         return `
         <div style="flex: 0 0 ${width}; min-width: ${width}; padding: 10px; box-sizing: border-box;">
-            <a href="${content.link}" target="_blank" style="text-decoration: none; color: inherit; display: block;">
+            <a href="${content.link}" rel="nofollow" style="text-decoration: none; color: inherit; display: block;">
             <div style=" background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 8px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.1); transition: transform 0.3s, box-shadow 0.3s; height: 100%;" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 4px 12px rgba(0,0,0,0.2)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 2px 8px rgba(0,0,0,0.1)';">
                 <div style="position: relative; padding-top: 133.33%; overflow: hidden;  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
                 <img src="${content.image}" loading="lazy" alt="${content.title}" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22300%22 height=%22400%22%3E%3Crect fill=%22%23ddd%22 width=%22300%22 height=%22400%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22 fill=%22%23999%22%3ENo Image%3C/text%3E%3C/svg%3E';">
