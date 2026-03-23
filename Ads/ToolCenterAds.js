@@ -68,6 +68,10 @@
                     {
                         "imageUrl": "https://hayadebi.github.io/Accounting-ai-app/Ads/CenterImage/AdsImage9.jpg",
                         "siteUrl": "https://hayadebi.github.io/Accounting-ai-app/Tools/ThreadDungeon/threaddungeon.html"
+                    },
+                    {
+                        "imageUrl": "https://hayadebi.github.io/Accounting-ai-app/Ads/CenterImage/AdsImage10.jpg",
+                        "siteUrl": "https://note.com/hayadebi_ai/n/n9679ee17ac93"
                     }
                 ];
                 

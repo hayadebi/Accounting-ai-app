@@ -1,6 +1,10 @@
   // 組み合わせリスト
   const combinations = [
   {
+    "imageUrl": "../../Ads/ToolImage/AdsImage1.jpg",
+    "siteUrl": "https://note.com/hayadebi_ai/n/n9f71a3b80529"
+  },
+  {
     "imageUrl": "../../Ads/ToolImage/AdsImage2.jpg",
     "siteUrl": "https://bitflyer.com/invitation?id=hhhv5jly&lang=ja-JP"
   },
@@ -31,6 +35,10 @@
   {
     "imageUrl": "../../Ads/ToolImage/AdsImage9.jpg",
     "siteUrl": "https://btcc.com/invite/Uf2pqnp"
+  },
+  {
+    "imageUrl": "../../Ads/ToolImage/AdsImage10.jpg",
+    "siteUrl": "https://note.com/hayadebi_ai/n/n9679ee17ac93"
   }
 ];
   

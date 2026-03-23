@@ -24,9 +24,9 @@
             "link": "https://hayadebi.github.io/Accounting-ai-app/Tools/ThreadDungeon/threaddungeon.html"
         },
         {
-            "title": "InfoGuild",
-            "image": "https://hayadebi.github.io/Accounting-ai-app/Ads/CenterImage/AdsImage2.jpg",
-            "link": "https://hayadebi.github.io/Accounting-ai-app/Tools/InfoGuild/infoguild.html"
+            "title": "ブログ記事執筆自動化AIツール",
+            "image": "https://hayadebi.github.io/Accounting-ai-app//Ads/CenterImage/AdsImage10.jpg",
+            "link": "https://note.com/hayadebi_ai/n/n9679ee17ac93"
         },
         {
             "title": "SuperInspector",

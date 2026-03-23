@@ -35,6 +35,10 @@
   {
     "imageUrl": "../../Ads/BlogImage/AdsImage9.jpg",
     "siteUrl": "https://btcc.com/invite/Uf2pqnp"
+  },
+  {
+    "imageUrl": "../../Ads/BlogImage/AdsImage10.jpg",
+    "siteUrl": "https://note.com/hayadebi_ai/n/n9679ee17ac93"
   }
 ];
   
