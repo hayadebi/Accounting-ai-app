@@ -39,6 +39,10 @@
   {
     "imageUrl": "../../Ads/BlogImage/AdsImage10.jpg",
     "siteUrl": "https://note.com/hayadebi_ai/n/n9679ee17ac93"
+  },
+  {
+    "imageUrl": "../../Ads/BlogImage/AdsImage11.jpg",
+    "siteUrl": "https://note.com/hayadebi_ai/n/n9b28923fbcd6"
   }
 ];
   

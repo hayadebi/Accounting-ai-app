@@ -77,8 +77,13 @@
                         "checkUrl": "#"
                     },
                     {
-                        "imageUrl": "https://assets.st-note.com/production/uploads/images/261415256/rectangle_large_type_2_05ab358d6c8614ee09fef2f417f9c7b1.png?width=1280",
+                        "imageUrl": "https://hayadebi.github.io/Accounting-ai-app/Ads/CenterImage/AdsImage10.jpg",
                         "siteUrl": "https://note.com/hayadebi_ai/n/n9679ee17ac93",
+                        "checkUrl": "#"
+                    },
+                    {
+                        "imageUrl": "https://hayadebi.github.io/Accounting-ai-app/Ads/CenterImage/AdsImage11.jpg",
+                        "siteUrl": "https://note.com/hayadebi_ai/n/n9b28923fbcd6",
                         "checkUrl": "#"
                     }
                 ];
