@@ -30,13 +30,31 @@ function esc(s) {
     .replace(/"/g,'&quot;').replace(/'/g,'&#039;');
 }
 
+// function linkify(s) {
+//   if (s == null) return '';
+//   const escaped = esc(s);
+//   return escaped.replace(
+//     /(https?:\/\/[^\s<>"&]+)/g,
+//     '<a href="$1" rel="nofollow" class="steps-link">$1</a>'
+//   );
+// }
 function linkify(s) {
   if (s == null) return '';
+  // esc()でHTMLエスケープ後、[]ラベル付きURLと裸URLの両方をaタグに変換
+  // 例1: [リンク内容]https://... → <a href="URL">リンク内容</a>
+  // 例2: https://...            → <a href="URL">URL</a>
   const escaped = esc(s);
-  return escaped.replace(
-    /(https?:\/\/[^\s<>"&]+)/g,
-    '<a href="$1" target="_blank" rel="noopener noreferrer" class="steps-link">$1</a>'
-  );
+  return escaped
+    // パターン1: [ラベル]URL の形式（[]直後にURLが続く）
+    .replace(
+      /\[([^\]]+)\](https?:\/\/[^\s<>"&]+)/g,
+      '<a href="$2" target="_blank" rel="nofollow noopener noreferrer" class="steps-link">$1</a>'
+    )
+    // パターン2: 裸のURL（[]ラベルなし）
+    .replace(
+      /(https?:\/\/[^\s<>"&]+)/g,
+      '<a href="$1" target="_blank" rel="nofollow noopener noreferrer" class="steps-link">$1</a>'
+    );
 }
 
 async function sha256(msg) {
@@ -445,6 +463,11 @@ async function openQuestDetail(idx) {
       <h4>手順</h4>
       <p>${linkify(quest.steps||'—')}</p>
     </div>
+    ${(quest.service||'').length > 0 ? `
+    <div class="service-box">
+      <h4>サービス概要</h4>
+      <p>${esc(quest.service).replace(/\n/g,'<br>')}</p>
+    </div>` : ''}
     <div class="warn-box">
       <h4>⚠ 注意事項（必読）</h4>
       <p>${esc(quest.notes||'なし').replace(/\n/g,'<br>')}</p>
