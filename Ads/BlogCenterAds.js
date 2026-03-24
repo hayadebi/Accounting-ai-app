@@ -78,17 +78,17 @@
             "checkUrl": "#"
         },
         {
-            "imageUrl": "https://hayadebi.github.io/Accounting-ai-app/Ads/CenterImage/AdsImage9.jpg",
+            "imageUrl": "../../Ads/CenterImage/AdsImage9.jpg",
             "siteUrl": "https://hayadebi.github.io/Accounting-ai-app/Tools/ThreadDungeon/threaddungeon.html",
             "checkUrl": "#"
         },
         {
-            "imageUrl": "https://hayadebi.github.io/Accounting-ai-app/Ads/CenterImage/AdsImage10.jpg",
+            "imageUrl": "../../Ads/CenterImage/AdsImage10.jpg",
             "siteUrl": "https://note.com/hayadebi_ai/n/n9679ee17ac93",
             "checkUrl": "#"
         },
         {
-            "imageUrl": "https://hayadebi.github.io/Accounting-ai-app/Ads/CenterImage/AdsImage11.jpg",
+            "imageUrl": "../../Ads/CenterImage/AdsImage11.jpg",
             "siteUrl": "https://note.com/hayadebi_ai/n/n9b28923fbcd6",
             "checkUrl": "#"
         }

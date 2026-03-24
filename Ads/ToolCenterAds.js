@@ -47,42 +47,42 @@
                         "checkUrl": "#"
                     },
                     {
-                        "imageUrl": "https://hayadebi.github.io/Accounting-ai-app/Ads/CenterImage/AdsImage2.jpg",
+                        "imageUrl": "../../Ads/CenterImage/AdsImage2.jpg",
                         "siteUrl": "https://hayadebi.github.io/Accounting-ai-app/adnextcenter.html?q=hayadebi.github.io%2FAccounting-ai-app%2FTools%2FInfoGuild%2Finfoguild.html",
                         "checkUrl": "#"
                     },
                     {
-                        "imageUrl": "https://hayadebi.github.io/Accounting-ai-app/Ads/CenterImage/AdsImage4.gif",
+                        "imageUrl": "../../Ads/CenterImage/AdsImage4.gif",
                         "siteUrl": "https://dlaf.jp/home/dlaf/=/aid/githubhayadebitools/url/https%3A%2F%2Fwww.dlsite.com%2Fhome%2Franking%2Fweek%2F%3Futm_medium%3Daffiliate%26utm_campaign%3Dbnlink%26utm_content%3Dtext",
                         "checkUrl": "#"
                     },
                     {
-                        "imageUrl": "https://hayadebi.github.io/Accounting-ai-app/Ads/CenterImage/AdsImage5.jpg",
+                        "imageUrl": "../../Ads/CenterImage/AdsImage5.jpg",
                         "siteUrl": "https://note.com/hayadebi_ai/n/nd7234ba28c72",
                         "checkUrl": "#"
                     },
                     {
-                        "imageUrl": "https://hayadebi.github.io/Accounting-ai-app/Ads/CenterImage/AdsImage6.jpg",
+                        "imageUrl": "../../Ads/CenterImage/AdsImage6.jpg",
                         "siteUrl": "https://hayadebi.github.io/Accounting-ai-app/Tools/BlogEditor/blogeditor.html",
                         "checkUrl": "#"
                     },
                     {
-                        "imageUrl": "https://hayadebi.github.io/Accounting-ai-app/Ads/CenterImage/AdsImage8.jpg",
+                        "imageUrl": "../../Ads/CenterImage/AdsImage8.jpg",
                         "siteUrl": "https://hayadebi.github.io/Accounting-ai-app/adnextcenter.html?q=hayadebi.github.io%2FAccounting-ai-app%2FTools%2FInfoGuild%2Finfoguild.html",
                         "checkUrl": "#"
                     },
                     {
-                        "imageUrl": "https://hayadebi.github.io/Accounting-ai-app/Ads/CenterImage/AdsImage9.jpg",
+                        "imageUrl": "../../Ads/CenterImage/AdsImage9.jpg",
                         "siteUrl": "https://hayadebi.github.io/Accounting-ai-app/Tools/ThreadDungeon/threaddungeon.html",
                         "checkUrl": "#"
                     },
                     {
-                        "imageUrl": "https://hayadebi.github.io/Accounting-ai-app/Ads/CenterImage/AdsImage10.jpg",
+                        "imageUrl": "../../Ads/CenterImage/AdsImage10.jpg",
                         "siteUrl": "https://note.com/hayadebi_ai/n/n9679ee17ac93",
                         "checkUrl": "#"
                     },
                     {
-                        "imageUrl": "https://hayadebi.github.io/Accounting-ai-app/Ads/CenterImage/AdsImage11.jpg",
+                        "imageUrl": "../../Ads/CenterImage/AdsImage11.jpg",
                         "siteUrl": "https://note.com/hayadebi_ai/n/n9b28923fbcd6",
                         "checkUrl": "#"
                     }
