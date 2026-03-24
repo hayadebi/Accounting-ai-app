@@ -13,65 +13,44 @@ const CFG = {
     BLACKLIST: 'blacklist'
   }
 };
-
 const App = {
   user:           null,   
   userCachedAt:   null,   
   quests:         [],     
   questsLoaded:   false
 };
-
 const api = GASStorage.createSimpleAPI();
-
 function esc(s) {
   if (s == null) return '';
   return String(s)
     .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
     .replace(/"/g,'&quot;').replace(/'/g,'&#039;');
 }
-
-// function linkify(s) {
-//   if (s == null) return '';
-//   const escaped = esc(s);
-//   return escaped.replace(
-//     /(https?:\/\/[^\s<>"&]+)/g,
-//     '<a href="$1" rel="nofollow" class="steps-link">$1</a>'
-//   );
-// }
 function linkify(s) {
   if (s == null) return '';
   const escaped = esc(s);
-  // [ラベル]URL と 裸URL を1つの正規表現で同時処理（2段階replaceによる二重変換を防ぐ）
   return escaped.replace(
     /(?:\[([^\]]+)\])?(https?:\/\/[^\s<>"&]+)/g,
     (match, label, url) => {
-      const text = label || url;  // []ラベルがあればそちら、なければURL文字列をそのまま使用
+      const text = label || url;  
       return `<a href="${url}" target="_blank" rel="nofollow" class="steps-link">${text}</a>`;
     }
   );
 }
-
 async function sha256(msg) {
   const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(msg));
   return Array.from(new Uint8Array(buf)).map(b=>b.toString(16).padStart(2,'0')).join('');
 }
-
 function uid() { return Date.now().toString(36) + Math.random().toString(36).slice(2,9); }
-
 function today() { return new Date().toISOString().slice(0,10); }
-
 function now() { return new Date().toISOString(); }
-
 function isValidEth(addr) { return /^0x[0-9a-fA-F]{40}$/.test(addr); }
-
 function isValidName(n) { return /^[a-zA-Z0-9_]{3,20}$/.test(n); }
-
 function recruitLabel(type, days) {
   if (type === 'once')     return '1人1回のみ';
   if (type === 'interval') return `${days}日ごと受注可`;
   return type || '通常';
 }
-
 const Q_LABELS = {
   pet:    '最初に飼ったペットの名前は？',
   school: '最初に通った小学校の名前は？',
@@ -79,7 +58,6 @@ const Q_LABELS = {
   hero:   '子供の頃の憧れの人物は？',
   food:   '一番好きな食べ物は？'
 };
-
 let _toastTimer = null;
 function showToast(msg, duration=3200) {
   const el = document.getElementById('toast');
@@ -88,7 +66,6 @@ function showToast(msg, duration=3200) {
   clearTimeout(_toastTimer);
   _toastTimer = setTimeout(() => el.classList.remove('show'), duration);
 }
-
 let _loadingCount = 0;
 function startLoading(txt='処理中...') {
   _loadingCount++;
@@ -100,7 +77,6 @@ function endLoading() {
   if (_loadingCount === 0)
     document.getElementById('loading-overlay').classList.remove('show');
 }
-
 function openModal(id) {
   document.getElementById(id).classList.add('open');
   if (id === 'modal-account')     renderAccount();
@@ -110,22 +86,17 @@ function closeModal(id) {
   document.getElementById(id).classList.remove('open');
 }
 function switchModal(a, b) { closeModal(a); openModal(b); }
-
 function toggleDropdown(e) {
   e.stopPropagation();
   document.getElementById('user-dropdown').classList.toggle('open');
 }
-
 document.addEventListener('click', () => {
   document.querySelectorAll('.dropdown.open').forEach(d => d.classList.remove('open'));
 });
-
 document.querySelectorAll('.modal-overlay').forEach(ov => {
   ov.addEventListener('click', e => { if (e.target === ov) ov.classList.remove('open'); });
 });
-
 function scrollToTop() { window.scrollTo({ top:0, behavior:'smooth' }); }
-
 function updateNavUI() {
   if (App.user) {
     document.getElementById('nav-guest').style.display = 'none';
@@ -136,7 +107,6 @@ function updateNavUI() {
     document.getElementById('nav-user').style.display  = 'none';
   }
 }
-
 async function doRegister(e) {
   e.preventDefault();
   const wallet = document.getElementById('reg-wallet').value.trim();
@@ -145,14 +115,8 @@ async function doRegister(e) {
   const pw2    = document.getElementById('reg-pw2').value;
   const q      = document.getElementById('reg-q').value;
   const ans    = document.getElementById('reg-ans').value.trim();
-
   ['err-reg-wallet','err-reg-uname','err-reg-pw','err-reg-general']
     .forEach(id => { document.getElementById(id).textContent = ''; });
-
-  // if (!isValidEth(wallet)) {
-  //   document.getElementById('err-reg-wallet').textContent = '有効な Litecoinネットワーク アドレスを入力してください';
-  //   return;
-  // }
   if (!isValidName(uname)) {
     document.getElementById('err-reg-uname').textContent = '3〜20 文字の半角英数字・アンダースコアのみ使用できます';
     return;
@@ -169,14 +133,12 @@ async function doRegister(e) {
     document.getElementById('err-reg-general').textContent = '秘密の質問を選択してください';
     return;
   }
-
   startLoading('登録処理中...');
   try {
     try {
       const r = await api.get(CFG.SHEET.USERS, wallet.toLowerCase());
       if (r) { document.getElementById('err-reg-wallet').textContent = 'このウォレットアドレスは既に登録済みです'; return; }
     } catch (_) { /* 未登録 → OK */ }
-
     try{
       const blResult = await api.getAll(CFG.SHEET.BLACKLIST);
       const lowerWallet = wallet.toLowerCase();
@@ -187,17 +149,14 @@ async function doRegister(e) {
         }
       }
     }catch (_) {
-      // blacklistシートが存在しない・取得失敗の場合はスキップ（登録を妨げない）
+      // 
     }
-
     try {
       const r = await api.get(CFG.SHEET.USERNAMES, uname.toLowerCase());
       if (r) { document.getElementById('err-reg-uname').textContent = 'このアカウント名は既に使用されています'; return; }
     } catch (_) { /* 未使用 → OK */ }
-
     const pwHash  = await sha256(pw + wallet.toLowerCase());
     const ansHash = await sha256(ans.toLowerCase());
-
     const userData = {
       accountName:     uname,
       passwordHash:    pwHash,
@@ -210,10 +169,8 @@ async function doRegister(e) {
       updatedAt:       now(),
       createdAt:       now()
     };
-
     await api.set(CFG.SHEET.USERS,     wallet.toLowerCase(), JSON.stringify(userData));
     await api.set(CFG.SHEET.USERNAMES, uname.toLowerCase(),  wallet.toLowerCase());
-
     closeModal('modal-register');
     document.getElementById('form-register').reset();
     showToast('⚔ 冒険者登録完了！ログインしてください。');
@@ -224,47 +181,39 @@ async function doRegister(e) {
     endLoading();
   }
 }
-
 async function doLogin(e) {
   e.preventDefault();
   const uname = document.getElementById('login-uname').value.trim();
   const pw    = document.getElementById('login-pw').value;
   document.getElementById('err-login').textContent = '';
-
   startLoading('ログイン中...');
   try {
     let wallet;
     try { wallet = await api.get(CFG.SHEET.USERNAMES, uname.toLowerCase()); }
     catch (_) { wallet = null; }
-
     if (!wallet) {
       document.getElementById('err-login').textContent = 'アカウント名またはパスワードが正しくありません';
       return;
     }
-
     let userDataStr;
     try { userDataStr = await api.get(CFG.SHEET.USERS, wallet); }
     catch (_) {
       document.getElementById('err-login').textContent = 'ユーザーデータの取得に失敗しました';
       return;
     }
-
     const ud = JSON.parse(userDataStr);
     const hash = await sha256(pw + wallet);
     if (hash !== ud.passwordHash) {
       document.getElementById('err-login').textContent = 'アカウント名またはパスワードが正しくありません';
       return;
     }
-
     const td = today();
     if (ud.lastLoginDate !== td) { ud.todayInquiryCount = 0; }
     ud.lastLoginDate = td;
     ud.updatedAt = now();
     await api.set(CFG.SHEET.USERS, wallet, JSON.stringify(ud));
-
     App.user = ud;
     App.userCachedAt = Date.now();
-
     updateNavUI();
     closeModal('modal-login');
     document.getElementById('form-login').reset();
@@ -276,7 +225,6 @@ async function doLogin(e) {
     endLoading();
   }
 }
-
 function doLogout() {
   App.user = null;
   App.userCachedAt = null;
@@ -284,7 +232,6 @@ function doLogout() {
   document.querySelectorAll('.dropdown.open').forEach(d => d.classList.remove('open'));
   showToast('ログアウトしました');
 }
-
 async function refreshUserIfNeeded() {
   if (!App.user) return;
   if (App.userCachedAt && Date.now() - App.userCachedAt < CFG.CACHE_MS) return;
@@ -294,7 +241,6 @@ async function refreshUserIfNeeded() {
     App.userCachedAt = Date.now();
   } catch (err) { console.error('UserRefresh:', err); }
 }
-
 async function doPwReset(e) {
   e.preventDefault();
   const uname  = document.getElementById('reset-uname').value.trim();
@@ -303,30 +249,23 @@ async function doPwReset(e) {
   const newPw  = document.getElementById('reset-new-pw').value;
   const newPw2 = document.getElementById('reset-new-pw2').value;
   document.getElementById('err-pw-reset').textContent = '';
-
   if (newPw !== newPw2) { document.getElementById('err-pw-reset').textContent = '新しいパスワードが一致しません'; return; }
   if (newPw.length < 8) { document.getElementById('err-pw-reset').textContent = '新しいパスワードは 8 文字以上必要です'; return; }
-
   startLoading('パスワード変更中...');
   try {
     let wallet;
     try { wallet = await api.get(CFG.SHEET.USERNAMES, uname.toLowerCase()); }
     catch (_) { wallet = null; }
     if (!wallet) { document.getElementById('err-pw-reset').textContent = 'アカウントが見つかりません'; return; }
-
     const s  = await api.get(CFG.SHEET.USERS, wallet);
     const ud = JSON.parse(s);
-
     const curHash = await sha256(curPw + wallet);
     if (curHash !== ud.passwordHash) { document.getElementById('err-pw-reset').textContent = '現在のパスワードが正しくありません'; return; }
-
     const ansHash = await sha256(ans.toLowerCase());
     if (ansHash !== ud.secretAnswerHash) { document.getElementById('err-pw-reset').textContent = '秘密の質問の回答が正しくありません'; return; }
-
     ud.passwordHash = await sha256(newPw + wallet);
     ud.updatedAt = now();
     await api.set(CFG.SHEET.USERS, wallet, JSON.stringify(ud));
-
     if (App.user && App.user.walletAddress === wallet) App.user = ud;
     closeModal('modal-pw-reset');
     document.getElementById('form-pw-reset').reset();
@@ -338,7 +277,6 @@ async function doPwReset(e) {
     endLoading();
   }
 }
-
 function renderAccount() {
   if (!App.user) return;
   const u = App.user;
@@ -356,14 +294,12 @@ function renderAccount() {
     </div>
   `;
 }
-
 async function loadQuests() {
   try {
     const [questResult, subResult] = await Promise.all([
       api.getAll(CFG.SHEET.QUESTS),
       api.getAll(CFG.SHEET.SUBMISSIONS)
     ]);
-
     const quests = [];
     for (let i = 0; i < questResult.keys.length; i++) {
       if (!questResult.keys[i]) continue;
@@ -372,7 +308,6 @@ async function loadQuests() {
     App.quests = quests;
     App.questsLoaded = true;
     renderBoard(quests);
-
     let approvedCount  = 0;
     let approvedReward = 0;
     for (let i = 0; i < subResult.keys.length; i++) {
@@ -386,7 +321,6 @@ async function loadQuests() {
       } catch (_) {}
     }
     renderStats(approvedCount, approvedReward);
-
   } catch (err) {
     console.error('LoadQuests:', err);
     document.getElementById('quest-board').innerHTML = `
@@ -397,7 +331,6 @@ async function loadQuests() {
       </div>`;
   }
 }
-
 function renderStats(count, totalReward) {
   const bar = document.getElementById('stats-bar');
   const rewardStr = totalReward.toFixed(8).replace(/\.?0+$/, '');
@@ -405,7 +338,6 @@ function renderStats(count, totalReward) {
   document.getElementById('stat-reward').textContent = rewardStr + ' LTC';
   bar.style.display = 'block';
 }
-
 function renderBoard(quests) {
   const board = document.getElementById('quest-board');
   if (!quests.length) {
@@ -428,7 +360,6 @@ function renderBoard(quests) {
       <div class="quest-desc">${esc((q.description||'').slice(0,90))}${(q.description||'').length>90?'…':''}</div>
       <div class="wax-seal">⚜</div>
     </div>`).join('');
-
   board.querySelectorAll('.quest-card').forEach(card => {
     card.addEventListener('click', () => {
       const idx = parseInt(card.dataset.idx, 10);
@@ -436,13 +367,10 @@ function renderBoard(quests) {
     });
   });
 }
-
 async function openQuestDetail(idx) {
   const quest = App.quests[idx];
   if (!quest) { showToast('クエストデータが見つかりません'); return; }
-
   document.getElementById('detail-title').textContent = `⚔ ${quest.title}`;
-
   document.getElementById('detail-body').innerHTML = `
     <div class="detail-reward">報酬：${esc(String(quest.reward))} LTC</div>
     <div class="detail-section">
@@ -469,7 +397,6 @@ async function openQuestDetail(idx) {
     <div class="info-box">
       <p><strong>募集タイプ：</strong>${esc(recruitLabel(quest.recruitType, quest.reorderDays))}</p>
     </div>`;
-
   const actDiv = document.getElementById('detail-action');
   if (!App.user) {
     actDiv.innerHTML = `
@@ -489,10 +416,8 @@ async function openQuestDetail(idx) {
       actDiv.innerHTML = `<p style="color:var(--red-warn);font-size:13px;font-weight:600">${esc(check.reason)}</p>`;
     }
   }
-
   openModal('modal-quest-detail');
 }
-
 async function canOrder(quest, wallet) {
   try {
     const res = await api.getAll(CFG.SHEET.SUBMISSIONS);
@@ -519,7 +444,6 @@ async function canOrder(quest, wallet) {
     return { ok: true }; 
   }
 }
-
 function openSubmitModal(idx) {
   const q = App.quests[idx];
   if (!q) return;
@@ -536,7 +460,6 @@ function openSubmitModal(idx) {
   closeModal('modal-quest-detail');
   openModal('modal-submit');
 }
-
 async function doSubmitQuest(e) {
   e.preventDefault();
   if (!App.user) { document.getElementById('err-submit').textContent = 'ログインが必要です'; return; }
@@ -545,12 +468,8 @@ async function doSubmitQuest(e) {
   const content = document.getElementById('submit-content').value.trim();
   document.getElementById('err-submit').textContent = '';
   if (!content) { document.getElementById('err-submit').textContent = '提出内容を入力してください'; return; }
-
   startLoading('提出中...');
   try {
-    // ---- ブラックリスト照合 ----
-    // blacklistシートのA列（keys）に登録されたウォレットと一致する場合は
-    // 提出を記録するが status を問答無用で 'rejected' にセットする
     let isBlacklisted = false;
     try {
       const blResult = await api.getAll(CFG.SHEET.BLACKLIST);
@@ -562,9 +481,8 @@ async function doSubmitQuest(e) {
         }
       }
     } catch (_) {
-      // blacklistシートが存在しない・取得失敗の場合は照合をスキップ（通常フローへ）
+      // 
     }
-
     const sid = uid();
     const sub = {
       submissionId:  sid,
@@ -576,12 +494,9 @@ async function doSubmitQuest(e) {
       createdAt:     now()
     };
     await api.set(CFG.SHEET.SUBMISSIONS, sid, JSON.stringify(sub));
-
-    // 提出回数はBAN済みでもカウント（記録として残す）
     App.user.submittedCount = (App.user.submittedCount || 0) + 1;
     App.user.updatedAt = now();
     await api.set(CFG.SHEET.USERS, App.user.walletAddress, JSON.stringify(App.user));
-
     closeModal('modal-submit');
     openModal('modal-submit-done');
   } catch (err) {
@@ -591,7 +506,6 @@ async function doSubmitQuest(e) {
     endLoading();
   }
 }
-
 async function loadSubmissions() {
   if (!App.user) return;
   const body = document.getElementById('submissions-body');
@@ -607,20 +521,17 @@ async function loadSubmissions() {
       } catch (_) {}
     }
     mine.sort((a,b) => new Date(b.createdAt) - new Date(a.createdAt));
-
     if (!mine.length) {
       body.innerHTML = '<div class="empty-state"><div class="icon">📋</div><p>まだクエストを提出していません。</p></div>';
       return;
     }
     const qMap = {};
     App.quests.forEach(q => { qMap[q.taskId] = q; });
-
     const STATUS = {
       pending:  { label:'確認中（各クエスト指定営業日以内）',   cls:'badge-pending'  },
       approved: { label:'承認：報酬支払済み',       cls:'badge-approved' },
       rejected: { label:'却下：注意事項該当',       cls:'badge-rejected' }
     };
-
     body.innerHTML = mine.map(s => {
       const q   = qMap[s.taskId] || {};
       const st  = STATUS[s.status] || STATUS.pending;
@@ -644,7 +555,6 @@ async function loadSubmissions() {
     body.innerHTML = '<div class="empty-state"><p>読み込みに失敗しました。</p></div>';
   }
 }
-
 function openContactModal() {
   if (App.user) {
     openModal('modal-contact-user');
@@ -653,44 +563,35 @@ function openContactModal() {
     openModal('modal-contact-guest');
   }
 }
-
 async function doContactUser(e) {
   e.preventDefault();
   const content = document.getElementById('cu-content').value.trim();
   document.getElementById('err-cu').textContent = '';
-
   await refreshUserIfNeeded();
   const td = today();
   if (App.user.lastLoginDate !== td) App.user.todayInquiryCount = 0;
-
   if ((App.user.todayInquiryCount || 0) >= CFG.MAX_INQUIRY) {
     document.getElementById('err-cu').textContent = '本日のお問い合わせ上限（1回）に達しています。';
     return;
   }
-
   const subj = `[InfoGuild] お問い合わせ - ${App.user.accountName}`;
   const body = `アカウント名：${App.user.accountName}\nウォレット：${App.user.walletAddress}\n---\n${content}`;
   window.location.href = `mailto:${CFG.ADMIN_EMAIL}?subject=${encodeURIComponent(subj)}&body=${encodeURIComponent(body)}`;
-
   try {
     App.user.todayInquiryCount = (App.user.todayInquiryCount || 0) + 1;
     App.user.updatedAt = now();
     await api.set(CFG.SHEET.USERS, App.user.walletAddress, JSON.stringify(App.user));
   } catch (_) {}
-
   closeModal('modal-contact-user');
   document.getElementById('form-contact-user').reset();
   showToast('メーラーが起動しました。送信してください。');
 }
-
 function doContactGuest(e) {
   e.preventDefault();
   const eth     = document.getElementById('cg-eth').value.trim();
   const wallet  = document.getElementById('cg-wallet').value.trim();
   const content = document.getElementById('cg-content').value.trim();
   document.getElementById('err-cg').textContent = '';
-  //if (!isValidEth(wallet)) { document.getElementById('err-cg').textContent = '有効な LTC ウォレットアドレスを入力してください'; return; }
-
   const subj = '[InfoGuild] 非会員お問い合わせ';
   const body = `送金元ウォレット：${wallet}\n送金 LTC 額：${eth}\n送金先ウォレット：${CFG.ADMIN_WALLET}\n---\n${content}`;
   window.location.href = `mailto:${CFG.ADMIN_EMAIL}?subject=${encodeURIComponent(subj)}&body=${encodeURIComponent(body)}`;
@@ -698,7 +599,6 @@ function doContactGuest(e) {
   document.getElementById('form-contact-guest').reset();
   showToast('メーラーが起動しました。送信してください。');
 }
-
 function doLoginIssue(e) {
   e.preventDefault();
   const uname   = document.getElementById('li-uname').value.trim();
@@ -707,7 +607,6 @@ function doLoginIssue(e) {
   const newPw   = document.getElementById('li-new-pw').value.trim();
   const eth     = document.getElementById('li-eth').value.trim();
   const detail  = document.getElementById('li-detail').value.trim();
-
   const subj = '[InfoGuild] ログイン不能サポート申請';
   const body = `アカウント名：${uname}\n秘密の質問の回答：${ans}\n登録ウォレット（送金元）：${wallet}\n仮パスワード：${newPw}\n送金 LTC 額：${eth}\n送金先：${CFG.ADMIN_WALLET}\n---\n${detail}`;
   window.location.href = `mailto:${CFG.ADMIN_EMAIL}?subject=${encodeURIComponent(subj)}&body=${encodeURIComponent(body)}`;
@@ -715,20 +614,17 @@ function doLoginIssue(e) {
   document.getElementById('form-login-issue').reset();
   showToast('メーラーが起動しました。送信してください。');
 }
-
 async function doDeleteReq(e) {
   e.preventDefault();
   if (!App.user) return;
   const pw     = document.getElementById('dr-pw').value;
   const reason = document.getElementById('dr-reason').value.trim();
   document.getElementById('err-dr').textContent = '';
-
   const hash = await sha256(pw + App.user.walletAddress);
   if (hash !== App.user.passwordHash) {
     document.getElementById('err-dr').textContent = 'パスワードが正しくありません';
     return;
   }
-
   const subj = '[InfoGuild] アカウント削除申請';
   const body = `アカウント名：${App.user.accountName}\nウォレット：${App.user.walletAddress}\n削除理由：${reason}`;
   window.location.href = `mailto:${CFG.ADMIN_EMAIL}?subject=${encodeURIComponent(subj)}&body=${encodeURIComponent(body)}`;
@@ -736,7 +632,6 @@ async function doDeleteReq(e) {
   document.getElementById('form-delete-req').reset();
   showToast('削除申請を送信しました。処理まで数日かかる場合があります。');
 }
-
 function checkDailyReset() {
   if (!App.user) return;
   const td = today();
@@ -748,14 +643,12 @@ function checkDailyReset() {
        .catch(err => console.error('DailyReset:', err));
   }
 }
-
 document.addEventListener('visibilitychange', async () => {
   if (!document.hidden && App.user) {
     await refreshUserIfNeeded();
     checkDailyReset();
   }
 });
-
 window.addEventListener('DOMContentLoaded', async () => {
   updateNavUI();
   await loadQuests();
