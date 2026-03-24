@@ -46,7 +46,7 @@ function linkify(s) {
     /(?:\[([^\]]+)\])?(https?:\/\/[^\s<>"&]+)/g,
     (match, label, url) => {
       const text = label || url;  // []ラベルがあればそちら、なければURL文字列をそのまま使用
-      return `<a href="${url}" target="_blank" rel="nofollow noopener noreferrer" class="steps-link">${text}</a>`;
+      return `<a href="${url}" target="_blank" rel="nofollow" class="steps-link">${text}</a>`;
     }
   );
 }
