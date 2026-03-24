@@ -40,21 +40,15 @@ function esc(s) {
 // }
 function linkify(s) {
   if (s == null) return '';
-  // esc()でHTMLエスケープ後、[]ラベル付きURLと裸URLの両方をaタグに変換
-  // 例1: [リンク内容]https://... → <a href="URL">リンク内容</a>
-  // 例2: https://...            → <a href="URL">URL</a>
   const escaped = esc(s);
-  return escaped
-    // パターン1: [ラベル]URL の形式（[]直後にURLが続く）
-    .replace(
-      /\[([^\]]+)\](https?:\/\/[^\s<>"&]+)/g,
-      '<a href="$2" target="_blank" rel="nofollow noopener noreferrer" class="steps-link">$1</a>'
-    )
-    // パターン2: 裸のURL（[]ラベルなし）
-    .replace(
-      /(https?:\/\/[^\s<>"&]+)/g,
-      '<a href="$1" target="_blank" rel="nofollow noopener noreferrer" class="steps-link">$1</a>'
-    );
+  // [ラベル]URL と 裸URL を1つの正規表現で同時処理（2段階replaceによる二重変換を防ぐ）
+  return escaped.replace(
+    /(?:\[([^\]]+)\])?(https?:\/\/[^\s<>"&]+)/g,
+    (match, label, url) => {
+      const text = label || url;  // []ラベルがあればそちら、なければURL文字列をそのまま使用
+      return `<a href="${url}" target="_blank" rel="nofollow noopener noreferrer" class="steps-link">${text}</a>`;
+    }
+  );
 }
 
 async function sha256(msg) {
