@@ -995,7 +995,7 @@ function stairAds(){
   var elements = document.querySelectorAll('[id^="' + prefix + '"]');
   if (elements.length === 0) return;
   var randomIndex = Math.floor(Math.random() * elements.length);
-  elements[randomIndex+1].style.display = "inline-block";
+  elements[randomIndex].style.display = "inline-block";
 }
 
 function goToFloor(num){GS.floor=num;if(num>GS.achievements.maxFloor)GS.achievements.maxFloor=num;GS.threadId=generateThreadId();saveState();localStorage.removeItem(SAVE_KEY+'_floor');location.reload();}
