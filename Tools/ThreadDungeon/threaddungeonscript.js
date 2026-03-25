@@ -830,7 +830,6 @@ function checkPlayerDead(fromRun){
   if(dollIdx>=0){GS.items=GS.items.filter(id=>id!==0);playSFX('item');bAddLog('身代わりモナー人形が砕けた！ゲームオーバーを回避！HP1で復活する！','gold',600);GS.hp=1;GS.floor=1;saveState();updateStatus();bAddCb(()=>battleEnd(false,false,true));}
   else{playBGM(null,null);playSFX('gameover');bAddLog(GS.explorerName+'は倒れた…','red',700);bAddCb(()=>battleEnd(true,false,false));}
 }
- 
 function battleVictory(){
   if(!battleState)return;const bs=battleState;playSFX('victory');
   const coins=randInt(Math.floor(Math.max(1,bs.enemy.lv*0.8)*bs.enemy.coinRange[0]),Math.floor(Math.max(1,bs.enemy.lv*0.8)+bs.enemy.coinRange[1]));
@@ -860,10 +859,11 @@ function battleEnd(playerDied,escaped,substituted,droppedItem,enemyRan){
  
 function gameOver(){
   //playBGM('explore',null);
+
   const savedAch=GS.achievements;const savedName=GS.explorerName;
   GS=initNewState(savedName);GS.achievements=savedAch;GS.floor=0;
   saveState();localStorage.removeItem(SAVE_KEY+'_floor');
-  setTimeout(()=>{addLog('名無しさん','モナコインも所持品もすべて失った。\n実績だけが残った。','red',1000,'anon');setTimeout(()=>{addLog('名無しさん','B0のギルドに戻された…','',1500,'anon');setTimeout(()=>goToFloor(0),3000);},2000);},1000);
+  setTimeout(()=>{addLog('名無しさん','モナコインも所持品もすべて失った。\n実績だけが残った。','red',1000,'anon');setTimeout(()=>{addLog('名無しさん','B0のギルドに戻された…','',1500,'anon');adDisplayed = true;showAd();setTimeout(()=>goToFloor(0),5000);},2000);},1000);
 }
  
 /* =====================================================
