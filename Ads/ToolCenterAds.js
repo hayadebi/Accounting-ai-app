@@ -29,11 +29,11 @@ const centercombinations = [
             "siteUrl": "https://hayadebi.github.io/Accounting-ai-app/adnextcenter.html?q=hayadebi.github.io%2FAccounting-ai-app%2FTools%2FInfoGuild%2Finfoguild.html",
             "checkUrl": "#"
         },
-        {
-            "imageUrl": "../../Ads/CenterImage/AdsImage9.jpg",
-            "siteUrl": "https://hayadebi.github.io/Accounting-ai-app/Tools/ThreadDungeon/threaddungeon.html",
-            "checkUrl": "#"
-        },
+        // {
+        //     "imageUrl": "../../Ads/CenterImage/AdsImage9.jpg",
+        //     "siteUrl": "https://hayadebi.github.io/Accounting-ai-app/Tools/ThreadDungeon/threaddungeon.html",
+        //     "checkUrl": "#"
+        // },
         {
             "imageUrl": "../../Ads/CenterImage/AdsImage10.jpg",
             "siteUrl": "https://note.com/hayadebi_ai/n/n9679ee17ac93",
