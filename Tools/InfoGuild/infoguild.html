@@ -206,7 +206,13 @@
         <p class="board-subtitle">挑戦者求む。情報提供で報酬を獲得せよ。</p>
         <div class="board-ornament" style="margin-top:8px">✦ ✦ ✦</div>
     </div>
-    <!-- <center><p style="color:rgb(210, 64, 64);font-size:13px;">重要：2026/3/21以前よりアカウント登録されていた方は、LTCウォレットアドレスで再登録をお願いします;</p></center> -->
+    <div id="quest-tabs-bar">
+        <div id="quest-tabs">
+            <button class="quest-tab active" data-tab="q">⚔ サービス</button>
+            <button class="quest-tab" data-tab="g">🎮 ゲーム</button>
+        </div>
+        <button class="btn btn-dark btn-sm" id="btn-filter" onclick="openModal('modal-filter')">⚙ 条件絞込</button>
+    </div>
     <div id="quest-board">
         <div class="empty-state" style="grid-column:1/-1">
         <div class="spinner" style="margin:0 auto 16px"></div>
@@ -784,6 +790,40 @@
         <button type="submit" class="btn btn-danger btn-wide">削除申請を送信する</button>
         </form>
     </div>
+    </div>
+
+    <div id="modal-filter" class="modal-overlay">
+        <div class="modal">
+            <div class="modal-header">
+            <span class="modal-title">⚙ 条件絞込・ソート</span>
+            <button class="modal-close" onclick="closeModal('modal-filter')">×</button>
+            </div>
+            <div class="form-group">
+            <label class="form-label">報酬額ソート</label>
+            <select id="filter-sort" class="form-input">
+                <option value="default">デフォルト（登録順）</option>
+                <option value="asc">報酬額：低い順</option>
+                <option value="desc">報酬額：高い順</option>
+            </select>
+            </div>
+            <div class="form-group">
+            <label class="form-label">募集タイプ表示</label>
+            <div style="display:flex;flex-direction:column;gap:8px;margin-top:4px">
+                <label style="display:flex;align-items:center;gap:8px;cursor:pointer;font-size:14px;color:var(--sepia-dark)">
+                <input type="checkbox" id="filter-once" checked style="width:16px;height:16px;cursor:pointer;accent-color:var(--gold-bright)">
+                1回だけ受注できるクエストを表示
+                </label>
+                <label style="display:flex;align-items:center;gap:8px;cursor:pointer;font-size:14px;color:var(--sepia-dark)">
+                <input type="checkbox" id="filter-interval" checked style="width:16px;height:16px;cursor:pointer;accent-color:var(--gold-bright)">
+                繰り返し受注できるクエストを表示
+                </label>
+            </div>
+            </div>
+            <div style="display:flex;gap:8px;margin-top:8px">
+            <button class="btn btn-gold" style="flex:1" onclick="applyFilter()">✔ 反映</button>
+            <button class="btn btn-dark" style="flex:1" onclick="resetFilter()">↩ リセット</button>
+            </div>
+        </div>
     </div>
 
     <div class="centerad-widget"></div>

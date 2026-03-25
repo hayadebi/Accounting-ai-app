@@ -19,6 +19,12 @@ const App = {
   quests:         [],     
   questsLoaded:   false
 };
+const Filter = {
+  tab:      'q',       // 'q'=サービス / 'g'=ゲーム
+  sort:     'default', // 'default'/'asc'/'desc'
+  once:     true,      // 1回のみ表示
+  interval: true       // 繰り返し表示
+};
 const api = GASStorage.createSimpleAPI();
 function esc(s) {
   if (s == null) return '';
@@ -307,6 +313,7 @@ async function loadQuests() {
     }
     App.quests = quests;
     App.questsLoaded = true;
+    
     renderBoard(quests);
     let approvedCount  = 0;
     let approvedReward = 0;
@@ -339,33 +346,78 @@ function renderStats(count, totalReward) {
   bar.style.display = 'block';
 }
 function renderBoard(quests) {
+  let list = (quests || []).filter(q => (q.taskId || '').startsWith(Filter.tab));
+
+  list = list.filter(q => {
+    if (q.recruitType === 'once'     && !Filter.once)     return false;
+    if (q.recruitType === 'interval' && !Filter.interval) return false;
+    return true;
+  });
+
+  if (Filter.sort === 'asc') {
+    list = list.slice().sort((a, b) => parseFloat(a.reward) - parseFloat(b.reward));
+  } else if (Filter.sort === 'desc') {
+    list = list.slice().sort((a, b) => parseFloat(b.reward) - parseFloat(a.reward));
+  }
+
   const board = document.getElementById('quest-board');
-  if (!quests.length) {
+  if (!list.length) {
     board.innerHTML = `
       <div class="empty-state" style="grid-column:1/-1">
         <div class="icon">📋</div>
-        <p>現在掲示されているクエストはありません。しばらくお待ちください。</p>
+        <p>条件に一致するクエストはありません。</p>
       </div>`;
     return;
   }
-  board.innerHTML = quests.map((q, i) => `
-    <div class="quest-card" data-idx="${i}">
-      <div class="quest-card-top">
-        <div>
-          <div class="quest-title">${esc(q.title)}</div>
-          <span class="quest-type-tag">${esc(recruitLabel(q.recruitType, q.reorderDays))}</span>
+
+  board.innerHTML = list.map(q => {
+    const idx = App.quests.indexOf(q);
+    return `
+      <div class="quest-card" data-idx="${idx}">
+        <div class="quest-card-top">
+          <div>
+            <div class="quest-title">${esc(q.title)}</div>
+            <span class="quest-type-tag">${esc(recruitLabel(q.recruitType, q.reorderDays))}</span>
+          </div>
+          <div class="quest-reward-badge">${esc(String(q.reward))} LTC</div>
         </div>
-        <div class="quest-reward-badge">${esc(String(q.reward))} LTC</div>
-      </div>
-      <div class="quest-desc">${esc((q.description||'').slice(0,90))}${(q.description||'').length>90?'…':''}</div>
-      <div class="wax-seal">⚜</div>
-    </div>`).join('');
+        <div class="quest-desc">${esc((q.description||'').slice(0,90))}${(q.description||'').length>90?'…':''}</div>
+        <div class="wax-seal">⚜</div>
+      </div>`;
+  }).join('');
+
   board.querySelectorAll('.quest-card').forEach(card => {
     card.addEventListener('click', () => {
-      const idx = parseInt(card.dataset.idx, 10);
-      openQuestDetail(idx);
+      openQuestDetail(parseInt(card.dataset.idx, 10));
     });
   });
+}
+
+function switchTab(tab) {
+  Filter.tab = tab;
+  document.querySelectorAll('.quest-tab').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.tab === tab);
+  });
+  renderBoard(App.quests);
+}
+
+function applyFilter() {
+  Filter.sort     = document.getElementById('filter-sort').value;
+  Filter.once     = document.getElementById('filter-once').checked;
+  Filter.interval = document.getElementById('filter-interval').checked;
+  closeModal('modal-filter');
+  renderBoard(App.quests);
+}
+
+function resetFilter() {
+  Filter.sort     = 'default';
+  Filter.once     = true;
+  Filter.interval = true;
+  document.getElementById('filter-sort').value       = 'default';
+  document.getElementById('filter-once').checked     = true;
+  document.getElementById('filter-interval').checked = true;
+  closeModal('modal-filter');
+  renderBoard(App.quests);
 }
 async function openQuestDetail(idx) {
   const quest = App.quests[idx];
@@ -650,6 +702,9 @@ document.addEventListener('visibilitychange', async () => {
   }
 });
 window.addEventListener('DOMContentLoaded', async () => {
+  document.querySelectorAll('.quest-tab').forEach(btn => {
+    btn.addEventListener('click', () => switchTab(btn.dataset.tab));
+  });
   updateNavUI();
   await loadQuests();
   checkDailyReset();
