@@ -202,6 +202,7 @@ async function generateIdeas() {
         generateBtn.disabled = false;
         btnIcon.classList.remove('loading');
         btnText.textContent = 'ゲーム企画を生成';
+        toolCenterAdsReplaceCombination();
         adDisplayed = true;
         showAd();
     }
