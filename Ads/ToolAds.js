@@ -47,7 +47,7 @@
 ];
   
   // ランダムに1つ選択
-  const selected = combinations[Math.floor(Math.random() * combinations.length)];
+  let selected = combinations[Math.floor(Math.random() * combinations.length)];
   
   // DOMが読み込まれた後に実行
   if (document.readyState === 'loading') {
@@ -58,6 +58,7 @@
   
   function replaceCombination() {
     // 画像の置き換え
+    selected = combinations[Math.floor(Math.random() * combinations.length)];
     const images = document.querySelectorAll('.random-ads-image');
     images.forEach(function(img) {
       img.src = selected.imageUrl;

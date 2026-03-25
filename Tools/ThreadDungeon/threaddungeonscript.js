@@ -982,6 +982,7 @@ function processStairs(){
 // function isPlaygamaAds(state){return state==='closed'||state==='failed';}
 
 function stairAds(){
+  replaceCombination();
   const ads=document.getElementById('stair-ads');
   ads.style.display=ads.style.display==='block'?'none':'block';
 
