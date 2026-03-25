@@ -863,7 +863,7 @@ function gameOver(){
   const savedAch=GS.achievements;const savedName=GS.explorerName;
   GS=initNewState(savedName);GS.achievements=savedAch;GS.floor=0;
   saveState();localStorage.removeItem(SAVE_KEY+'_floor');
-  setTimeout(()=>{addLog('名無しさん','モナコインも所持品もすべて失った。\n実績だけが残った。','red',1000,'anon');setTimeout(()=>{addLog('名無しさん','B0のギルドに戻された…','',1500,'anon');adDisplayed = true;showAd();setTimeout(()=>goToFloor(0),6000);},2000);},1000);
+  setTimeout(()=>{addLog('名無しさん','モナコインも所持品もすべて失った。\n実績だけが残った。','red',1000,'anon');setTimeout(()=>{addLog('名無しさん','B0のギルドに戻された…','',1500,'anon');toolCenterAdsReplaceCombination();adDisplayed = true;showAd();setTimeout(()=>goToFloor(0),6000);},2000);},1000);
 }
  
 /* =====================================================
