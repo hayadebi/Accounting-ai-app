@@ -1,3 +1,53 @@
+const centercombinations = [
+        {
+            "imageUrl": "../../Ads/CenterImage/AdsImage1.jpg",
+            "siteUrl": "https://note.com/hayadebi_ai/n/n9f71a3b80529",
+            "checkUrl": "#"
+        },
+        {
+            "imageUrl": "../../Ads/CenterImage/AdsImage2.jpg",
+            "siteUrl": "https://hayadebi.github.io/Accounting-ai-app/adnextcenter.html?q=hayadebi.github.io%2FAccounting-ai-app%2FTools%2FInfoGuild%2Finfoguild.html",
+            "checkUrl": "#"
+        },
+        {
+            "imageUrl": "../../Ads/CenterImage/AdsImage4.gif",
+            "siteUrl": "https://dlaf.jp/home/dlaf/=/aid/githubhayadebitools/url/https%3A%2F%2Fwww.dlsite.com%2Fhome%2Franking%2Fweek%2F%3Futm_medium%3Daffiliate%26utm_campaign%3Dbnlink%26utm_content%3Dtext",
+            "checkUrl": "#"
+        },
+        {
+            "imageUrl": "../../Ads/CenterImage/AdsImage5.jpg",
+            "siteUrl": "https://note.com/hayadebi_ai/n/nd7234ba28c72",
+            "checkUrl": "#"
+        },
+        {
+            "imageUrl": "../../Ads/CenterImage/AdsImage6.jpg",
+            "siteUrl": "https://hayadebi.github.io/Accounting-ai-app/Tools/BlogEditor/blogeditor.html",
+            "checkUrl": "#"
+        },
+        {
+            "imageUrl": "../../Ads/CenterImage/AdsImage8.jpg",
+            "siteUrl": "https://hayadebi.github.io/Accounting-ai-app/adnextcenter.html?q=hayadebi.github.io%2FAccounting-ai-app%2FTools%2FInfoGuild%2Finfoguild.html",
+            "checkUrl": "#"
+        },
+        {
+            "imageUrl": "../../Ads/CenterImage/AdsImage9.jpg",
+            "siteUrl": "https://hayadebi.github.io/Accounting-ai-app/Tools/ThreadDungeon/threaddungeon.html",
+            "checkUrl": "#"
+        },
+        {
+            "imageUrl": "../../Ads/CenterImage/AdsImage10.jpg",
+            "siteUrl": "https://note.com/hayadebi_ai/n/n9679ee17ac93",
+            "checkUrl": "#"
+        },
+        {
+            "imageUrl": "../../Ads/CenterImage/AdsImage11.jpg",
+            "siteUrl": "https://note.com/hayadebi_ai/n/n9b28923fbcd6",
+            "checkUrl": "#"
+        }
+    ];
+
+let centerselected = centercombinations[Math.floor(Math.random() * centercombinations.length)];
+
 (function() {
     const adHTML = `
         <div id="adOverlay" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.7); justify-content: center; align-items: center; z-index: 1000;">
@@ -39,56 +89,8 @@
             const containers = document.querySelectorAll('.centerad-widget');
             containers.forEach(function(container) {
                 container.innerHTML = adHTML;
-
-                const centercombinations = [
-                    {
-                        "imageUrl": "../../Ads/CenterImage/AdsImage1.jpg",
-                        "siteUrl": "https://note.com/hayadebi_ai/n/n9f71a3b80529",
-                        "checkUrl": "#"
-                    },
-                    {
-                        "imageUrl": "../../Ads/CenterImage/AdsImage2.jpg",
-                        "siteUrl": "https://hayadebi.github.io/Accounting-ai-app/adnextcenter.html?q=hayadebi.github.io%2FAccounting-ai-app%2FTools%2FInfoGuild%2Finfoguild.html",
-                        "checkUrl": "#"
-                    },
-                    {
-                        "imageUrl": "../../Ads/CenterImage/AdsImage4.gif",
-                        "siteUrl": "https://dlaf.jp/home/dlaf/=/aid/githubhayadebitools/url/https%3A%2F%2Fwww.dlsite.com%2Fhome%2Franking%2Fweek%2F%3Futm_medium%3Daffiliate%26utm_campaign%3Dbnlink%26utm_content%3Dtext",
-                        "checkUrl": "#"
-                    },
-                    {
-                        "imageUrl": "../../Ads/CenterImage/AdsImage5.jpg",
-                        "siteUrl": "https://note.com/hayadebi_ai/n/nd7234ba28c72",
-                        "checkUrl": "#"
-                    },
-                    {
-                        "imageUrl": "../../Ads/CenterImage/AdsImage6.jpg",
-                        "siteUrl": "https://hayadebi.github.io/Accounting-ai-app/Tools/BlogEditor/blogeditor.html",
-                        "checkUrl": "#"
-                    },
-                    {
-                        "imageUrl": "../../Ads/CenterImage/AdsImage8.jpg",
-                        "siteUrl": "https://hayadebi.github.io/Accounting-ai-app/adnextcenter.html?q=hayadebi.github.io%2FAccounting-ai-app%2FTools%2FInfoGuild%2Finfoguild.html",
-                        "checkUrl": "#"
-                    },
-                    {
-                        "imageUrl": "../../Ads/CenterImage/AdsImage9.jpg",
-                        "siteUrl": "https://hayadebi.github.io/Accounting-ai-app/Tools/ThreadDungeon/threaddungeon.html",
-                        "checkUrl": "#"
-                    },
-                    {
-                        "imageUrl": "../../Ads/CenterImage/AdsImage10.jpg",
-                        "siteUrl": "https://note.com/hayadebi_ai/n/n9679ee17ac93",
-                        "checkUrl": "#"
-                    },
-                    {
-                        "imageUrl": "../../Ads/CenterImage/AdsImage11.jpg",
-                        "siteUrl": "https://note.com/hayadebi_ai/n/n9b28923fbcd6",
-                        "checkUrl": "#"
-                    }
-                ];
                 
-                const centerselected = centercombinations[Math.floor(Math.random() * centercombinations.length)];
+                centerselected = centercombinations[Math.floor(Math.random() * centercombinations.length)];
                 
                 if (document.readyState === 'loading') {
                     document.addEventListener('DOMContentLoaded', replaceCombination);
@@ -117,3 +119,22 @@
     });
 
 })();
+
+function toolCenterAdsReplaceCombination(){
+    centerselected = centercombinations[Math.floor(Math.random() * centercombinations.length)];
+
+    const centerimages = document.querySelectorAll('.center-ads-image');
+    centerimages.forEach(function(img) {
+    img.src = centerselected.imageUrl;
+    });
+    
+    const centerchecks = document.querySelectorAll('.center-ads-check');
+    centerchecks.forEach(function(img) {
+    img.src = centerselected.checkUrl;
+    });
+
+    const centerlinks = document.querySelectorAll('.center-ads-link');
+    centerlinks.forEach(function(link) {
+    link.href = centerselected.siteUrl;
+    });
+}

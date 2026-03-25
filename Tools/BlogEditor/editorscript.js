@@ -1140,6 +1140,7 @@ function exportHTML(fileName) {
     URL.revokeObjectURL(url);
 
     showNotification('HTMLファイルをダウンロードしました', 'success');
+    toolCenterAdsReplaceCombination();
     adDisplayed = true;
     showAd();
 }
@@ -1213,6 +1214,7 @@ function saveDraft() {
     URL.revokeObjectURL(url);
     
     showNotification('下書きをファイルとして保存しました', 'success');
+    toolCenterAdsReplaceCombination();
     adDisplayed = true;
     showAd();
 }
