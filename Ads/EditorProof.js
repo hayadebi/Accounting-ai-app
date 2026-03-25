@@ -93,7 +93,7 @@
     }
     });
     function showAd() {
-    if (url.indexOf("cms.e.jimdo.com") === -1 && Math.random()<0.05) {
+    if (url.indexOf("cms.e.jimdo.com") === -1 && Math.random()<0.1) {
         let adContainer = document.getElementById("adContainer");
         let closeButton = document.getElementById("closeButton");
         if (isMobile()) {
