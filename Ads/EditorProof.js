@@ -48,11 +48,6 @@
             "imageUrl": "https://hayadebi.github.io/Accounting-ai-app/Ads/CenterImage/AdsImage12.jpg",
             "siteUrl": "https://freecash.com/r/devilnessie",
             "checkUrl": "#"
-        },
-        {
-            "imageUrl": "https://hayadebi.github.io/Accounting-ai-app/Ads/CenterImage/AdsImage13.jpg",
-            "siteUrl": "https://timebucks.com/?refID=223743191",
-            "checkUrl": "#"
         }
     ];
     const centerselected = centercombinations[Math.floor(Math.random() * centercombinations.length)];
