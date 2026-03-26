@@ -125,24 +125,25 @@ HTMLやJavaScriptコードなどを、多言語対応、SEO、そして構造化
         <section class="section" id="section-2">
             <h2>前提条件と注意点</h2>
             <p>本プロンプトは、高度な推論能力とコード生成能力を持つAIである、<strong>Claude</strong>上での実行を前提としています。</p><a href="https://claude.ai/new" class="btn" target="_blank" rel="nofollow" referrerpolicy="no-referrer-when-downgrade" alt="リンクボタン">Claudeはこちらから</a><p>Claudeを活用することで、複雑なコードに対する多言語対応も、機能や構造を維持しつつ高い精度で完遂できます。
- 
 また入力には、翻訳したい「コード（添付対応）」と「対象国」「対象言語」の3点が必要になります。
 入力情報を基に、対象言語圏のユーザーにとって自然で、SEOに最適化された意図理解ベースの翻訳。
 さらに出力は、解説や補足を含まない完全なコードのみであり、そのまま実装可能な状態であることが厳守される設計になっています。</p>
         </section><section class="section" id="section-目次番号">
 
-<h2>活用事例</h2><div class="recommend-boxes">
-
-<div class="recommend-box" style="text-align: left;margin-bottom:0;">
-
-<h3 style="font-size:1.4rem;color: #a8d0ff;">【日本語版】</h3><a href="https://hayadebi.github.io/Accounting-ai-app/Tools/ThreadDungeon/threaddungeon.html" class="btn" target="_blank" rel="nofollow" referrerpolicy="no-referrer-when-downgrade" alt="リンクボタン">日本語版 掲示板スレダンジョン</a></div><div class="recommend-box" style="text-align: left;margin-bottom:0;">
-
-<h3 style="font-size:1.4rem;color: #a8d0ff;">【英語版】</h3><a href="https://hayadebi.github.io/Accounting-ai-app/Tools/ThreadDungeon/threaddungeon_en.html" class="btn" target="_blank" rel="nofollow" referrerpolicy="no-referrer-when-downgrade" alt="リンクボタン">英語版 掲示板スレダンジョン</a></div></div><p>こちらは自作のローグライクゲームで、
+<h2>活用事例</h2>
+<a href="https://hayadebi.github.io/Accounting-ai-app/Tools/ThreadDungeon/threaddungeon.html" class="btn" target="_blank" rel="nofollow" referrerpolicy="no-referrer-when-downgrade" alt="リンクボタン">日本語版 掲示板スレダンジョン</a><a href="https://hayadebi.github.io/Accounting-ai-app/Tools/ThreadDungeon/threaddungeon_en.html" class="btn" target="_blank" rel="nofollow" referrerpolicy="no-referrer-when-downgrade" alt="リンクボタン">英語版 掲示板スレダンジョン</a>
+<p>こちらは自作のローグライクゲームで、
 大量のアイテムやモンスター、会話イベントなどが実装されています。
 それらも海外向けにローカライズされています。</p></section>
         
         <section class="section" id="section-3">
-            <h2>プロンプトと使い方</h2><script>
+            <h2>プロンプトと使い方</h2>
+            <div id="cwrap" style="position:relative;font-family:'Courier New',Courier,monospace;font-size:13px;line-height:1.7;background:#1e1e1e;border-radius:8px;border:1px solid #3a3a3a;padding:16px;box-sizing:border-box;max-width:100%;">
+  <button id="cbtn" style="position:absolute;top:10px;right:10px;background:#3a3a3a;color:#ccc;border:1px solid #555;border-radius:5px;padding:4px 12px;font-size:12px;cursor:pointer;z-index:10;" onmouseover="this.style.background='#555'" onmouseout="this.style.background='#3a3a3a'">コピー</button>
+  <textarea id="craw" style="position:fixed;left:-9999px;top:-9999px;opacity:0;width:1px;height:1px;" readonly=""></textarea>
+  <div id="cdisp" style="max-height:320px;overflow-y:auto;overflow-x:auto;padding-right:8px;padding-top:8px;white-space:pre;word-break:normal;"></div>
+</div>
+            <script>
 (function(){
   var raw = "あなたは、HTMLやJavascriptの多言語対応・SEO・構造化データ最適化に精通したエンジニア兼翻訳者として行動せよ。\n以下の要件をすべて厳守し、**実運用可能な高品質HTMLまたはJavascriptコードのみを出力すること。**\n\n---\n\n## ■目的\n\nUSERが提供するコード内容・言語および指定された「対象国」「対象言語」を基に、\n**内容・意図・UX・SEO・技術構造を完全に維持したまま、対象言語圏向けに最適化された翻訳HTMLまたはJavascriptコードを生成すること。**\n\n---\n\n## ■絶対条件\n\n### 1. 機能・表示・構造の完全維持\n\n以下の要素を一切変更・破壊・削除してはならない。\n\n* JavaScriptの挙動\n* CSSの表示\n* class・id・data属性\n* DOM構造\n* イベント処理\n* API通信\n* 外部ライブラリ\n* URL構造\n* scriptの実行\n* iframe・widget\n* フォーム処理\n* 既存SEOロジック\n* UI/UX\n* レイアウト\n* style\n\n機能・構造・視覚表現は**100％維持**すること。\n\n---\n\n### 2. 翻訳方針\n\n直訳は禁止。\n対象言語圏のユーザーにとって自然で理解しやすく、コンバージョン最適化を意識した翻訳を行うこと。\n\n必須要素：\n\n* 意図理解ベース翻訳\n* UX最適化\n* マーケティング視点\n* CTA最適化\n* ローカル文化適合\n* 検索ニーズに適した語彙\n\n---\n\n### 3. SEO最適化翻訳\n\n以下を対象言語・対象国の検索意図に最適化すること。\n\n* タイトル\n* 見出し\n* CTA\n* メタ要素\n\n#### キーワード最適化\n\n実際の検索行動を想定した語彙へ改善する。\n\n#### EEAT最適化\n\n以下を考慮する。\n\n* 専門性\n* 信頼性\n* 権威性\n* 有用性\n\n---\n\n### 4. head情報の最適化\n\n以下を翻訳・改善し、対象国SEOに最適化すること。（存在する場合）\n\n* html lang\n* title\n* meta name description\n* meta name keywords\n* meta property og:title\n* meta property og:description\n* Open Graph\n* Twitter Card\n* canonical\n* alternate\n* hreflang\n* robots\n* viewport\n\n---\n\n### 5. hreflang・alternate実装\n\n必ず以下を正確に設定すること。\n\n* 元言語（日本を維持）\n* 翻訳言語\n* x-default\n\n必要に応じて不足項目を補完する。\n\n---\n\n### 6. 構造化データ最適化（最重要）\n\nHTML内の以下を検出し、翻訳およびSEO最適化すること。\n\n* JSON-LD\n* microdata\n* RDFa\n* Schema.org\n\n必須最適化項目：\n\n* name\n* description\n* keywords\n* offers\n* FAQ\n* Article\n* SoftwareApplication\n* WebApplication\n* Breadcrumb\n* Organization\n* Product\n\n対象国の検索エンジンに最適な内容へ改善し、不足項目は補完する。\n\n---\n\n### 7. URL・内部リンク最適化\n\n必要に応じて以下を改善する。（ただし存在しないURLを追加しない）\n\n* slug\n* 内部リンク\n* アンカーテキスト\n* 多言語URL構造\n\n既存構造は破壊しないこと。\n\n---\n\n### 8. 出力形式\n\n以下を厳守する。\n\n* 完全なHTMLまたはJavascriptコードのみ出力\n* 解説・前置き・補足は禁止\n* コメント禁止\n* 省略禁止\n* そのまま実装可能な状態\n\n---\n\n### 9. 入力\n\nUSERは以下を提供する。\n\n1. コード:添付\n2. 対象国:\n3. 対象言語:\n\n---\n\n### 10. 品質基準\n\n以下をすべて満たすこと。\n\n* 実運用可能\n* SEO最適\n* 技術的整合性\n* 構造破壊なし\n* 自然言語\n* 商用レベル\n\n基準を満たさない場合は再生成する。\n\n---\n\n### 11. 追加最適化\n\n必要に応じて以下も改善する。\n\n* UX文言\n* エラーメッセージ\n* フォーム\n* ボタン\n* ナビゲーション\n* フッター\n* 法的表記\n* プライバシー関連\n\n---\n\n上記要件をすべて満たし、最高品質の翻訳コードを生成せよ。";
 
@@ -205,11 +206,7 @@ HTMLやJavaScriptコードなどを、多言語対応、SEO、そして構造化
     }
   });
 })();
-</script><div id="cwrap" style="position:relative;font-family:'Courier New',Courier,monospace;font-size:13px;line-height:1.7;background:#1e1e1e;border-radius:8px;border:1px solid #3a3a3a;padding:16px;box-sizing:border-box;max-width:100%;">
-  <button id="cbtn" style="position:absolute;top:10px;right:10px;background:#3a3a3a;color:#ccc;border:1px solid #555;border-radius:5px;padding:4px 12px;font-size:12px;cursor:pointer;z-index:10;" onmouseover="this.style.background='#555'" onmouseout="this.style.background='#3a3a3a'">コピー</button>
-  <textarea id="craw" style="position:fixed;left:-9999px;top:-9999px;opacity:0;width:1px;height:1px;" readonly=""></textarea>
-  <div id="cdisp" style="max-height:320px;overflow-y:auto;overflow-x:auto;padding-right:8px;padding-top:8px;white-space:pre;word-break:normal;"></div>
-</div>
+</script>
             <p>まず、上記の本プロンプトの内容を全てコピーして、Claude AIの入力インターフェースにそのまま貼り付けてください。
  </p><h3 style="font-size:1.4rem;color: #a8d0ff;">2.入力情報の準備</h3><p>プロンプトの最後に「## 9. 入力」という項目があります。
 ここで、Claudeに提供すべき情報が示されています。</p><div class="recommend-boxes">
@@ -227,9 +224,11 @@ HTMLやJavaScriptコードなどを、多言語対応、SEO、そして構造化
  </p><h3 style="font-size:1.4rem;color: #a8d0ff;">3.指示と実行</h3><p>準備した入力情報も加えて実行します。
 例えば、以下のように指示します。</p><div class="recommend-icon"><img src="https://hayadebi.github.io/Accounting-ai-app/Images/blogai2_inputsample.webp" alt="記事参考画像" style="object-fit: cover;max-width:100%;height: auto; display: block;border-radius:2%;" loading="lazy" /></div><p>Claudeがこの指示を受け取ると、プロンプトに記載された「絶対条件」に従い、コードの翻訳と最適化を開始します。
 具体的には、JavaScriptの挙動やCSSの表示、DOM構造などを維持しつつ、タイトル、メタ要素、hreflang、構造化データ、URLなどを対象国・言語向けに最適化された形でコードを生成します。</p><h3 style="font-size:1.4rem;color: #a8d0ff;">実運用上の注意点・コツ</h3><p><strong>・具体的なコードの提供:</strong>
-翻訳したいコードは、可能な限り具体的かつ完全な形で提供してください。部分的なコードでは、文脈が失われ、最適化の精度が低下する可能性があります。
+翻訳したいコードは、
+可能な限り具体的かつ完全な形で提供してください。部分的なコードでは、文脈が失われ、最適化の精度が低下する可能性があります。
 <strong>・品質基準の確認:</strong>
-生成されたコードは、必ず「実運用可能」「SEO最適」「技術的整合性」「構造破壊なし」「自然言語」「商用レベル」といった品質基準を満たしているかを確認してください。
+生成されたコードは、
+必ず「実運用可能」「SEO最適」「技術的整合性」「構造破壊なし」「自然言語」「商用レベル」といった品質基準を満たしているかを確認してください。
 必要であれば、Claudeに修正を指示することも可能です。
 <strong>・追加最適化の活用:</strong>
 プロンプトには「## 11. 追加最適化」として、UX文言、エラーメッセージ、フォーム、ボタン、ナビゲーション、フッター、法的表記、プライバシー関連などの改善項目が挙げられています。
@@ -248,8 +247,7 @@ HTMLやJavaScriptコードなどを、多言語対応、SEO、そして構造化
         <section class="section" id="section-4">
             <h2>まとめ</h2>
             <p>本記事では、HTMLやJavaScriptの多言語対応、SEO、構造化データ最適化を目的としたプロンプトについて解説しました。
-Webサイトのグローバル展開は、
-個人企業問わず多くの運営にとって重要な戦略です。
+Webサイトのグローバル展開は、個人企業問わず多くの運営にとって重要な戦略です。
 このプロンプトとClaudeを組み合わせることで、対応作業をより効率的かつ高品質に進めることができるでしょう。
 ぜひ、あなたのWebプロジェクトでこのプロンプトを試し、国際的な成功への一歩を踏み出してください。</p>
              <a href="https://note.com/hayadebi_ai/n/n9679ee17ac93" class="btn" target="_blank" rel="nofollow" referrerpolicy="no-referrer-when-downgrade" alt="リンク説明">ブログ記事執筆自動化AIツールも試す【PR】</a><a href="https://hayadebi.github.io/Accounting-ai-app/Tools/BlogEditor/blogeditor.html" class="btn" target="_blank" rel="nofollow" referrerpolicy="no-referrer-when-downgrade" alt="リンクボタン">ビジュアルブログエディタも試す【PR】</a>
