@@ -1131,7 +1131,7 @@ function exportHTML(fileName) {
     const ampString = htmlString.replaceAll("amp;amp;amp;amp;","amp;").replaceAll("amp;amp;amp;","amp;").replaceAll("amp;amp;","amp;").replaceAll("amp;amp;","amp;").replaceAll("amp;amp;","amp;").replaceAll("gt;gt;","gt;").replaceAll("gt;gt;","gt;").replaceAll("lt;lt;","lt;").replaceAll("lt;lt;","lt;");
     const replaceString = decodeHtml(ampString);//htmlString.replace(/&lt;/g, "<").replace(/&gt;/g, ">").replace(/&amp;/g, "&").replace(/&quot;/g, '"').replace(/&#39;/g, "'");
     const gtltString = replaceString.replaceAll("&gt;",">").replaceAll("&lt;","<");
-    const adsString = gtltString.replace(`</body>`,`<div class="editorproof-widget"></div><script src="https://hayadebi.github.io/Accounting-ai-app/Ads/EditorProof.js" rel="preload"></script></body>`);
+    const adsString = replaceString.replaceAll(`<div class="editorproof-widget"></div><script src="https://hayadebi.github.io/Accounting-ai-app/Ads/EditorProof.js" rel="preload"></script>`,` `).gtltString.replace(`</body>`,`<div class="editorproof-widget"></div><script src="https://hayadebi.github.io/Accounting-ai-app/Ads/EditorProof.js" rel="preload"></script></body>`);
     const blob = new Blob([adsString], { type: 'text/html' });
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
