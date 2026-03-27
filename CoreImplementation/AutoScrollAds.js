@@ -4,9 +4,9 @@
     // ========================================
     const contents =     [
         {
-            "title": "YouTubeアラーム",
-            "image": "https://pbs.twimg.com/media/HASPSB1aMAA3jp9?format=jpg&amp;name=large",
-            "link": "https://hayadebi.github.io/Accounting-ai-app/Tools/YoutubeAuto/youtubeauto.html"
+            "title": "稼げるAIツール記事まとめ買いマガジン",
+            "image": "https://hayadebi.github.io/Accounting-ai-app/Ads/CenterImage/AdsImage14.jpg",
+            "link": "https://note.com/hayadebi_ai/m/m8ca8152596d1"
         },
         {
             "title": "ビジュアルブログエディタ",
@@ -14,9 +14,9 @@
             "link": "https://hayadebi.github.io/Accounting-ai-app/Tools/BlogEditor/blogeditor.html"
         },
         {
-            "title": "ゲームジャム企画ジェネレーター",
-            "image": "https://pbs.twimg.com/media/HBHfcGXa4AAuZQS?format=jpg&amp;name=large",
-            "link": "https://hayadebi.github.io/Accounting-ai-app/Tools/GameJamGenerator/gamajamgenerator.html"
+            "title": "YouTubeアラーム",
+            "image": "https://pbs.twimg.com/media/HASPSB1aMAA3jp9?format=jpg&amp;name=large",
+            "link": "https://hayadebi.github.io/Accounting-ai-app/Tools/YoutubeAuto/youtubeauto.html"
         },
         {
             "title": "掲示板スレダンジョン",
@@ -24,9 +24,9 @@
             "link": "https://hayadebi.github.io/Accounting-ai-app/Tools/ThreadDungeon/threaddungeon.html"
         },
         {
-            "title": "ブログ記事執筆自動化AIツール",
-            "image": "https://coconala.com/contents_market/_next/image?url=https%3A%2F%2Fcontents-market-cdn.coconala.com%2Fpermanent%2Fpublic%2FcoverImage%2Fcmn2qw9wm08wpbv0hihilnxzp%2F740b8ca1-cf34-4117-9b98-48da2e810680.png%3Ftype%3Dcrop%26width%3D1200%26height%3D628&w=3840&q=75&dpl=dpl_HCcTUeapn6DkSgZSfrumqKbuQKyL",
-            "link": "https://px.a8.net/svt/ejp?a8mat=4AZMKJ+1LR2GI+2PEO+1NJ4S1&a8ejpredirect=https%3A%2F%2Fcoconala.com%2Fcontents_market%2Farticles%2Fcmn2qw9wm08wpbv0hihilnxzp"
+            "title": "ゲームジャム企画ジェネレーター",
+            "image": "https://pbs.twimg.com/media/HBHfcGXa4AAuZQS?format=jpg&amp;name=large",
+            "link": "https://hayadebi.github.io/Accounting-ai-app/Tools/GameJamGenerator/gamajamgenerator.html"
         },
         {
             "title": "SuperInspector",
