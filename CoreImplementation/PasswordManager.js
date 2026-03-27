@@ -59,18 +59,12 @@ class PasswordManager {
      */
     toSpellRestoration(data) {
         try {
-            // 1. JSON文字列に変換
             const json = JSON.stringify(data);
-            
-            // 2. Base64文字列に変換
             const base64 = this.toBase64(json);
-            
-            // 3. テーブルに基づいて置換
             let spellRestoration = "";
             for (let char of base64) {
                 spellRestoration += this.encodeMap.get(char) || char;
             }
-            
             return spellRestoration;
         } catch (error) {
             console.error("Encryption error:", error);
@@ -85,26 +79,18 @@ class PasswordManager {
      */
     fromSpellRestoration(spellRestoration) {
         if (!spellRestoration) return null;
-
         try {
-            // 1. ひらがなをBase64文字に戻す
             let base64 = "";
-            // ひらがなはマルチバイトなので、1文字ずつ正しく処理
-            const chars = Array.from(spellRestoration);
+            const chars = Array.from(spellRestoration.trim());
             for (let char of chars) {
                 const originalChar = this.decodeMap.get(char);
                 if (originalChar !== undefined) {
                     base64 += originalChar;
                 } else {
-                    // テーブルにない文字はそのまま追加（スペースや改行など）
                     base64 += char;
                 }
             }
-
-            // 2. Base64をデコードしてJSON文字列に戻す
             const json = this.fromBase64(base64);
-            
-            // 3. JSONをパースしてオブジェクトを返す
             return JSON.parse(json);
         } catch (error) {
             console.error("Decryption error:", error);
@@ -113,7 +99,11 @@ class PasswordManager {
     }
 }
 
-// Node.js環境でのエクスポート
+// 実行環境に応じたエクスポート処理
 if (typeof module !== 'undefined' && module.exports) {
+    // Node.js (CommonJS)
     module.exports = PasswordManager;
+} else if (typeof window !== 'undefined') {
+    // ブラウザ (グローバル変数として公開)
+    window.PasswordManager = PasswordManager;
 }
