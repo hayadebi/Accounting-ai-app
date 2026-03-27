@@ -53,6 +53,11 @@ const centercombinations = [
             "imageUrl": "https://hayadebi.github.io/Accounting-ai-app/Ads/CenterImage/AdsImage13.jpg",
             "siteUrl": "https://timebucks.com/?refID=223743191",
             "checkUrl": "#"
+        },
+        {
+            "imageUrl": "https://hayadebi.github.io/Accounting-ai-app/Ads/CenterImage/AdsImage14.jpg",
+            "siteUrl": "https://note.com/hayadebi_ai/m/m8ca8152596d1",
+            "checkUrl": "#"
         }
     ];
 
