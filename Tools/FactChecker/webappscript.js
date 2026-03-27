@@ -1,7 +1,8 @@
 'use strict';
 
-const GAS_URL = atob('aHR0cHM6Ly9zY3JpcHQuZ29vZ2xlLmNvbS9tYWNyb3Mvcy9BS2Z5Y2J5MHRjRDJxMXBuNUVqQ2Z5ZG9rNmRwMEtSRmpBRTBFbkZSYzA5TGVqX1NDTXNpZmJMTldlb0NRUWloaTREUXJJQzNrQS9leGVj');
-
+const pm = new PasswordManager();
+const decrypted = pm.fromSpellRestoration('けらめぜほくいずそもびげへだせじひねいぜしらほげふだほがはてでやふだぜげふぬかやへらぶずしぢすげちなぎらまぬせもまといぜのぜちじへとかごふやにかひゆせらまぬつげひずはゆへえいしなゆはろちななごつぬできならすごそなざよひよぶとちぜぞずひぬはもとおでねはぬぶえなにかれひきゆぜつかかじてなすずひぜおげはねめよのじけん');
+const GAS_URL = typeof decrypted === 'string' ? decrypted : JSON.stringify(decrypted, null, 2);
 const GEMINI_MODEL = 'gemini-2.5-flash';
 const GEMINI_API_BASE = ['https://generative', 'language.googleapis.com', '/v1beta/models/'].join('');
 
