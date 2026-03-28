@@ -1,8 +1,7 @@
-User-agent：*
+User-agent: *
+Disallow: /*?sort=
+Disallow: /*?filter=
+Disallow: /*?q=
+Disallow: /*?from=
 
-Disallow：/*?sort=
-Disallow：/*?filter=
-Disallow：/*?q=
-Disallow：/*?from=
-
-Sitemap: https://hayadebi.github.io/Accounting-ai-app/sitemap.xml
+https://hayadebi.github.io/Accounting-ai-app/sitemap.xml
