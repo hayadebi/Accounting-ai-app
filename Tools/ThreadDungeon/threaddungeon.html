@@ -28,6 +28,7 @@
     <!-- 言語未対応ユーザー用 (デフォルト) -->
     <link rel="alternate" hreflang="x-default" href="threaddungeon.html" />
     <!-- <script async src="https://widgets.playgama.com/index.js"></script> -->
+     <meta name="robots" content="noindex">
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-GLW3M3X7B3" defer></script>
     <script async>
         window.dataLayer = window.dataLayer || [];
@@ -38,140 +39,7 @@
     </script>
     <!-- <script src="playgama-bridge-config.json" rel="preload"></script>
     <script src="https://bridge.playgama.com/v1/stable/playgama-bridge.js" rel="preload"></script> -->
-    <!--後で構造化データを生成して貼る-->
-    <script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@graph": [
-
-    {
-      "@type": "Organization",
-      "@id": "https://hayadebi.github.io/Accounting-ai-app/#organization",
-      "name": "ハヤデビのツール工房",
-      "url": "https://hayadebi.github.io/Accounting-ai-app/",
-      "logo": {
-        "@type": "ImageObject",
-        "url": "https://pbs.twimg.com/media/HA-QSWzbsAM91dr?format=jpg&name=large"
-      }
-    },
-
-    {
-      "@type": "Person",
-      "@id": "https://hayadebi.github.io/Accounting-ai-app/profile.html#person",
-      "name": "ハヤデビ",
-      "url": "https://hayadebi.github.io/Accounting-ai-app/profile.html",
-      "jobTitle": "フリーランスエンジニア"
-    },
-
-    {
-      "@type": "SoftwareApplication",
-      "@id": "https://hayadebi.github.io/Accounting-ai-app/Tools/ThreadDungeon/threaddungeon.html#software",
-      "name": "掲示板スレダンジョン",
-      "url": "https://hayadebi.github.io/Accounting-ai-app/Tools/ThreadDungeon/threaddungeon.html",
-      "applicationCategory": "GameApplication",
-      "applicationSubCategory": "Roguelike RPG",
-      "operatingSystem": "Web",
-      "isAccessibleForFree": true,
-      "inLanguage": "ja",
-      "genre": "Roguelike RPG",
-      "keywords": "掲示板, ダンジョン, ローグライク, RPG, ブラウザゲーム, 無料, 2ch",
-      "image": "https://hayadebi.github.io/Accounting-ai-app/Ads/CenterImage/AdsImage9.jpg",
-
-      "description": "掲示板の書き込み風テキストで進む、2ch風AAキャラクターが登場するローグライクダンジョン探索RPG。B1から深層を目指し、強敵スレ主を倒し続けるブラウザゲームです。",
-
-      "offers": {
-        "@type": "Offer",
-        "price": "0",
-        "priceCurrency": "JPY"
-      },
-
-      "author": {
-        "@id": "https://hayadebi.github.io/Accounting-ai-app/profile.html#person"
-      },
-
-      "publisher": {
-        "@id": "https://hayadebi.github.io/Accounting-ai-app/#organization"
-      }
-    },
-
-    {
-      "@type": "WebPage",
-      "@id": "https://hayadebi.github.io/Accounting-ai-app/Tools/ThreadDungeon/threaddungeon.html",
-      "url": "https://hayadebi.github.io/Accounting-ai-app/Tools/ThreadDungeon/threaddungeon.html",
-      "name": "掲示板スレダンジョン：無料ローグライクRPGで大冒険！2ch風無料ブラウザゲーム",
-      "inLanguage": "ja",
-
-      "isPartOf": {
-        "@type": "WebSite",
-        "@id": "https://hayadebi.github.io/Accounting-ai-app/#website"
-      },
-
-      "about": {
-        "@id": "https://hayadebi.github.io/Accounting-ai-app/Tools/ThreadDungeon/threaddungeon.html#software"
-      }
-    },
-
-    {
-      "@type": "HowTo",
-      "name": "掲示板スレダンジョンの進め方",
-      "description": "フロアを探索しイベントをこなしながら階段を見つけて深層へ進む基本的な流れです。",
-      "step": [
-        {
-          "@type": "HowToStep",
-          "name": "探索者名の登録",
-          "text": "探索者名を入力しギルドに登録して探索を開始します。"
-        },
-        {
-          "@type": "HowToStep",
-          "name": "フロア探索",
-          "text": "探索ボタンを押しランダムイベントを進めます。"
-        },
-        {
-          "@type": "HowToStep",
-          "name": "戦闘とコマンド選択",
-          "text": "アタック、チャージ、ガード、アイテム、サーチ、逃げるのコマンドを駆使して戦います。"
-        },
-        {
-          "@type": "HowToStep",
-          "name": "深層への移動",
-          "text": "階段を見つけ次の階層へ進みます。5の倍数フロアにはボスが出現します。"
-        }
-      ]
-    },
-
-    {
-      "@type": "FAQPage",
-      "mainEntity": [
-        {
-          "@type": "Question",
-          "name": "ゲームオーバーになったらどうなりますか？",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "コインと所持アイテムは消失しB0に戻ります。最高到達階や図鑑などの実績は保持されます。"
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "不死の敵が倒せません。",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "不死タイプには通常攻撃が効きません。サーチで弱点アイテムを確認し対応アイテムを使用してください。"
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "セーブはどのように行われますか？",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "ゲームはブラウザのローカルストレージに自動保存されます。"
-          }
-        }
-      ]
-    }
-
-  ]
-}
-</script>
+    
   </head>
   <body>
     <!-- Google Tag Manager (noscript) -->
