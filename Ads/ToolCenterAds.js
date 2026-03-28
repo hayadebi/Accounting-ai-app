@@ -6,7 +6,7 @@ const centercombinations = [
         },
         {
             "imageUrl": "../../Ads/CenterImage/AdsImage2.jpg",
-            "siteUrl": "https://hayadebi.github.io/Accounting-ai-app/adnextcenter.html?q=hayadebi.github.io%2FAccounting-ai-app%2FTools%2FInfoGuild%2Finfoguild.html",
+            "siteUrl": "https://hayadebi.github.io/Accounting-ai-app/adnextcenter.html?q=hayadebitools.devilnessie.workers.dev%2FTools%2FInfoGuild%2Finfoguild.html",
             "checkUrl": "#"
         },
         {
@@ -26,7 +26,7 @@ const centercombinations = [
         },
         {
             "imageUrl": "../../Ads/CenterImage/AdsImage8.jpg",
-            "siteUrl": "https://hayadebi.github.io/Accounting-ai-app/adnextcenter.html?q=hayadebi.github.io%2FAccounting-ai-app%2FTools%2FInfoGuild%2Finfoguild.html",
+            "siteUrl": "https://hayadebi.github.io/Accounting-ai-app/adnextcenter.html?q=hayadebitools.devilnessie.workers.dev%2FTools%2FInfoGuild%2Finfoguild.html",
             "checkUrl": "#"
         },
         // {
